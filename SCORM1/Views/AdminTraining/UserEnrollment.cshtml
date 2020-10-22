@@ -1,0 +1,163 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model AdminModuleViewModel
+
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+<div class="jumbotron col-md-12">
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th><center>Nombre</center></th>
+                    <th>Usuario</th>
+                    <th>Documneto</th>
+                    <th>Correo</th>
+                    <th>Primer Ingreso</th>
+                    <th>Ultimo Ingreso</th>
+                    <th>Enviar Correo</th>
+                    <th>Calificaciones</th>
+
+            </thead>
+            <tbody>
+
+                @foreach (var modules in Model.listenrrolment)
+                {
+                    <tr>
+                        <td>@modules.ApplicationUser.FirstName @modules.ApplicationUser.LastName</td>
+                        <td>@modules.ApplicationUser.UserName</td>
+                        <td>@modules.ApplicationUser.Document</td>
+                        <td>@modules.ApplicationUser.Email</td>
+                        <td>@modules.ApplicationUser.firstAccess</td>
+                        <td>@modules.ApplicationUser.lastAccess</td>
+                        <td>
+                            <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#@modules.Enro_Id">Enviar Correo</button>
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("Resultt", "AdminTraining", new { id = modules.Enro_Id , idd = modules.Modu_Id })" class="btn btn-primary">Calificaciónes</a>
+                        </td>
+                       
+
+                            </tr>
+                    <div id="@modules.Enro_Id" class="modal fade" role="dialog">
+                        <div class="modal-dialog1">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title"><strong></strong></h2>
+                                </div>
+                                <div class="modal-body">
+
+                                    @using (Html.BeginForm("EmailUser", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                                    {
+                                        <p class="fecha">Estudiante: @modules.ApplicationUser.FirstName @modules.ApplicationUser.FirstName</p>
+                                        <p class="fecha">Usuario: @modules.ApplicationUser.UserName</p>
+                                        <p class="fecha">Correo: @modules.ApplicationUser.Email</p>
+                                        @Html.AntiForgeryToken()
+                                        <div class="row">
+                                            <br />
+                                            <div class="col-md-6">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.idEnroll, new {@Value=@modules.Enro_Id})
+                                                @Html.LabelFor(model => model.Asunto, htmlAttributes: new { @class = "control-label col-md-3" })
+                                                @Html.EditorFor(model => model.Asunto, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Asunto, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-12">
+                                                <br />
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    @Html.TextAreaFor(model => model.Mensaje, new { @class = "form-control", @row = 5 })
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-8">
+                                                    <br /><br />
+                                                    <center><button class="btn btn-primary" name="singin" type="submit">Enviar</button></center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,107 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model UserTestViewModel
+@{
+    ViewBag.Title = "Test";
+}
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+        <a href="@Url.Action("Tests", "UserPlenamente")" class="btn btn-info">Mediciones</a>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("FinishedTest", "UserPlenamente", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="jumbotron col-md-12">
+        @if (Model.UserEvaluate != null)
+        {
+            @Html.HiddenFor(x=>x.UserEvaluate.Id)
+            <div class="titulo"><strong>Evaluando a tus compañeros</strong></div>
+            <table>
+                <thead>
+                    <tr>
+                        <td> Nombres:</td>
+                        <td> Apellidos</td>
+                        <td> Relación:</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.UserEvaluate.FirstName </td>
+                        <td>@Model.UserEvaluate.LastName </td>
+                        <td>@Model.UserType </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="titulo"><strong>Auto Medicion</strong></div>
+        }
+
+
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-striped">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.UserTestId)
+                @Html.HiddenFor(model => model.TestId)
+                @Html.HiddenFor(model => model.MeasureId)
+
+                @{
+
+                    var coun = 10;
+                    <tbody>
+                        @for (var i = 0; i < Model.Questions.Count; i++)
+                        {
+                            if (coun == 10)
+                            {
+
+                                <tr class="success">
+                                    <td>No.</td>
+                                    <td>Pregunta</td>
+                                    <td>Nunca</td>
+                                    <td>Casi Nunca</td>
+                                    <td>Casi Siempre</td>
+                                    <td>Siempre</td>
+                                </tr>
+
+                                coun = 0;
+                            }
+                            coun = coun + 1;
+                            @Html.HiddenFor(model => model.Questions[i].QuestionType)
+                            @Html.HiddenFor(model => model.Questions[i].ProficiencyId)
+                            <tr>
+                                <td>@Model.Questions[i].QuestionId</td>
+                                <td>@Model.Questions[i].QuestionDescription</td>
+                                <td>@Html.RadioButtonFor(model => Model.Questions[i].Assigned, 1)</td>
+                                <td>@Html.RadioButtonFor(model => Model.Questions[i].Assigned, 2)</td>
+                                <td>@Html.RadioButtonFor(model => Model.Questions[i].Assigned, 3)</td>
+                                <td>@Html.RadioButtonFor(model => Model.Questions[i].Assigned, 4)</td>
+                            </tr>
+                        }
+                    </tbody>
+               }
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="finish" class="botones_resultados" value="Finalizar" />
+            </div>
+        </div>
+    </div>
+     }
+@if (!string.IsNullOrEmpty(ViewBag.ShowDialog))
+{
+    <script>
+        alert("exito;");
+        $(document).ready($('#FrmAcceptUser').dialog('open'));
+    </script>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,66 @@
+﻿@using SCORM1.Enum
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bureau Veritas</title> @*se establece el nombre de la pestaña*@
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:300,400,400i,700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scade=1.0">
+    <title>@ViewBag.Title UnAula MI</title>
+    @using Microsoft.AspNet.Identity
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/style1.css")
+    @Styles.Render("~/Content/demo.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="margin-top:-5px;background: #B0002D; min-height:1.5% !important;">
+
+    </div>
+    <div class="container-fluid">
+        @Html.Partial("_LoginPartial")
+
+    </div>
+
+
+    <div class="container containerA">
+        @RenderBody()
+
+    </div>
+
+
+    @if (Model.Sesion == SESION.No)
+    {
+        <script>
+             window.location.href = '@Url.Action("Index", "Home")';
+        </script>
+    }
+   
+
+        <div class="footer2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <img src="~/Content/Images/facebook.png" class="imagenesiconos" style=" width:30px" />
+            <img src="~/Content/Images/twitter.png" class="imagenesiconos" style=" width:30px" />
+            <img src="~/Content/Images/youtube.png" class="imagenesiconos" style=" width:30px" />
+            <img src="~/Content/Images/instagram.png" class="imagenesiconos" style=" width:30px" />
+            <img src="~/Content/Images/linkedin.png" class="imagenesiconos" style=" width:30px" />
+
+            <div class="info-footer" style="margin-top:0px">
+                <B style="color:#000;background-color:transparent;">Content Group </B>-
+                <a href="http://contentgrp.com/" target="_blank" style="color:#000;background-color:transparent;">Visítanos</a><br />
+                <B style="color:#000;background-color:transparent;">Tratamiento de datos </B>- <a style="color:#000;background-color:transparent;" href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank">Clic aquí</a><br />
+                @*<B>Política de privacidad </B>- <a href="https://contentgroup.com.co" target="_blank">Clic aquí</a>*@
+            </div><br>
+
+        </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

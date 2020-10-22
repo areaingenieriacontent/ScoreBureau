@@ -1,0 +1,92 @@
+﻿@model SCORM1.Models.ViewModel.UploadViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<html>
+    <head>
+        <link rel="stylesheet" href="@Url.Content("~/Content/dropzone.css")" media="all">
+        <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap1.min.css")" media="all" />
+        <link rel="stylesheet" href="@Url.Content("~/Content/Site1.css")" media="all" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/dropzone.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.imglist.js")"></script>
+        <script>
+            var allowed_ext = new Array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff');
+            //dropzone config
+            Dropzone.options.myAwesomeDropzone = {
+                dictInvalidFileType: "Invalid file type ",
+                dictFileTooBig: "El tamaño de la imagen es muy grande",
+                dictResponseError: "SERVER ERROR",
+                paramName: "file", // The name that will be used to transfer the file
+                maxFilesize: 1, // MB
+                accept: function(file, done) {
+                    var extension=file.name.split('.').pop();
+                    if ($.inArray(extension, allowed_ext) > -1) {
+                        done();
+                    }
+                    else { done("Done"); }
+                }
+            };
+
+
+        </script>        
+    </head>
+    <body>
+        <input type="hidden" id="track" value="@Model.track" />
+
+        <!----- uploader div start ------->
+        <div class="uploader">
+            
+            @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { id = "myAwesomeDropzone", @class = "dropzone" }))
+            {
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>                
+            }                        
+            <center><button class="btn btn-large btn-primary close-uploader"><i class="icon-backward icon-white"></i> Ir a la lista</button></center>
+            <div class="space10"></div><div class="space10"></div>
+        </div>
+        <!----- uploader div start ------->
+        
+        <div class="container-fluid">
+
+            <!----- header div start -->
+                <div class="filters">
+                    <button class="btn btn-primary upload-btn" style="margin-left:5px;"><i class="icon-upload icon-white"></i> Cargar Imagen</button> 
+                </div>
+                <!-- header div end ------->
+            <div class="row-fluid ff-container">
+                <div id="ff-container" class="span12 pull-right"></div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#ff-container").imageList({
+                    connector: '@Url.Action("ListFiles")',
+                    imgcontainer: "ff-container"
+                });
+
+                $('.upload-btn').click(function () {
+                    $('.uploader').show(500);
+                    $('.ff-container').hide();
+                });
+                $('.close-uploader').click(function () {
+                    $('.uploader').hide(500);
+                    window.location.reload();
+                });
+
+
+            });
+
+            $(document).on('click', '.thumbnail', function() {
+                var track = $('#track').val();
+                var target = window.parent.document.getElementsByClassName('mce-img_' + track);
+                var closed = window.parent.document.getElementsByClassName('mce-filemanager');
+                $(target).val($(this).attr("src"));
+                $(closed).find('.mce-close').trigger('click');
+            });
+            
+        </script>
+    </body>
+</html>

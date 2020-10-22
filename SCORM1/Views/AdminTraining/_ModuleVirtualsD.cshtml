@@ -1,0 +1,53 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@using SCORM1.Models;
+
+@model AdminTrainingEnrollmentViewModel
+
+
+<br /><br /><br /><br /><br />
+<div class="jumbotron col-md-12">
+
+    <br><h1 class="title">CURSOS VIRTUALES DISPONIBLES</h1>
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Nombre del Curso</th>
+                    <th>Descripción</th>
+                    <th>categoria</th>
+                    <th>Estado</th>
+                    <th>Fecha de Incio</th>
+                    <th>Vigencia</th>
+                    <th>Portada</th>
+                    <th>Matricular</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (Module modules in Model.listmodule)
+                {
+                    <tr>
+                        <td>@modules.Modu_Name</td>
+                        <td><div style='width:60px;height:20px; overflow:hidden;'>@modules.Modu_Description</div></td>
+                        <td>@modules.Modu_TypeOfModule</td>
+                        <td>@modules.Modu_Statemodule</td>
+                        <td>@modules.Modu_InitDate</td>
+                        <td>@modules.Modu_Validity @modules.Modu_Period</td>
+                        <td>
+                            <img src="~/Resources/@modules.Modu_ImageName" style="width:50px; height:50px" />
+                        </td>
+                        <td>
+                            @Html.ActionLink("Matricular", "EnrollmentmModuleVirtualsD", "AdminTraining", new { Modu_Id = modules.Modu_Id, user_Id = Model.User.Id }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+

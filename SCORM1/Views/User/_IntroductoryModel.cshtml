@@ -1,0 +1,24 @@
+﻿@using SCORM1.Models.ViewModel
+@model   UserProfileViewModel
+
+<div class="panel-primary">
+
+    <br /><br /><br />
+    <h1 class="title"> Modulo Introductorio</h1>
+    <embed src="~/TermsandConditions/@Model.FileTerms" width="800" height="375">
+    @using (Html.BeginForm("Validateterms", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        
+        <br /><br />
+                
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <br /><br />
+                <center><button class="btn btn-primary" name="singin" type="submit">Finalizar</button></center>
+            </div>
+        </div>
+    }
+</div>
+

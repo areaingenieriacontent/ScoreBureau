@@ -1,0 +1,97 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model ContentQuestionViewModels
+
+@{
+    ViewBag.Title = "Questions";
+}
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+    </div>
+</div>
+<div class="jumbotron col-md-12">
+    @using (Html.BeginForm("SearchQuestion", "ContentAdmin", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchQuestion, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la Pregunta" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Descripción</th>
+                    <th>Competencia</th>
+                    <th>Tipo de Pregunta</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Question question in Model.Questions)
+                {
+                    <tr>
+                        <td>@question.QuestionDescription</td>
+                        <td>@question.Proficiency.ProficiencyDescription</td>
+                        <td>@question.QuestionType.ToString()</td>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Modificar" onclick="LoadUpdateQuestion(@question.QuestionId)" data-cname="@question.QuestionId" />
+                        </td>
+                        <td>
+                           
+                                <input type="submit" onclick="confirm_meth('@question.QuestionId')" data-cname="@question.QuestionId"  class="btn btn-primary" value="Eliminar" />
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="UpdateQuestionSection">
+
+    </div>
+    <br><hr style="width:100%; clear:both; border:dashed; border-color: #A3DC68; border-width:thin; margin-bottom:10px;">
+    <div class="caja_botones" style="clear:both;">
+        <button id="BTN_ADD" class="botones_pregunta">Añadir Pregunta</button>
+    </div>
+    <br />
+    <div id="AddQuestionSection">
+
+    </div>
+
+    <script>
+        document.getElementById("BTN_ADD").onclick = function () { LoadQuestionDiv() };
+        function LoadQuestionDiv() {
+
+            $("#AddQuestionSection").load('@Url.Action("AddQuestion","ContentAdmin")');
+        }
+
+        function LoadUpdateQuestion(questionID) {
+            var link = '@Url.Action("UpdateQuestion", "ContentAdmin", new { id = "value" })';
+            link = link.replace("value", questionID)
+            $("#UpdateQuestionSection").load(link);
+        }
+    </script>
+    <script type="text/Javascript" language="javascript">
+        function confirm_meth(QuestionId)
+{
+  if( confirm("Quieres eliminar la pregunta ?")==true)
+  {
+      var Q = QuestionId;
+      window.location.href = ' @Url.Action("DeleteQuestion", "ContentAdmin", new {id = "ID"})'.replace("ID",Q);
+   }
+  else
+  {
+      var link = '@Url.Action("Questions", "ContentAdmin")';
+  }
+}
+    </script>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

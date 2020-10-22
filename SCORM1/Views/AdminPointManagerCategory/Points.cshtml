@@ -1,0 +1,144 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@using SCORM1.Models;
+@using PagedList.Mvc;
+
+@model pointuser
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo").modal();
+            });
+        </script>
+    }}
+<div id="DeleteInfo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Puntos Adicionales</h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <h3 style="color:#000;">@TempData["Info"]</h3>
+
+                @if (@Model.user != null)
+                {
+                    <h3 style="color:#000;">Datos Usuario</h3>
+                    <br />
+                    <h1 style="color:#000;">Usuario: @Model.user.UserName</h1>
+                    <h1 style="color:#000;">Nombre: @Model.user.FirstName @Model.user.LastName</h1>
+                    <h1 style="color:#000;">Correo: @Model.user.Email</h1>
+                    <br /><br />
+                    using (Html.BeginForm("Pointadd", "AdminPointManagerCategory", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="row">
+                            @Html.HiddenFor(model => model.user.Id)
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.puntos, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.puntos, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.puntos, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Asignar Puntos</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+                <br />
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+<div class="panel-primary">
+
+    @if (Model.UserEnrolllment.Count == 0)
+    {
+        <center>
+            <div>
+                <img src="~/Content/Images/usuario-no-cursos-v.jpg" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+            </div>
+        </center>
+    }
+    else
+    {
+        using (Html.BeginForm("SeachUserp", "AdminPointManagerCategory", FormMethod.Post, new { @class = "row", role = "search" }))
+        {
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.SearchUser, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Usuario" } })
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary btn-responsive">Buscar</button>
+            </div>
+        }
+
+        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Tipo de usuario</th>
+                        <th>Email</th>
+                        <th>Asignar</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ApplicationUser user in Model.UserEnrolllment)
+                    {
+                        <tr>
+                            <td>@user.FirstName @user.LastName</td>
+                            <td>@user.UserName</td>
+                            <td>@user.Role</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <input type="submit" onclick="Enrollment('@user.Id')" data-cname="@user.Id" class="btn btn-primary" value="Asignar Puntos" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model.UserEnrolllment, page => Url.Action("Points", new { page }))
+        </div>
+    }
+    <script type="text/Javascript" language="javascript">
+        function Enrollment(Id) {
+                var a = Id;
+                window.location.href = ' @Url.Action("AddPoin", "AdminPointManagerCategory", new {id = "ID"})'.replace("ID", a);
+        }
+    </script>
+</div>
+

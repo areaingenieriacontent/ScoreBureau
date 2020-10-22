@@ -1,0 +1,134 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model UserEnrollmentViewmodel
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+
+<div class="panel-primary">
+    @using (Html.BeginForm("SearchMVirtual", "User", FormMethod.Post, new { @class = "row", role = "search" }))
+    {
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.SearchModuleVirtual, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Curso" } })
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-default">Buscar</button>
+        </div>
+    }
+    <p style="font-size: 50px;">Mis calificaciones</p>
+    <p>En esta vista podrás visualizar el resultado de la evaluación desarrollada para cada uno de los cursos que tienes disponibles</p>
+
+    @if (Model.enrollment != null)
+    {
+
+        <br />
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre del Contenido</th>
+                        <th>Fecha de Incio</th>
+                        <th>Vigencia</th>
+                        <th>Calificación</th>
+                        @*
+                        <th>Portada</th>
+                        <th>Ver</th>*@
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var modules in Model.enrollment)
+                    {
+                        if (modules.Module.QSMActive == 0)
+                        {
+
+                            if (modules.AdvanceCourse.Count == 1)
+                            {
+                                <tr>
+                                    <td>@modules.Module.Modu_Name</td>
+                                    <td>@modules.Enro_InitDateModule</td>
+                                    <td>@modules.Enro_FinishDateModule</td>
+                                    @foreach (var a in modules.AdvanceCourse)
+                                    {
+                                        <td>
+                                            <div class="progress" style="margin-top:10%; background-color: #babdbd;height: 20px;">
+                                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                     aria-valuenow="@a.AdCo_ScoreObtanied" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: @a.AdCo_ScoreObtanied%">
+                                                    <span>@a.AdCo_ScoreObtanied%</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    @*
+                                    <td>
+                                        <img src="~/Resources/@modules.Module.Modu_ImageName" style="width:50px; height:50px" />
+                                    </td>
+                                    <td>
+                                        <a href='@Url.Action("Grades", "User", new { id = @modules.Module.Modu_Id })'>
+                                            <img src='~/Content/Images/Ver_1.png' style="width:60px;height:15%;" class="img img-responsive" />
+                                        </a>
+                                    </td>
+                                    *@
+                                </tr>
+                            }
+                        }
+                        //quien sabe mas
+                        else
+                        {
+                            <tr>
+                                <td>@modules.Module.Modu_Name</td>
+                                <td>@modules.Enro_InitDateModule</td>
+                                <td>@modules.Enro_FinishDateModule</td>
+                                @foreach (var a in Model.quienSabeMasPuntajes)
+                                {
+                                    if (a.Mudole_Id == modules.Module.Modu_Id)
+                                    {
+                                        <td>
+                                            <div class="progress" style="margin-top:10%; background-color: #babdbd;height: 20px;">
+                                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                     aria-valuenow="@a.Puntaje" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: @a.Puntaje%">
+                                                    <span>@a.Puntaje%</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                }
+                                @*
+                                <td>
+                                    <img src="~/Resources/@modules.Module.Modu_ImageName" style="width:50px; height:50px" />
+                                </td>
+                                <td>
+                                    <a href='@Url.Action("Grades", "User", new { id = @modules.Module.Modu_Id })'>
+                                        <img src='~/Content/Images/Ver_1.png' style="width:60px;height:15%;" class="img img-responsive" />
+                                    </a>
+                                </td>
+                                *@
+                            </tr>
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <br /><br /><br /><br /><br />
+        <div class="row">
+
+            <center> <img src="~/Content/Images/No_cursos_evaluativos_w.png" style="width:600px;" alt="Imagen responsive" class="img-responsive" /></center>
+
+        </div>
+    }
+</div>
+
+
+

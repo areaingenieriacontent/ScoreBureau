@@ -1,0 +1,29 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models;
+@model AdminTrainingMassiveEnrollmentViewMode
+<br><br /><br />
+<div class="table-responsive col-md-12 col-sm-12">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr class="success">
+                <th>Nombre</th>
+                <th>Nombre de Usuario</th>
+                <th>Tipo de usuario</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ApplicationUser user in Model.listuser)
+            {
+                <tr>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Role</td>
+                    <td>@user.Email</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+

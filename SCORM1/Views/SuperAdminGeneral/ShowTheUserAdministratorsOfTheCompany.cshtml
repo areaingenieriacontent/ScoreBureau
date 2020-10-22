@@ -1,0 +1,320 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models
+@using PagedList.Mvc;
+<br /><br /><br />
+@model  SuperAdminGeneralManagementUsersAdminOfTheCompanies
+
+<script>
+    //method Delete User
+    function DeleteUser(UserId) {
+        if (confirm("Elimiar el usuario (Perderas toda la informacion. (no se puede revertir))") == true) {
+            var User = UserId;
+            window.location.href = ' @Url.Action("DeleteUser", "SuperAdminGeneral", new { IdUserToDelete = "ID" })'.replace("ID", User);
+        }
+    }
+
+    //method Update
+    function UpdateUser(UserId) {
+        if (confirm("Actualizar Registro") == true) {
+            var User = UserId;
+            window.location.href = ' @Url.Action("UpdateUserCurrent", "SuperAdminGeneral", new { IdUserToModified = "ID"})'.replace("ID", User);
+        }
+    }
+
+</script>
+
+
+@if (TempData["Warning"] != null)
+{
+    <script type="text/JavaScript">
+        $(document).ready(function () {
+            $("#myModal").modal();
+        });
+    </script>
+}
+
+@if (TempData["UpdateUserCurrent"] != null)
+{
+    <script type="text/JavaScript">
+        $(document).ready(function () {
+            $("#UpdateUser").modal();
+        });
+    </script>
+}
+@if (TempData["Menssage"] != null)
+{
+    <script type="text/JavaScript">
+        $(document).ready(function () {
+            $("#Menssages").modal();
+        });
+    </script>
+}
+
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("CreationOfCompanies", "SuperAdminGeneral")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+
+<div class="panel-primary">
+
+    <button data-toggle="modal" data-target="#myModal" class="btn btn-primary">Agregar usuario</button>
+
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #F57C00; border-width:thin;">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Documento</th>
+                    <th>Rol</th>
+                    <th>Último acceso</th>
+                    <th>Primer acceso</th>
+                    <th>Autorizado</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ApplicationUser User in Model.UserOfCompany)
+                {
+                    <tr>
+                        <td>
+                            @User.FirstName @User.LastName
+                        </td>
+                        <td>@User.UserName</td>
+                        <td>
+                            @User.Document
+                        </td>
+                        <td>@User.Role.ToString()</td>
+                        @if (User.lastAccess != null)
+                        {
+                            <td>@User.lastAccess</td>
+                        }
+                        else
+                        {
+
+                            <td>No ha ingresado</td>
+                        }
+
+                        @if (User.firstAccess != null)
+                        {
+                            <td>@User.firstAccess</td>
+                        }
+                        else
+                        {
+
+                            <td>No ha ingresado</td>
+                        }
+
+
+                        <td>@User.Enable</td>
+                        <td>
+                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:30px;height:15%;" class="img img-responsive" onclick="UpdateUser('@User.Id')" id="@User.Id" />
+                        </td>
+                        <td>
+                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:30px;height:15%;" class="img img-responsive" onclick="DeleteUser('@User.Id')" data-cname="@User.Id"/>
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model.UserOfCompany, page => Url.Action("CreationOfUserAdminGeneral", new { page }))
+    </div>
+
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><strong>Agregar Usuario</strong></h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("CreateUser", "SuperAdminGeneral", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <p class="danger"> @TempData["Warning"]</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.companyId)
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control"} })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-7">
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })                           
+                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "El nombre de usuario debe ser mayor a 6 caracteres" } })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                   
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })  
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="col-md-7">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+       
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                @Html.EnumDropDownListFor(model => model.Country, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-7">
+                            @Html.LabelFor(model => model.Document, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                                @Html.EditorFor(model => model.Document, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })
+ 
+                        </div>
+
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.enable, htmlAttributes: new { @class = "control-label col-md-2" })
+              
+                                @Html.EnumDropDownListFor(model => model.enable, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.enable, "", new { @class = "text-danger" })
+          
+                        </div>
+                        <br /><br />
+
+                        <div class="form-group">
+
+                            <div class="col-md-offset-2 col-md-8">
+                                <br /><br />
+                                <input type="submit" value="Agregar" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="UpdateUser" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><strong> Actualizar Registro</strong></h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UpdateUserCurrent", "SuperAdminGeneral", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <p class="danger"> @TempData["Warning"]</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.companyId)
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-7">
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "El nombre de usuario debe ser mayor a 6 caracteres" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="col-md-7">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                            @Html.EnumDropDownListFor(model => model.Country, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-7">
+                            @Html.LabelFor(model => model.Document, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                            @Html.EditorFor(model => model.Document, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="col-md-5">
+                            @Html.LabelFor(model => model.enable, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                            @Html.EnumDropDownListFor(model => model.enable, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.enable, "", new { @class = "text-danger" })
+
+                        </div>
+                        <br /><br />
+                        @Html.HiddenFor(x => x.UserId)
+                        <div class="form-group">
+
+                            <div class="col-md-offset-2 col-md-8">
+                                <br /><br />
+                                <input type="submit" value="Actualizar" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+             
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

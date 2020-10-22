@@ -1,0 +1,114 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model QuestionSelect
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo").modal();
+            });
+        </script>
+    }}
+
+<div id="DeleteInfo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <h1 style="color:red"> @TempData["Info"]</h1>
+                <br />
+              
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<body style="background:url(../../ImgTemplate/@Model.setting.MG_Template.Plant_Img_Questions); background-size: cover;background-position: center center;background-repeat: no-repeat;background-attachment: fixed;">
+    <br /><br /><br /><br /><br /><br />
+@using (Html.BeginForm("Instructions", "ViewGame", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+            <a href="@Url.Action("Setting", "AdminGame")" class="btn btn-info">Ajuste Juego</a>
+            <a href="@Url.Action("MgQuestions", "AdminGame", new { id = Model.Sett_Id })" class="btn btn-info">Preguntas</a>
+        </div>
+    </div>
+            for (int i = 0; i < Model.listquestionsselect.Count; i++)
+            {
+    <div class="preguntas col-md-7" style="left:350px;">
+        <div style="background:url('../../ImgTemplate/CUADROPREGUNTA(3).png');background-repeat: no-repeat; width:600px;height:230px;padding:10px;">
+                @if (@Model.listquestionsselect[i].MuCh_Description != null)
+                {
+                    <br /><br /><br /><br /><br />
+                    <h1> @Model.listquestionsselect[i].MuCh_Description</h1>
+                }
+                else
+                {
+                    <img src="~/Mg_Game_Image/@Model.listquestionsselect[i].MuCh_ImageQuestion"  style="width:400px; height:210px" />
+                }          
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="jumbotron3">
+            <div class="col-md-12">
+                <br /><br /><br /><br /><br />
+            </div>
+        </div>
+    </div>
+            <div class="col-md-6">
+                <div class="pruebas">
+                    <br />
+                    <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[0].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[0].AnMul_ID"><h1>A. @Model.listquestionsselect[i].listanswerM[0].AnMul_Description</h1></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pruebas3">
+                    <br />
+                    <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[1].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[1].AnMul_ID"><h1>B. @Model.listquestionsselect[i].listanswerM[1].AnMul_Description</h1></a>
+                </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="pruebas2">
+                        <br />
+                        <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[2].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[2].AnMul_ID"><h1>C. @Model.listquestionsselect[i].listanswerM[2].AnMul_Description</h1></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pruebas4">
+                        <br />
+                        <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[3].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[3].AnMul_ID"><h1>D. @Model.listquestionsselect[i].listanswerM[3].AnMul_Description</h1></a>
+                    </div>
+                </div>
+    <div class="col-md-12">
+        <div class="jumbotron3">
+            <div class="col-md-12">
+               <br /><br /><br /><br /><br />
+            </div>
+        </div>
+    </div>
+    }
+    <div class="jumbotron3">
+
+        <div class="col-md-12">
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        </div>
+        <div class="col-md-12">
+
+        </div>
+        <div class="col-md-12">
+            @*<audio src="~/ResourceGame/Quien_Quiere_ser_millonario_Cancin_Inicial_-vi9jLV63W8.mp3" autoplay loop></audio>*@
+        </div>
+    </div>
+}
+</body>
+

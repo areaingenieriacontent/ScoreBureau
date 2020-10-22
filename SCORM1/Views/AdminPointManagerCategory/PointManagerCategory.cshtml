@@ -1,0 +1,236 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models.Engagement
+@model AdminPointManagerCategory
+@if (TempData["Edit"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Edit"]
+    </div>
+}
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@if (TempData["Delete"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Delete"]
+    </div>
+}
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Points", "AdminPointManagerCategory")" class="btn btn-info">Puntos Adicionales</a>
+    </div>
+</div>
+<div class="jumbotron col-md-12">
+    <h1 class="title">ADMINISTRADOR DE PUNTOS POR CATEGORIAS</h1>
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["UpdatePointManagerCategory"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#FormUpdatePointManagerCategory").modal();
+                });
+            </script>
+        }}
+    @using (Html.BeginForm("UpdatePointManagerCategory", "AdminPointManagerCategory", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="FormUpdatePointManagerCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title"><strong>MODIFICAR PUNTOS</strong></h2>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            @Html.HiddenFor(model => model.PoMaCa_Id)
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PoMaCa_Periodical, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.PoMaCa_Periodical, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.PoMaCa_Periodical, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PoMaCa_course, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.PoMaCa_course, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.PoMaCa_course, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PoMaCa_Improvements, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.PoMaCa_Improvements, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.PoMaCa_Improvements, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modifica Puntos</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+    @using (Html.BeginForm("AddPointManagerCategory", "AdminPointManagerCategory", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="AddCategoryModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title"><strong>ASIGNAR PUNTOS</strong></h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PoMaCa_Periodical, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.PoMaCa_Periodical, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.PoMaCa_Periodical, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PoMaCa_course, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.PoMaCa_course, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.PoMaCa_course, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PoMaCa_Improvements, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.PoMaCa_Improvements, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.PoMaCa_Improvements, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Agregar </button></center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- breadCrumb -->
+
+    @using (Html.BeginForm("SearchPointManagerCategory", "AdminPointManagerCategory", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+        </div>
+        @*<button type="submit" class="btn btn-default">Buscar</button>*@
+        //Condición para desaparecer boton de agreagar
+        if (Model.PointManagerCategory.Count != 0)
+        {
+
+        }
+        else
+        {
+            <ul class="fecha">
+
+                <button id="BTN_ADD" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddCategoryModule">Añadir Puntos</button>
+            </ul>
+        }
+
+    }
+
+    @if (Model.PointManagerCategory.Count == 0)
+    {
+        <br />
+        <br />
+        <br />
+        <br />
+                    <br />
+                    <div class="row">
+                        <center> <img src="@Url.Content("~/Content/Images//No-solicitudes-w.png")" style="width:600px;" alt="Imagen responsive" class="img-responsive" /></center>
+                    </div>
+    }
+    else
+    {
+        <hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="tablea tablea-hover tablea-striped">
+                <thead>
+                    <tr class="success">
+                        <th> Comentarios  Periodico </th>
+                        <th> Evidencia</th>
+                        <th> Foro</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PointManagerCategory pointManagerCategory in Model.PointManagerCategory)
+                {
+                        <tr>
+                            <td>@pointManagerCategory.PoMaCa_Periodical</td>
+                            <td>@pointManagerCategory.PoMaCa_course</td>
+                            <td>@pointManagerCategory.PoMaCa_Improvements</td>
+                            <td>
+                                <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdatePointManagerCategory('@pointManagerCategory.PoMaCa_Id')" data-cname="@pointManagerCategory.PoMaCa_Id" />
+                            </td>
+                            <td>
+                                <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="DeletePointManagerCategory('@pointManagerCategory.PoMaCa_Id')" data-cname="@pointManagerCategory.PoMaCa_Id" />
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    @*Modificar Categoria*@
+    <script type="text/Javascript" language="javascript">
+        function UpdatePointManagerCategory(PoMaCa_Id) {
+            if (confirm("Modificar puntos") == true) {
+                var c = PoMaCa_Id;
+                window.location.href = ' @Url.Action("UpdatePointManagerCategory", "AdminPointManagerCategory", new {id = "ID"})'.replace("ID", c);
+            }
+            else {
+                var link = '@Url.Action("PointManagerCategory", "AdminPointManagerCategory")';
+            }
+        }
+    </script>
+    @*Script eliminar Categoria*@
+    <script type="text/Javascript" language="javascript">
+        function DeletePointManagerCategory(PoMaCa_Id) {
+            if (confirm("Elimiar puntos") == true) {
+                var c = PoMaCa_Id;
+                window.location.href = ' @Url.Action("DeletePointManagerCategory", "AdminPointManagerCategory", new {id = "ID"})'.replace("ID", c);
+            }
+            else {
+                var link = '@Url.Action("PointManagerCategory", "AdminPointManagerCategory")';
+            }
+        }
+    </script>
+</div>

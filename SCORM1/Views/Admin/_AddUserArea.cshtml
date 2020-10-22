@@ -1,0 +1,63 @@
+﻿
+@using SCORM1.Models.MeasuringSystem
+@model AdminAreaViewModel
+
+
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <br />
+    <br />
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.AreaName, htmlAttributes: new { @class = "control-label col-md-2" })
+
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped ">
+            <thead>
+                <tr class="success">
+                    <td>Nombre</td>
+                    <td>Apellidos</td>
+                    <td>documento</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuariosJefes in Model.Users)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.RadioButtonFor(model => model.Selected, usuariosJefes.Id,
+                       (usuariosJefes.AreaId.HasValue) ? new { @checked = "checked" } : null) @usuariosJefes.FirstName
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => usuariosJefes.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => usuariosJefes.Document)
+                </td>
+                <td>
+                    @using (Html.BeginForm("DeleteUserArea", "Admin", FormMethod.Post, new { id = "deleteForm" }))
+                    {
+                        <button class="btn btn-primary" formaction="~/Admin/DeleteUserAreas/@usuariosJefes.Id">Eliminar</button>
+                    }
+                </td>
+            </tr>
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,61 @@
+﻿@using SCORM1.Models.ViewModel
+@model   UserGame
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+    $(document).ready(function () {
+        $("#Inform").modal();
+    });
+        </script>
+    }}
+<div id="Inform" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @TempData["Info"]
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="panel-primary">
+
+        <br /><br /><br /><br /><br />
+        <h1 class="title"> INSTRUCCIONES DEL JUEGO</h1>
+        <embed src="~/TermsandConditions/@Model.FileTerms" width="800" height="375">
+        @using (Html.BeginForm("Validateterms", "ViewGameUser", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <br /><br />
+            <div class="col-md-12">
+                @*<div class="col-md-12">
+                    <h1 class="title">TUTORIAL JUEGO</h1>
+                    <video controls="controls" width="800" height="500">
+                        <source src="https://www.aprendeyavanza2.com.co/SaludVida/Recursos/video_introduccion%20_SCORE.mp4" type="video/mp4" />
+                    </video>
+                </div>*@
+            </div><br />
+            <br /><br />
+            <div class="col-md-offset-2 col-md-8">
+                <br /><br /><br />
+                @Html.CheckBoxFor(m => m.termsandGame, htmlAttributes: new { @class = "", @style = "width: 50px;height: 30px; " })
+                @Html.LabelFor(m => m.termsandGame)
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <br /><br />
+                    <center><button class="btn btn-primary" name="singin" type="submit">Continuar</button></center>
+                </div>
+            </div>
+        }
+    </div>
+
+

@@ -1,0 +1,208 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+<br /><br /><br />
+@model AdminTrainingMassiveEnrollmentViewMode
+
+ @if (TempData["Info"] != null)
+                    {
+@section Scripts {
+    <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+    </script>
+}}
+
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Enrollment", "AdminTraining")" class="btn btn-info">USUARIOS</a>
+        <a href="@Url.Action("ModulesEnrollment", "MassiveEnrollment")" class="btn btn-info">CURSOS</a>
+    </div>
+</div>
+<br /><br />
+    <div class="panel panel-primary">
+        <div class="panel-heading panel-head"> Matriculas Masivas </div>
+        <div class="panel-body">
+            @Html.HiddenFor(model => model.Module.Modu_Id)
+
+            @Html.AntiForgeryToken()
+
+            <br /><br />
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#menu1">General</a></li>            
+                    <li><a data-toggle="tab" href="#menu2">Areas</a></li>
+                    <li><a data-toggle="tab" href="#menu3">Cargos</a></li>
+                    <li><a data-toggle="tab" href="#menu4">Ciudades</a></li>
+                    <li><a data-toggle="tab" href="#menu5">Ubicaciones</a></li>            
+            </ul>
+            <div class="tab-content">
+
+                <div id="menu1" class="tab-pane fade in active">
+                    <div class="contenido-articulo">
+                        <br /><br />
+                        <div class="col-md-2">              
+                            <button id="BTN_ADD" class="btn btn-primary">Ver Usuarios</button>
+                            <br />                                               
+                        </div>
+                            @using (Html.BeginForm("EnrollmentAllUser", "MassiveEnrollment", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.HiddenFor(model => model.Module.Modu_Id)
+                                for (int i = 0; i < Model.ListAllUser.Count; i++)
+                                {
+
+                                    @Html.HiddenFor(model => model.ListAllUser[i].Modu_Id)
+                                    @Html.HiddenFor(model => model.ListAllUser[i].User_Id)
+
+
+                                }
+
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-primary" value="Matricular" />
+                            <br />
+                        </div>
+                        }
+                        <br /><br />
+                        <div id="AllUser">
+
+                        </div>  
+                    </div>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <div class="contenido-articulo">
+                        @using (Html.BeginForm("EnrollmentAreas", "MassiveEnrollment", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.HiddenFor(model => model.Module.Modu_Id)
+                            for (int i = 0; i < Model.ListAreas.Count; i++)
+                            {
+
+                        @Html.HiddenFor(model => model.ListAreas[i].Modu_Id)
+                            foreach (var item in Model.ListAreas[i].Listareas)
+                            {
+                                <br />
+                                <div class="form-control">
+                                    <div class="col-md-4 fecha">
+                                        @Html.RadioButtonFor(model => Model.ListAreas[i].Area_Id, item.AreaId, htmlAttributes: new { @class = "control-label" }) <strong> @item.AreaName</strong>
+                                    </div>
+                                </div>
+                                    }
+                                    }
+                                <br />
+                                    <div class="col-md-12">
+                                        <br />
+                                        <input type="submit" class="btn btn-primary" value="Matricular" />
+                                        <br />
+                                    </div>
+                                    }
+                                    <br /><br />
+
+                                </div>
+                </div>
+                <div id="menu3" class="tab-pane fade">
+                    <div class="contenido-articulo">
+    @using (Html.BeginForm("EnrollmentPositions", "MassiveEnrollment", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.Module.Modu_Id)
+        for (int i = 0; i < Model.ListPositions.Count; i++)
+        {
+            @Html.HiddenFor(model => model.ListPositions[i].Modu_Id)
+            foreach (var item in Model.ListPositions[i].Listpositions)
+            {
+                <br />
+                                    <div class="form-control">
+                                        <div class="col-md-4 fecha">
+                                            @Html.RadioButtonFor(model => Model.ListPositions[i].Posi_Id, item.Posi_id, htmlAttributes: new { @class = " control-label" }) <strong> @item.Posi_Description</strong>
+                                            </div>
+                                            </div>
+                                            }
+                                            }
+                                            <br />
+                                            <div class="col-md-12">
+                                                <input type="submit" class="btn btn-primary" value="Matricular" />
+                                                <br />
+                                            </div>
+                                            }
+                                            <br /><br />
+                                        </div>
+                                    </div>
+                                    <div id="menu4" class="tab-pane fade">
+                                        <div class="contenido-articulo">
+                                        @using (Html.BeginForm("EnrollmentCities", "MassiveEnrollment", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                                        {
+                                            @Html.HiddenFor(model => model.Module.Modu_Id)
+                                            for (int i = 0; i < Model.ListCitices.Count; i++)
+                                            {
+                                                @Html.HiddenFor(model => model.ListCitices[i].Modu_Id)
+                                                foreach (var item in Model.ListCitices[i].Listcities)
+                                                {
+                                                    <br />
+                                                    <div class="form-control">
+                                                        <div class="col-md-4 fecha">
+                                                            @Html.RadioButtonFor(model => Model.ListCitices[i].City_Id, item.City_Id, htmlAttributes: new { @class = " control-label" }) <strong> @item.City_Name</strong>                                                        
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            <br />
+                                           <div class="col-md-12">
+                                           <input type="submit" class="btn btn-primary" value="Matricular" />
+                                           <br />
+                                           </div>
+                                           }
+                                           <br /><br />
+                                           </div>
+                                           </div>
+                                                        <div id="menu5" class="tab-pane fade">
+                                                            <div class="contenido-articulo">
+    @using (Html.BeginForm("EnrollmentLocations", "MassiveEnrollment", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.Module.Modu_Id)
+        for (int i = 0; i < Model.ListLocations.Count; i++)
+        {
+            @Html.HiddenFor(model => model.ListLocations[i].Modu_Id)
+            foreach (var item in Model.ListLocations[i].Listlocations)
+            {
+                <br />
+                <div class="form-control">
+                    <div class="col-md-4 fecha">
+                        @Html.RadioButtonFor(model => Model.ListLocations[i].Loca_Id, item.Loca_Id, htmlAttributes: new { @class = " control-label" }) <strong> @item.Loca_Description</strong>
+                    </div>
+                </div>
+            }
+        }
+        <br />
+        <div class="col-md-12">
+        <input type="submit" class="btn btn-primary" value="Matricular" />
+        <br />
+        </div>
+        }
+        <br /><br />
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+<div id="Inform" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @TempData["Info"]
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("BTN_ADD").onclick = function () { LoadUserDiv() };
+        function LoadUserDiv() {
+
+            $("#AllUser").load('@Url.Action("AllUsers", "MassiveEnrollment")');
+        }
+</script>

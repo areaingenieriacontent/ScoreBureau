@@ -1,0 +1,148 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model AdminTrainingTestViewModel
+
+
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+else
+{
+    if (TempData["Info"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+            </script>
+        }}
+}
+@Scripts.Render("~/bundles/jqueryval")
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Grades", "AdminTraining", new {id = Model.topic.Module.Modu_Id})" class="btn btn-info">CURSO</a>
+    </div>
+</div>
+<br /><br /><br />
+<div class="panel panel-primary">
+  
+    <div class="panel-heading panel-head"><center> Evaluación</center></div>
+    <div class="panel-body">
+        <div id="Inform" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        @TempData["Info"]
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+@if (Model.topic.BankQuestion.Count == 0)
+{
+    
+        using (Html.BeginForm("AddBanQuestion", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+                        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.topic.ToCo_Id)
+                @Html.LabelFor(model => model.BaQu_Name, htmlAttributes: new { @class = "control-label col-md-5" })
+                @Html.EditorFor(model => model.BaQu_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre de la prueba", @style = "width:58%" } })
+                @Html.ValidationMessageFor(model => model.BaQu_Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.BaQu_Porcentaje, htmlAttributes: new { @class = "control-label col-md-5" })
+                @Html.EditorFor(model => model.BaQu_Porcentaje, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                @Html.ValidationMessageFor(model => model.BaQu_Porcentaje, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.BaQu_SelectQuestion, htmlAttributes: new { @class = "control-label col-md-5", @Title = "Seleccionar preguntas existentes de otras evaluaciones creadas" })
+                @Html.EnumDropDownListFor(model => model.BaQu_SelectQuestion, new { @class = "form-control", @style = "width:58%", @Title = "Seleccionar preguntas existentes de otras evaluaciones creadas" })
+                @Html.ValidationMessageFor(model => model.BaQu_SelectQuestion, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.BaQu_QuestionUser, htmlAttributes: new { @class = "control-label col-md-5" })
+                @Html.EditorFor(model => model.BaQu_QuestionUser, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                @Html.ValidationMessageFor(model => model.BaQu_QuestionUser, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.BaQu_InintDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                @Html.EditorFor(model => model.BaQu_InintDate, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                @Html.ValidationMessageFor(model => model.BaQu_InintDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.BaQu_FinishDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                @Html.EditorFor(model => model.BaQu_FinishDate, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                @Html.ValidationMessageFor(model => model.BaQu_FinishDate, "", new { @class = "text-danger" })
+            </div>
+
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <center><button class="btn btn-primary" name="singin" type="submit">Añadir Preguntas</button></center>
+                </div>
+            </div>
+
+        </div>
+
+    }
+}
+else
+{
+                    
+                            <h2>Este Tema ya tiene una evaluación asignada</h2>
+
+                            <div class="col-md-2">
+                                <p>
+                                    @using (Html.BeginForm("Questions", "AdminTraining", FormMethod.Post, new { id = "detallesForm" }))
+                                    {
+                                        <center><input type="submit" formaction="~/AdminTraining/Questions/@Model.BaQu_Id" class="btn btn-primary" value="MODIFICAR" /></center>
+                                    }
+                                 </p>
+
+                            </div>
+}
+
+        
+
+
+
+
+                <br />
+                
+
+        
+       
+    </div>
+</div>
+
+
+<script>
+    function LoadUpdateUsers(ToCo_Id) {
+
+            var link = '@Url.Action("AddQuestion","AdminTraining", new { id = "value" })';
+            link = link.replace("value", ToCo_Id)
+            $("#AddQuestionss").load(link);
+    }
+    </script>
+
+
+  

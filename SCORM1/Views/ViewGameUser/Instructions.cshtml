@@ -1,0 +1,683 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model UserPreviw
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo").modal();
+            });
+        </script>
+    }}
+@if (TempData["Info1"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo1").modal();
+            });
+        </script>
+
+    }}
+@*@if (TempData["ultimo"] != null)
+{      
+        
+
+    }*@
+@if (TempData["ultimo"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo2").modal();
+            });
+        </script>
+
+    }}
+@if (TempData["Info1"] != null)
+{
+
+}
+else
+{
+    if (TempData["Info2"] != null)
+    {
+
+    }
+    else
+    {
+        if (TempData["Ultimo"] != null)
+        {
+
+        }
+        else
+        {
+            if (Model.setting.Sett_Audio1 != null)
+            {
+                <audio src="~/ResourceGame/@Model.setting.Sett_Audio1" autoplay loop></audio>
+            }
+        }
+    }
+}
+
+<div id="DeleteInfo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <h1 style="color:red"> @TempData["Info"]</h1>
+                <br />
+                @*@if (TempData["ultimo"] != null)
+                {
+                    if (Model.setting.Sett_Audio5 != null)
+                    {
+                    <audio src="~/ResourceGame/@Model.setting.Sett_Audio5" autoplay loop></audio>
+                    <h1 style="color:red"> @TempData["ultimo"]</h1>
+                    }
+                }*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="DeleteInfo1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <h1 style="color:red"> @TempData["Info1"]</h1>
+                <br />  
+                @if (TempData["Info1"] != null)
+                {
+                   
+
+              
+                    if (Model.setting.Sett_Audio2 != null)
+                    {
+                    <audio src="~/ResourceGame/@Model.setting.Sett_Audio2" autoplay loop></audio>      
+                }
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="DeleteInfo2" class="modal fade" role="dialog">
+    <div class="modal-dialog2">
+        <div class="modal-content2">
+            <div class="modal-header2">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal1-title"></h4>
+            </div>
+            <div class="modal1-body">
+                <h1 style="color:red"> @TempData["Info2"]</h1>
+                <br />
+                @if (TempData["ultimo"] != null)
+                {
+                    if (Model.setting.Sett_Audio5 != null)
+                    {
+                        <audio src="~/ResourceGame/@Model.setting.Sett_Audio5" autoplay loop></audio>
+                        <br /><br /><br /><br />
+                        <h1 style="font-size:40px; color:red"> @TempData["ultimo"]</h1>
+                        if (TempData["ultimo1"] != null)
+                        {
+                            <h1 style="font-size:40px; color:red"> @TempData["ultimo1"]</h1>
+                        }
+                    }
+                    <canvas style="height:80%;width:100%;position:absolute;left:0px;top:0px;z-index:99999;" id="confeti"></canvas>
+                    <script type="text/javascript">
+  //<![CDATA[
+(function() {
+
+(function() {
+  var Confetti, PI_2, canvas, colors, confetti, context, drawCircle, i, range, resizeWindow, xpos;
+
+  canvas = document.getElementById("confeti");
+
+  context = canvas.getContext("2d");
+
+  window.w = window.innerWidth;
+
+  window.h = window.innerHeight;
+
+  resizeWindow = function() {
+    window.w = canvas.width = window.innerWidth;
+    return window.h = canvas.height = window.innerHeight;
+  };
+
+  window.addEventListener('resize', resizeWindow, false);
+
+  window.onload = function() {
+    return setTimeout(resizeWindow, 0);
+  };
+
+  range = function(a, b) {
+    return (b - a) * Math.random() + a;
+  };
+
+  colors = [[85, 71, 106], [174, 61, 99], [219, 56, 83], [244, 92, 68], [248, 182, 70]];
+
+  PI_2 = 2 * Math.PI;
+
+  drawCircle = function(x, y, r, style) {
+    context.beginPath();
+    context.arc(x, y, r, 0, PI_2, false);
+    context.fillStyle = style;
+    return context.fill();
+  };
+
+  xpos = 0.5;
+
+  document.onmousemove = function(e) {
+    return xpos = e.pageX / w;
+  };
+
+  window.requestAnimationFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+      return window.setTimeout(callback, 1000 / 60);
+    };
+  })();
+
+  Confetti = (function() {
+
+    function Confetti() {
+      this.style = colors[~~range(0, 5)];
+      this.rgb = "rgba(" + this.style[0] + "," + this.style[1] + "," + this.style[2];
+      this.r = ~~range(2, 6);
+      this.replace();
+    }
+
+    Confetti.prototype.replace = function() {
+      this.opacity = 0;
+      this.dop = 0.03 * range(1, 5);
+      this.x = range(-2 * this.r, w - 2 * this.r);
+      this.y = range(-2 * this.r, h - 2 * this.r);
+      this.xmax = w - this.r;
+      this.ymax = h - this.r;
+      this.vx = 2 * Math.random() + 10 * xpos - 6;
+      return this.vy = this.r + range(-1, 1);
+    };
+
+    Confetti.prototype.draw = function() {
+      var _ref;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.opacity += this.dop;
+      if (this.opacity > 1) {
+        this.opacity = 1;
+        this.dop *= -1;
+      }
+      if (this.opacity < 0 || this.y > this.ymax || !((0 < (_ref = this.x) && _ref < this.xmax))) {
+        this.replace();
+      }
+      return drawCircle(~~this.x, ~~this.y, this.r, "" + this.rgb + "," + this.opacity + ")");
+    };
+
+    return Confetti;
+
+  })();
+
+  confetti = (function() {
+    var _results;
+    _results = [];
+    for (i = 1; i <= 300; i++) {
+      _results.push(new Confetti);
+    }
+    return _results;
+  })();
+
+  window.step = function() {
+    var c, _i, _len, _results;
+    requestAnimationFrame(step);
+    context.clearRect(0, 0, w, h);
+    _results = [];
+    for (_i = 0, _len = confetti.length; _i < _len; _i++) {
+      c = confetti[_i];
+      _results.push(c.draw());
+    }
+    return _results;
+  };
+
+  step();
+
+}).call(this);
+
+})();
+//]]>
+                    </script>
+                }
+
+            </div>
+            <div class="modal1-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<body style="background:url(../../ImgTemplate/@Model.setting.MG_Template.Plant_Img_instructions); background-size: cover;background-position: center center;background-repeat: no-repeat;background-attachment: fixed;"> 
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <div class="col-md-4">
+        <div class="col-md-3" style="background:url(../../ResourceGame/Posicion.png);background-repeat: no-repeat; width:310px;height:135px;">
+            <div class="col-md-12">
+                <br /><br /><br />
+            </div>
+            @if (Model.ListRanking.Count != 0)
+            {
+                foreach (var item in Model.ListRanking.Where(x => x.user.Id == Model.User_Id))
+                {
+                    <h1 style="font-size:50px;">@item.Ranking</h1>
+                }
+            }
+
+        </div>
+
+        <div class="col-md-3" style="background:url(../../ResourceGame/Ranking_1.png);background-repeat: no-repeat; width:310px;height:620px; ">
+            <div class="col-md-12">
+                <br /><br /><br /><br />
+            </div>
+            @if (Model.ListRanking.Count != 0)
+            {
+                foreach (var item in Model.ListRanking.Take(10))
+                {
+                    <h1 style="font-size:19px; text-align:left; padding-left: 16px;">@item.Ranking @item.user.FirstName @item.user.LastName @item.puntos</h1>
+                }
+            }
+
+        </div>
+    </div>
+
+    <div class="preguntas2 col-md-4" style="left:480px;">
+        @if (Model.facil >= 15 && Model.medio >= 18 && Model.dificil >= 15 && Model.attempts< Model.setting.Sett_Attemps && Model.attemptUser<=Model.setting.Sett_Attemps)
+        {
+
+            if (Model.contador == 1)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel1.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 1)
+            {
+                <div class="col-md-4">      
+                        <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+
+            if (Model.contador == 2)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/2 (6).png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 2)
+            {
+                <div class="col-md-4">
+                        <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 2)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 3)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel3.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 3)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 3)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 4)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/4 (1).png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 4)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 4)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 5)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/5 (1).png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 5)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 5)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador ==6)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel6.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 6)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 6)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+
+            if (Model.contador == 7)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel7.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 7)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 7)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+
+            if (Model.contador == 8)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel8.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 8)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 8)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 9)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel9.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 9)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 9)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 10)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel10.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 10)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 10)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+
+            if (Model.contador == 11)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel11.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 11)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 11)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+
+            if (Model.contador == 12)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel12.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 12)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 12)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 13)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel13.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 13)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 13)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+
+            if (Model.contador == 14)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel14.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 14)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 14)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador == 15)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("Question", "ViewGameUser")">
+                        <img src="~/ResourceGame/Nivel15.png" class="img-responsive" />
+                    </a>
+                </div>
+            }
+            if (Model.contador > 15)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Bien.png" class="img-responsive" />
+                </div>
+            }
+            if (Model.contador < 15)
+            {
+                <div class="col-md-4">
+                    <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <img src="~/ResourceGame/Pregunta.png" class="img-responsive" />
+            </div>
+        }
+    </div>
+    
+    <div class="col-md-4"></div>
+   
+    <div class="col-md-4" style="left:100px;">
+        <div class="col-md-3"  style="background:url(../../ResourceGame/Niveles.png);background-repeat: no-repeat;width:310px;height:135px;">
+            <br /><br />
+            <h1><span id="seg" style="font-size:60px;">@Model.attemptUser de @Model.setting.Sett_Attemps</span></h1>
+        </div>
+        <div class="col-md-3" style="background:url(../../ResourceGame/Tus_Puntos.png);background-repeat: no-repeat; width:310px;height:135px;">
+            <div class="col-md-12">
+                <br /><br /><br />
+            </div>
+            @if (Model.ListRankingUser.Count != 0)
+            {
+                foreach (var item in Model.ListRankingUser)
+                {
+                    <h1 style="font-size:50px;">@item.puntos</h1>             
+                }
+            }
+
+        </div>
+        <div class="col-md-12">
+            <br />
+        </div>
+       
+    </div>
+</body>
+

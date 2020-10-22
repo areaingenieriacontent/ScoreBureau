@@ -1,0 +1,1323 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model AdminTrainingGeneralViewModel
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+
+
+@if (TempData["UpdateJob"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#EditJobs").modal();
+            });
+        </script>
+    }}
+<br /><br /><br />
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["form"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#AddTopicVirtual").modal();
+            });
+        </script>
+    }}
+else
+{
+    if (TempData["form2"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#AddTopicEvaluative").modal();
+                });
+            </script>
+        }}
+    else
+    {
+        if (TempData["EditBetterPractice"] != null)
+        {
+            @section Scripts {
+                <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#EditBetterPractices").modal();
+                });
+                </script>
+            }}
+        else
+        {
+            if (TempData["EditImprovement"] != null)
+            {
+                @section Scripts {
+                    <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#EditImprovements").modal();
+                });
+                    </script>
+                }}
+            else
+            {
+                if (TempData["Resource"] != null)
+                {
+                    @section Scripts {
+                        <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#AddResource").modal();
+                });
+                        </script>
+                    }}
+                else
+                {
+                    if (TempData["Info"] != null)
+                    {
+                        @section Scripts {
+                            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+                            </script>
+                        }}
+                    else
+                    {
+                        if (TempData["UpdateTopicVirtual"] != null)
+                        {
+                            @section Scripts {
+                                <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#UpdateTopicVirtual").modal();
+                });
+                                </script>
+                            }}
+                        else
+                        {
+                            if (TempData["UpdateTopicEvaluative"] != null)
+                            {
+                                @section Scripts {
+                                    <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#UpdateTopicEvaluative").modal();
+                });
+                                    </script>
+                                }}
+                            else
+                            {
+                                if (TempData["DeleteBetterPractice"] != null)
+                                {
+                                    @section Scripts {
+                                        <script type="text/JavaScript">
+                                        $(document).ready(function () {
+                                            $("#DeleteBetterPractices").modal();
+                                        });
+                                        </script>
+                                    }}
+                                else
+                                {
+                                    if (TempData["DeleteImprovement"] != null)
+                                    {
+                                        @section Scripts {
+                                            <script type="text/JavaScript">
+                                        $(document).ready(function () {
+                                            $("#DeleteImprovements").modal();
+                                        });
+                                            </script>
+                                        }}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Modules", "AdminTraining")" class="btn btn-info">CURSOS</a>
+    </div>
+</div>
+<br /><br /><br />
+<div class="panel panel-primary">
+    <div id="AddTopicVirtual" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">NUEVO TEMA</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("AddGeneralTopicVirtual", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Modules.Modu_Id)
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Modu_Id)
+                                @Html.LabelFor(model => model.ToCo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ToCo_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.ToCo_Attempt, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.EditorFor(model => model.ToCo_Attempt, new { htmlAttributes = new { @class = "form-control", @style = "width:55%" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Attempt, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-7">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.ToCo_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ToCo_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Description, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.ToCo_Type, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.EnumDropDownListFor(model => model.ToCo_Type, new { @class = "form-control", @style = "width:55%" })
+                                @Html.ValidationMessageFor(model => model.ToCo_Type, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-7">
+                                @Html.LabelFor(model => model.ToCo_RequiredEvaluation, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EnumDropDownListFor(model => model.ToCo_RequiredEvaluation, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ToCo_RequiredEvaluation, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.ToCo_Visible, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.EnumDropDownListFor(model => model.ToCo_Visible, new { @class = "form-control", @style = "width:55%" })
+                                @Html.ValidationMessageFor(model => model.ToCo_Visible, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.ToCo_ContentVirtual, new { @class = "form-control", @row = 5 })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear Tema</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="UpdateTopicVirtual" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">MODIFICAR</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("UpdateTopicVirtual", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Modules.Modu_Id)
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => Model.ToCo_Id)
+                                @Html.LabelFor(model => model.ToCo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ToCo_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Name, "", new { @class = "text-danger" })
+                            </div>
+                            @if (Model.topics != null)
+                            {
+                                if (Model.topics.BankQuestion.Count != 0)
+                                {
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.ToCo_Visible, htmlAttributes: new { @class = "control-label col-md-5" })
+                                        @Html.EnumDropDownListFor(model => model.ToCo_Visible, new { @class = "form-control", @style = "width:55%" })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Visible, "", new { @class = "text-danger" })
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.ToCo_Attempt, htmlAttributes: new { @class = "control-label col-md-5" })
+                                        @Html.EditorFor(model => model.ToCo_Attempt, new { htmlAttributes = new { @class = "form-control", @style = "width:55%" } })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Attempt, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.LabelFor(model => model.ToCo_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.EditorFor(model => model.ToCo_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Description, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.ToCo_Type, htmlAttributes: new { @class = "control-label col-md-5" })
+                                        @Html.EnumDropDownListFor(model => model.ToCo_Type, new { @class = "form-control", @style = "width:55%" })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Type, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.LabelFor(model => model.ToCo_RequiredEvaluation, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.EnumDropDownListFor(model => model.ToCo_RequiredEvaluation, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ToCo_RequiredEvaluation, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.ToCo_Visible, htmlAttributes: new { @class = "control-label col-md-5" })
+                                        @Html.EnumDropDownListFor(model => model.ToCo_Visible, new { @class = "form-control", @style = "width:55%" })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Visible, "", new { @class = "text-danger" })
+                                    </div>
+                                }
+                            }
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.ToCo_ContentVirtual, new { @class = "form-control", @row = 5 })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="EditBetterPractices" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditBetterPractice", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Modu_Id)
+                        <h2> <center>Evidencia, Vinculación Nuevos Miembros Asociaciones</center></h2>
+                        <br />
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Modu_Id)
+                                @Html.HiddenFor(model => model.BePr_Id)
+                                @Html.HiddenFor(model => Model.Modules.Modu_Id)
+                                @Html.LabelFor(model => model.BePr_StateBetterpractice, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-md-4">
+                                    @Html.EnumDropDownListFor(model => model.BePr_StateBetterpractice, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BePr_StateBetterpractice, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="EditImprovements" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditImprovement", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Modu_Id)
+                        <h2> <center>Foro</center></h2>
+                        <br />
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Modu_Id)
+                                @Html.HiddenFor(model => model.Impr_Id)
+                                @Html.HiddenFor(model => Model.Modules.Modu_Id)
+                                @Html.LabelFor(model => model.Impr_StateImprovement, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-md-4">
+                                    @Html.EnumDropDownListFor(model => model.Impr_StateImprovement, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Impr_StateImprovement, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="AddTopicEvaluative" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">NUEVO TEMA</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("AddGeneralTopic", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Modules.Modu_Id)
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Modu_Id)
+                                @Html.LabelFor(model => model.ToCo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ToCo_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.ToCo_Attempt, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.EditorFor(model => model.ToCo_Attempt, new { htmlAttributes = new { @class = "form-control", @style = "width:55%" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Attempt, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-7">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.ToCo_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ToCo_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Description, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.ToCo_Type, htmlAttributes: new { @class = "control-label col-md-5" })
+                                @Html.EnumDropDownListFor(model => model.ToCo_Type, new { @class = "form-control", @style = "width:55%" })
+                                @Html.ValidationMessageFor(model => model.ToCo_Type, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-7">
+                                @Html.LabelFor(model => model.ToCo_RequiredEvaluation, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EnumDropDownListFor(model => model.ToCo_RequiredEvaluation, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ToCo_RequiredEvaluation, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.ToCo_Content, new { @class = "form-control", @row = 5 })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear Tema</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="UpdateTopicEvaluative" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">MODIFICAR</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("UpdateTopicEvaluative", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Modules.Modu_Id)
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => Model.ToCo_Id)
+                                @Html.LabelFor(model => model.ToCo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ToCo_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                @Html.ValidationMessageFor(model => model.ToCo_Name, "", new { @class = "text-danger" })
+                            </div>
+                            @if (Model.topics != null)
+                            {
+                                if (Model.topics.BankQuestion.Count != 0)
+                                {
+                                }
+                                else
+                                {
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.ToCo_Attempt, htmlAttributes: new { @class = "control-label col-md-5" })
+                                        @Html.EditorFor(model => model.ToCo_Attempt, new { htmlAttributes = new { @class = "form-control", @style = "width:55%" } })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Attempt, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.LabelFor(model => model.ToCo_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.EditorFor(model => model.ToCo_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Description, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.ToCo_Type, htmlAttributes: new { @class = "control-label col-md-5" })
+                                        @Html.EnumDropDownListFor(model => model.ToCo_Type, new { @class = "form-control", @style = "width:55%" })
+                                        @Html.ValidationMessageFor(model => model.ToCo_Type, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.LabelFor(model => model.ToCo_RequiredEvaluation, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.EnumDropDownListFor(model => model.ToCo_RequiredEvaluation, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ToCo_RequiredEvaluation, "", new { @class = "text-danger" })
+                                    </div>
+                                }
+                            }
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.ToCo_Content, new { @class = "form-control", @row = 5 })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="AddResource" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="logo_inicial">
+                        @Html.Raw(Model.Logo)
+                    </div>
+                    <br /><br /><br /><br />
+                    <div class="col-md-6">
+                        <div class="fecha3">
+                            <br />
+                            <p><strong>Está permitido el uso de archivos de los siguientes tipos:</strong> </p> <br />
+                            <p><strong>El tamaño máximo del archivo debe ser no mayor a 5MB:</strong> </p> <br />
+                            <p><strong>.Imagenes</strong></p>
+                            <p><strong>.Videos</strong></p>
+                            <p><strong>.Audios</strong></p>
+                            <p><strong>.Documentos de Word,Excel y Power Point</strong></p>
+                            <p><strong>.Documentos en PDF</strong></p>
+                            <br />
+                        </div>
+                    </div>
+
+                    @using (Html.BeginForm("AddResource", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(model => Model.Modules.Modu_Id)
+                        @Html.HiddenFor(model => Model.ToCo_Id)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.ReMo_Name, htmlAttributes: new { @class = "control-label col-md-6" })
+                                @Html.EditorFor(model => model.ReMo_Name, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
+                                @Html.ValidationMessageFor(model => model.ReMo_Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <br />
+                                @Html.AntiForgeryToken()
+                                @Html.Label("Agregar archivo", htmlAttributes: new { @class = "control-label col-md-5" })
+                                <input type="file" id="CoverpageModule" name="upload" style="width:58%" />
+                            </div>
+                            <br />
+                            <div class="col-md-5">
+                                <br />
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button class="btn btn-primary" name="singin" type="submit">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Inform" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @TempData["Info"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- here is the section of Update Comment -->
+        @using (Html.BeginForm("DeleteBetterPractice", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="DeleteBetterPractices" class="modal fade" role="dialog">
+                <div class="modal-dialog1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h1 class="modal-title" style="color:black"><strong> Aporte de Evidencia, Vinculación Nuevos Miembros Asociaciones Rechazado</strong></h1>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <br />
+                                <div class="form-group">
+                                    @Html.HiddenFor(x => x.BePr_Id)
+                                    @Html.HiddenFor(x => x.Modules.Modu_Id)
+                                    <h1 style="color:black;"> @Html.Label("Redacta el mensaje para el envio del correo", htmlAttributes: new { @class = "col-md-5" })</h1>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.BePr_CommentAdmin, new { @class = "form-control", @row = 2 })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Enviar</button></center>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        <!-- here is the section of Update Comment -->
+        @using (Html.BeginForm("DeleteImprovement", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="DeleteImprovements" class="modal fade" role="dialog">
+                <div class="modal-dialog1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h1 class="modal-title" style="color:black"><strong> Aporte de Foro Rechazado</strong></h1>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <br />
+                                <div class="form-group">
+                                    @Html.HiddenFor(x => x.Impr_Id)
+                                    @Html.HiddenFor(x => x.Modules.Modu_Id)
+                                    <h1 style="color:black;"> @Html.Label("Redacta el mensaje para el envio del correo", htmlAttributes: new { @class = "col-md-5" })</h1>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.Impr_CommentAdmin, new { @class = "form-control", @row = 2 })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Enviar</button></center>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="EditJobs" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @using (Html.BeginForm("EditJob", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Job_Id)
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <br />
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.Modules.Modu_Id)
+                                    @Html.LabelFor(model => model.Job_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.Job_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Job_Name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.Job_Visible, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.EnumDropDownListFor(model => model.Job_Visible, new { @class = "form-control", @style = "width:70%" })
+                                    @Html.ValidationMessageFor(model => model.Job_Visible, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.Job_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.Job_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Job_Description, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.Job_TypeJob, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.EnumDropDownListFor(model => model.Job_TypeJob, new { @class = "form-control", @style = "width:70%" })
+                                    @Html.ValidationMessageFor(model => model.Job_TypeJob, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.Job_Points, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.Job_Points, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+                                    @Html.ValidationMessageFor(model => model.Job_Points, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.Job_StateJob, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.EnumDropDownListFor(model => model.Job_StateJob, new { @class = "form-control", @style = "width:70%" })
+                                    @Html.ValidationMessageFor(model => model.Job_StateJob, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-6" style="text-align: initial;">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.Job_InitDate, new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.Job_InitDate, new { @class = "col-sm-1" })
+                                    @Html.ValidationMessageFor(model => model.Job_InitDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.Job_FinishDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.EditorFor(model => model.Job_FinishDate, new { @class = "col-sm-1", @style = "width:2%" })
+                                    @Html.ValidationMessageFor(model => model.Job_FinishDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.Job_Content, 10, 15, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Job_Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <br /><br />
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <div class="panel-heading panel-head"><center><h1 style="font-size:35px;">@Model.Modules.Modu_Name</h1> </center></div>
+
+    <div class="panel-body">
+
+        <div class="col-md-2">
+           <img src="~/Resources/@Model.Modules.Modu_ImageName" style="width:150px; height:100px" class="img-responsive" />
+        </div>     
+        <div class="col-md-10">
+            <p style="color:#888888; font-size:30px; width:100%;text-align:left; " >@Model.Modules.Modu_Description</p>
+        </div>
+       
+        <div class="col-md-12"> <br /></div>
+        @if (Model.Modules.Certification.Count == 0)
+        {
+            <div class="col-md-2">
+                <p>
+                    @using (Html.BeginForm("Form", "AdminTraining", FormMethod.Post, new { id = "detallesForm" }))
+                {
+                        <center><input type="submit" formaction="~/AdminTraining/Form/@Model.Modules.Modu_Id" class="btn btn-primary" value="CREAR TEMA " /></center>
+                    
+                    }
+                </p>
+
+            </div>
+            <div class="col-md-10">
+                <p style="color:red; font-size:30px;width:100%;text-align:left;">
+                    <strong>
+
+                        Recuerde crear todos los temas para este curso antes de crear una evaluación.
+
+                    </strong>
+                </p>
+
+            </div>
+        }
+        else
+        {
+            <div class="col-md-8">
+                <p style="color:red">
+                    <strong>
+                        No se pueden agregar mas temas debido a que
+                        un usuario ya se certifico en este curso.
+
+
+                    </strong>
+
+                </p>
+
+            </div>
+        }
+
+
+        <br /><br /><br /><br />
+
+        @if (Model.Modules.TopicsCourse.Count != 0)
+            {
+                if (Model.Modules.TopicsCourse != null)
+                {
+                <ul class="nav nav-tabs">
+                    @if (Model.Modules.Modu_BetterPractice == FORO.No && Model.Modules.Modu_Improvement == FORO.No)
+                    {
+                    }
+                    else
+                    {
+                        <li style="font-size:20px; "><a data-toggle="tab" href="#menu1" style="font-size:20px;">MIS EXPERIENCIA</a></li>
+                    }
+                    <li class="active"><a data-toggle="tab" href="#@Model.Modules.TopicsCourse.ToList()[0].ToCo_Id" style="font-size:20px;">@Model.Modules.TopicsCourse.ToList()[0].ToCo_Name</a></li>
+                    @foreach (TopicsCourse topic in Model.Modules.TopicsCourse.Where(x => x.ToCo_Id != @Model.Modules.TopicsCourse.ToList()[0].ToCo_Id))
+                    {
+                        <li style="font-size:20px;"><a data-toggle="tab" href="#@topic.ToCo_Id" style="font-size:20px;">@topic.ToCo_Name</a></li>
+                        
+                    }
+                </ul>
+
+
+                <div class="tab-content">
+                    @if (Model.Modules.Modu_BetterPractice == FORO.No && Model.Modules.Modu_Improvement == FORO.No)
+                    {
+                    }
+                    else
+                    {
+                            <div id="menu1" class="tab-pane fade in active">
+                                <div class="contenido-articulo">
+                                    <h1 class="title" style="color:#fff;">OBL</h1>
+                                    @if (Model.Modules.Modu_BetterPractice == FORO.No && Model.Modules.Modu_Improvement == FORO.No)
+                                    {
+                                        <br />
+
+                                        <br />
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <img src="~/Content/Images/imagen.jpg" style="width:100%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <ul class="nav nav-tabs">
+
+                                    @if (Model.Modules.Modu_BetterPractice == FORO.Si)
+                                    {
+                                    <li class="active"><a data-toggle="tab" href="#BuenasPracticas">Buenas Prácticas</a></li>
+                                    }
+                                    @if (Model.Modules.Modu_Improvement == FORO.Si)
+                                    {
+                                    <li><a data-toggle="tab" href="#MejoraContinua">Mis Experiencias</a></li>
+                                    }
+                                        </ul>
+                                        <div class="tab-content">
+                                            @if (Model.Modules.Modu_BetterPractice == FORO.Si)
+                                            {
+                                            <div id="BuenasPracticas" class="tab-pane fade in active">
+                                                <div class="contenido-articulo">
+                                                    <br />
+                                                    <h1 style="color:#888888;">BUENAS PRÁCTICAS</h1>
+                                                    <br />
+                                                    <h4> Nos interesa saber los resultados obtenidos con la buena práctica del tema que aprendiste. Debes describir lo que hiciste y el resultado que conseguiste. Si quieres nos puedes enviar un archivo donde se evidencie el proceso y/o el resultado. ¡Anímate y gana puntos!</h4>
+                                                    <br />
+                                                    @if (Model.Modules.Modu_BetterPractice == FORO.Si)
+                                                    {
+                                                        if (Model.Modules.BetterPractice.Count != 0)
+                                                        {
+                                                            if (Model.Modules.BetterPractice != null)
+                                                            {
+                                                                foreach (BetterPractice betterpractice in Model.Modules.BetterPractice)
+                                                                {
+                                                                    <div class="comentario">
+
+                                                                        @if (betterpractice.BePr_Points == 0)
+                                                                        {
+                                                                            <div class="botones-edicion">
+                                                                                <a href="@Url.Action("EditBetterPractice", "AdminTraining", new { id = @betterpractice.BePr_Id })"><i class="fa fa-cog" style="color: #f57c00"></i></a>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+
+                                                                        }
+                                                                        <p><strong>@betterpractice.BePr_TiTle</strong></p>
+                                                                        <p><em>@betterpractice.ApplicationUser.FirstName @betterpractice.ApplicationUser.LastName</em></p>
+                                                                        <p>
+                                                                            @Html.Raw(betterpractice.BePr_Comment)
+                                                                        </p>
+
+                                                                        <p>
+                                                                            <div class="fecha">
+                                                                                Archivo Adjunto:  <a href="~/ResourceBetterPractice/@betterpractice.BePr_Resource" target="_blank" download="@betterpractice.BePr_Name" style="background-color:transparent;color:#f57c00;"> @betterpractice.BePr_Name</a>
+                                                                            </div>
+
+
+                                                                        </p>
+                                                                        @if (@betterpractice.BePr_Points == 0)
+                                                                        {
+                                                                            <h6 class="puntaje">
+                                                                                Pendiente Por revision<br />
+                                                                                Fecha Publicación: @betterpractice.BePr_InitDate
+                                                                            </h6>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <h6 class="puntaje">
+                                                                                Puntos: @betterpractice.BePr_Points<br />
+                                                                                Fecha Publicación: @betterpractice.BePr_InitDate
+                                                                            </h6>
+                                                                        }
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                            }
+                                            @if (Model.Modules.Modu_Improvement == FORO.Si)
+                                            {
+                                            <div id="MejoraContinua" class="tab-pane fade">
+                                                <div class="contenido-articulo">
+                                                    <br />
+                                                    <h1 style="color:#888888;">MEJORA</h1>
+                                                    <br />
+                                                    <h4>Sabemos que todo evoluciona, por eso queremos que nos des tus ideas sobre cómo mejorar en alguno de los aspectos que has revisado en el contenido. recuerda, debes describir la situación actual, cuál es tu propuesta y qué resultados piensas que se pueden obtener. Nos puedes enviar un archivo con más detalle sobre tu propuesta. ¡Anímate y gana puntos!</h4>
+                                                    <br />
+                                                    @if (Model.Modules.Modu_Improvement == FORO.Si)
+                                                    {
+                                                        if (Model.Modules.Improvement.Count != 0)
+                                                        {
+                                                            if (Model.Modules.Improvement != null)
+                                                            {
+                                                                foreach (Improvement improvement in Model.Modules.Improvement)
+                                                                {
+                                                                    <div class="comentario">
+                                                                        @if (improvement.Impr_Points == 0)
+                                                                        {
+                                                                            <div class="botones-edicion">
+                                                                                <a href="@Url.Action("EditImprovement", "AdminTraining", new { id = @improvement.Impr_Id })"><i class="fa fa-cog"style="color: #f57c00"></i></a>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+
+                                                                        }
+                                                                        <p><strong>@improvement.Impr_Title</strong></p>
+                                                                        <p><em>@improvement.ApplicationUser.FirstName @improvement.ApplicationUser.LastName</em></p>
+                                                                        <p>
+                                                                            @Html.Raw(improvement.Impr_Comment)
+                                                                        </p>
+                                                                        <p>
+                                                                            @Html.Raw(improvement.Impr_Comment2)
+                                                                        </p>
+                                                                        <p>
+                                                                            <div class="fecha">
+                                                                                Archivo Adjunto:  <a href="~/ResourcesImprovement/@improvement.Impr_Resource" target="_blank" download="@improvement.Impr_Name" style="background-color:transparent;color:#f57c00;"> @improvement.Impr_Name</a>
+                                                                            </div>
+
+
+                                                                        </p>
+                                                                        @if (@improvement.Impr_Points == 0)
+                                                                        {
+                                                                            <h6 class="puntaje">
+                                                                                Pendiente Por revision<br />
+                                                                                Fecha Publicación: @improvement.Impr_InitDate
+                                                                            </h6>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <h6 class="puntaje">
+                                                                                Puntos: @improvement.Impr_Points<br />
+                                                                                Fecha Publicación: @improvement.Impr_InitDate
+                                                                            </h6>
+                                                                        }
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+        }
+                    <div id="@Model.Modules.TopicsCourse.ToList()[0].ToCo_Id" class="tab-pane fade in active">
+                        <div class="contenido-articulo">
+                            <br /><br /><br />
+                            @if (Model.ActualRole==ROLES.AdministradoGeneral)
+	                        {	                        
+                            <div class="botones-edicion">
+                                <a href="@Url.Action("DeleteTopicVirtual", "AdminTraining", new { id = @Model.Modules.TopicsCourse.ToList()[0].ToCo_Id })"><i class="fa fa-remove" style="color: #bc112e"></i></a>
+                                <a href="@Url.Action("UpdateTopicVirtual", "AdminTraining", new { id = @Model.Modules.TopicsCourse.ToList()[0].ToCo_Id })"><i class="fa fa-cog" style="color: #bc112e"></i></a>
+                            </div>
+                            }
+                            @if (Model.Modules.TopicsCourse.ToList()[0].ToCo_RequiredEvaluation == REQUIREDEVALUATION.Si)
+                            {
+                                <div class="col-md-2">
+                                    <p>
+                                        @using (Html.BeginForm("Test", "AdminTraining", FormMethod.Post, new { id = "detallesForm" }))
+                                        {
+                                            <center><input type="submit" formaction="~/AdminTraining/Test/@Model.Modules.TopicsCourse.ToList()[0].ToCo_Id" class="btn btn-primary" value="Crear Evaluación" /></center>
+                                        }
+                                    </p>
+                                </div>
+
+                            }
+                            <div class="col-md-2">
+                                <p>
+                                    @using (Html.BeginForm("AddResources", "AdminTraining", FormMethod.Post, new { id = "s " }))
+                                    {
+                                        <center><input type="submit" formaction="~/AdminTraining/AddResources/@Model.Modules.TopicsCourse.ToList()[0].ToCo_Id" class="btn btn-primary" value="Añadir Documento" /></center>
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="@Url.Action("FormJob", "AdminTraining", new {id=Model.Modules.TopicsCourse.ToList()[0].ToCo_Id } )" class="btn btn-default">Añadir Recurso</a>
+                            </div>
+
+                            <br /><br /><br /><br />
+
+                            <p>@Html.Raw(Model.Modules.TopicsCourse.ToList()[0].ToCo_ContentVirtual)</p>
+                            <p>@Html.Raw(Model.Modules.TopicsCourse.ToList()[0].ToCo_Content)</p>
+                            <br />
+                            @if (Model.Modules.TopicsCourse.ToList()[0].ResourceTopics.Count == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                <div class="fecha1">
+                                    <h4>Documentos de Apoyo</h4><br />
+                                    @foreach (ResourceTopics resource in Model.Modules.TopicsCourse.ToList()[0].ResourceTopics)
+                                    {
+
+                                        <div class="botones-edicion">
+                                            <a href="@Url.Action("DeleteResource", "AdminTraining", new { id = @resource.ReMo_Id })"><i class="fa fa-remove" style="color: #bc112e"></i></a>
+
+                                        </div>
+                                                <h4>
+                                                    <strong>
+                                                        -  <a href="~/ResourceTopic/@resource.ReMo_NameResource" target="_blank" download="@resource.ReMo_Name" style="background-color:transparent;color:#f57c00;"> @resource.ReMo_Name</a>
+                                                    </strong>
+                                                </h4>
+
+                                    }
+                                </div>
+
+                            }
+                            <br />
+                            @if (Model.Modules.TopicsCourse.ToList()[0].Job.Count != 0)
+                            {
+                                <div class="fecha">
+                                    <h4>Actividades a calificar</h4><br />
+                                    @foreach (var resource in Model.Modules.TopicsCourse.ToList()[0].Job.OrderBy(a => a.Job_Name))
+                                    {
+                                        <div class="botones-edicion">
+                                           @if (Model.ActualRole == ROLES.AdministradoGeneral)
+                                           {
+                                            <a href="#" onclick="DeleteUser('@resource.Job_Id')" data-cname="@resource.Job_Id"><i class="fa fa-remove" style="color: #bc112e"></i></a>
+                                           }
+                                            <a href="@Url.Action("EditJob", "AdminTraining", new { id = @resource.Job_Id })"><i class="fa fa-cog" style="color: #bc112e"></i></a>
+                                        </div>
+                                            <h4>
+                                               
+
+                                                <strong>
+                                                    	<a href="@Url.Action("ViewJob", "Ratings", new { id = @resource.Job_Id })" style="background-color:transparent;color:#bc112e;">@resource.Job_Name</a>
+                                                </strong>
+                                            </h4>
+                                    }
+                                </div>
+                            }
+                            @if (Model.listtest!=null && Model.listtest.Count != 0)
+                            {
+                                <div class="fecha">
+                                    <br />
+                                    <h4>Listado Test</h4><br />
+                                </div>
+                                foreach (var item in Model.listtest)
+                                {
+                                    <h4 class="fecha">
+                                        <strong>
+                                            	<a href="@Url.Action("ViewTest", "AdminTraining", new { id = @item.BaQu_Id })" style="background-color:transparent;color:#bc112e;">Test de @item.TopicsCourse.ToCo_Name</a>
+                                        </strong>
+                                    </h4>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    @foreach (TopicsCourse topic1 in Model.Modules.TopicsCourse.Where(x => x.ToCo_Id != Model.Modules.TopicsCourse.ToList()[0].ToCo_Id ))
+                    {
+                        <div id="@topic1.ToCo_Id" class="tab-pane fade">
+                            <div class="contenido-articulo">
+                                    <br /><br /><br />
+                                    @if (Model.ActualRole == ROLES.AdministradoGeneral)
+                                    {
+                                    <div class="botones-edicion">
+                                        <a href="@Url.Action("DeleteTopicVirtual", "AdminTraining", new { id = @topic1.ToCo_Id })"><i class="fa fa-remove" style="color: #bc112e"></i></a>
+                                        <a href="@Url.Action("UpdateTopicVirtual", "AdminTraining", new { id = @topic1.ToCo_Id })"><i class="fa fa-cog" style="color: #bc112e"></i></a>
+                                    </div>
+                                    }
+                                    @if (topic1.ToCo_RequiredEvaluation == REQUIREDEVALUATION.Si)
+                                    {
+                                        <div class="col-md-2">
+                                            <p>
+                                                @using (Html.BeginForm("Test", "AdminTraining", FormMethod.Post, new { id = "detallesForm" }))
+                                                {
+                                                    <center><input type="submit" formaction="~/AdminTraining/Test/@topic1.ToCo_Id" class="btn btn-primary" value="Crear Evaluación" /></center>
+                                                }
+                                            </p>
+                                        </div>
+
+                                    }
+                                    <div class="col-md-2">
+                                        <p>
+                                            @using (Html.BeginForm("AddResources", "AdminTraining", FormMethod.Post, new { id = "s " }))
+                                            {
+                                                <center><input type="submit" formaction="~/AdminTraining/AddResources/@topic1.ToCo_Id" class="btn btn-primary" value="Añadir Documento" /></center>
+                                            }
+                                        </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="@Url.Action("FormJob", "AdminTraining", new {id=topic1.ToCo_Id } )" class="btn btn-default">Añadir Recurso</a>
+                                    </div>
+
+                                    <br /><br /><br /><br />
+
+                                    <p>@Html.Raw(topic1.ToCo_ContentVirtual)</p>
+                                    <p>@Html.Raw(topic1.ToCo_Content)</p>
+                                    <br />
+                                    @if (topic1.ResourceTopics.Count == 0)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <div class="fecha1">
+                                            <h4>Documentos de Apoyo</h4><br />
+                                            @foreach (ResourceTopics resource in topic1.ResourceTopics)
+                                            {
+                                         
+                                                <div class="botones-edicion">
+                                                    <a href="@Url.Action("DeleteResource", "AdminTraining", new { id = @resource.ReMo_Id })"><i class="fa fa-remove" style="color: #bc112e"></i></a>
+
+                                                </div>
+                                                <h4>
+                                                    <strong>
+                                                        -  <a href="~/ResourceTopic/@resource.ReMo_NameResource" target="_blank" download="@resource.ReMo_Name" style="background-color:transparent;color:#f57c00;"> @resource.ReMo_Name</a>
+                                                    </strong>
+                                                </h4>
+
+                                            }
+                                        </div>
+
+                                    }
+                                <br />
+                                @if (topic1.Job.Count != 0)
+                                {
+                                    <div class="fecha">
+                                        <h4>Actividades a calificar</h4><br />
+                                        @foreach (var resource in topic1.Job.OrderBy(a=>a.Job_Name))
+                                        {
+                                            <div class="botones-edicion">
+                                                @if (Model.ActualRole == ROLES.AdministradoGeneral)
+                                                {
+                                                <a href="#" onclick="DeleteUser('@resource.Job_Id')" data-cname="@resource.Job_Id"><i class="fa fa-remove" style="color: #bc112e"></i></a>
+                                                }
+                                                <a href="@Url.Action("EditJob", "AdminTraining", new { id = @resource.Job_Id })"><i class="fa fa-cog" style="color: #bc112e"></i></a>
+                                            </div>
+                                            <h4>
+                                                <strong>
+                                                    	<a href="@Url.Action("ViewJob", "Ratings", new { id = @resource.Job_Id })" style="background-color:transparent;color:#bc112e;">@resource.Job_Name</a>
+                                                </strong>
+                                            </h4>
+                                        }
+                                    </div>
+                                }     
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            }
+        }
+        else
+        {
+            <div class="col-lg-10">
+                <div>
+                    <img src="~/Content/Images/No_temas_w.png"   style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+
+
+
+<script>
+    //method Delete
+    function DeleteUser(Id) {
+        if (confirm("Elimiar Recurso (Perdera toda la información sobre respuestas subidas y calificaciones. (NO se puede revertir))") == true) {
+            var User = Id;
+            window.location.href = ' @Url.Action("DeleteJob", "AdminTraining", new { id = "ID" })'.replace("ID", User);
+        }
+    }
+</script>

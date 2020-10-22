@@ -1,0 +1,43 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model AdminTrainingTestViewModel
+@Scripts.Render("~/bundles/jqueryval")
+<br /><br /><br /><br /><br /><br />
+@using (Html.BeginForm("AddPairing", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-5">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.BaQu_Id)
+            @Html.LabelFor(model => model.Pair_Question, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.EditorFor(model => model.Pair_Question, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre pregunta", @style = "width:70%" } })
+            @Html.ValidationMessageFor(model => model.Pair_Question, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-7">
+            @Html.LabelFor(model => model.Pair_Description, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.EditorFor(model => model.Pair_Description, new { htmlAttributes = new { @class = "form-control", @style = "width:60%" } })
+            @Html.ValidationMessageFor(model => model.Pair_Description, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.AnPa_OptionsQuestion, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.EditorFor(model => model.AnPa_OptionsQuestion, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+            @Html.ValidationMessageFor(model => model.AnPa_OptionsQuestion, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-7">
+            @Html.LabelFor(model => model.AnPa_OptionAnswer, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.EditorFor(model => model.AnPa_OptionAnswer, new { htmlAttributes = new { @class = "form-control", @style = "width:60%" } })
+            @Html.ValidationMessageFor(model => model.AnPa_OptionAnswer, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-12">
+            <br /><br />
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <center><button class="btn btn-primary" name="singin" type="submit">Crear Pregunta</button></center>
+            </div>
+        </div>
+    </div>
+}
+<br><hr style="width:100%; clear:both; border:dashed; border-color: #F57C00; border-width:thin; margin-bottom:10px;">

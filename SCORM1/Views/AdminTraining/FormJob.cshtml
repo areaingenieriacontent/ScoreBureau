@@ -1,0 +1,152 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model AdminTrainingGeneralViewModel
+
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row">
+    @using (Html.BeginForm("AddJob", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ToCo_Id)
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <br />
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Modules.Modu_Id)
+                @Html.LabelFor(model => model.Job_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.EditorFor(model => model.Job_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Job_Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Job_Visible, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.EnumDropDownListFor(model => model.Job_Visible, new { @class = "form-control", @style = "width:70%" })
+                @Html.ValidationMessageFor(model => model.Job_Visible, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Job_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.EditorFor(model => model.Job_Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Job_Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Job_TypeJob, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.EnumDropDownListFor(model => model.Job_TypeJob, new { @class = "form-control", @style = "width:70%" })
+                @Html.ValidationMessageFor(model => model.Job_TypeJob, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Job_Points, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.EditorFor(model => model.Job_Points, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+                @Html.ValidationMessageFor(model => model.Job_Points, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Job_StateJob, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.EnumDropDownListFor(model => model.Job_StateJob, new { @class = "form-control", @style = "width:70%" })
+                @Html.ValidationMessageFor(model => model.Job_StateJob, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-6" style="text-align: initial;">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Job_InitDate, new { @class = "control-label col-md-3" })
+                @Html.EditorFor(model => model.Job_InitDate, new { @class = "col-sm-1" })
+                @Html.ValidationMessageFor(model => model.Job_InitDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Job_FinishDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                @Html.EditorFor(model => model.Job_FinishDate, new { @class = "col-sm-1", @style = "width:2%" })
+                @Html.ValidationMessageFor(model => model.Job_FinishDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+
+            <div class="col-md-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Job_Content, 10, 15, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Job_Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <br /><br />
+                    <center><button class="btn btn-primary" name="singin" type="submit">Crear</button></center>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

@@ -1,0 +1,56 @@
+﻿@model SCORM1.Models.FormViewModel
+<div class="form-container">
+
+    @using (Html.BeginForm("SendEmail", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="col-md-12">
+
+            <h4><p>Si tienes alguna inquietud sobre el funcionamiento de la plataforma de conocimiento, diligencia la información que te solicitamos y escribe una breve descripción de lo que te sucede. Estamos para acompañarte </p></h4>
+
+
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-12" style="margin-bottom:35px; margin-top:35px;">
+            <div>
+                Nombre
+                <br />
+
+                @Html.TextBoxFor(m => m.Form_Name, new { @class = "form-forgot-listinput" })
+                @Html.ValidationMessageFor(m => m.Form_Name, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.DropDownListFor(model => model.Modu_Id, Model.ListModule, new { @class = "form-forgot-listinput hidden", Type = "hidden" })
+                @Html.ValidationMessageFor(model => model.Modu_Id, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                Correo Electronico
+                <br />
+
+                @Html.TextBoxFor(m => m.Form_Email, new { @class = "form-forgot-listinput" })
+                @Html.ValidationMessageFor(m => m.Form_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-container-message">
+            Mensaje
+            <br />
+            @Html.TextAreaFor(m => m.Form_Comment, 10, 15, new { @class = "form-forgot-txtarea", Style = "width:72%;" })
+            @Html.ValidationMessageFor(m => m.Form_Comment, "", new { @class = "text-danger" })
+
+            <br /><br />
+            <input type="submit" id="send-form-tutor" value="Enviar" class="btn btn-info" style="background:#FF0040;border-color:#FF0040;border-radius:10px;" />
+
+            <br /><br />
+
+            <div class="rowsend">
+                <div class="col-md-12" style="background:white">
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+</div>

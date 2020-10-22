@@ -1,0 +1,417 @@
+﻿using SCORM1.Models.Newspaper
+@using SCORM1.Enum
+@using SCORM1.Models.ViewModel
+@model AdminInformationArticles
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
+<link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+
+
+@*Script sections modal*@
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+
+@if (TempData["AddArticle"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#CreationOfArticles").modal();
+            });
+        </script>
+    }}
+
+@if (TempData["UpdateSection"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateMySection").modal();
+            });
+        </script>
+    }}
+<script>
+
+    //method AddArticles
+    function AddArticles(sect_id) {
+        if (confirm("Agregar artículo") == true) {
+            var sectionID = sect_id;
+            window.location.href = ' @Url.Action("CreateArticle", "AdminInformation", new {id = "ID"})'.replace("ID", sectionID);
+        }
+    }
+
+    //method DeleteArticles
+    function DeleteArticle(Arti_Id) {
+        if (confirm("Eliminar el Articulo (Perderás toda la información.)") == true) {
+            var IdArticle = Arti_Id;
+            window.location.href = ' @Url.Action("DeleteArticleCurrent", "AdminInformation", new {id = "ID"})'.replace("ID", IdArticle);
+        }
+    }
+
+    //method UpdateSections
+    function UpdateSection(sect_id) {
+        if (confirm("Actualizar la Sección") == true) {
+            var sectionID = sect_id;
+            window.location.href = ' @Url.Action("UpdateSectionCurrent", "AdminInformation", new {id = "ID"})'.replace("ID", sectionID);
+        }
+    }
+
+    //method DeleteSections
+    function DeleteSection(sect_id) {
+        if (confirm("Eliminar la sección (Perderás todos los artículos.)") == true) {
+            var sectionID = sect_id;
+            window.location.href = ' @Url.Action("DeleteSectionCurrent", "AdminInformation", new {id = "ID"})'.replace("ID", sectionID);
+        }
+    }
+</script>
+
+
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Editions", "AdminInformation")" class="btn btn-info">EDICIONES</a>
+    </div>
+</div>
+<br />
+<div class="jumbotron">
+
+ 
+
+    <p><button data-toggle="modal" data-target="#myModal" class="btn btn-primary">Agregar sección</button></p>
+
+    <h1 class="title">@Model.editions.Edit_Name</h1>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#modalInicio">INICIO</a></li>
+        @foreach (var sections in Model.sectionsList)
+            {
+            <li><a data-toggle="tab" href="#@sections.sect_Id">@sections.sect_name</a></li>
+        }
+    </ul>
+
+
+    <div class="tab-content">
+
+        <div id="modalInicio" class="tab-pane fade in active">
+            <div class="img-container">
+                <img src="~/Resources/@Model.editions.Edit_ImageName" Text" style="width:30%;height:50%; " />
+            </div>
+        </div>
+        @if (Model.sectionsList.Count != 0)
+        {
+            foreach (var SectionsContent in Model.sectionsList)
+            {
+
+                <div id="@SectionsContent.sect_Id" class="tab-pane fade">
+
+                    <div class="contenido-articulo">
+                        <div class="botones-edicion">
+                            <i><button onclick="DeleteSection('@SectionsContent.sect_Id')" data-cname="@SectionsContent.sect_Id" class="fa fa-remove"></button></i>
+                            <i><button onclick="UpdateSection('@SectionsContent.sect_Id')" data-cname="@SectionsContent.sect_Id" class="fa fa-cog"></button></i>
+                            <br />
+                            <button onclick="AddArticles('@SectionsContent.sect_Id')" data-cname="@SectionsContent.sect_Id" class="btn btn-primary">Agregar Articulos</button>
+                            <br /><br /><br /><br />
+                        </div>
+                        <div class="col-md-12">
+                            @if (SectionsContent.Article.Count != 0)
+                    {
+
+                        foreach (var articlesOfSection in SectionsContent.Article)
+                        {
+                                    <div class="edicion col-sm-6 col-lg-4">
+                                        <div class="panel panel-info col-md-12">                                         
+                                            <p style="color:#F57C00;">@articlesOfSection.Arti_Name</p>
+                                            <div>
+                                                <div>
+                                                    <center><img src="~/Resources/SourceSection/@articlesOfSection.Arti_imagen" style="width:150px;height:150px;" class="img-responsive" alt="Imagen responsive" /></center>
+                                                </div>
+                                                <div>
+                                                    @Html.ActionLink(" ", "ViewArticle", "AdminInformation", new { id = articlesOfSection.Arti_Id }, new { @class = "fa fa-plus-square" })
+                                                    <button onclick="DeleteArticle('@articlesOfSection.Arti_Id')" data-cname="@articlesOfSection.Arti_Id" class="fa fa-remove"></button>
+                                                </div>
+                                            </div>
+                                           </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <br />
+                                <center>
+                                    <div class="col-lg-10">
+                                        <div>
+                                            <img src="~/Content/Images/No_articulos_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                                        </div>
+                                    </div>
+                                </center>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+
+            <br />
+            <center>
+                <div class="col-lg-10">
+                    <div>
+                        <img src="~/Content/Images/No_secciones_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                    </div>
+                </div>
+            </center>
+
+        }
+
+    </div>
+
+</div>
+<!-- here is the section of Create Article -->
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateSection", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <form class="form-horizontal">
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sect_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Sect_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sect_Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @Html.HiddenFor(x => x.editions.Edit_Id)
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-8">
+                                <center><button class="btn btn-primary" name="singin" type="submit">Crear sección</button></center>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- here is the section of Create Article -->
+
+    <div id="CreationOfArticles" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("CreateArticle", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <form class="form-horizontal">
+                            <br />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.arti_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.arti_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.arti_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.arti_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.arti_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.arti_Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.arti_State, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.arti_State, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.arti_State, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ArticleWithComment, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.ArticleWithComment, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ArticleWithComment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Portada", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-md-3">
+                                    <center><input type="file" id="CoverpageModule" name="upload" /></center>
+                                </div>
+                            </div>
+                          
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <center>@Html.TextAreaFor(model => model.arti_Content, new { @class = "form-control", @row = 5 })</center>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(x => x.editions.Edit_Id)
+                            @Html.HiddenFor(x => x.SectionId)
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <!-- here is the section of Update the Article -->
+    @if (Model.editions != null)
+    {
+        using (Html.BeginForm("UpdateSectionCurrent", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="UpdateMySection" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="title_popup">Actualizar Section <button type="button" class="close" data-dismiss="modal">×</button></h5>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <form class="form-horizontal">
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sect_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Sect_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Sect_Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @Html.HiddenFor(x=>x.SectionId)
+                        @Html.HiddenFor(x => x.editions.Edit_Id)
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-8">
+                                <center><button class="btn btn-primary" name="singin" type="submit">Actualizar sección </button></center>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        }
+    }
+</div>

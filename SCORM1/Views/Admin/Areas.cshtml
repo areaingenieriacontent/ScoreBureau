@@ -1,0 +1,122 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@using SCORM1.Models.SCORM1
+
+@model AdminAreaViewModel
+
+@{
+    ViewBag.Title = "Areas";
+}
+
+<h2></h2>
+<!--Body of Area-->
+<div class="jumbotron col-md-12">
+
+    @using (Html.BeginForm("SearchArea", "Admin", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.AreaSearch, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la Pregunta" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+
+    <div class="table-responsive col-md-12">
+
+        <table class="table table-hover table-striped">
+
+            <thead>
+                <tr class="success">
+                    <td>Nombre de Area</td>
+                    <td>Jefe</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Area area in Model.Areas)
+                {
+                    <tr style="font-weight:700">
+                        <td>
+                            @area.AreaName
+                        </td>
+                        <td>
+                            @area.ApplicationUser.FirstName
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" onclick="ModifyAreasAdd(@area.AreaId)" data-cname="@area.AreaId">Administrar</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" id="Modify" onclick="UpdateAreas(@area.AreaId)" data-cname="@area.AreaId">Modificar</button>
+                        </td>
+                        <td>
+                            @*@using (Html.BeginForm("DeleteArea", "Admin", FormMethod.Post, new { id = "deleteForm" }))
+                            {
+                                <button class="btn btn-primary" formaction="~/Admin/DeleteArea/@area.AreaId">Eliminar</button>
+                            }*@
+                            <input type="submit" onclick="confirm_meth('@area.AreaId')" data-cname="@area.AreaId" class="btn btn-primary" value="Eliminar" />
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+
+    <!-- Area for Add Manages XD-->
+    <div id="UpdateAreas"> </div>
+    <!--div for modify Areas-->
+    <div id="ModifyAreas">    </div>
+ 
+
+    <div class="caja_botones" style="clear:both;">
+        <button id="AddAreaButton" class="botones_pregunta">Crear Área</button>
+    </div>
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+
+    <!-- Area for Add Areas XD-->
+    <div id="AddAreas"> </div>
+
+   
+
+
+</div>
+<script>
+    document.getElementById("AddAreaButton").onclick = function () { LoadProficiencyDiv() };
+    function LoadProficiencyDiv() {
+
+        $("#AddAreas").load('@Url.Action("AddArea","Admin")');
+    }
+    function UpdateAreas(AreaId) {
+        var link = '@Url.Action("UpdateArea", "Admin", new { IdArea = "value" })';
+        link = link.replace("value", AreaId)
+        $("#UpdateAreas").load(link);
+    }
+
+    function ModifyAreasAdd(AreaId) {
+        var link = '@Url.Action("ModifyAreaAdduser","Admin", new { AreaId = "value"})';
+        link = link.replace("value", AreaId)
+        $("#ModifyAreas").load(link)
+    }
+
+</script>
+<script type="text/Javascript" language="javascript">
+    function confirm_meth(AreaId)
+{
+  if( confirm("Quieres eliminar el area ?")==true)
+  {
+      var Q = AreaId;
+      window.location.href = ' @Url.Action("DeleteArea", "Admin", new {id = "ID"})'.replace("ID",Q);
+   }
+  else
+  {
+      var link = '@Url.Action("Areas", "Admin")';
+  }
+}
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

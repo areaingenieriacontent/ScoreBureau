@@ -1,0 +1,77 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@using Microsoft.AspNet.Identity
+@model BossAreaViewModel
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Panels";
+}
+
+<h2></h2>
+<div class="jumbotron col-md-12">
+    @foreach (ApplicationUser Boss in Model.BossUser)
+    {
+        if (Boss.Area == null)
+        {
+
+            <div class="avatar"></div>
+            <div class="nombre_perfil">@Boss.FirstName @Boss.LastName</div>
+            <hr>
+
+            <div class="nombre_area"><h3>No hay Area definida para este usuario </h3></div><br><br>
+            <hr>
+
+        }
+        else
+        {
+            <div class="avatar"></div>
+            <div class="nombre_perfil">@Boss.FirstName @Boss.LastName</div>
+            <hr>
+            <div class="nombre_area">@Boss.Area.AreaName</div><br><br>
+            <hr>
+        }
+
+        if (Boss.Area == null)
+        {
+            <h2>no hay area para mostrar</h2>
+        }
+        else
+        {
+            <div class="table-responsive col-md-12">
+                <table class="table table-hover table-striped">
+
+                    <thead>
+                        <tr class="success">
+                            <td>Nombre de Usuario</td>
+                            <td>Área</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ApplicationUser usuariosarea in Model.BossArea)
+                        {
+
+                            <tr style="font-weight:700">
+                                <td>
+                                    @usuariosarea.FirstName @usuariosarea.LastName
+                                </td>
+                                <td>
+                                    @usuariosarea.Area.AreaName
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn btn-success" value="Planes" onclick="location.href='@Url.Action("ViewPlans", "Plans", new { userId = usuariosarea.Id, role = Boss.Role  })'" />
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn btn-success" value="Resultados" onclick="location.href='@Url.Action("ViewResults", "Results", new { userId = usuariosarea.Id, role = Boss.Role })'" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+            </div>
+        }
+    }
+</div>

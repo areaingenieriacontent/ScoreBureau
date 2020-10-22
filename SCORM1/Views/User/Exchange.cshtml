@@ -1,0 +1,181 @@
+﻿@using SCORM1.Models;
+@using SCORM1.Models.Engagement;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model UserExchangeViewModel
+
+@if (TempData["Menssages"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+<script>
+    //method SendRequest
+    function SendRequest(Arti_id) {
+        if (confirm("Realizar Postulación") == true) {
+            window.location.href = ' @Url.Action("ExchangeUser", "User", new { id = "ID" })'.replace("ID", Arti_id);
+        }
+    }
+</script>
+<br /><br /><br /><br /><br /><br />
+
+<div class="container">
+
+    <div>
+        <div class="row fecha">
+            <div class="btn-group btn-breadcrumb">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+            </div>
+        </div>
+        <br />
+        <h1 class="title"> PREMIOS</h1>
+        <br />
+        <h1 class="puntaje" style="color:#000; font-size:30px;"> <center> <b>Acumula puntos  y gánate alguno de estos premios</b>  </center> </h1>
+        <br />
+
+        @if (Model.ListPrize.Count == 0)
+        {
+            <br /><br />
+            <div class="row">
+
+                <center> <img src="~/Content/Images/No_premios_w.png" style="width:600px;" alt="Imagen responsive" class="img-responsive" /></center>
+
+            </div>
+        }
+        else
+        {
+            <br />
+            foreach (Prize detalles in Model.ListPrize)
+            {
+
+                <div class="thumbnail col-md-4">
+                    @*<div id="galeria">*@
+                    <div id="">
+                        <div class="">
+
+                            @switch (@detalles.Prize_Icon)
+
+                            {
+                                case ICONPRIZE.Deporte:
+                                    <img src="~/Content/Images/icon1oro.png" style="width:200px; height:200px" />
+                                    break;
+                                case ICONPRIZE.Musica:
+                                    <img src="~/Content/Images/icon2plata.png" style="width:200px; height:200px" />
+                                    break;
+                                case ICONPRIZE.Tecnologia:
+
+                                    <img src="~/Content/Images/icon3diamante.png" style="width:200px; height:200px" />
+                                    break;
+
+                                case ICONPRIZE.Cine:
+                                    <img src="~/Content/Images/cine.png" style="width:200px; height:200px" />
+                                    break;
+                                case ICONPRIZE.Eventos:
+                                    <img src="~/Content/Images/icon(2).png" style="width:200px; height:200px" />
+                                    break;
+                                case ICONPRIZE.Viajes:
+                                    <img src="~/Content/Images/viajes.png" style="width:200px; height:200px" />
+                                    break;
+                                case ICONPRIZE.Juegos_Mesa:
+                                    <img src="~/Content/Images/juegos-mesa.png" style="width:200px; height:200px" />
+                                    break;
+
+                                case ICONPRIZE.Arte:
+                                    <img src="~/Content/Images/arte.png" style="width:200px; height:200px" />
+                                    break;
+
+                                    <div class="form-group">
+                                        @Html.Label("Portada", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                        <div class="col-sm-3">
+                                            <input type="file" id="CoverpageModule" name="upload" />
+                                        </div>
+                                    </div>
+                            }
+                        </div>
+                    </div>
+
+                    @*Habilitar cuando se establescan los premios por parte de la empresa*@
+
+                    
+                    <div>
+                        <h2 class="puntaje"> <center> <b>@detalles.Priz_Name </b>  </center> </h2>
+                        <h4 class="puntaje"> <center> <b>Puntos Requeridos: @detalles.Priz_RequiredPoints </b> </center> </h4>
+                        <br />
+                        <h4 class="puntaje"><center> <b>@detalles.Priz_Description</b></h4>
+                        <br />
+
+                    </div>
+                    @if (@detalles.Priz_Stateprize == PRIZESTATE.Activo)
+                    {
+                        @*<i><button onclick="SendRequest('@detalles.Priz_Id')" data-cname="@detalles.Priz_Id" class="btn btn-success">Postularme</button></i>*@
+                    }
+                    else
+                    {
+                        <br />
+                        <h> <b>Sin existencias <b></h>
+                    }
+                    
+                    <p>
+                        @using (Html.BeginForm("Detalles", "User", FormMethod.Post, new { id = "detallesForm" }))
+                        {
+                        }
+
+                    </p>
+
+                </div>
+
+
+            }
+        }
+    </div>
+    <div>
+        <p style="font-size:20px"> <strong style="color:black">Consulta más sobre como ganar puntos dando <a style="color:crimson;background:white"  href="https://aprendeyavanza2.com.co/contentgroup/bureau/politica_puntos.pdf" target="_blank"><u>clic aquí</u></a></strong></p>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12"><br /><br /><br /></div>
+        <button type="button" class="btn btn-default active">Total Puntos: @Model.TotalPointUser </button>
+        @Html.ActionLink("Generar Reporte de puntos", "Report", "User", new { @class = "btn btn-primary btn-responsive" })
+        <br /> <br />
+        @*@foreach (var item in Model.ListPoint)
+        {
+            <div class="col-md-4">
+                <br />
+                <button type="button" class="btn btn-warning">Puntos por @item.TypePoint.TyPo_Description : @item.Quantity_Points</button>
+            </div>
+
+        }*@
+    </div>
+</div>
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssages"]
+                </p>
+                @if (TempData["Menssages1"] != null)
+                {
+                    <p>
+                        @TempData["Menssages1"]
+                    </p>
+                }
+                @if (TempData["Menssages2"] != null)
+                {
+                    <p>
+                        @TempData["Menssages2"]
+                    </p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,107 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models
+@using PagedList.Mvc;
+<br /><br /><br />
+@model RatingUserViewJobs
+  
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+@if (TempData["Edit"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateBook").modal();
+            });
+        </script>
+    }}
+
+
+
+@if (TempData["Result"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Result").modal();
+                });
+        </script>
+    }}
+<div class="panel-primary">
+
+
+    <br /><br /><br /><br />
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        </div>
+    </div>
+    <br />
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th><center>Recurso</center></th>
+                    <th><center>Calificación</center></th>
+                    <th><center>Retroalimentación</center></th>
+                    <th><center>Estado</center></th>
+                    <th><center>Fecha Calificación</center></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listresultado.OrderBy(x=>x.Nombre))
+                {
+                    <tr>
+                        <td>
+                            @item.Nombre
+                        </td>
+                        <td>
+                            @item.BoRa_Score
+                        </td>
+                        <td>
+                            @item.BoRa_Description
+                        </td>
+                        <td>
+                            @item.BoRa_StateScore
+                        </td>
+                        <td>
+                            @item.BoRa_InitDate
+                        </td>
+                       
+                    </tr>
+                }
+                <tr>
+                    <td><hr /></td>
+                    <td><h3>lista de cuestionarios</h3></td>
+                 
+                </tr>
+                @foreach (var item in Model.listTestUs.OrderBy(x => x.Nombre))
+                {
+                <tr>
+                    <td>
+                        @item.Nombre
+                    </td>
+                    <td>
+                        @item.BoRa_Score
+                    </td>
+                     
+                    <td>
+                        @item.BoRa_StateScore
+                    </td>
+                 
+
+                     </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

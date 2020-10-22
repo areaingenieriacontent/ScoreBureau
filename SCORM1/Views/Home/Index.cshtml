@@ -1,0 +1,236 @@
+﻿@using SCORM1.Models
+@using SCORM1.Enum
+@model indexMain
+@Styles.Render("~/Content/demo.css")
+@Styles.Render("~/Content/style1.css")
+@{
+    ViewBag.Title = "Home Page";
+}
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Inform").modal();
+            });
+        </script>
+    }}
+<div id="Inform" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @TempData["Info"]
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model.Home != null)
+{
+    switch (Model.Home.ActualRole)
+    {
+        case ROLES.Usuario:
+            <br /><br />
+            <div class="center-block">
+                <!--Si los terminos y condiciones no han sido aceptados (RenderAction) envía a la vista de T&C-->
+                @if (Model.TermsandConditions.terms == Terms_and_Conditions.No_apceptado)
+                {
+                    { Html.RenderAction("TermsandConditions", "User"); }
+                }
+                else
+                {<!--Si los terminos y condiciones ya han sido aceptados (RenderAction) envía a la vista de Módulo Introductorio->(Videos)-->
+                    if (Model.TermsandConditions.TermVideos == VIDEOS.No_apceptado)
+                    {
+                        { Html.RenderAction("Profile", "User"); }
+                    }
+                    else
+                    {<!--Si los terminos y condiciones y el modulo introductorio ya han sido aceptados (RenderAction) envía a la vista del perfil-->
+                        { Html.RenderAction("Profile", "User"); }
+                    }
+                    //    else
+                    //    {
+                    //        if (Model.TermsandConditions.TermVideos == VIDEOS.Opción2)
+                    //        {
+                    //            { Html.RenderAction("Profile2", "User"); }
+                    //        }
+
+                    //    }
+
+                    //}
+                }
+            </div>
+            break;
+
+
+        case ROLES.AdministradordeInformacion:
+            <br /><br />
+            <div class="center-block">
+                @if (Model.TermsandConditions.terms == Terms_and_Conditions.No_apceptado)
+                {
+                    { Html.RenderAction("TermsandConditions", "AdminInformation"); }
+                }
+                else
+                {
+                    if (Model.TermsandConditions.TermVideos == VIDEOS.No_apceptado)
+                    {
+                        { Html.RenderAction("Videos", "AdminInformation"); }
+                    }
+                    else
+                    {
+                        { Html.RenderAction("Edition", "AdminInformation"); }
+                    }
+                }
+            </div>
+            break;
+        case ROLES.AdministradordeFormacion:
+            <br /><br />
+            <div class="center-block">
+                @if (Model.TermsandConditions.terms == Terms_and_Conditions.No_apceptado)
+                {
+                    { Html.RenderAction("TermsandConditions", "AdminTraining"); }
+                }
+                else
+                {
+                    if (Model.TermsandConditions.TermVideos == VIDEOS.No_apceptado)
+                    {
+                        { Html.RenderAction("Videos", "AdminTraining"); }
+                    }
+                    else
+                    {
+                        { Html.RenderAction("Profile", "AdminTraining"); }
+                    }
+                }
+            </div>
+            break;
+        case ROLES.AdministradoGeneral:
+            <br /><br />
+            <div class="center-block">
+
+                @if (Model.TermsandConditions.terms == Terms_and_Conditions.No_apceptado)
+                {
+                    { Html.RenderAction("Admin", "AdminGeneral"); }
+                }
+                else
+                {
+                    { Html.RenderAction("Admin", "AdminGeneral"); }
+                }
+            </div>
+            break;
+        case ROLES.AdministradordePuntos:
+            <br /><br />
+            <div class="center-block">
+                @if (Model.TermsandConditions.terms == Terms_and_Conditions.No_apceptado)
+                {
+                    { Html.RenderAction("TermsandConditions", "AdminPoint"); }
+                }
+                else
+                {
+                    { Html.RenderAction("ProfileAd", "AdminPoint"); }
+                }
+            </div>
+            break;
+        case ROLES.SuperAdministradoGeneral:
+            <br /><br />
+            <section class="row">
+                <br /><br />
+                @{ Html.RenderAction("CreationOfCompanies", "SuperAdminGeneral"); }
+            </section>
+            break;
+    }
+}
+else
+{
+    <br />
+    <div class="cb-slideshow">
+
+        <!--Video-->
+        @*<video class="video"  muted autoplay="autoplay" loop="loop" volume="0" id="video_background">
+                <source src="~/Content/Images/dd.mp4" type="video/mp4" />
+            </video>*@
+        <image src="~/Content/Images/BV-Training-Community-background.jpg" style="width:100%"></image>
+        <!--Fin Video-->
+    </div>
+
+
+
+
+    <div style="margin-top:-34px; margin-left:17px;height:38em; z-index:100000;">
+        @{ Html.RenderPartial("_Login", Model.Login); }
+    </div>
+
+    if (TempData["Menssages"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Menssages").modal();
+                });
+            </script>
+        }}
+
+    <div id="Menssages" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        @TempData["Menssages"];
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body-contactenos">
+                    <div class="a">
+                        <img src="~/Content/Images/ECO.png" style="width:95%;height:100%;" class="img-responsive" alt="Imagen responsive" />
+                    </div>
+                    <div class="b">
+                        <img src="~/Content/Images/contactos.png" style="width:95%;height:100%;" class="img-responsive" alt="Imagen responsive" />
+                    </div>
+                    <div class="c">
+                        <video controls="controls" class="videoooo" autoplay>
+                            <source src="~/Resources/video.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="form" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="center-block">
+                        @{ Html.RenderPartial("_Form", Model.Form); }
+                    </div>
+                </div>
+                <div class="modal-footer-form">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

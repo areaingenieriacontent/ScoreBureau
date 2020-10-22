@@ -1,0 +1,110 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model ContentPlansViewModel
+
+@{
+    ViewBag.Title = "Plans";
+}
+<h2></h2>
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+    </div>
+</div>
+<div class="jumbotron col-md-12">
+    @using (Html.BeginForm("SearchPlan", "ContentAdmin", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchPlan, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Plan" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Plan</th>
+                    <th>Competencia</th>
+                    <th>Objetvio</th>
+                    <th>Puntaje Minimo</th>
+                    <th>Puntaje Maximo</th>
+                    <th>Recurso</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Plan plan in Model.Plans)
+            {
+                    <tr>
+                        <td>@plan.PlanDescription</td>
+                        <td>@plan.Proficiency.ProficiencyDescription</td>
+                        <td>@plan.PlanTo.ToString()</td>
+                        <td>@plan.PlanMinScore</td>
+                        <td>@plan.PlanMaxScore</td>
+                        <td>
+                            @Html.ActionLink("Link", "GetFileEmail", "File", new { id = Model.userId + "-"+ plan.ResourceId }, new { @class = "btn btn-primary", target = "_blank" })
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Modificar" onclick="LoadUpdatePlan(@plan.PlanId)" data-cname="@plan.PlanId" />
+                        </td>
+                        <td>
+                            @*@using (Html.BeginForm("DeletePlan", "ContentAdmin", FormMethod.Post, new { id = "deleteForm" }))
+                            {
+                                <input type="submit" formaction="~/ContentAdmin/DeletePlan/@plan.PlanId" class="btn btn-primary" value="Eliminar" />
+                            }*@
+
+                            <input type="submit" onclick="confirm_meth('@plan.PlanId')" data-cname="@plan.PlanId" class="btn btn-primary" value="Eliminar" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="UpdatePlanSection">
+
+    </div>
+    <br><hr style="width:100%; clear:both; border:dashed; border-color: #A3DC68; border-width:thin; margin-bottom:10px;">
+    <div class="caja_botones" style="clear:both;">
+        <button id="BTN_ADD" class="botones_pregunta">Añadir Plan</button>
+    </div>
+    <br />
+    <div id="AddPlanSection">
+
+    </div>
+
+    <script>
+        document.getElementById("BTN_ADD").onclick = function () { LoadPlanDiv() };
+        function LoadPlanDiv() {
+
+            $("#AddPlanSection").load('@Url.Action("AddPlan","ContentAdmin")');
+        }
+
+        function LoadUpdatePlan(PlanID) {
+            var link = '@Url.Action("UpdatePlan", "ContentAdmin", new { id = "value" })';
+            link = link.replace("value", PlanID)
+            $("#UpdatePlanSection").load(link);
+        }
+    </script>
+    <script type="text/Javascript" language="javascript">
+        function confirm_meth(PlanId)
+{
+  if( confirm("Quieres eliminar el plan ?")==true)
+  {
+      var Q = PlanId;
+      window.location.href = ' @Url.Action("DeletePlan", "ContentAdmin", new {id = "ID"})'.replace("ID",Q);
+   }
+  else
+  {
+      var link = '@Url.Action("Plans", "ContentAdmin")';
+  }
+}
+    </script>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

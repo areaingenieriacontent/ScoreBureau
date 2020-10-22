@@ -1,0 +1,49 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@using PagedList;
+@using PagedList.Mvc;
+@model AdminRelationsViewModel
+
+<div class="jumbotron">
+    @using (Html.BeginForm("addRelation", "Admin", FormMethod.Post, new { id = "value" }))
+    {
+
+        if (Model.UserAddRelations != null && Model.UserAddRelations.Count() > 0)
+        {
+            <h2>Asignando Relaciones</h2>
+            <table>
+                @foreach (var UserAddRelation in Model.UserAddRelations)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(Model => UserAddRelation.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => UserAddRelation.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => UserAddRelation.Area.AreaName)
+                            </td>
+                            <td></td>
+                            <td>
+                                @using (Html.BeginForm("addRelation", "Admin", FormMethod.Post, new { id = "value" }))
+                                {
+                                    @Html.EnumDropDownListFor(model => model.ASINGUSER)
+                                    @Html.HiddenFor(model => Model.SearchUser)
+                                    <input type="submit" formaction="~/Admin/addRelation/@UserAddRelation.Id" class="btn btn-success" value="agregar relación" />
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            @Html.PagedListPager(Model.UserAddRelations, page => Url.Action("AddUserRelations", new { page }))
+        }
+    }
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

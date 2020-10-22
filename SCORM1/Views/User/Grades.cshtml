@@ -1,0 +1,844 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model UserGeneralViewModel
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+
+<br />
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+
+
+
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["BetterPractice"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#AddBettertractice").modal();
+            });
+        </script>
+    }}
+else
+{
+    if (TempData["Improvement"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#AddImprovement").modal();
+                });
+            </script>
+        }}
+    else
+    {
+        if (TempData["Result"] != null)
+        {
+            @section Scripts {
+                <script type="text/JavaScript">
+                    $(document).ready(function () {
+                        $("#Result").modal();
+                    });
+                </script>
+            }}
+        else
+        {
+            if (TempData["Error"] != null)
+            {
+                @section Scripts {
+                    <script type="text/JavaScript">
+                        $(document).ready(function () {
+                            $("#Errors").modal();
+                        });
+                    </script>
+                }}
+        }
+    }
+}
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        @*<a href="@Url.Action(" Result", "Ratings" , new {id=Model.Enrollment.Modu_Id})" class="btn btn-info" stye="margin-left:-5em">Calificaciones</a> *@
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info" stye="margin-left:-5em">Inicio</a>
+    </div>
+</div>
+<br />
+<div class="panel panel-primary">
+    <div id="AddBettertractice" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("AddBetterPractice", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Enrollment.Modu_Id)
+                        @Html.HiddenFor(model => Model.Enrollment.Module.Modu_Id)
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Enrollment.Modu_Id)
+                                @Html.LabelFor(model => model.BePr_TiTle, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.BePr_TiTle, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                    @Html.ValidationMessageFor(model => model.BePr_TiTle, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.BePr_Comment, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.BePr_Comment, 10, 15, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BePr_Comment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Adjunto", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    <input type="file" id="CoverpageModule" name="upload" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BePr_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.BePr_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                    @Html.ValidationMessageFor(model => model.BePr_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Enviar</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="AddImprovement" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("AddImprovement", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => Model.Enrollment.Module.Modu_Id)
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Enrollment.Modu_Id)
+                                @Html.LabelFor(model => model.Impr_Title, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Impr_Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                    @Html.ValidationMessageFor(model => model.Impr_Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.Impr_Comment, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.Impr_Comment, 10, 15, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Impr_Comment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.Impr_Comment2, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.Impr_Comment2, 10, 15, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Impr_Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Adjunto", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    <input type="file" id="CoverpageModule" name="carga" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Impr_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Impr_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                    @Html.ValidationMessageFor(model => model.Impr_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Enviar</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="Result" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <strong> @TempData["Result"]</strong>
+                    @if (TempData["Result1"] != null)
+                    {
+                        @*<center> <img src="~/Content/Images/@TempData["Result1"]" style="width:300px; height:300px" class="img-responsive" /></center>*@
+                    }
+                    @if (TempData["datos1"] != null)
+                    {
+                        <strong>
+                            @TempData["datos1"]
+                        </strong>
+                    }
+                    @if (TempData["datos2"] != null)
+                    {
+                        <strong>
+                            @TempData["datos2"]
+                        </strong>
+                    }
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Errors" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <strong> @TempData["Error"]</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Muestra el curso seleccionado de los que estan inscritos-->
+    <div class="panel-heading panel-head"><center><h1 style="font-size:45px;"> @Model.Enrollment.Module.Modu_Name</h1> </center></div>
+    <div class="panel-body">
+        <div class="panel-body">
+            <div class="col-md-2">
+                <img src="~/Resources/@Model.Enrollment.Module.Modu_ImageName" style="width:100%;" class="img-responsive" />
+            </div>
+            <div class="col-md-10">
+                <p style="color:#888888; font-size:30px;width:100%;text-align:left;">@Model.Enrollment.Module.Modu_Description</p>
+                <div class="col-md-7"></div>
+                @*<div class="col-md-5">
+                        <p style="font-size:25px; color:#000; text-align:left;">Progreso</p>
+                        <div class="progress" style="background-color: #babdbd; height:30px">
+                            @foreach (var a in Model.Enrollment.AdvanceCourse)
+                            {
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                     style="width:@a.AdCo_ScoreObtanied%; padding:10px">
+                                    <span style="font-size:20px">@a.AdCo_ScoreObtanied%</span>
+                                </div>
+                            }
+                        </div>
+                    </div>*@
+            </div>
+            <!--Son los botones asignados a la cantidad de unidades del curso-->
+            @*<div class="col-md-12">
+                    <br />
+                    <div class="col-md-4 "><a style="background:none" target="_blank" href="http://aprendeyavanza2.com.co/contentGroup/bureau/ISO45001/TEMA%201/iso_45001.mp4"><button class="botonesGrades">Bienvenida</button></a></div>
+                    <div class="col-md-4 "><a style="background:none" target="_blank" href="http://aprendeyavanza2.com.co/contentGroup/bureau/ISO45001/TEMA%202/linea-de-tiempo/genially.html"><button class="botonesGrades">1. Resolución 0312 de 2019 y su compatibilidad con el SG-SST</button></a></div>
+                    <div class="col-md-4 "><a style="background:none" target="_blank" href="http://aprendeyavanza2.com.co/contentGroup/bureau/ISO45001/TEMA%202/multimedia/paralelografico/genially.html"><button class="botonesGrades">2. Cambios ISO 45001 vs OHSAS 18001 de 2017</button></a></div>
+                    <br><br>
+                    <h1 style="color:#000;text-align:left">Tema 3 - Requisitos de las normas ISO 450012018</h1>
+                    <br>
+                </div>*@
+            @if (Model.Enrollment.Module.TopicsCourse.Where(x => x.ToCo_Visible == FORO.Si).ToList().Count != 0)
+            {
+                if (Model.Enrollment.Module.TopicsCourse.Where(x => x.ToCo_Visible == FORO.Si).ToList() != null)
+                {
+
+                    <ul class="nav nav-tabs">
+                        @if (Model.Enrollment.Module.Modu_BetterPractice == FORO.No && Model.Enrollment.Module.Modu_Improvement == FORO.No)
+                        {
+                        }
+                        else
+                        {
+                            <li><a data-toggle="tab" href="#menu1" style="font-size:20px;">Aportes</a></li>
+                        }
+                        <li class="active"><a data-toggle="tab" href="#@Model.listenrollment[0].ToCo_Id" style="font-size:20px;">@Model.listenrollment[0].ToCo_Name</a></li>
+
+
+                        @foreach (TopicsCourse topic in Model.Enrollment.Module.TopicsCourse.OrderBy(x => x.ToCo_Id).Where(x => x.ToCo_Id != @Model.listenrollment[0].ToCo_Id && x.ToCo_Visible == FORO.Si))
+                        {
+                            //var hola = topic.ToCo_Id - 1;
+
+                            //if (Model.user.AdvanceUser.Where(x => x.ToCo_id == hola && x.AdUs_ScoreObtained >= 1 && x.User_Id == Model.user.Id).Count() == 1)
+                            //{
+                            <li>
+                                <a data-toggle="tab" href="#@topic.ToCo_Id" style="font-size:20px;">@topic.ToCo_Name</a>
+                            </li>
+                            @*}
+                                else
+                                {
+                                    if (topic.ToCo_Test == FORO.No)
+                                    {
+                                        <li>
+                                            <a data-toggle="tab" href="#@topic.ToCo_Id" style="font-size:20px;">@topic.ToCo_Name</a>
+                                        </li>
+
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a data-toggle="tab" href="" style="font-size:20px; background: gray">@topic.ToCo_Name</a>
+                                        </li>
+                                    }
+                                }*@
+                        }
+                    </ul>
+                    <div class="tab-content">
+                        @if (Model.Enrollment.Module.Modu_BetterPractice == FORO.No && Model.Enrollment.Module.Modu_Improvement == FORO.No)
+                        {
+                        }
+                        else
+                        {
+                            <div id="menu1" class="tab-pane fade ">
+                                <div class="contenido-articulo">
+                                    <h1 class="title" style="color:white">APORTES</h1>
+                                    @if (Model.Enrollment.Module.Modu_BetterPractice == FORO.No && Model.Enrollment.Module.Modu_Improvement == FORO.No)
+                                    {
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <img src="~/Content/Images/imagen.jpg" style="width:100%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+
+
+                                        <ul class="nav nav-tabs">
+                                            @if (Model.Enrollment.Module.Modu_BetterPractice == FORO.Si)
+                                            {
+                                                <li class="active"><a data-toggle="tab" href="#BuenasPracticas">Buenas Practicas</a></li>
+                                            }
+                                            @if (Model.Enrollment.Module.Modu_Improvement == FORO.Si)
+                                            {
+                                                <li><a data-toggle="tab" href="#MejoraContinua">Mejora Continua</a></li>
+                                            }
+
+
+                                        </ul>
+                                        <div class="tab-content">
+                                            @if (Model.Enrollment.Module.Modu_BetterPractice == FORO.Si)
+                                            {
+                                                <div id="BuenasPracticas" class="tab-pane fade in active">
+                                                    <div class="contenido-articulo">
+                                                        <br />
+                                                        <h1>BUENAS PRACTICAS</h1>
+                                                        <br />
+                                                        <h4> Nos interesa saber los resultados obtenidos con la buena práctica del tema que aprendiste. Debes describir lo que hiciste y el resultado que conseguiste. Si quieres nos puedes enviar un archivo donde se evidencie el proceso y/o el resultado. ¡Anímate y gana puntos!</h4>
+                                                        <br />
+                                                        @if (Model.Enrollment.Module.Modu_BetterPractice == FORO.Si)
+                                                        {
+                                                            if (Model.Enrollment.Enro_FinishDateModule <= DateTime.Now)
+                                                            {
+
+                                                                <h2 style="color:#888888"><strong>Curso vencido</strong></h2>
+                                                                <br />
+                                                            }
+                                                            else
+                                                            {
+                                                                <br />
+                                                                <div class="col-md-2">
+                                                                    <p>
+                                                                        @using (Html.BeginForm("Form", "AdminTraining", FormMethod.Post, new { id = "detallesForm" }))
+                                                                        {
+                                                                            <center><input type="submit" formaction="~/User/BetterPractice/@Model.Enrollment.Module.Modu_Id" class="btn btn-primary" value="AGREGAR" /></center>
+                                                                        }
+                                                                    </p>
+                                                                </div>
+                                                            }
+                                                            <br /><br />
+                                                            if (Model.Enrollment.Module.BetterPractice.Count != 0)
+                                                            {
+                                                                if (Model.Enrollment.Module.BetterPractice != null)
+                                                                {
+                                                                    foreach (BetterPractice betterpractice in Model.Enrollment.Module.BetterPractice)
+                                                                    {
+                                                                        if (betterpractice.BePr_StateBetterpractice == BETTERPRACTICESTATE.Autorizado)
+                                                                        {
+                                                                            <br />
+                                                                            <div class="comentario">
+                                                                                <p><strong>@betterpractice.BePr_TiTle</strong></p>
+                                                                                <p><em>@betterpractice.ApplicationUser.FirstName @betterpractice.ApplicationUser.LastName</em></p>
+                                                                                <p>
+                                                                                    @Html.Raw(betterpractice.BePr_Comment)
+                                                                                </p>
+                                                                                <p>
+                                                                                    <div class="fecha">
+                                                                                        Archivo Adjunto:  <a href="~/ResourceBetterPractice/@betterpractice.BePr_Resource" target="_blank" download="@betterpractice.BePr_Name" style="background-color:transparent;color:#f57c00;"> @betterpractice.BePr_Name</a>
+                                                                                    </div>
+                                                                                </p>
+                                                                                <h6 class="puntaje">
+                                                                                    Puntos: @betterpractice.BePr_Points<br />
+                                                                                    Fecha Publicación: @betterpractice.BePr_InitDate
+                                                                                </h6>
+
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <br /><br />
+                                                                            <div class="col-md-12">
+                                                                                <p>
+                                                                                    <center>
+                                                                                        <h6>APORTE PENDIENTE POR REVISIÓN</h6>
+                                                                                    </center>
+                                                                                </p>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {<br /><br />
+
+
+                                                            }
+
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            }
+                                            @if (Model.Enrollment.Module.Modu_Improvement == FORO.Si)
+                                            {
+                                                <div id="MejoraContinua" class="tab-pane fade">
+                                                    <div class="contenido-articulo">
+                                                        <br />
+                                                        <h1>MEJORA</h1>
+                                                        <br />
+                                                        <h4>Sabemos que todo evoluciona, por eso queremos que nos des tus ideas sobre cómo mejorar en alguno de los aspectos que has revisado en el contenido. recuerda, debes describir la situación actual, cuál es tu propuesta y qué resultados piensas que se pueden obtener. Nos puedes enviar un archivo con más detalle sobre tu propuesta. ¡Anímate y gana puntos!</h4>
+                                                        <br />
+                                                        @if (Model.Enrollment.Module.Modu_Improvement == FORO.Si)
+                                                        {
+                                                            if (Model.Enrollment.Enro_FinishDateModule <= DateTime.Now)
+                                                            {
+
+                                                                <h2 style="color:#888888"><strong>Curso vencido</strong></h2>
+                                                                <br />
+                                                            }
+                                                            else
+                                                            {
+                                                                <br />
+                                                                <div class="col-md-2">
+                                                                    <p>
+                                                                        @using (Html.BeginForm("Form", "AdminTraining", FormMethod.Post, new { id = "detallesForm" }))
+                                                                        {
+                                                                            <center><input type="submit" formaction="~/User/Improvement/@Model.Enrollment.Module.Modu_Id" class="btn btn-primary" value="AGREGAR" /></center>
+                                                                        }
+                                                                    </p>
+                                                                </div>
+                                                            }
+                                                            <br /><br />
+                                                            if (Model.Enrollment.Module.Improvement.Count != 0)
+                                                            {
+                                                                if (Model.Enrollment.Module.Improvement != null)
+                                                                {
+                                                                    foreach (Improvement improvement in Model.Enrollment.Module.Improvement)
+                                                                    {
+                                                                        if (improvement.Impr_StateImprovement == IMPROVEMENTSTATE.Autorizado)
+                                                                        {
+                                                                            <br />
+                                                                            <div class="comentario">
+                                                                                <p><strong>@improvement.Impr_Title</strong></p>
+                                                                                <p><em>@improvement.ApplicationUser.FirstName @improvement.ApplicationUser.LastName</em></p>
+                                                                                <p>
+                                                                                    @Html.Raw(improvement.Impr_Comment)
+                                                                                </p>
+                                                                                <p>
+                                                                                    @Html.Raw(improvement.Impr_Comment2)
+                                                                                </p>
+                                                                                <p>
+                                                                                    <div class="fecha">
+                                                                                        Archivo Adjunto:  <a href="~/ResourcesImprovement/@improvement.Impr_Resource" target="_blank" download="@improvement.Impr_Name" style="background-color:transparent;color:#f57c00;"> @improvement.Impr_Name</a>
+                                                                                    </div>
+                                                                                </p>
+                                                                                <h6 class="puntaje">
+                                                                                    Puntos: @improvement.Impr_Points<br />
+                                                                                    Fecha Publicación: @improvement.Impr_InitDate
+                                                                                </h6>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <br /><br />
+                                                                            <div class="col-md-12">
+                                                                                <p>
+                                                                                    <center>
+                                                                                        <h6>APORTE PENDIENTE POR REVISIÓN</h6>
+                                                                                    </center>
+                                                                                </p>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <br /><br />
+
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <div id="@Model.listenrollment[0].ToCo_Id" class="tab-pane fade in active">
+                            <div class="contenido-articulo">
+
+                                <br /><br />
+                                <p>@Html.Raw(Model.listenrollment[0].ToCo_ContentVirtual)</p>
+                                <p>@Html.Raw(Model.listenrollment[0].ToCo_Content)</p>
+                                @if (Model.listenrollment[0].ResourceTopics.Count == 0)
+                                {
+
+                                }
+                                else
+                                {
+                                    <div class="fecha1">
+                                        <br />
+                                        <h1> <strong> Documentos de Apoyo</strong></h1>
+                                        <br />
+                                        @foreach (ResourceTopics resource in Model.listenrollment[0].ResourceTopics)
+                                        {
+                                            <h4>
+                                                <strong>
+                                                    Documento Adjunto:  <a href="~/ResourceTopic/@resource.ReMo_NameResource" target="_blank" download="@resource.ReMo_Name" style="background-color:transparent;color:#f57c00;"> @resource.ReMo_Name</a>
+                                                </strong>
+                                            </h4>
+                                        }
+
+                                    </div>
+                                }
+                                <br /> <br /><br />
+                                @if (Model.listenrollment[0].BankQuestion.Count == 0)
+                                {
+
+                                }
+                                else
+                                {
+                                    <div class="fecha2">
+
+                                        @*<h4 class="fecha"><strong> Evaluación</strong></h4><br /> *@
+                                        @if (Model.user.AdvanceUser.Where(x => x.ToCo_id == Model.listenrollment[0].ToCo_Id).Count() == 0)
+                                        {
+                                            foreach (var item1 in Model.listenrollment[0].BankQuestion)
+                                            {
+                                                if (item1.Attempts.Where(x => x.BaQu_Id == item1.BaQu_Id && x.UserId == Model.user.Id).Count() < item1.BaQu_Attempts)
+                                                {
+                                                    var a = item1.Attempts.Where(x => x.BaQu_Id == item1.BaQu_Id && x.UserId == Model.user.Id).Count();
+                                                    //<h4 class="fecha"><strong> Llevas  @a intentos</strong></h4><br />
+                                                    if (Model.Enrollment.Enro_FinishDateModule <= DateTime.Now)
+                                                    {
+
+                                                        <h2 style="color:#888888"><strong>Curso vencido</strong></h2>
+                                                        <br />
+                                                    }
+
+                                                    //Se comento la opcion donde aparece el enlace de la evaluacion
+                                                    else
+                                                    {
+                                                        //<div class="fecha">
+                                                        //<a href="@Url.Action("TestUser", "User", new { id = @Model.listenrollment[0].ToCo_Id })"><i class="fa fa-chevron-down" aria-hidden="true">Ir a Evaluación</i></a>
+                                                        //</div>
+                                                    }
+                                                }
+                                                else
+                                                {
+
+
+                                                    //<h4 class="fecha"> <strong> Ya no tiene intentos disponibles</strong></h4>
+
+
+                                                }
+                                            }
+                                        }
+                                        else
+                                        //id = @item1.BaQu_Id
+                                        {
+                                            foreach (var item1 in Model.listenrollment[0].BankQuestion)
+                                            {
+                                                if (item1.Attempts.Where(x => x.BaQu_Id == item1.BaQu_Id && x.UserId == Model.user.Id).Count() < item1.BaQu_Attempts)
+                                                {
+                                                    var a = item1.Attempts.Where(x => x.BaQu_Id == item1.BaQu_Id && x.UserId == Model.user.Id).Count();
+                                                    if (Model.Enrollment.Enro_FinishDateModule <= DateTime.Now)
+                                                    {
+
+                                                        <h2 style="color:#888888"><strong>Curso vencido</strong></h2>
+                                                        <br />
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fecha">
+                                                            <h4 class="fecha"> <strong> Ya no tiene intentos disponibles</strong></h4>
+                                                            <h4 class="fecha"><strong> Usted ya Realizo  esta evaluación </strong></h4><br />
+
+                                                            @*@Html.ActionLink("ContAdministrador", "ResulQuestions", "User", new { id = @item1.BaQu_Id }, new { @class = "btn btn-primary" })*@
+
+
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+
+
+
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                }
+                                <br />
+                                @if (Model.listenrollment[0].Job.Count != 0)
+                                {
+                                    <div class="fecha">
+
+                                        @foreach (var resource in Model.listenrollment[0].Job.Where(x => x.Job_Visible == FORO.Si))
+                                        {
+                                            <h4>
+                                                <strong>
+                                                    	<a href="@Url.Action("ViewJobUser", "Ratings", new { id = @resource.Job_Id })" style="background-color:transparent;color:#bc112e;">@resource.Job_Name</a>
+                                                </strong>
+                                            </h4>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @foreach (TopicsCourse topic1 in Model.Enrollment.Module.TopicsCourse.Where(x => x.ToCo_Id != Model.listenrollment[0].ToCo_Id && x.ToCo_Visible == FORO.Si))
+                        {
+                            <div id="@topic1.ToCo_Id" class="tab-pane fade">
+                                <div class="contenido-articulo">
+
+                                    <br /><br /><br />
+                                    <p>@Html.Raw(topic1.ToCo_ContentVirtual)</p>
+                                    <p>@Html.Raw(topic1.ToCo_Content)</p>
+                                    @if (topic1.ResourceTopics.Count == 0)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <div class="fecha1">
+                                            <br />
+                                            <h1> <strong> Documentos de Apoyo</strong></h1>
+                                            <br />
+                                            @foreach (ResourceTopics resource in topic1.ResourceTopics)
+                                            {
+                                                <h4>
+                                                    <strong>
+                                                        Documento Adjunto:  <a href="~/ResourceTopic/@resource.ReMo_NameResource" target="_blank" download="@resource.ReMo_Name" style="background-color:transparent;color:#f57c00;"> @resource.ReMo_Name</a>
+                                                    </strong>
+                                                </h4>
+                                            }
+
+                                        </div>
+                                    }
+                                    <br /> <br /><br />
+                                    @if (topic1.BankQuestion.Count == 0)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <div class="fecha2">
+                                            @*<h4 class="fecha"><strong> Evaluación</strong></h4><br />*@
+                                            @if (Model.user.AdvanceUser.Where(x => x.ToCo_id == topic1.ToCo_Id).Count() == 0)
+                                            {
+                                                foreach (var item1 in topic1.BankQuestion)
+                                                {
+                                                    if (item1.Attempts.Where(x => x.BaQu_Id == item1.BaQu_Id && x.UserId == Model.user.Id).Count() < item1.BaQu_Attempts)
+                                                    {
+                                                        var a = item1.Attempts.Where(x => x.BaQu_Id == item1.BaQu_Id && x.UserId == Model.user.Id).Count();
+                                                        @*<h4 class="fecha"><strong> Lleva  @a intento de @item1.BaQu_Attempts  </strong></h4><br />*@
+                                                        if (Model.Enrollment.Enro_FinishDateModule <= DateTime.Now)
+                                                        {
+
+                                                            <h2 style="color:#888888"><strong>Curso vencido</strong></h2>
+                                                            <br />
+                                                        }
+                                                        else
+                                                        {
+                                                            @* se comenta la seccion donde aparece el link de la evaluacion para efectos de este despliegue*@
+                                                            @*<div class="fecha">
+                                                                  <a href="@Url.Action("TestUser", "User", new { id = @topic1.ToCo_Id })"><i class="fa fa-chevron-down" aria-hidden="true">Ir a Evaluación</i></a>
+                                                                </div>*@
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <h4 class="fecha"> <strong> Ya no tiene intentos disponibles</strong></h4>
+                                                        @*<p class="fecha">
+                                                                @Html.ActionLink("Contactar al Administrador", "EmailAttempts", "User", new { BaQu_Id = item1.BaQu_Id }, new { @class = "btn btn-primary" })
+                                                            </p>*@
+
+                                                        <p class="fecha">
+                                                            @Html.ActionLink("Resultado test", "ResulQuestions", "User", new { BaQu_Id = item1.BaQu_Id }, new { @class = "btn btn-primary" })
+                                                        </p>
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <h4 class="fecha"><strong> Usted ya aprobo esta evaluación </strong></h4><br />
+                                            }
+                                        </div>
+                                    }
+                                    <br />
+                                    @if (topic1.Job.Count != 0)
+                                    {
+                                        <div class="fecha">
+
+                                            @foreach (var resource in topic1.Job.Where(x => x.Job_Visible == FORO.Si))
+                                            {
+                                                if (resource.Job_TypeJob == TYPEJOB.Tarea)
+                                                {
+                                                    <h4>
+                                                        <strong>
+                                                            	<a href="@Url.Action("ViewJobUser", "Ratings", new { id = @resource.Job_Id })" style="background-color:transparent;color:#bc112e;">@resource.Job_Name</a>
+                                                        </strong>
+                                                    </h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4>
+                                                        <strong>
+                                                            	<a href="@Url.Action("ViewFobUser", "Ratings", new { id = @resource.Job_Id })" style="background-color:transparent;color:#bc112e;">@resource.Job_Name</a>
+                                                        </strong>
+                                                    </h4>
+                                                }
+
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <br /><br />
+                <div class="col-lg-10">
+                    <div>
+                        <img src="~/Content/Images/No_temas_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

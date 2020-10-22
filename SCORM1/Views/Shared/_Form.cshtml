@@ -1,0 +1,48 @@
+﻿@model SCORM1.Models.FormViewModel
+<div class="form-container">
+
+    @using (Html.BeginForm("SendEmail", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <div class="form-container-title">
+            <div class="col-md-12">
+                <h4><p>Antes de enviar el correo electrónico, selecciona el tema sobre el cual tengas dudas, de ésta forma será más fácil darte respuesta.</p></h4>
+            </div>
+            <br />
+            <div class="col-md-12">
+                <br />
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-container-info">
+            <div>
+                @Html.TextBoxFor(m => m.Form_Name, new { @class = "form-forgot-listinput", @placeholder = " Tu Nombre" })
+                @Html.ValidationMessageFor(m => m.Form_Name, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.DropDownListFor(model => model.Modu_Id, Model.ListModule, new { @class = "form-forgot-listinput" })
+                @Html.ValidationMessageFor(model => model.Modu_Id, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.TextBoxFor(m => m.Form_Email, new { @class = "form-forgot-listinput", @placeholder = "Tu correo electrónico" })
+                @Html.ValidationMessageFor(m => m.Form_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-container-message">
+            @Html.TextAreaFor(m => m.Form_Comment, 10, 15, new { @class = "form-forgot-txtarea", @placeholder = "Deje su mensaje aquí" })
+            @Html.ValidationMessageFor(m => m.Form_Comment, "", new { @class = "text-danger" })
+
+            <br /><br />
+            <div class="rowsend">
+                <div class="col-md-4"></div>
+                <div class="col-md-1">
+                    <input type="submit" id="send-form-tutor" value="Enviar" class="btn btn-info" style="background:#FF0040;border-color:#FF0040;border-radius:10px;" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+</div>

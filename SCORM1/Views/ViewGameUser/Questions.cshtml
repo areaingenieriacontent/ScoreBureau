@@ -1,0 +1,177 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model QuestionSelect
+@using Chart.Mvc.ComplexChart
+@using Chart.Mvc.Extensions
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/Chart.js")
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo").modal();
+            });
+        </script>
+    }}
+<div id="DeleteInfo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <h1 style="color:red"> @TempData["Info"]</h1>
+                <br />
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<body onload="setInterval('contador()',1000)" style="background:url(../../ImgTemplate/@Model.setting.MG_Template.Plant_Img_Questions); background-size: cover;background-position: center center;background-repeat: no-repeat;background-attachment: fixed;">
+    <br /><br /><br /><br /><br /><br />
+
+    <div class="Grafica">
+        @if (Model.Result != null)
+        {
+            <div class="caja_graficas" style="width:300px;height:160px;">
+                <canvas id="myCanvas"></canvas>
+                @Html.CreateChart("myCanvas", Model.Result)
+            </div>
+        }
+    </div>
+
+    @using (Html.BeginForm("AnswerQuestions", "ViewGameUser", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        <div class="tiempo">
+
+            <h1 style="margin-top:6px;"><span id="seg" style="font-size:40px;">60</span></h1>
+            <audio src="~/ResourceGame/Who_Wants_To_Be_A_Millionaire_Phone_A_Friend_Clock_2011-_sLzu0dTdPQs.mp3"autoplay loop></audio>
+        </div>
+
+        for (int i = 0; i < Model.listquestionsselect.Count; i++)
+        {
+            if (Model.cmd1 != 0)
+            {
+                <div class="Cambio1"></div>
+            }
+            else
+            {
+                <a class="Cambio" href="#" onclick="CambioP('@Model.listquestionsselect[i].MuCh_ID')" data-cname="@Model.listquestionsselect[i].MuCh_ID"><div class="Cambio">  </div></a>
+            }
+            if (Model.cmd2 != 0)
+            {
+                <div class="Estadistica1"></div>
+            }
+            else
+            {
+                <a class="Estadistica" href="#" onclick="Estadistic('@Model.listquestionsselect[i].MuCh_ID')" data-cname="@Model.listquestionsselect[i].MuCh_ID"><div class="Estadistica">  </div></a>
+            }
+
+            <div class="preguntas col-md-7" style="left:350px;">
+                <div style="background:url('../../ImgTemplate/CUADROPREGUNTA(3).png');background-repeat: no-repeat; width:600px;height:230px;padding:10px;">
+                    @if (@Model.listquestionsselect[i].MuCh_Description != null)
+                    {
+                        <br /><br /><br /><br /><br />
+                        <h1> @Model.listquestionsselect[i].MuCh_Description</h1>
+                    }
+                    else
+                    {
+                        <img src="~/Mg_Game_Image/@Model.listquestionsselect[i].MuCh_ImageQuestion" style="width:400px; height:210px" />
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="jumbotron3">
+                    <div class="col-md-12">
+                        <br /><br /><br /><br /><br />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pruebas">
+                    <br />
+                    <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[0].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[0].AnMul_ID"><h1>A. @Model.listquestionsselect[i].listanswerM[0].AnMul_Description</h1></a>
+                </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="pruebas3">
+                        <br />
+                        <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[1].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[1].AnMul_ID"><h1>B. @Model.listquestionsselect[i].listanswerM[1].AnMul_Description</h1></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pruebas2">
+                        <br />
+                        <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[2].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[2].AnMul_ID"><h1>C. @Model.listquestionsselect[i].listanswerM[2].AnMul_Description</h1></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pruebas4">
+                        <br />
+                        <a class="Select" href="#" onclick="UpdateModule('@Model.listquestionsselect[i].listanswerM[3].AnMul_ID')" data-cname="@Model.listquestionsselect[i].listanswerM[3].AnMul_ID"><h1>D. @Model.listquestionsselect[i].listanswerM[3].AnMul_Description</h1></a>
+                    </div>
+                </div>
+
+        }
+        <div class="jumbotron3">
+            <div class="col-md-12">
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </div>
+            <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
+
+            </div>
+        </div>
+    }
+</body>
+
+<script>
+    var num = 0;
+    if (@Model.seg !=0) {
+        num=@Model.seg;
+    }else{
+        num=60;
+    }
+
+    function contador() {
+        num--;
+        valor = num;
+        if (num == 0) location = '@Url.Action("AnswerQuestionsTime", "ViewGameUser", new { id = Model.listquestionsselect[0].listanswerM[0].AnMul_ID })';
+        document.getElementById('seg').innerHTML = num;
+    }
+    function UpdateModule(AnMul_ID)
+{
+      var a = AnMul_ID;
+      var e = num;
+      var c=0;
+      if (@Model.cmd1 !=0 && @Model.v1==0) {
+        c=@Model.cmd1;
+      }
+      if (@Model.cmd2 !=0 && @Model.v2==0) {
+         c=@Model.cmd2;
+      }
+      window.location.href = '@Url.Action("AnswerQuestions", "ViewGameUser", new { id = "ee",AnwId = "ID", id2 = "MMD"})'.replace("ee", e).replace("ID", a).replace("MMD", c);
+    }
+    function Estadistic(Much_Id) {
+        if (confirm("Utilizar Ayuda del publico") == true) {
+            var a = Much_Id;
+            var e = num;
+            window.location.href = '@Url.Action("EstadisticOption", "ViewGameUser", new { id = "ee", Much_Id = "ID"})'.replace("ee", e).replace("ID", a);
+        }
+    }
+    function CambioP(Much_Id) {
+        if (confirm("Utilizar Ayuda cambio de pregunta") == true) {
+            var a = Much_Id;
+            var e = num;
+            window.location.href = '@Url.Action("CambioOption", "ViewGameUser", new { id = "ee", Much_Id = "ID"})'.replace("ee", e).replace("ID", a);
+        }
+    }
+</script>

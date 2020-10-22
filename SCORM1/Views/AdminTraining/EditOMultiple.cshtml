@@ -1,0 +1,228 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model AdminTrainingTestViewModel
+@*<script src="~/Scripts/Tinymce/tinymce.min.js"></script>*@
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br /><br /><br /><br /><br /><br />
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 100,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '/Gastronomia' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["Form"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#EditOpenQuestion").modal();
+            });
+        </script>
+    }}
+else
+{
+
+}
+<br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Questions", "AdminTraining", new {id = Model.BaQu_Id})" class="btn btn-info">Evaluación</a>
+    </div>
+</div>
+<br /><br />
+
+<div class="panel panel-primary">
+   
+    <div id="EditOpenQuestion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditOptionMultiples", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-5">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.BaQu_Id)
+                                @Html.HiddenFor(model => model.OpMu_Id)
+                                @Html.LabelFor(model => model.OpMu_Question, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.OpMu_Question, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+                                @Html.ValidationMessageFor(model => model.OpMu_Question, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="col-md-7">
+                                @Html.LabelFor(model => model.OpMu_Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.OpMu_Description, new { htmlAttributes = new { @class = "form-control", @style = "width:90%" } })
+                                @Html.ValidationMessageFor(model => model.OpMu_Description, "", new { @class = "text-danger" })
+                            </div>
+                              
+                        
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.OpMult_Content, new { @class = "form-control", @row = 5 })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel-heading panel-head"><center> Preguntas</center></div>
+    <div class="panel-body">
+
+        @foreach (OptionMultiple option in Model.ListOptionMultiple)
+        {
+            <br />
+            <div class="comentario">
+                <div class="botones-edicion">
+                    <a href="@Url.Action("DeleteOptionMultiple", "AdminTraining", new { id = @option.OpMu_Id })"><i class="fa fa-remove"style="color: #f57c00"></i></a>
+                    <a href="@Url.Action("EditOptionMultiple", "AdminTraining", new { id = @option.OpMu_Id })"><i class="fa fa-cog" style="color: #f57c00"></i></a>
+                </div>
+                <p>
+                    <h4 class="fecha">Pregunta</h4>
+                </p>
+                <p><strong>@option.OpMu_Question</strong></p>
+                <p><em>@option.OpMu_Description</em></p>
+                @foreach (AnswerOptionMultiple answeroptionmultiple in Model.ListAnswerOptionMultiple)
+                {
+                    if (answeroptionmultiple.OptionMultiple.OpMu_Id == option.OpMu_Id)
+                    {
+                        <br />
+                        <div class="comentario">
+                            <div class="botones-edicion">
+                                <a href="@Url.Action("DeleteAnswerOptionMultiple", "AdminTraining", new { id = @answeroptionmultiple.AnOp_Id })"><i class="fa fa-remove"style="color: #f57c00"></i></a>
+                                <a href="@Url.Action("EditAnswerOptionMultiple", "AdminTraining", new { id = @answeroptionmultiple.AnOp_Id })"><i class="fa fa-cog" style="color: #f57c00"></i></a>
+                            </div>
+                            <p>
+                                <h4 class="fecha">Respuesta</h4>
+                            </p>
+                            @*<p><strong>@answeroptionmultiple.AnOp_OptionAnswer</strong></p>*@
+                            @Html.Raw(@answeroptionmultiple.AnOp_OptionAnswer)
+
+
+
+
+                            @*<p><em>@answeroptionmultiple.AnOp_TrueAnswer</em></p>*@
+                            @Html.Raw(@answeroptionmultiple.AnOp_TrueAnswer)
+
+
+                        </div>
+                        <br />
+                    }
+                }
+            </div>
+            <br />
+            <div class="col-md-4">
+                <p>
+                    <center><input type="submit" value="Añadir Respuesta" onclick="AddAnswerOM('@option.OpMu_Id')" data-cname="@option.OpMu_Id" class="btn btn-primary" /></center>
+                </p>
+            </div>
+            <br /><br />
+        }
+        <div id="AddAnswerOptionMultiple">
+
+        </div>
+        <div id="AddOptionMultiple">
+
+        </div>
+        <br /><br /><br />
+        <div class="col-md-offset-2 col-md-8">
+            <p>
+                <center><input type="submit" value="Añadir otra Pregunta" onclick="AddQuestionOM('@Model.BaQu_Id')" data-cname="@Model.BaQu_Id" class="btn btn-primary" /></center>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    function AddAnswerOM(OpMu_Id) {
+        var link = '@Url.Action("AddOptionMultiples", "AdminTraining", new { id = "value" })';
+        link = link.replace("value", OpMu_Id)
+        $("#AddAnswerOptionMultiple").load(link);
+    }
+    function AddQuestionOM(BaQu_Id) {
+        var link = '@Url.Action("AddOtherOptionMultiples", "AdminTraining", new { id = "value" })';
+        link = link.replace("value", BaQu_Id)
+        $("#AddOptionMultiple").load(link);
+    }
+</script>

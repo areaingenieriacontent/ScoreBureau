@@ -1,0 +1,41 @@
+﻿@using SCORM1.Models.ViewModel
+@model   UserProfileViewModel
+
+<div class="panel-primary">
+
+    <br /><br /><br />
+  
+        <div class="col-md-12">
+                @using (Html.BeginForm("Validateview", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                            <div class="col-md-6">
+                                <h1 class="title">Vista Secuencial </h1>
+                                <img src='@Url.Content("~/Content/Images/ruta_secuencial.png")' style="width:50%; height:50%;" />
+                                <br /><br />
+                                @Html.HiddenFor(model => model.Opción1, new { Value = true })
+                                <center><button class="btn btn-primary" name="singin" type="submit">Ingresar</button></center>
+                            </div>
+
+                }
+            @using (Html.BeginForm("Validateview", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-6">
+                    <h1 class="title">Vista Ambiente Virtual</h1>
+                    <img src='@Url.Content("~/Content/Images/ruta_ambiente.png")' style="width:50%; height:50%;" />
+                    <br /><br />
+                    @Html.HiddenFor(model => model.Opción2, new { Value = true })
+                    <center><button class="btn btn-primary" name="singin" type="submit">Ingresar</button></center>
+                </div>
+
+            }
+            
+        </div><br />
+ 
+    
+</div>
+
+
+
+

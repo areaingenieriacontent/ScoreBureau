@@ -1,0 +1,61 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models
+@using PagedList.Mvc;
+<br /><br /><br />
+@model AdminTrainingViewTest
+
+
+<div class="panel-primary">
+    
+    <br /><br /><br /><br />
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        </div>
+    </div>
+    <br />
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th><center>Nombre Completo</center></th>
+                    <th><center>Usuario</center></th>
+                    <th><center>Documento</center></th>
+                    <th><center> Correo</center></th>
+                    <th><center>Tema</center></th>
+                    <th><center>Calificación</center></th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListTest)
+                {
+                    <tr>
+                        <td>
+
+                            @item.ApplicationUser.FirstName @item.ApplicationUser.LastName
+                        </td>
+                        <td>@item.ApplicationUser.UserName</td>
+                        <td>
+                            @item.ApplicationUser.Document
+                        </td>
+                        <td>@item.ApplicationUser.Email</td>                    
+                        <td>@item.TopicsCourse.ToCo_Name</td>
+                        <td>
+                            @{ var a= (@item.AdUs_ScoreObtained * 100 ) / @Model.cali; } 
+                             @Math.Round(@a)  de 100
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model.ListTest, page => Url.Action("ViewTest", new { page }))
+
+
+    </div>
+
+</div>
+

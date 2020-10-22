@@ -1,0 +1,35 @@
+﻿
+@using SCORM1.Models;
+@using SCORM1.Models.Engagement;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+
+<br />
+<br /><br /><br /><br />
+
+
+
+<div class="jumbotron3">
+
+    <div class="col-md-4">
+        <a href='@Url.Action("Category", "AdminPoint")' style="background-color:transparent;">
+            <img src='@Url.Content("~/Content/Images/gestion_categorias.png")' style="width:50%; height:50%;" />
+        </a>
+        <h4>@Html.ActionLink("Gestión de Categorías", "Category", "AdminPoint", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#F57C00;background-color:transparent;" })</h4>
+    </div>
+    <div class="col-md-4">
+        <a href='@Url.Action("Points", "AdminPoint")' style="background-color:transparent;">
+            <img src='@Url.Content("~/Content/Images/gestion_puntos_individuales.png")' style="width:50%; height:50%;" />
+        </a>
+        <h4>@Html.ActionLink("Gestión de Puntos Individuales", "Points", "AdminPoint", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#F57C00;background-color:transparent;" })</h4>
+    </div>
+    <div class="col-md-4">
+        <a href='@Url.Action("MassivePoints", "AdminPoint")' style="background-color:transparent;">
+            <img src='@Url.Content("~/Content/Images/gestion_puntos_masivos.png")' style="width:50%; height:50%;" />
+        </a>
+        <h4>@Html.ActionLink("Gestión de Puntos Masivos", "MassivePoints", "AdminPoint", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#F57C00;background-color:transparent;" })</h4>
+    </div>
+
+</div>
+
+

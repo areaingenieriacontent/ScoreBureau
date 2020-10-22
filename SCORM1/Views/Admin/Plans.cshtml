@@ -1,0 +1,91 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@using SCORM1.Models
+@model AdminPlansViewModel
+
+@{
+    ViewBag.Title = "Plans";
+}
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+    </div>
+</div>
+<div class="jumbotron col-md-12">
+    <div class="titulo"><strong>Planes Actuales de la Empresa</strong></div>
+
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Plan</th>
+                    <th>Competencia</th>
+                  
+                    <th>Recurso</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Plans != null)
+                {
+                    foreach (Plan plan in Model.Plans)
+                    {
+                        <tr>
+                            <td>@plan.PlanDescription</td>
+                            <td>@plan.Proficiency.ProficiencyDescription</td>
+                        
+                            <td>
+                                @Html.ActionLink("Link", "GetFileEmail", "File", new { id = Model.userId + "-" + plan.ResourceId }, new { @class = "btn btn-primary", target = "_blank" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+
+    <div class="titulo"><strong>Planes Por Usuario</strong></div>
+
+    @using (Html.BeginForm("SearchUserPlan", "Admin", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchUserPlan, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Usuario" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+    }
+
+
+    <div class="table-responsive col-md-12">
+        <table class="col-md-12  table table-hover table-striped ">
+            <thead>
+                <tr class="success">
+                    <td>Nombre de Usuario</td>
+                    <td>Area</td>
+                    <td>Ver Plan</td>
+                </tr>
+            </thead>
+            @if (Model.Users != null)
+            {
+                foreach (ApplicationUser user in Model.Users)
+                {
+                    <tr style="font-weight:700">
+                        <td>@user.FirstName  @user.LastName</td>
+                        <td>@if (@user.Area == null)
+                        {
+                            string noArea = "No Area";
+                            @noArea;
+                        }
+                        else
+                        {
+                            @user.Area.AreaName
+                        }
+                        </td>
+                        <td><input type="submit" class="btn btn-success" value="Plan" onclick="location.href='@Url.Action("ViewPlans", "Plans", new {  userId = user.Id, role = Model.ActualRole})'" /></td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

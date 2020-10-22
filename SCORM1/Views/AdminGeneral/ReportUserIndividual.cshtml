@@ -1,0 +1,75 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@using SCORM1.Models;
+@using PagedList.Mvc;
+
+@model AdminReportsUserIndividual
+
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+<div class="panel-primary">
+
+    @if (Model.UserEnrollment.Count == 0)
+    {
+        <center>
+            <div>
+                <img src="~/Content/Images/usuario-no-cursos-v.jpg" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+            </div>
+        </center>
+    }
+    else
+    {
+        using (Html.BeginForm("SeachUser", "AdminGeneral", FormMethod.Post, new { @class = "row", role = "search" }))
+        {
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.SearchUser, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Usuario" } })
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary btn-responsive">Buscar</button>
+            </div>
+        }
+
+        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Tipo de usuario</th>
+                        <th>Email</th>
+                        <th>Reporte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ApplicationUser user in Model.UserEnrollment)
+                    {
+                        <tr>
+                            <td>@user.FirstName @user.LastName</td>
+                            <td>@user.UserName</td>
+                            <td>@user.Role</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <input type="submit" onclick="Report('@user.Id')" data-cname="@user.Id" class="btn btn-primary" value="Reporte" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model.UserEnrollment, page => Url.Action("ReportUserIndividual", new { page }))
+        </div>
+    }
+    <script type="text/Javascript" language="javascript">
+        function Report(Id) {
+                var a = Id;
+                window.location.href = ' @Url.Action("ExportToExcel22", "AdminGeneral", new {id = "ID"})'.replace("ID", a);
+        }
+    </script>
+</div>
+

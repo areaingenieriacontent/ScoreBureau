@@ -1,0 +1,91 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@using SCORM1.Models;
+@using SCORM1.Enum;
+
+@model AdminTrainingNewAttemptsViewMode
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Inform").modal();
+            });
+        </script>
+    }}
+<br /><br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+
+<div class="jumbotron col-md-12">
+    <div id="Inform" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @TempData["Info"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model.NewAttempts.Count == 0)
+    {
+        <center>
+            <div>
+                <img src="~/Content/Images/No_solicitudes_intentos_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+            </div>
+        </center>
+    }
+    else
+    {
+
+        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Tema</th>
+                        <th>Curso</th>
+                        <th>Nuevo Intento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (NewAttempts user in Model.NewAttempts)
+                    {
+                        <tr>
+                            <td>@user.ApplicationUser.FirstName @user.ApplicationUser.LastName</td>
+                            <td>@user.ApplicationUser.UserName</td>
+                            <td>@user.BankQuestion.TopicsCourse.ToCo_Name</td>
+                            <td>@user.BankQuestion.TopicsCourse.Module.Modu_Name</td>
+                            <td>
+                                @if (user.Attempts == ATTEMPTS.No)
+                                {
+                                    @Html.ActionLink("Nuevo Intento", "NewAttemptsUser", "AdminTraining", new { BaQu_Id = user.BaQu_Id, User_Id = user.User_Id }, new { @class = "btn btn-primary" })
+                                }
+                                else
+                                {
+
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+

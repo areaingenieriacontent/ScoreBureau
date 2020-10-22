@@ -1,0 +1,117 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model AdminTrainingTopicViewModel
+<div class="jumbotron col-md-12">
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["AddTopics"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+    $(document).ready(function () {
+        $("#AddTopic").modal();
+    });
+            </script>
+        }}
+    <br /><br />
+    <div id="AddTopic" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("AddTopic", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h2> <center>NUEVO TEMA</center></h2>
+                        <form>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_Name, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_Name, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_Name, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_Description, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_Description, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_Description, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_Attempt, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_Attempt, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_Attempt, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_ExpectedScore, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_ExpectedScore, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_ExpectedScore, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_TotalQuestion, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_TotalQuestion, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_TotalQuestion, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.ToCo_InintDate, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>@Html.EditorFor(model => model.ToCo_InintDate, new { htmlAttributes = new { @class = "form-control datepicker " } })</center>
+                                    @Html.ValidationMessageFor(model => model.ToCo_InintDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.ToCo_FinishDate, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>@Html.EditorFor(model => model.ToCo_FinishDate, new { htmlAttributes = new { @class = "form-control datepicker " } })</center>
+                                    @Html.ValidationMessageFor(model => model.ToCo_FinishDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center>@Html.LabelFor(model => model.ToCo_ModuleId, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>   @Html.DropDownListFor(model => model.ToCo_ModuleId, Model.modules, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    @Html.ValidationMessageFor(model => model.ToCo_ModuleId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.Toco_Image, new { @class = "" })</center>
+                                <div class="col-lg-9">
+                                    <input type="file" name="Img" id="file_upload" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.ToCo_Content, new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>@Html.TextAreaFor(model => model.ToCo_Content, new { @class = "form-control", @row = 5 })</center>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear Categoria</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

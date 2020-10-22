@@ -1,0 +1,189 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@using SCORM1.Models;
+
+@model AdminTrainingEnrollmentViewModel
+
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Enrollment", "AdminTraining")" class="btn btn-info">USUARIOS</a>
+    </div>
+</div>
+<br />
+@if (TempData["Add"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+        </script>
+    }}
+
+@Scripts.Render("~/bundles/jqueryval")
+<div id="Inform" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @TempData["Add"]
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head"><center> Matriculas</center></div>
+    <div class="panel-body">
+        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.User.FirstName @Model.User.LastName</td>
+                        <td>@Model.User.UserName</td>
+                        <td>@Model.User.Email</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <h1 class="title">Cursos</h1>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#menu1">Cursos Virtuales</a></li>
+            <li><a data-toggle="tab" href="#menu2">Cursos Evaluativos</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="menu1" class="tab-pane fade in active">
+                <div class="contenido-articulo">
+                    @if (Model.listenrollmentvirtual.Count == 0)
+                    {
+                        <div class="col-lg-10">
+                            <div>
+                                <img src="~/Content/Images/backgrounds-52.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <br><h1 class="title">CURSOS VIRTUALES MATRICULADOS</h1>
+                        <br /><br /><br />
+                        <div class="table-responsive col-md-12 col-sm-12">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr class="success">
+                                        <th>Nombre del Curso</th>
+                                        <th>Descripción</th>
+                                        <th>categoria</th>
+                                        <th>Estado</th>
+                                        <th>Fecha de Incio</th>
+                                        <th>Fecha de Vigencia</th>
+                                        <th>Portada</th>
+                                        <th>Desmatricular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var enrollment in Model.listenrollmentvirtual)
+                                    {
+                                        <tr>
+                                            <td>@enrollment.Module.Modu_Name</td>
+                                            <td><div style='width:60px;height:20px; overflow:hidden;'>@enrollment.Module.Modu_Description</div></td>
+                                            <td>@enrollment.Module.Modu_TypeOfModule</td>
+                                            <td>@enrollment.Module.Modu_Statemodule</td>
+                                            <td>@enrollment.Module.Modu_InitDate</td>
+                                            <td>@enrollment.Module.Modu_Validity @enrollment.Module.Modu_Period</td>
+                                            <td>
+                                                <img src="~/Resources/@enrollment.Module.Modu_ImageName" style="width:50px; height:50px" />
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Desmatricular", "CancelEnrollmentmVirtuals", "AdminTraining", new { Modu_Id = enrollment.Enro_Id, user_Id = Model.User.Id }, new { @class = "btn btn-primary" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <div class="contenido-articulo">
+                    @if (Model.listenrollmentevaluative.Count == 0)
+                    {
+                        <div class="col-lg-10">
+                            <div>
+                                <img src="~/Content/Images/backgrounds-52.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <br><h1 class="title">CURSOS EVALUATIVOS MATRICULADOS</h1>
+                        <br /><br /><br />
+                        <div class="table-responsive col-md-12 col-sm-12">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr class="success">
+                                        <th>Nombre del Curso</th>
+                                        <th>Descripción</th>
+                                        <th>categoria</th>
+                                        <th>Estado</th>
+                                        <th>Fecha de Incio</th>
+                                        <th>Vigencia</th>
+                                        <th>Portada</th>
+                                        <th>Desmatricular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var enrollment in Model.listenrollmentevaluative)
+                                    {
+                                        <tr>
+                                            <td>@enrollment.Module.Modu_Name</td>
+                                            <td><div style='width:60px;height:20px; overflow:hidden;'>@enrollment.Module.Modu_Description</div></td>
+                                            <td>@enrollment.Module.Modu_TypeOfModule</td>
+                                            <td>@enrollment.Module.Modu_Statemodule</td>
+                                            <td>@enrollment.Module.Modu_InitDate</td>
+                                            <td>@enrollment.Module.Modu_Validity @enrollment.Module.Modu_Period</td>
+                                            <td>
+                                                <img src="~/Resources/@enrollment.Module.Modu_ImageName" style="width:50px; height:50px" />
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Desmatricular", "CancelEnrollmentmVirtuals", "AdminTraining", new { Modu_Id = enrollment.Enro_Id, user_Id = Model.User.Id }, new { @class = "btn btn-primary" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <script>
+            function ModuleVirtual(Id) {
+        var link = '@Url.Action("ModuleVirtual", "AdminTraining", new { id = "value" })';
+        link = link.replace("value",Id)
+        $("#ModuleVirtual").load(link);
+    }
+            function ModuleEvaluative(Id) {
+        var link = '@Url.Action("ModuleEvaluative", "AdminTraining", new { id = "value" })';
+        link = link.replace("value",Id)
+        $("#ModuleEvaluatives").load(link);
+    }
+        </script>
+    </div>
+</div>

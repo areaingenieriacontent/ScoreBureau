@@ -1,0 +1,35 @@
+﻿@using SCORM1.Models.ViewModel;
+
+@model UserProfileViewModel
+
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["Result"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Result").modal();
+                });
+        </script>
+    }}
+
+<h2>Report_Person</h2>
+<br /><br /><br /><br /><br />
+<div class="jumbotron">
+    <div class="jumbotron">
+        <hr />
+
+        <h2><p></p>Cursos Certificados</h2>
+        <br /><br />
+        @if (Model.listcert.Count != 0)
+        {
+            foreach (var item in Model.listcert)
+            {
+                <p>@item.Enrollment.Module.Modu_Name:@Html.ActionLink("Descargar", "ExportToExcel6", "User", new { Id = @item.Cert_Id }, new { @class = "btn btn-primary" })              </p>
+                @*<p>@item.Enrollment.Module.Modu_Name:@Html.ActionLink("Ver", "certificado", "User", new { Id = @item.Cert_Id }, new { @class = "btn btn-primary" })              </p>*@
+            }
+        }
+       
+
+        </div>
+    </div>

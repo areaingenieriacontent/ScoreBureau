@@ -1,0 +1,211 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@using PagedList;
+@using PagedList.Mvc;
+@model AdminRelationsViewModel
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal col-md-12">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="text-center">
+            @using (Html.BeginForm("AddUserRelations", "Admin", FormMethod.Post, new { id= "value2" }))
+            {
+                @Html.HiddenFor(model => Model.SearchUser)
+                <input class="btn btn-primary" type="submit" value="nuevas Relaciones" formaction="~/Admin/AddUserRelations/@Model.SearchUser" onclick="showUser(@Model.SearchUser)" />
+            }
+        </div>
+
+        @*user superiors*@
+        <div class="table-responsive col-md-6">
+            <h5>user superiores</h5>
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="success">
+                        <td>Nombre</td>
+                        <td>Apellidos</td>
+                        <td>area</td>
+
+                    </tr>
+                </thead>
+                @if (Model.SuperiorsUsers != null && Model.SuperiorsUsers.Count() > 0)
+                {
+                    <tbody>
+                        @foreach (var userSuperior in Model.SuperiorsUsers)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.Area.AreaName)
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("deleteRelations", "Admin", FormMethod.Post, new { id = "value" }))
+                                    {
+                                        @Html.HiddenFor(model => Model.SearchUser)
+                                        <input type="submit" formaction="~/Admin/deleteRelations/@userSuperior.Id?relation=1" class="btn btn-success" value="eliminar" />
+                                    }
+                                </td>
+                            </tr>
+                            @Html.HiddenFor(model => userSuperior.Id)
+
+                        }
+                    </tbody>
+                }
+            </table>
+            @Html.PagedListPager(Model.SuperiorsUsers, page => Url.Action("_loadRelation", new { page }))
+        </div>
+
+
+        @*user clients*@
+        <div class="table-responsive col-md-6">
+            <h5>user clientes</h5>
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="success">
+                        <td>Nombre</td>
+                        <td>Apellidos</td>
+                        <td>area</td>
+
+                    </tr>
+                </thead>
+                @if (Model.ClientsUsers != null && Model.ClientsUsers.Count() > 0)
+                {
+                    <tbody>
+                        @foreach (var userSuperior in Model.ClientsUsers)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.Area.AreaName)
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("deleteRelations", "Admin", FormMethod.Post, new { id = "value" }))
+                                    {
+                                        @Html.HiddenFor(model => Model.SearchUser)
+                                        <input type="submit" formaction="~/Admin/deleteRelations/@userSuperior.Id?relation=2" class="btn btn-success" value="eliminar" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+            @Html.PagedListPager(Model.ClientsUsers, page => Url.Action("_loadRelation", new { page }))
+
+        </div>
+
+
+        @**user Equal*@
+        <div class="table-responsive col-md-6">
+            <h5>user Equal</h5>
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="success">
+                        <td>Nombre</td>
+                        <td>Apellidos</td>
+                        <td>area</td>
+                    </tr>
+                </thead>
+                @if (Model.EqualUsers != null && Model.EqualUsers.Count() > 0)
+                {
+                    <tbody>
+                        @foreach (var userSuperior in Model.EqualUsers)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.Area.AreaName)
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("deleteRelations", "Admin", FormMethod.Post, new { id = "value" }))
+                                    {
+                                        @Html.HiddenFor(model => Model.SearchUser)
+                                        <input type="submit" formaction="~/Admin/deleteRelations/@userSuperior.Id?relation=3" class="btn btn-success" value="eliminar" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+            @Html.PagedListPager(Model.EqualUsers, page => Url.Action("_loadRelation", new { page }))
+        </div>
+
+
+        @**user myOffice*@
+        <div class="table-responsive col-md-6">
+            <h5>user myOffice</h5>
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="success">
+                        <td>Nombre</td>
+                        <td>Apellidos</td>
+                        <td>area</td>
+
+                    </tr>
+                </thead>
+                @if (Model.MyOffice != null && Model.MyOffice.Count() > 0)
+                {
+                    <tbody>
+                        @foreach (var userSuperior in Model.MyOffice)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => userSuperior.Area.AreaName)
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("deleteRelations", "Admin", FormMethod.Post, new { id = "value" }))
+                                    {
+                                        @Html.HiddenFor(model => Model.SearchUser)
+                                        <input type="submit" formaction="~/Admin/deleteRelations/@userSuperior.Id?relation=4" class="btn btn-success" value="eliminar" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+            @Html.PagedListPager(Model.SuperiorsUsers, page => Url.Action("_loadRelation", new { page }))
+
+        </div>
+
+    </div>
+
+}
+
+@*<script>
+        function LoadRelations(Id, userId) {
+            var link = '@Url.Action("AddUserRelations", "Admin", new { Id = 0, UserId = "value2" })';
+            link = link.replace("value", userId)
+            $("#NewUserRelations").load(link);
+        }
+    </script>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

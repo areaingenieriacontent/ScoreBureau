@@ -1,0 +1,35 @@
+﻿@using SCORM1.Models.ViewModel
+@model   UserProfileViewModel
+
+<div class="panel-primary">
+
+    <br /><br /><br />
+    <h1 class="title"> TÉRMINOS Y CONDICIONES</h1>
+    <embed src="~/TermsandConditions/@Model.FileTerms" width="800" height="375">
+    @using (Html.BeginForm("Validateterms", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<div class="col-md-12">
+                <h1 class="title">GUÍA DE NAVEGACIÓN </h1>
+                <video controls="controls" width="600" height="500" style="margin-top: -70px;" onclick="this.paused?this.play():this.pause();" poster="~/Content/Images/cap1.png">
+                    <source src="https://www.aprendeyavanza2.com.co/Gastronomia/Recursos/video.mp4" type="video/mp4" />
+                </video>
+                <br /><br />
+
+            </div>*@
+        <br /><br />
+        <div class="col-md-offset-2 col-md-8">
+            <br /><br /><br />
+            @Html.CheckBoxFor(m => m.termsandconditions, htmlAttributes: new { @class = "", @style = "width: 50px;height: 30px; " })
+            @Html.LabelFor(m => m.termsandconditions)
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <br /><br />
+                <center><button class="btn btn-primary" name="singin" type="submit">Continuar</button></center>
+            </div>
+        </div>
+    }
+</div>
+

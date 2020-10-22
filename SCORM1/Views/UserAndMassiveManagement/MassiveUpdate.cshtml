@@ -1,0 +1,213 @@
+﻿
+@using SCORM1.Models;
+@using SCORM1.Models.ViewModel;
+@using System.Data;
+@model LogoUserUpdate
+@{
+    ViewBag.Title = "MassiveRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+<br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("ManagementUser", "UserAndMassiveManagement")" class="btn btn-info">GESTIÓN DE ACTUALIZACIÓN USUARIOS</a>
+    </div>
+</div>
+<div class="panel-primary">
+    @using (Html.BeginForm("MassiveUpdate", "UserAndMassiveManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <h4>Actualización Masiva de Usuarios</h4>
+        <div class="fecha">
+            <a href="~/Reports/CargaMasivaUsuarios.xlsx" target="_blank" download="CargaMasivaUsuarios.xlsx"><h1 style="color:red;">Descargar Formato</h1></a>
+        </div>
+        <br /><br />
+            <div class="logo_inicial">
+                <br />
+                @Html.Raw("<div class='center-block' style='width:500px;height:200px;'>" + "<br />" + Model.Logo + "</div>")
+            </div>
+            <br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group col-md-4">
+                <label class="col-md-8">Selecciona el archivo Excel</label>
+            </div>
+            <div class="form-group col-md-12">
+                <input type="file" name="excelUpload" class="col-md-7" />
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Actualizar Usuarios" class="btn btn-default" />
+                </div>
+            </div>
+    }
+
+    <br />
+    <div class="table-responsive">
+        @if (Model.data != null)
+        {
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        @foreach (DataColumn col in Model.data.Columns)
+                        {
+                            <th>@col.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in Model.data.Rows)
+                {
+                        <tr>
+                            @foreach (DataColumn col in Model.data.Columns)
+                            {
+                                <td>@row[col.ColumnName]</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h1 style="color:#000;"><strong>@TempData["Menssage"]</strong></h1>
+                <br /><br /><br />
+                @if (Model.usuarios_actualizados != null)
+                {
+                    if (Model.usuarios_actualizados.Count != 0)
+                    {
+                        <h1 style="color:#000;"><strong>@TempData["Menssage1"]</strong></h1>
+                        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+                        <div class="table-responsive col-md-12 col-sm-12">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr class="success">
+
+                                        <th><center>Nombre Usuario</center></th>
+                                        <th><center>Nombre Completo</center></th>
+                                        <th><center>Documento</center></th>
+                                        <th><center>Email</center></th>
+                                        <th><center>Código Área</center></th>
+                                        <th><center>Área</center></th>
+                                        <th><center>Código Cargo</center></th>
+                                        <th><center>cargo</center></th>
+                                        <th><center>Código Ciudad</center></th>
+                                        <th><center>Ciudad</center></th>
+                                        <th><center>Código Ubicación</center></th>
+                                        <th><center>Ubicación</center></th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var User in Model.usuarios_actualizados)
+                                    {
+                                        <tr>
+                                            <td>@User.username</td>
+                                            <td>
+                                                @User.firstname @User.lastname
+                                            </td>
+                                            <td>
+                                                @User.document
+                                            </td>
+                                            <td>@User.email</td>
+                                            <td>@User.codigo_area</td>
+                                            <td>@User.área</td>
+                                            <td>@User.codigo_cargo</td>
+                                            <td>@User.cargo</td>
+                                            <td>@User.codigo_ciudad</td>
+                                            <td>@User.ciudad</td>
+                                            <td>@User.codigo_ubicación</td>
+                                            <td>@User.ubicación</td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+                <br />
+                @if (Model.usuarios_nuevos != null)
+                {
+                    if (Model.usuarios_nuevos.Count != 0)
+                    {
+                        <h1 style="color:#000;"><strong>@TempData["Menssage2"]</strong></h1>
+                        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+                        <div class="table-responsive col-md-12 col-sm-12">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr class="success">
+
+                                        <th><center>Nombre Usuario</center></th>
+                                        <th><center>Nombre Completo</center></th>
+                                        <th><center>Documento</center></th>
+                                        <th><center>Email</center></th>
+                                        <th><center>Código Área</center></th>
+                                        <th><center>Área</center></th>
+                                        <th><center>Código Cargo</center></th>
+                                        <th><center>cargo</center></th>
+                                        <th><center>Código Ciudad</center></th>
+                                        <th><center>Ciudad</center></th>
+                                        <th><center>Código Ubicación</center></th>
+                                        <th><center>Ubicación</center></th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var User in Model.usuarios_nuevos)
+                                    {
+                                        <tr>
+                                            <td>@User.username</td>
+                                            <td>
+                                                @User.firstname @User.lastname
+                                            </td>
+                                            <td>
+                                                @User.document
+                                            </td>
+                                            <td>@User.email</td>
+                                            <td>@User.codigo_area</td>
+                                            <td>@User.área</td>
+                                            <td>@User.codigo_cargo</td>
+                                            <td>@User.cargo</td>
+                                            <td>@User.codigo_ciudad</td>
+                                            <td>@User.ciudad</td>
+                                            <td>@User.codigo_ubicación</td>
+                                            <td>@User.ubicación</td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

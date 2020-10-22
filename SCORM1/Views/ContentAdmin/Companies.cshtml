@@ -1,0 +1,96 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model ContentCompaniesViewModel
+
+@{
+    ViewBag.Title = "Companies";
+}
+
+<div class="jumbotron col-md-12">
+    @using (Html.BeginForm("SearchCompany", "ContentAdmin", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchCompany, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la Compañia" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>NIT</th>
+                    <th>Nombre</th>
+                    <th>Sector</th>
+                    <th>Tipo</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Company company in Model.Companies)
+                {
+                    <tr>
+                        <td>@company.CompanyNit</td>
+                        <td>@company.CompanyName</td>
+                        <td>@company.CompanySector.ToString()</td>
+                        <td>@company.CompanyType.ToString()</td>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Modificar" onclick="LoadUpdateCompany(@company.CompanyId)" data-cname="@company.CompanyId" />
+                        </td>
+                        <td>
+                            @*@using (Html.BeginForm("DeleteCompany", "ContentAdmin", FormMethod.Post, new { id = "deleteForm" }))
+                            {
+                                <input type="submit" formaction="~/ContentAdmin/DeleteCompany/@company.CompanyId" class="btn btn-primary" value="Eliminar" />
+                            }*@
+                            <input type="submit" onclick="confirm_meth('@company.CompanyId')" data-cname="@company.CompanyId" class="btn btn-primary" value="Eliminar" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="UpdateCompanySection">
+
+    </div>
+    <br><hr style="width:100%; clear:both; border:dashed; border-color: #A3DC68; border-width:thin; margin-bottom:10px;">
+    <div class="caja_botones" style="clear:both;">
+        <button id="BTN_ADD" class="botones_pregunta">Añadir Compañia</button>
+    </div>
+    <br />
+    <div id="AddCompanySection">
+
+    </div>
+
+    <script>
+        document.getElementById("BTN_ADD").onclick = function () { LoadCompanyDiv() };
+        function LoadCompanyDiv() {
+
+            $("#AddCompanySection").load('@Url.Action("AddCompany","ContentAdmin")');
+        }
+
+        function LoadUpdateCompany(CompanyID) {
+            var link = '@Url.Action("UpdateCompany", "ContentAdmin", new { id = "value" })';
+            link = link.replace("value", CompanyID)
+            $("#UpdateCompanySection").load(link);
+        }
+    </script>
+    <script type="text/Javascript" language="javascript">
+        function confirm_meth(CompanyId)
+{
+  if( confirm("Quieres eliminar la compañia ?")==true)
+  {
+      var Q = CompanyId;
+      window.location.href = ' @Url.Action("DeleteCompany", "ContentAdmin", new {id = "ID"})'.replace("ID",Q);
+   }
+  else
+  {
+      var link = '@Url.Action("Companies", "ContentAdmin")';
+  }
+}
+    </script>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

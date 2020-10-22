@@ -1,0 +1,72 @@
+﻿
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model UserPendientes
+<br /><br />
+
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+
+<div class="panel-primary">
+
+    <p style="font-size: 50px;">Módulos Pendientes</p>
+    <p>En este página encontrará los modulos que aún no ha comenzado</p>
+    @if (Model.CursosFaltantes != null)
+    {
+
+        <br />
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre del Modulo</th>
+                        <th>Nombre del Contenido</th>
+                        <th>Portada</th>
+                        <th>Ver</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var modules in Model.CursosFaltantes)
+                    {
+
+
+                        <tr>
+                            <td>@modules.Module.Modu_Name</td>
+                            <td>@modules.ToCo_Name</td>
+                            <td>
+                                <img src="~/Resources/@modules.Module.Modu_ImageName" style="width:50px; height:50px" />
+                            </td>
+                            <td>
+                                <a href='@Url.Action("TestUser", "User", new { id = @modules.ToCo_Id })'>
+                                    <img src='~/Content/Images/Ver_1.png' style="width:60px;height:15%;" class="img img-responsive" />
+                                </a>
+                            </td>
+
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <br /><br /><br /><br /><br />
+        <div class="row">
+
+            <center> <img src="~/Content/Images/No_cursos_virtuales_w.png" style="width:600px;" alt="Imagen responsive" class="img-responsive" /></center>
+
+        </div>
+    }
+</div>
+
+
+

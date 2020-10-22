@@ -1,0 +1,50 @@
+﻿
+@using SCORM1.Models.MeasuringSystem
+
+@model ModelReportUserMeasuare
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+        <a href="@Url.Action("Measures", "Admin")" class="btn btn-info">MEDICIONES</a>
+
+    </div>
+</div>
+<div class="jumbotron col-md-12 col-lg-12">
+    <h2>Reporte general de la medición </h2>
+    <br />
+
+    @Html.ActionLink("Bajar Informe", "ReportUserMeasuares", "Admin", new { id = @Model.id }, new { @class = "btn btn-info" })
+
+    <br /><br />
+
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped" cellpadding="1" style="border: 1px solid black;">
+
+            <thead>
+                <tr>
+                    <td>Nombre Completo</td>
+                    <td>SERVICIO AL CLIENTE</td>
+                    <td>TRABAJO EN EQUIPO</td>
+                    <td>TOMA DE DECISIONES</td>
+                    <td>TRABAJO BAJO PRESIÓN</td>
+                    <td>ATENCIÓN AL DETALLE</td>
+                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.mode)
+                {
+                    <tr>
+                        <td>@item.user.FirstName @item.user.LastName</td>
+
+                        @foreach (var item2 in item.Score)
+                        {
+                            <td> @item2.Value</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

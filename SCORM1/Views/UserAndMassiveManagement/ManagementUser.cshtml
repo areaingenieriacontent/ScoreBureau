@@ -1,0 +1,1092 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models
+@using PagedList.Mvc;
+<br /><br /><br />
+@model UserAndMassiveManagementViewModel
+@{
+    ViewBag.Title = "ManagementUser";
+}
+<script>
+    //method Delete User
+    function DeleteUser(UserId) {
+        if (confirm("Elimiar Usuario (Perdera toda la informacion. (NO se puede revertir))") == true) {
+            var User = UserId;
+            window.location.href = ' @Url.Action("DeleteUser", "UserAndMassiveManagement", new { IdUserToDelete = "ID" })'.replace("ID", User);
+        }
+    }
+
+    //method Update
+    function UpdateUser(UserId) {
+        if (confirm("Actualizar registro") == true) {
+            var User = UserId;
+            window.location.href = ' @Url.Action("UpdateUserCurrent", "UserAndMassiveManagement", new { IdUserToModified = "ID"})'.replace("ID", User);
+        }
+    }
+
+</script>
+
+
+@if (TempData["Warning"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#myModal").modal();
+            });
+        </script>
+    }}
+
+@if (TempData["UpdateUserCurrent"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateUser").modal();
+            });
+        </script>
+    }}
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+@if (TempData["UpdateArea"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateAreas").modal();
+            });
+        </script>
+    }}
+@if (TempData["Updateposition"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Updatepositions").modal();
+            });
+        </script>
+    }}
+@if (TempData["Updatecity"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Updatecities").modal();
+            });
+        </script>
+    }}
+@if (TempData["UpdateLocations"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateLocations").modal();
+            });
+        </script>
+    }}
+
+@if (TempData["Result"] != null)
+        {
+@section Scripts {
+    <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Result").modal();
+                });
+    </script>
+}}
+<div class="panel-primary">
+    <div id="Result" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <strong> @TempData["Result"]</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br />
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        </div>
+    </div>
+    <br />
+
+    @using (Html.BeginForm("SearchUserManager", "UserAndMassiveManagement", FormMethod.Post, new { @class = "row", role = "search" }))
+    {
+        <div class="col-md-2" style="color:#fff;">
+            @Html.EditorFor(model => model.User_Id, new { htmlAttributes = new { @class = "form-control",@style = "color:#fff", placeholder = "Nombre del Usuario" } })
+        </div>
+        <button type="submit" class="btn btn-primary btn-responsive">Buscar</button>
+        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-responsive">Agregar usuario</button>
+        @Html.ActionLink("Carga Usuario", "MassiveRegister", "UserAndMassiveManagement", new { @class = "btn btn-primary btn-responsive" })
+        <button data-toggle="modal" data-target="#CrearteArea" class="btn btn-primary btn-responsive">Agregar Area</button>
+        <button data-toggle="modal" data-target="#CrearteLocations" class="btn btn-primary btn-responsive">Agregar ubicación</button>
+        <button data-toggle="modal" data-target="#CrearteCitys" class="btn btn-primary btn-responsive">Agregar Ciudades</button>
+        <button data-toggle="modal" data-target="#CreartePositions" class="btn btn-primary btn-responsive">Agregar Cargos</button>
+        <br /><br />
+        <div class="col-md-12">
+            <br />
+        </div>
+        <div class="col-md-2">
+            @Html.ActionLink("Enviar Correo de Bienvenida de forma masiva", "EmailMassive", "UserAndMassiveManagement", new { @class = "btn btn-primary btn-responsive" })
+        
+        </div>
+        <div  class="col-md-5">
+            @Html.ActionLink("Actualizar Usuario", "MassiveUpdate", "UserAndMassiveManagement", new { @class = "btn btn-primary btn-responsive" })
+        </div>
+      
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th><center>Nombre Completo</center></th>
+                    <th><center>Usuario</center></th>
+                    <th><center>Documento</center></th>
+                    <th><center> Rol</center></th>
+                    <th><center>Último Acceso</center></th>
+                    <th><center>Primer Acceso</center></th>
+                    <th><center>Autorizado</center></th>
+                    <th><center>Modificar</center></th>
+                    <th><center>Eliminar</center></th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ApplicationUser User in Model.UserOfCompany)
+                {
+                    <tr>
+                        <td>
+
+                            @User.FirstName @User.LastName
+                        </td>
+                        <td>@User.UserName</td>
+                        <td>
+                            @User.Document
+                        </td>
+                        <td>@User.Role.ToString()</td>
+                        @if (User.lastAccess != null)
+                        {
+                            <td>@User.lastAccess</td>
+                        }
+                        else
+                        {
+
+                            <td>No ha ingresado</td>
+                        }
+
+                        @if (User.firstAccess != null)
+                        {
+                            <td>@User.firstAccess</td>
+                        }
+                        else
+                        {
+
+                            <td>No ha ingresado</td>
+                        }
+
+
+                        <td>@User.Enable</td>
+                        <td>
+                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateUser('@User.Id')" id="@User.Id" />
+                        </td>
+                        <td>
+                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="DeleteUser('@User.Id')" data-cname="@User.Id" />
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model.UserOfCompany, page => Url.Action("ManagementUser", new { page }))
+
+
+    </div>
+
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">NUEVO USUARIO</h2>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("CreateUser", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <p class="danger"> @TempData["Warning"]</p>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "El nombre de usuario debe ser mayor a 6 caracteres" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EnumDropDownListFor(model => model.Role, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EnumDropDownListFor(model => model.Country, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Document, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Document, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.PositionId, "Cargo", htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.DropDownList("PositionId", Model.PositionTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.AreaId, "Area", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("AreaId", Model.AreasOfTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AreaId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.CityId, "Ciudad", htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.DropDownList("CityId", Model.CityOfTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.LocationId, "Direccion", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("LocationId", Model.LocationOfTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.enable, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EnumDropDownListFor(model => model.enable, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.enable, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-8">
+                                <br /><br />
+                                <center><button class="btn btn-primary" name="singin" type="submit">Crear Usuario</button></center>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="UpdateUser" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MODIFICAR USUARIO</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UpdateUserCurrent", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <p class="danger"> @TempData["Warning"]</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-md-6">
+                            @Html.HiddenFor(x => x.User_Id)
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "El nombre de usuario debe ser mayor a 6 caracteres" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EnumDropDownListFor(model => model.Role, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EnumDropDownListFor(model => model.Country, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Document, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Document, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.PositionId, "Cargo", htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.DropDownList("PositionId", Model.PositionTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.AreaId, "Area", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("AreaId", Model.AreasOfTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AreaId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.CityId, "Ciudad", htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.DropDownList("CityId", Model.CityOfTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.LocationId, "Direccion", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.DropDownList("LocationId", Model.LocationOfTheCompany, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.enable, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EnumDropDownListFor(model => model.enable, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.enable, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12">
+                            <br />
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-8">
+                                <br /><br />
+                                <center><button class="btn btn-primary" name="singin" type="submit">Modificar Usuario</button></center>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- here to Create Areas -->
+
+<div id="CrearteArea" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">AREAS</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("AddArea", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AreaName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.AreaName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AreaName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Agregar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Areas in Model.AreasOfTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Areas.Value
+                                        </td>
+                                        <td>
+                                            @Areas.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateArea('@Areas.Value')" data-cname="@Areas.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="confirm_Delete('@Areas.Value')" data-cname="@Areas.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="UpdateAreas" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MODIFICAR AREA</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UpdateArea", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.HiddenFor(x => x.AreaId)
+                            @Html.LabelFor(model => model.AreaName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.AreaName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AreaName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Modificar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Areas in Model.AreasOfTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Areas.Value
+                                        </td>
+                                        <td>
+                                            @Areas.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateArea('@Areas.Value')" data-cname="@Areas.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="confirm_Delete('@Areas.Value')" data-cname="@Areas.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="CrearteLocations" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">UBICACIONES</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("AddLocation", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LocationName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Agregar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Location in Model.LocationOfTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Location.Value
+                                        </td>
+                                        <td>
+                                            @Location.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateLocat('@Location.Value')" data-cname="@Location.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Delete_Locat('@Location.Value')" data-cname="@Location.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="UpdateLocations" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MODIFICAR UBICACIONES</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UpdateLocation", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.HiddenFor(x => x.LocationId)
+                            @Html.LabelFor(model => model.LocationName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Modificar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Location in Model.LocationOfTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Location.Value
+                                        </td>
+                                        <td>
+                                            @Location.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateLocat('@Location.Value')" data-cname="@Location.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Delete_Locat('@Location.Value')" data-cname="@Location.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- here to Create Citys -->
+
+<div id="CrearteCitys" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">CIUDADES</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("AddCitys", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CityName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-3" value="Agregar" />
+                        </div>
+                    </div>
+                }
+                <div class="table-responsive col-md-12">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr class="success">
+                                <th>Codigo</th>
+                                <th>Listado Ciudad</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Citys in Model.CityOfTheCompany)
+                            {
+                                <tr>
+                                    <td>@Citys.Value</td>
+                                    <td>
+                                        @Citys.Text
+                                    </td>
+                                    <td>
+                                        <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Updatecity('@Citys.Value')" data-cname="@Citys.Value" />
+                                    </td>
+                                    <td>
+                                        <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Deletecity('@Citys.Value')" data-cname="@Citys.Value" />
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <br /><br />
+            <br /><br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Updatecities" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MODIFICAR CIUDAD</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UpdateCity", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.HiddenFor(x => x.CityId)
+                            @Html.LabelFor(model => model.CityName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Modificar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Listado Ciudades</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var city in Model.CityOfTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @city.Value
+                                        </td>
+                                        <td>
+                                            @city.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Updatecity('@city.Value')" data-cname="@city.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Deletecity('@city.Value')" data-cname="@city.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- here to Create Cargos -->
+
+<div id="CreartePositions" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">CARGOS</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("AddPosition", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PositionName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Agregar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var posi in Model.PositionTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @posi.Value
+                                        </td>
+                                        <td>
+                                            @posi.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Updateposi('@posi.Value')" data-cname="@posi.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Deleteposi('@posi.Value')" data-cname="@posi.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Updatepositions" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MODIFICAR CARGOS</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UpdatePosition", "UserAndMassiveManagement", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.HiddenFor(x => x.PositionId)
+                            @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PositionName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-2" value="Modificar" />
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="table-responsive1 col-md-12">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr class="success">
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Modificar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var posi in Model.PositionTheCompany)
+                                {
+                                    <tr>
+                                        <td>
+                                            @posi.Value
+                                        </td>
+                                        <td>
+                                            @posi.Text
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Updateposi('@posi.Value')" data-cname="@posi.Value" />
+                                        </td>
+                                        <td>
+                                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="Deleteposi('@posi.Value')" data-cname="@posi.Value" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/Javascript" language="javascript">
+        function UpdateArea(Area_Id)
+{
+  if( confirm("Modificar Área")==true)
+  {
+      var a = Area_Id;
+      window.location.href = ' @Url.Action("UpdateArea", "UserAndMassiveManagement", new {id = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+<script type="text/Javascript" language="javascript">
+        function confirm_Delete(Area_Id)
+{
+  if( confirm("Elimiar Área")==true)
+  {
+      var a = Area_Id;
+      window.location.href = ' @Url.Action("DeleteArea", "UserAndMassiveManagement", new {id = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+
+<script type="text/Javascript" language="javascript">
+        function UpdateLocat(Loca_Id)
+{
+  if( confirm("Modificar Ubicación")==true)
+  {
+      var a = Loca_Id;
+      window.location.href = ' @Url.Action("UpdateLocation", "UserAndMassiveManagement", new {id = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+<script type="text/Javascript" language="javascript">
+        function Delete_Locat(Loca_Id)
+{
+  if( confirm("Elimiar Ubicación")==true)
+  {
+      var a = Loca_Id;
+      window.location.href = ' @Url.Action("DeleteLocation", "UserAndMassiveManagement", new {id = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+
+<script type="text/Javascript" language="javascript">
+        function Updateposi(Posi_Id)
+{
+  if( confirm("Modificar Cargo")==true)
+  {
+      var a = Posi_Id;
+      window.location.href = ' @Url.Action("UpdatePosition", "UserAndMassiveManagement", new { idPosition = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+<script type="text/Javascript" language="javascript">
+        function Deleteposi(Posi_Id)
+{
+  if( confirm("Eliminar Cargo")==true)
+  {
+      var a = Posi_Id;
+      window.location.href = ' @Url.Action("DeletePosition", "UserAndMassiveManagement", new { idPosition = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+
+<script type="text/Javascript" language="javascript">
+        function Updatecity(City_Id)
+{
+  if( confirm("Modificar Ciudad")==true)
+  {
+      var a = City_Id;
+      window.location.href = ' @Url.Action("UpdateCity", "UserAndMassiveManagement", new { id = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>
+<script type="text/Javascript" language="javascript">
+        function Deletecity(City_Id)
+{
+  if( confirm("Eliminar Ciudad")==true)
+  {
+      var a = City_Id;
+      window.location.href = ' @Url.Action("DeleteCitys", "UserAndMassiveManagement", new { id = "ID"})'.replace("ID",a);
+   }
+  else
+  {
+      var link = '@Url.Action("ManagementUser", "UserAndMassiveManagement")';
+  }
+}
+</script>

@@ -1,0 +1,362 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Newspaper;
+@model AdminInformationEditionViewModel
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- here is the sections of scripts -->
+<script type="text/javascript">
+    window.alert = function () { };
+    var defaultCSS = document.getElementById('bootstrap-css');
+    function changeCSS(css) {
+        if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+        else $('head > link').filter(':first').replaceWith(defaultCSS);
+    }
+
+
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true
+    });
+
+</script>
+<!-- Carousel Modulos -->
+<script>
+
+    $(document).ready(function () {
+        $('#myCarousel2').carousel({
+            interval: 10000
+        })
+    });
+    $(document).ready(function () {
+        $('#carousel-example-generic').carousel({
+            interval: 10000
+        })
+    });
+    $(document).ready(function () {
+        $('#carousel-example-generic').carousel({
+            interval: 10000
+        })
+    });
+    $(document).ready(function () {
+        $('#myCarousel3').carousel({
+            interval: 10000
+        })
+    });
+
+</script>
+<!-- Carousel Newspaper -->
+<script type="text/javascript">
+    window.alert = function () { };
+    var defaultCSS = document.getElementById('bootstrap-css');
+    function changeCSS(css) {
+        if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+        else $('head > link').filter(':first').replaceWith(defaultCSS);
+    }
+    $(document).ready(function () {
+        var iframe_height = parseInt($('html').height());
+        window.parent.postMessage(iframe_height, 'http://bootsnipp.com');
+    });
+
+
+    jQuery(document).ready(function ($) {
+
+        $('#myCarousel').carousel({
+            interval: 5000
+        });
+
+        $('#carousel-text').html($('#slide-content-0').html());
+
+        //Handles the carousel thumbnails
+        $('[id^=carousel-selector-]').click(function () {
+            var id_selector = $(this).attr("id");
+            var id = id_selector.substr(id_selector.length - 1);
+            var id = parseInt(id);
+            $('#myCarousel').carousel(id);
+        });
+
+
+        // When the carousel slides, auto update the text
+        $('#myCarousel').on('slid', function (e) {
+            var id = $('.item.active').data('slide-number');
+            $('#carousel-text').html($('#slide-content-' + id).html());
+        });
+    });
+</script>
+@if (TempData["editarEdition"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#editionModal").modal();
+            });
+        </script>
+    }}
+
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<div class="jumbotron col-md-12">
+@if (TempData["editarEdition"] == null)
+{
+    <div class="banner">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active" style="border: 1px solid #62ab1b;background-color: #F57C00;"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" class="" style="border: 1px solid #62ab1b;background-color: #F57C00;"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2" class="" style="border: 1px solid #62ab1b;background-color: #F57C00;"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3" class="" style="border: 1px solid #62ab1b;background-color: #F57C00;"></li>
+
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <a href="@Model.Banners[0].Bann_Link">@Html.Raw(Model.Banners[0].Bann_Image)</a>
+
+                    <div class="header-text">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var imageOfBanner in Model.Banners.Where(x => x.Bann_Id != Model.Banners[0].Bann_Id))
+                {
+                    <div class="item">
+                        <a href="@imageOfBanner.Bann_Link">
+                            @Html.Raw(imageOfBanner.Bann_Image)
+                        </a>
+                        <div class="header-text">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+}
+    <h1 class="title">Gestión de información</h1>
+    <div class="boton-table2">
+        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Crear edición</button>
+        <a href='@Url.Action("ExportToExce24", "AdminGeneral")' class="btn btn-primary"> Descargar Reporte
+            
+        </a>
+    </div>
+    <br /><br /><br />
+    <div class="col-md-12">
+        @if (Model.Editions.Count() != 0)
+            {
+                foreach (Edition edition in Model.Editions)
+                {
+           
+                <div class="edicion col-sm-6 col-lg-4">
+                    <div class="panel panel-info col-md-12">                        
+                        <p style="color:#F57C00;">@Html.DisplayFor(x => edition.Edit_Name)</p>
+                        <div>
+                            <div>
+                                <center><img src="~/Resources/@edition.Edit_ImageName" style="width:150px;height:150px;" class="img-responsive" alt="Imagen responsive" /></center>
+                            </div>
+                            <div>
+                                <h5> @Html.DisplayFor(x => edition.Edit_StateEdition)  </h5>
+                                <i class="fa fa-cog" onclick="UpdateEdition('@edition.Edit_Id')" data-cname="@edition.Edit_Id"></i>
+                                <i class="fa fa-remove" onclick="DeleteEditions('@edition.Edit_Id')" data-cname="@edition.Edit_Id"></i>
+                                <i>@Html.ActionLink(" ", "ShowArticles", "AdminInformation", new { id = edition.Edit_Id }, new { @class = "fa fa-plus-square" })</i>
+                            </div>
+                        </div>
+</div>
+                </div>
+
+            }
+        }
+    </div>
+    <!-- here is the section of creation of edition -->
+    @if (Model != null)
+    {
+        using (Html.BeginForm("AddEdition", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="title_popup">CREAR EDICIÓN <button type="button" class="close" data-dismiss="modal">×</button></h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => Model.name, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.descriptions, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.descriptions, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.descriptions, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EnumDropDownListFor(model => model.state, htmlAttributes: new { @class = "form-control datepicker", @style = "width:58%" })
+                                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.InintDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.InintDate, new { htmlAttributes = new { @class = "form-control datepicker", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.InintDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.FinishDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.FinishDate, new { htmlAttributes = new { @class = "form-control datepicker", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.FinishDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("Portada", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    <input type="file" id="CoverpageModule" name="upload" data-fv-file-extension="jpeg,png,jpg,gif" style="width:58%" />
+                                </div>
+                                <div class="col-md-12">
+                                    <br /><br />
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Crear Edición</button></center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+    <!-- here is the section of Editar the edition -->
+    @if (Model.editionsForUpdate != null)
+    {
+        using (Html.BeginForm("UpdateEditionCurrent", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="modal fade" id="editionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="title_popup">EDITAR EDICIÓN <button type="button" class="close" data-dismiss="modal">×</button></h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.editionsForUpdate.Edit_Id)
+                                    @Html.LabelFor(model => model.editionsForUpdate.Edit_Name, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.editionsForUpdate.Edit_Name, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.editionsForUpdate.Edit_Name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.editionsForUpdate.Edit_Description, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.editionsForUpdate.Edit_Description, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.editionsForUpdate.Edit_Description, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.editionsForUpdate.Edit_InintDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.editionsForUpdate.Edit_InintDate, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.editionsForUpdate.Edit_InintDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.editionsForUpdate.Edit_FinishDate, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.editionsForUpdate.Edit_FinishDate, new { htmlAttributes = new { @class = "form-control", @style = "width:58%" } })
+                                    @Html.ValidationMessageFor(model => model.editionsForUpdate.Edit_FinishDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.editionsForUpdate.Edit_StateEdition, htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EnumDropDownListFor(model => model.editionsForUpdate.Edit_StateEdition, htmlAttributes: new { @class = "form-control", @style = "width:58%" })
+                                    @Html.ValidationMessageFor(model => model.editionsForUpdate.Edit_StateEdition, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("Portada", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    <input type="file" id="CoverpageModule" name="upload" data-fv-file-extension="jpeg,png,jpg,gif" style="width:58%" />
+                                </div>
+                                <div class="col-md-12">
+                                    <br /><br />
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Guardar Datos</button></center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@*Script delete Editions*@
+
+<script>
+    //method Update
+    function UpdateEdition(Edition_Id) {
+        if (confirm("Editar edición") == true) {
+            var a = Edition_Id;
+            window.location.href = ' @Url.Action("UpdateEditionCurrent", "AdminInformation", new {id = "ID"})'.replace("ID", a);
+        }
+        else {
+            var link = '@Url.Action("Editions", "AdminInformation")';
+        }
+    }
+
+
+    //method Delete
+    function DeleteEditions(Edition_Id) {
+        if (confirm("Quieres elimiar la Edicion (Perderas toda la informacion.)") == true) {
+            var IdEdition = Edition_Id;
+            window.location.href = ' @Url.Action("DeleteEdition", "AdminInformation", new {id = "ID"})'.replace("ID", IdEdition);
+        }
+    }
+</script>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

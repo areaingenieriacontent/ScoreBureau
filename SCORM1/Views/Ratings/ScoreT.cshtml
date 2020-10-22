@@ -1,0 +1,218 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models
+@using PagedList.Mvc;
+<br /><br /><br />
+@model ScoreT
+
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+@if (TempData["Edit"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateBook").modal();
+            });
+        </script>
+    }}
+
+
+
+@if (TempData["Result"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Result").modal();
+                });
+        </script>
+    }}
+<div class="panel-primary">
+    <div id="Result" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <strong> @TempData["Result"]</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="UpdateBook" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("UpdateBookT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <p class="danger"> @TempData["Warning"]</p>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="col-md-6">
+                                @Html.HiddenFor(x => x.BoRa_Id)
+                                @Html.LabelFor(model => model.BoRa_Score, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.BoRa_Score, new { htmlAttributes = new { @class = "form-control", @min = 0.0, @max = 5.0 } })
+                                @Html.ValidationMessageFor(model => model.BoRa_Score, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.BoRa_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.BoRa_Description, new { htmlAttributes = new { @class = "form-control", @min = 0.0, @max = 5.0 } })
+                                @Html.ValidationMessageFor(model => model.BoRa_Description, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <br /><br />
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Editar</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br /><br /><br /><br />
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+            <a href="@Url.Action("ViewJobsT", "Ratings", new {id=Model.JOBS.Job_Id })" class="btn btn-info">TAREAS</a>
+        </div>
+    </div>
+    <br />
+
+    @using (Html.BeginForm("SearchScoreT", "Ratings", FormMethod.Post, new { @class = "row", role = "search" }))
+    {
+        <div class="col-md-2" style="color:#fff;">
+            @Html.HiddenFor(model => model.JOBS.Job_Id)
+            @Html.EditorFor(model => model.SearchUser, new { htmlAttributes = new { @class = "form-control", @style = "color:#fff", placeholder = "Nombre del Usuario" } })
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary btn-responsive">Buscar</button>
+        </div>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th><center>Foto</center></th>
+                    <th><center>Nombre Completo</center></th>
+                    <th><center>Usuario</center></th>
+                    <th><center> Título</center></th>
+                    <th><center> Archivo</center></th>
+                    <th><center>Descripción</center></th>
+                    <th><center>Calificación</center></th>
+                    <th><center>Puntos</center></th>
+                    <th><center>Retroalimentación</center></th>
+                    <th><center>Estado</center></th>
+                    <th><center>Fecha Calificación</center></th>
+                    <th><center>Modificar</center></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListBookRatings)
+                {
+                    <tr>
+                        <td>
+                            @if (@item.ResourceJobs.ApplicationUser.Foto_perfil != null)
+                            {
+                                <img src="~/Resources/@item.ResourceJobs.ApplicationUser.Foto_perfil" class='imgRedonda3' />
+                            }
+                            else
+                            {
+                                <img src="~/Resources/perfil.png" class='imgRedonda3' />
+                            }
+
+                        </td>
+
+                        <td>
+                            @item.ResourceJobs.ApplicationUser.FirstName @item.ResourceJobs.ApplicationUser.LastName
+                        </td>
+                        <td>@item.ResourceJobs.ApplicationUser.UserName</td>
+                        <td>@item.ResourceJobs.ReJo_Name</td>
+                        <td>
+                        
+                        @if (@item.ResourceJobs.ReJo_Resource != null)
+                        {
+                            <div class="fecha">
+                                <a href="~/ResourcesJobs/@item.ResourceJobs.ReJo_Resource" target="_blank" download="@item.ResourceJobs.ReJo_Resource" style="background-color:transparent;color:#f57c00;"> Descargar</a>
+                            </div>
+                        }
+                       
+                        </td>
+                        <td>
+                            <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#@item.ResourceJobs.ReJo_Id">Ver</button>
+                        </td>
+                        <td>@item.BoRa_Score</td>
+                        <td>@item.BoRa_Point</td>
+                        <td>@item.BoRa_Description</td>
+                        <td>@item.BoRa_StateScore</td>
+                        <td>@item.BoRa_InitDate</td>
+                        <td>
+                            @Html.ActionLink("Editar", "UpdateBookT", "Ratings", new { id = item.BoRa_Id }, new { @class = "btn btn-primary btn-responsive" })
+                        </td>
+                        <td></td>
+                    </tr>
+                    <div id="@item.ResourceJobs.ReJo_Id" class="modal fade" role="dialog">
+                        <div class="modal-dialog1">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h2 class="modal-title"><strong></strong></h2>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                        <div class="row">
+                                            <br />
+                                         @Html.Raw(@item.ResourceJobs.ReJo_Content)
+                                        </div>
+                                   
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model.ListBookRatings, page => Url.Action("ScoreT", new { page }))
+
+
+    </div>
+
+</div>
+
+

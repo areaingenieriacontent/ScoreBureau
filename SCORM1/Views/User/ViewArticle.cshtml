@@ -1,0 +1,277 @@
+﻿@using SCORM1.Models.Newspaper
+@using SCORM1.Enum
+@using SCORM1.Models.ViewModel
+<br /><br /><br /><br />
+@model UserInformationArticles
+
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+
+    @if (TempData["Menssage"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Menssages").modal();
+                });
+            </script>
+        }}
+
+    @if (TempData["UpdateComment"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#UpdateCommentCurrent").modal();
+                });
+            </script>
+        }}
+
+    <script>
+        //method UpdateComment
+        function UpdateComment(comm_Id) {
+            if (confirm("Deseas actualizar el comentario") == true) {
+                var IdComment = comm_Id;
+                window.location.href = ' @Url.Action("UpdateCommentCurrent", "User", new {id = "ID"})'.replace("ID", IdComment);
+            }
+        }
+    </script>
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+    <div class="jumbotron">
+
+
+
+        <h1 class="title">@Model.ViewArticle.Arti_Name</h1>
+
+        <div class="tab-content">
+
+            <div>
+                <div class="contenido-articulo">
+                    <div class="botones-edicion">
+                   
+                    </div>
+                    <br /><br />
+                    <div style="padding: 10px; text-align: justify;"><h1 style="font-size:35px;color:#888888;">@Model.ViewArticle.Arti_Description</h1></div>
+                    <p style="padding:20px;">@Html.Raw(@Model.ViewArticle.Arti_Content)</p>
+                </div>
+                @if (Model.ViewArticle.ArticleWithComment == ARTICLEWITHCOMMENT.Aceptar_Comentario)
+            {
+                    <div class="col-md-12">
+
+                        <button data-toggle="modal" data-target="#CrationOfComments" class="btn btn-primary">Agregar Comentario</button>
+
+                        @if (Model.ViewArticle.Comments != null && Model.ViewArticle.Comments.Count() != 0)
+                {
+                            <h1 class="title">COMENTARIOS</h1>
+                            foreach (var CommentOfArtilcle in Model.ViewArticle.Comments)
+                            {
+                                if (CommentOfArtilcle.Comm_StateComment == COMMENTSTATE.Inactivo)
+                                {
+                                    <div class="comentario">
+                                        <p><em>Autor:@CommentOfArtilcle.comm_Author.FirstName  @CommentOfArtilcle.comm_Author.LastName</em></p>
+                                        <p>Comentario pendiente por aprobación</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="comentario">
+                                        <div class="botones-edicion">
+                                            @if (CommentOfArtilcle.comm_Author.Id == Model.myUser)
+                                            {
+                                                <i><button onclick="UpdateComment('@CommentOfArtilcle.Comm_Id')" data-cname="@CommentOfArtilcle.Comm_Id" class="fa fa-cog"></button></i>
+                                            }
+                                        </div>
+
+                                        <p><strong>@CommentOfArtilcle.comm_Title</strong></p>
+                                        <p><em>Autor:@CommentOfArtilcle.comm_Author.FirstName  @CommentOfArtilcle.comm_Author.LastName</em></p>
+                                        <p>@Html.Raw(@CommentOfArtilcle.comm_Description)</p>
+                                        <p>@CommentOfArtilcle.Comm_StateComment</p>
+                                        <h6 class="puntaje">PUNTOS OBTENIDOS:@CommentOfArtilcle.Comm_value</h6>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <!-- here is the section of Create Comment -->
+        @using (Html.BeginForm("CreateOFCommentToArticle", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="CrationOfComments" class="modal fade" role="dialog">
+                <div class="modal-dialog1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <br />
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.comm_Title, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.comm_Title, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.comm_Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <center> @Html.LabelFor(model => model.comm_Description, new { @class = "control-label col-sm-2" })</center>
+                                    <div class="col-md-12">
+                                        <center>@Html.TextAreaFor(model => model.comm_Description, new { @class = "form-control", @row = 5 })</center>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Enviar Comentario</button></center>
+                                    </div>
+                                </div>
+                            </form>
+                            @Html.HiddenFor(x => Model.ViewArticle.Arti_Id)
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        <!-- here is the section of Update Comment -->
+        @using (Html.BeginForm("UpdateCommentCurrent", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="UpdateCommentCurrent" class="modal fade" role="dialog">
+                <div class="modal-dialog1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <br />
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.commentToUpdate.comm_Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.commentToUpdate.comm_Title, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.commentToUpdate.comm_Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <center> @Html.LabelFor(model => model.commentToUpdate.comm_Description, new { @class = "" })</center>
+                                    <div class="col-md-12">
+                                        <center>@Html.TextAreaFor(model => model.commentToUpdate.comm_Description, new { @class = "form-control", @row = 5 })</center>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Actualizar comentario</button></center>
+                                    </div>
+                                </div>
+                            </form>
+                            @Html.HiddenFor(x => x.arti_Id)
+                            @Html.HiddenFor(x => x.commentToUpdate.Comm_Id)
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- this is message-->
+    <div id="Menssages" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>
+                        @TempData["Menssage"]
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

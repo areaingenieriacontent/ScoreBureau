@@ -1,0 +1,133 @@
+﻿
+@using SCORM1.Models.PageCustomization
+@using SCORM1.Models.ViewModel
+
+@model AdminPageLogoViewModel
+
+
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
+<link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+      tinymce.init({
+          selector: 'TextArea',
+        init_instance_callback: function (editor) {
+            editor.getBody().setAttribute('contenteditable', false);
+            console.log(editor.id)
+        },
+        theme: "modern",
+        height: 200,
+        menubar: false,
+        extended_valid_elements: 'img[class:img-responsive|!src|border:0|alt|title|width:1920|height:1080|style]',
+        invalid_elements: 'strong,b,em,i,p,h1,h2,h3,h4,h5',
+        plugins: [
+            "image"
+        ],
+        toolbar: "image",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        relative_urls: false,
+
+    });
+</script>
+<br /><br /><br />
+<div class="jumbotron">
+
+    @using (Html.BeginForm("Logo", "AdminPageCustomization", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <form class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <hr />
+            <h2> Logo</h2>
+            @Html.HiddenFor(model => model.companyId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UrlLogo, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.UrlLogo, new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+                    @Html.ValidationMessageFor(model => model.UrlLogo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+                 <h2> Imagenes de Fondo Inicial</h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UrlImage1, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.UrlImage1, new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+                    @Html.ValidationMessageFor(model => model.UrlImage1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UrlImage2, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.UrlImage2, new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+                    @Html.ValidationMessageFor(model => model.UrlImage2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UrlImage3, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.UrlImage3, new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+                    @Html.ValidationMessageFor(model => model.UrlImage3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UrlImage4, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(model => model.UrlImage4, new
+               {
+                   htmlAttributes = new { @class = "form-control" }
+               })
+                    @Html.ValidationMessageFor(model => model.UrlImage4, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <h2> Titulos</h2>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title1, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.Title1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title2, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.Title2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title3, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.Title3, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <center><button class="btn btn-primary" name="singin" type="submit">Actualizar banner</button></center>
+                </div>
+            </div>
+
+        </form>
+    }
+
+</div>

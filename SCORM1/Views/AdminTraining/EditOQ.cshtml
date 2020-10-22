@@ -1,0 +1,96 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model AdminTrainingTestViewModel
+<script src="~/Scripts/Tinymce/tinymce.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br /><br /><br /><br /><br /><br />
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+ @if (TempData["Form"] != null)
+        {
+@section Scripts {
+    <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#EditOpenQuestion").modal();
+            });
+    </script>
+}}
+else
+{
+  
+}
+<br /><br /><br />
+<div class="panel panel-primary">
+    <div id="EditOpenQuestion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditOpenQuestions", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.BaQu_Id)
+                                @Html.HiddenFor(model => model.OpQu_Id)
+                                @Html.LabelFor(model => model.OpQu_Question, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @Html.EditorFor(model => model.OpQu_Question, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del Tema" } })
+                                    @Html.ValidationMessageFor(model => model.OpQu_Question, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-heading panel-head"><center> Preguntas</center></div>
+    <div class="panel-body">
+        @foreach (OpenQuestion openquestion in Model.ListOpenQuestion)
+        {
+        <div class="comentario">
+            <div class="botones-edicion">
+                <a href="@Url.Action("DeleteOpenquestion", "AdminTraining", new { id =@openquestion.OpQu_Id })"><i class="fa fa-remove"></i></a>
+                <a href="@Url.Action("EditOpenquestion", "AdminTraining", new { id = @openquestion.OpQu_Id})"><i class="fa fa-cog"></i></a>
+            </div>
+            <p><strong>  Pregunta : @openquestion.OpQu_Question </strong></p>
+        </div>
+        <br />
+        }
+        <div id="AddQuestionss">
+
+        </div>
+        <div class="col-md-offset-2 col-md-8">
+            <center><input type="submit" value="Añadir otra pregunta" onclick="LoadUpdateUsers('@Model.BaQu_Id')" data-cname="@Model.BaQu_Id" class="btn btn-primary" /></center>
+        </div>
+    </div>
+    </div>
+<script>
+    function LoadUpdateUsers(BaQu_Id) {
+        var link = '@Url.Action("AddOpenQuestions","AdminTraining", new { id = "value" })';
+        link = link.replace("value", BaQu_Id)
+        $("#AddQuestionss").load(link);
+    }
+</script>

@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Inicio Del Contenedor General Del Banner   -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--Logo De La San Mateo   -->
+    <a style="background:transparent" href="https://aprendeyavanza2.com.co/bureauveritastrainingcommunity/Home/Index"><img src="~/Content/Images/logosan2.png" width="15%" class="d-inline-block align-top" alt="" style="margin-top:20px;"></a>
+    <!-- fin Logo  -->
+    <!-- Inicio Del Icono User Y Cerrar Sesion    -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarText" style="float:right;">
+
+        <span class="navbar-text">
+            <img src="~/Content/Images/user.png" width="35px" /><a>@Html.ActionLink("Hola " + Session["FirstName"] + " " + Session["LastName"] + "!", "ProfileUser", "User", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:#bc112e;  background-color:#fff;" })</a>
+        </span>
+        <span class="navbar-text">
+            <img src="~/Content/Images/password.png" width="30px" /><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#bc112e;background-color:transparent;">Cerrar sesión</a>
+        </span>
+    </div>
+</nav>
+        <!--  Fin Del Contenedor -->
+
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        @*<li>@Html.ActionLink("Iniciar sesión", "Index", "Home", routeValues: null, htmlAttributes: new { id = "loginLink", @style= "color:#575756;  background-color:transparent;" })</li>*@
+    </ul>
+}

@@ -1,0 +1,108 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model RatingAdminViewJobsT
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Inform").modal();
+            });
+        </script>
+    }}
+<br /><br /><br />
+@Scripts.Render("~/bundles/jqueryval")
+
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        @if (Model.ActualRole == ROLES.AdministradoGeneral || Model.ActualRole == ROLES.AdministradordeFormacion)
+        {
+            <a href="@Url.Action("Grades", "AdminTraining", new {id=Model.JOBS.TopicsCourse.Modu_Id })" class="btn btn-info">CURSO</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Grades", "User", new {id=Model.JOBS.TopicsCourse.Modu_Id })" class="btn btn-info">CURSO</a>
+        }
+
+        <a href="@Url.Action("ScoreT", "Ratings", new {id=Model.JOBS.Job_Id })" class="btn btn-info">LIBRO DE CALIFICACIONES</a>
+    </div>
+</div>
+<br /><br /><br />
+<div class="panel panel-primary">
+
+    <div id="Inform" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @TempData["Info"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-heading panel-head"><center><h1 style="font-size:35px;">@Model.JOBS.Job_Name</h1> </center></div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <br /><br /><br />
+            <p>
+                @Html.Raw(Model.JOBS.Job_Content)
+            </p>
+        </div>
+        <div class="col-md-12"> <br /><br /></div>
+        @if (@Model.JOBS.Job_Resource != null)
+        {
+            <div class="col-md-2">
+                <strong>
+                    -  <a href="~/ResourcesJobs/@Model.JOBS.Job_Resource" target="_blank" download="Recurso" style="background-color:transparent;color:#f57c00;"><img src="~/Content/Images/@Model.Image" style="width:150px; height:100px" class="img-responsive" /></a>
+                </strong>
+            </div>
+        }
+        
+        <div class="col-md-10">
+            <p style="color:#888888; font-size:30px; width:100%;text-align:left; ">@Model.JOBS.Job_Description</p>
+        </div>
+
+        <div class="col-md-12"> <br /></div>
+        <br />
+        <div class="col-md-12">
+            @using (Html.BeginForm("ResourceJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <form class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <hr />
+                    <h4><strong> Recuerde : Solo se aceptan documentos en formato Pdf,Word,Excel,PowerPoint y que el tamaño del archivo no supere 1MB</strong></h4>
+                    @Html.HiddenFor(model => model.JOBS.Job_Id)
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.JOBS.Job_Resource, htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-10">
+                            <input type="file" id="CoverpageModule" name="upload" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <center><button class="btn btn-primary" name="singin" type="submit">Subir</button></center>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+       
+    </div>
+
+
+</div>

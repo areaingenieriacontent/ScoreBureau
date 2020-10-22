@@ -1,0 +1,89 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models.Lms
+
+@model AdminManagementBankQuestions
+<br /><br /><br /><br />
+<div class="jumbotron">
+    <h2>
+        selecciones sus preguntas
+    </h2>
+    @using (Html.BeginForm("SelectdQuestions", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.bank.BaQu_Id)
+        @Html.HiddenFor(x => x.bankReceiving)
+        <div class="col-md-12">
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>description</td>
+                    </tr>
+                </thead>
+                @for (int a = 0; a < Model.OptionMultiple.Count; a++)
+                {
+                    @Html.HiddenFor(x => x.OptionMultiple[a].OpMu_Id)
+                    @Html.HiddenFor(x => x.OptionMultiple[a].OpMu_Question)
+                    @Html.HiddenFor(x => x.OptionMultiple[a].OpMu_Score)
+                    @Html.HiddenFor(x => x.OptionMultiple[a].OpMu_Description)
+                    @Html.HiddenFor(x => x.OptionMultiple[a].BaQu_Id)
+                    <tfoot>
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(model => Model.OptionMultiple[a].Check)
+                            </td>
+                            <td>
+                                <p>@Model.OptionMultiple[a].OpMu_Question</p>
+                            </td>
+
+                        </tr>
+                    </tfoot>
+                }
+                @for (int a = 0; a < Model.Pairing.Count; a++)
+                {
+                    @Html.HiddenFor(x => x.Pairing[a].Pair_Id)
+                    @Html.HiddenFor(x => x.Pairing[a].Pair_Question)
+                    @Html.HiddenFor(x => x.Pairing[a].Pair_Score)
+                    @Html.HiddenFor(x => x.Pairing[a].Pair_Description)
+                    @Html.HiddenFor(x => x.Pairing[a].BaQu_Id)
+
+                    <tfoot>
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(model => Model.Pairing[a].Check)
+                            </td>
+                            <td>
+                                <p>@Model.Pairing[a].Pair_Question</p>
+                            </td>
+
+                        </tr>
+                    </tfoot>
+                }
+                @for (int a = 0; a < Model.TrueOrFalse.Count; a++)
+                {
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].BaQu_Id)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_Id)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_Question)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_Description)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_FalseAnswer)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_TrueAnswer)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_Score)
+                    @Html.HiddenFor(x => x.TrueOrFalse[a].TrFa_State)
+                    <tfoot>
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(model => Model.TrueOrFalse[a].Check)
+                            </td>
+                            <td>
+                                <p>@Model.TrueOrFalse[a].TrFa_Question</p>
+                            </td>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+        </div>
+        <input type="submit" value="enviar" class="btn btn-primary" />
+    }
+
+</div>

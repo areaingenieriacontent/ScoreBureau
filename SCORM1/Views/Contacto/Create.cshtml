@@ -1,0 +1,98 @@
+﻿@model SCORM1.Models.ViewModel.ContactoModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Mesa de servicio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <style type="text/css">
+        .gris1 {
+            background-color: #42413C;
+        }
+
+        .rojo1 {
+            background-color: #CC023B;
+        }
+
+        .limit {
+            max-height: 700px;
+            overflow: hidden;
+            padding-right: 0px;
+        }
+
+            .limit img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="row ">
+        <div class="col-6">
+            <img src="~/Content/Images/fondo_mesa.jpg" class="img-fluid w-100">
+        </div>
+        <div class="col-6 gris1 text-center justify-content-center">
+            <center>
+                <h4 class="text-light">MESA DE SERVICIO</h4>
+                <h5 class="text-light">NUEVA SOLICITUD</h5>
+                <form method="post">
+
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6" style="text-align:left">
+                        <label class="text-light">Número de Identificación</label>
+                        <input type="text" placeholder="DIGITA TU NÚMERO DE IDENTIFICACIÓN" name="identificacion" class="form-control"><br />
+                        <label class="text-light">Razón Social</label>
+                        <input type="text" placeholder="EMPRESA A LA QUE PERTENECES" name="empresa" class="form-control"><br />
+                        <label class="text-light">Nombres Completos</label>
+                        <input type="text" placeholder="DIGITA TU NOMBRE COMPLETO" name="nombres" class="form-control"><br />
+                        <label class="text-light">Correo</label>
+
+                        <input type="text" placeholder="DIGITA TU CORREO" name="correos" class="form-control"><br />
+                        <label class="text-light">Categoria</label>
+                        <select name="categoria" class="text-light" style="width: 100%;color: #000 !important;height: 37px;">
+                            <option style="width:100%; color:#000" value="Tecnologico">Tecnológico</option>
+                            <option style="width:100%; color:#000" value="Producto">Producto</option>
+                            <option style="width:100%; color:#000" value="Administrativo">Administrativo</option>
+                        </select><br />
+                        <div class="form-group">
+                            <label class="text-light">Descripción</label>
+                            <textarea placeholder="CUÉNTANOS TU SOLICITUD" class="form-control" name="descripcion" rows="3"></textarea>
+                        </div>
+                        @*<div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" name="privacidad" />
+                        <label style="font-size:11px " class="text-light ">
+                            he leido y acepto la política de privacidad
+                        </label>
+                    </div>*@
+                    </div>
+
+                    <button type="submit" class="btn rojo1 text-light">Generar ticket</button>
+                </form>
+            </center>
+            <br />
+            <br />
+            <B class="text-light">Consulta los niveles de servicio - </B><a href="https://aprendeyavanza2.com.co/contentgroup/bureau/niveles_mesa.pdf" target="_blank">aquí</a>
+        </div>
+    </div>
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

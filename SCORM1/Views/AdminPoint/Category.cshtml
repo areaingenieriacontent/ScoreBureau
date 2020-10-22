@@ -1,0 +1,225 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models.Engagement
+
+@model AdminPointCategory
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+<h1 class="title">ADMINISTRADOR DE CATEGORIAS</h1>
+
+@if (TempData["Edit"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Edit"]
+    </div>
+}
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@if (TempData["Delete"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Delete"]
+    </div>
+}
+
+<div class="jumbotron col-md-12">
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["UpdateCategoryPrize"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#FormUpdateCategoryPrize").modal();
+                });
+            </script>
+        }}
+    @using (Html.BeginForm("UpdateCategory", "AdminPoint", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="FormUpdateCategoryPrize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title"> MODIFICAR CATEGORÍA</h2>
+                    </div>
+                    <div class="modal-body">
+                            <div class="row">
+                                <br />
+                                <div class="col-md-6">
+                                    @Html.HiddenFor(model => model.TyPo_Id)
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.TyPo_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.TyPo_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TyPo_Description, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.Poin_TypePoints, new { @class = "control-label col-md-3" })
+                                    @Html.EnumDropDownListFor(model => model.Poin_TypePoints, new { @class = "form-control" })
+                                </div>
+                                <br />
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Modificar Categoría</button></center>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("AddCategory", "AdminPoint", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="AddCategoryModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title"> NUEVA CATEGORÍA</h2>
+                    </div>
+                    <div class="modal-body">
+                       
+                        <div class="row">
+                            <br />
+                            <div class="col-md-6">
+                                @Html.HiddenFor(model => model.TyPo_Id)
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.TyPo_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.TyPo_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TyPo_Description, "", new { @class = "text-danger" })
+                            </div>                        
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Poin_TypePoints, new { @class = "control-label col-md-3" })
+                                @Html.EnumDropDownListFor(model => model.Poin_TypePoints, new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear Categoría</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- breadCrumb -->
+    @*<li><a href="#">@Html.ActionLink("HOME", "Index", "Home")</a></li>*@
+
+    @using (Html.BeginForm("SearchCategory", "AdminPoint", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchCate, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la categoria" } })
+        </div>
+
+
+        <div class="form-group">
+      
+                <div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button id="BTN_ADD" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddCategoryModule">Añadir Categoria</button>
+                </div>
+            
+        </div>
+    }
+    @if (Model.listcategory.Count == 0)
+    {
+        <br />
+        <br />
+        <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row">
+
+                        <center> <img src="@Url.Content("~/Content/Images//No-categorias-w.png")" style="width:600px;" alt="Imagen responsive" class="img-responsive" /></center>
+
+                    </div>
+
+    }
+
+    else
+    {
+
+        <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Categoria</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var categoryPrize in Model.listcategory)
+                {
+                        <tr>
+                            <td>@categoryPrize.TyPo_Description</td>
+                            <td>
+                                <input type="submit" onclick="UpdateCategoryPrize('@categoryPrize.TyPo_Id')" data-cname="@categoryPrize.TyPo_Id" class="btn btn-primary" value="Modificar" />
+                            </td>
+                            <td>
+                                <input type="submit" onclick="DeleteCategoryPrize('@categoryPrize.TyPo_Id')" data-cname="@categoryPrize.TyPo_Id" class="btn btn-primary" value="Eliminar" />
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    }
+    @*Modificar Categoria*@
+    <script type="text/Javascript" language="javascript">
+        function UpdateCategoryPrize(TyPo_Id) {
+            if (confirm(" Modificar Categoría") == true) {
+                var c = TyPo_Id;
+                window.location.href = ' @Url.Action("UpdateCategory", "AdminPoint", new {id = "ID"})'.replace("ID", c);
+            }
+            else {
+                var link = '@Url.Action("Category", "AdminPoint")';
+            }
+        }
+    </script>
+    @*Script eliminar Categoria*@
+    <script type="text/Javascript" language="javascript">
+        function DeleteCategoryPrize(TyPo_Id) {
+            if (confirm("Elimiar la Categoría") == true) {
+                var c = TyPo_Id;
+                window.location.href = ' @Url.Action("DeleteCategory", "AdminPoint", new {id = "ID"})'.replace("ID", c);
+            }
+            else {
+                var link = '@Url.Action("Category", "AdminPoint")';
+            }
+        }
+    </script>
+</div>

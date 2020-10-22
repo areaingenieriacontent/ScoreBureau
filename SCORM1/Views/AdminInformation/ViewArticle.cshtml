@@ -1,0 +1,388 @@
+﻿@using SCORM1.Models.Newspaper
+@using SCORM1.Enum
+@using SCORM1.Models.ViewModel
+
+@model AdminInformationArticles
+
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
+<link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+
+
+
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+
+@if (TempData["RefuseComment"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#RefuseCommentCurrent").modal();
+            });
+        </script>
+    }}
+
+<script>
+    //method RefuseComment
+    function RefuseComment(comm_Id) {
+        if (confirm("Rechazar el comentario") == true) {
+            var IdComment = comm_Id;
+            window.location.href = ' @Url.Action("RefuseCommentCurrent", "AdminInformation", new {id = "ID"})'.replace("ID", IdComment);
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#fileuploadI').uploadify({
+            'swf': '/Scripts/uploadify/uploadify.swf',
+            'uploader': "@Url.Action("UploadImage", "Admininformation")",
+            'cancelImg': "@Url.Content("/Scripts/uploadify/uploadify-cancel.png")",
+            'fileSizeLimit': '1MB', // Add Kb, MB, GB
+            'buttonText': 'Insert Images...', //Text for button
+            'queueSizeLimit': 10, // Max number of files allowed
+            'fileTypeDesc': 'Image Files',
+            'fileTypeExts': '*.gif; *.jpg; *.png', // File type allowed
+            'onUploadSuccess': function (file, data, response) {
+                tinyMCE.activeEditor.execCommand("mceInsertContent", true, "<img src='" + data + "' alt='Uploaded Image' class='img-responsive' />");
+            }
+        })
+    }
+);
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#fileuploadVideo').uploadify({
+            'swf': '/Scripts/uploadify/uploadify.swf',
+            'uploader': "@Url.Action("UploadVideo", "Admininformation")",
+            'cancelImg': "@Url.Content("/Scripts/uploadify/uploadify-cancel.png")",
+            'fileSizeLimit': '4MB', // Add Kb, MB, GB
+            'buttonText': 'Insert Video...', //Text for button
+            'queueSizeLimit': 10, // Max number of files allowed
+            'fileTypeDesc': 'Video Files',
+            'fileTypeExts': '*.mp4; *.avi; *.wmv; *.3gp;*.gif;*.mkv;', // File type allowed
+            'onUploadSuccess': function (file, data, response) {
+                tinyMCE.activeEditor.execCommand("mceInsertContent", true, "<video src='" + data + "' controls height='400x' width='400px'>HTML5 Video is required for this example</video> ");
+            }
+        })
+    }
+);
+</script>
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("ShowArticles", "AdminInformation", new {id = Model.ViewArticle.Section.Edition.Edit_Id })" class="btn btn-info">ARTICULOS</a>
+    </div>
+</div>
+
+<div class="jumbotron">
+
+    <h1 class="title">@Model.ViewArticle.Arti_Name</h1>
+
+    <div class="tab-content">
+
+        <div>
+            <div class="contenido-articulo">
+                <div class="botones-edicion">
+                    <i><button data-toggle="modal" data-target="#UpdateMyArticle" class="fa fa-cog"> </button></i>
+                </div>
+                <br /><br />
+                <div style="padding: 10px; text-align: justify;"><h1 style="font-size:35px;">@Model.ViewArticle.Arti_Description</h1></div>
+                <p style="padding:20px;">@Html.Raw(@Model.ViewArticle.Arti_Content)</p>
+            </div>
+            @if (Model.ViewArticle.ArticleWithComment == ARTICLEWITHCOMMENT.Aceptar_Comentario)
+            {
+                <div class="col-md-12">
+
+                    <button data-toggle="modal" data-target="#CrationOfComments" class="btn btn-primary">Agregar Comentario</button>
+
+                    @if (Model.ViewArticle.Comments != null && Model.ViewArticle.Comments.Count() != 0)
+                {
+                        <h1 class="title">COMENTARIOS</h1>
+                        foreach (var CommentOfArtilcle in Model.ViewArticle.Comments)
+                        {
+                            <div class="comentario">
+                                <div class="botones-edicion">
+                                    @if (CommentOfArtilcle.Comm_StateComment != COMMENTSTATE.aceptado)
+                                    {
+                                        <div class="botones-edicion">
+                                            <a href="@Url.Action("RefuseCommentCurrent", "AdminInformation", new { id = @CommentOfArtilcle.Comm_Id })"><i class="fa fa-remove" style="color: #f57c00"></i></a>
+                                            <a href="@Url.Action("AcceptedCommentCurrent", "Admininformation", new { IdComment = @CommentOfArtilcle.Comm_Id })"><i class="fa fa-cog" style="color: #f57c00"></i></a>
+                                        </div>
+                                       
+                                    }
+
+                                </div>
+                                <p><strong>@CommentOfArtilcle.comm_Title</strong></p>
+                                <p><em>Autor:@CommentOfArtilcle.comm_Author.FirstName  @CommentOfArtilcle.comm_Author.LastName</em></p>
+                                <p>@Html.Raw(@CommentOfArtilcle.comm_Description)</p>
+                                <p>@CommentOfArtilcle.Comm_StateComment</p>
+                                <h6 class="puntaje">PUNTOS OBTENIDOS:@CommentOfArtilcle.Comm_value</h6>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- here is the section of Update the Article -->
+
+    @using (Html.BeginForm("UpdateArticleCurrent", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="UpdateMyArticle" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="title_popup">Actualizar Articulo <button type="button" class="close" data-dismiss="modal">×</button></h5>
+                    </div>
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ViewArticle.Arti_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ViewArticle.Arti_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ViewArticle.Arti_Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ViewArticle.Arti_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ViewArticle.Arti_Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ViewArticle.Arti_Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ViewArticle.Arti_StateArticle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.ViewArticle.Arti_StateArticle, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ViewArticle.Arti_StateArticle, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Portada", htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-md-3">
+                                    <center><input type="file" id="CoverpageModule" name="upload" /></center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <center>@Html.TextAreaFor(model => model.ViewArticle.Arti_Content, new { @class = "form-control", @row = 5 })</center>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(x => x.ViewArticle.Arti_Id)
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Actualizar" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div>
+    <!-- here is the section of Create Comment -->
+    @using (Html.BeginForm("CreateOFCommentToArticle", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="CrationOfComments" class="modal fade" role="dialog">
+            <div class="modal-dialog1">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <br />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.comm_Title, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.comm_Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.comm_Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.comm_Description, new { @class = "control-label col-sm-2" })
+                                <div class="col-md-9">
+                                    <center>@Html.TextAreaFor(model => model.comm_Description, new { @class = "form-control", @row = 5 })</center>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Enviar Comentario</button></center>
+                                </div>
+                            </div>
+                        </form>
+                        @Html.HiddenFor(x => Model.ViewArticle.Arti_Id)
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    <!-- here is the section of Update Comment -->
+    @using (Html.BeginForm("RefuseCommentCurrent", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="RefuseCommentCurrent" class="modal fade" role="dialog">
+            <div class="modal-dialog1">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <br />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.commentToUpdate.comm_Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.DisplayTextFor(model => model.commentToUpdate.comm_Title)
+                                    @Html.ValidationMessageFor(model => model.commentToUpdate.comm_Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.commentToUpdate.comm_Description, new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @if (Model.commentToUpdate != null)
+                                    {
+                                        <p> @Html.Raw(@Model.commentToUpdate.comm_Description)</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.commentOfAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.commentOfAdmin, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.commentOfAdmin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Evaluar comentario</button></center>
+                                </div>
+                            </div>
+                        </form>
+                        @Html.HiddenFor(x => x.arti_Id)
+                        @Html.HiddenFor(x => x.commentToUpdate.Comm_Id)
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

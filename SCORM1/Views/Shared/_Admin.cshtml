@@ -1,0 +1,720 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel
+@using SCORM1.Enum;
+
+@model AdminGeneralControllerViewModel
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Librerias necesrias para el dropdown-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    window.alert = function () { };
+    var defaultCSS = document.getElementById('bootstrap-css');
+    function changeCSS(css) {
+        if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+        else $('head > link').filter(':first').replaceWith(defaultCSS);
+    }an
+
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true
+    });
+
+</script>
+
+
+<!-- Carousel Modulos -->
+
+<script>
+
+    $(document).ready(function () {
+        $('#myCarousel2').carousel({
+            interval: 10000
+        })
+    });
+    $(document).ready(function () {
+        $('#carousel-example-generic').carousel({
+            interval: 10000
+        })
+    });
+    $(document).ready(function () {
+        $('#carousel-example-generic').carousel({
+            interval: 10000
+        })
+    });
+    $(document).ready(function () {
+        $('#myCarousel3').carousel({
+            interval: 10000
+        })
+    });
+
+</script>
+
+
+<!-- Carousel Newspaper -->
+
+
+<script type="text/javascript">
+    window.alert = function () { };
+    var defaultCSS = document.getElementById('bootstrap-css');
+    function changeCSS(css) {
+        if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+        else $('head > link').filter(':first').replaceWith(defaultCSS);
+    }
+    $(document).ready(function () {
+        var iframe_height = parseInt($('html').height());
+        window.parent.postMessage(iframe_height, 'http://bootsnipp.com');
+    });
+
+
+    jQuery(document).ready(function ($) {
+
+        $('#myCarousel').carousel({
+            interval: 10000
+        });
+
+        $('#carousel-text').html($('#slide-content-0').html());
+
+        //Handles the carousel thumbnails
+        $('[id^=carousel-selector-]').click(function () {
+            var id_selector = $(this).attr("id");
+            var id = id_selector.substr(id_selector.length - 1);
+            var id = parseInt(id);
+            $('#myCarousel').carousel(id);
+        });
+
+
+        // When the carousel slides, auto update the text
+        $('#myCarousel').on('slid', function (e) {
+            var id = $('.item.active').data('slide-number');
+            $('#carousel-text').html($('#slide-content-' + id).html());
+        });
+    });
+</script>
+
+<!--aqui esta el menu desplegable en barra horizontal-->
+<div class="CoHeader"
+<div class="showMenu">
+    <br />
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" style="background:#822433 !important" style="border:#822433 !important">Personalizacion</button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Estilos Personalizados
+            </button>
+            <div class="dropdown-menu">
+                <li>@Html.ActionLink("Banner", "BannerAndLogos", "AdminPageCustomization", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Logo y Titulos", "Logo", "AdminPageCustomization", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Terminos y Condiciones", "TermsandConditions", "AdminPageCustomization", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                </div>
+                </div>
+                <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Recursos
+                </button>
+                <div class="dropdown-menu">
+                <li>@Html.ActionLink("Gestión de Usuarios", "ManagementUser", "UserAndMassiveManagement", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión  de Puntos", "PointManagerCategory", "AdminPointManagerCategory", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión de Reportes", "Report", "AdminGeneral", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión  de Premios", "Prize", "AdminGeneral", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión  de Matriculas", "Enrollment", "AdminTraining", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión  de Intentos", "NewAttempts", "AdminTraining", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                </div>
+                </div>
+                <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Gestion De Plenamente
+                </button>
+                <div class="dropdown-menu">
+                <li>@Html.ActionLink("Gestión de competencias", "Proficiencies", "ContentAdmin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión de preguntas", "Questions", "ContentAdmin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión de Test", "Tests", "ContentAdmin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                <li>@Html.ActionLink("Gestión de mediciones", "Measures", "Admin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                @*<li>@Html.ActionLink("Gestión de planes", "Plans", "ContentAdmin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>*@
+                <li>@Html.ActionLink("Administrar resultados", "Results", "Admin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>
+                @*<li>@Html.ActionLink("Administrar planes", "Plans", "Admin", routeValues: null, htmlAttributes: new { @style = "color:#bc112e;  background-color:transparent;" })</li>*@
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <br /><br />
+                <div class="container-menu">
+                    <!--/inicio banner-->
+                    <br />
+                    <div class="banner">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <a href="@Model.Banners[0].Bann_Link" target="_blank">@Html.Raw(Model.Banners[0].Bann_Image)</a>
+
+                                    <div class="header-text">
+                                        <div class="col-md-12">
+                                            @Model.Banners[0].Bann_Description
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @foreach (var imageOfBanner in Model.Banners.Where(x => x.Bann_Id != Model.Banners[0].Bann_Id))
+                                {
+                                    <div class="item">
+                                        <a class="img-responsive" href="@imageOfBanner.Bann_Link" target="_blank">
+                                            @Html.Raw(imageOfBanner.Bann_Image)
+                                        </a>
+                                        <div class="header-text">
+                                            <div class="col-md-12">
+                                                @imageOfBanner.Bann_Description
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--/fin banner-->
+                    <h1 class="title">@Model.Title1</h1>
+
+
+                    <!--/inicio modulos-->
+                    @{ int InicialA = 1;}
+                    @{ int InicialB = 2;}
+                    <a href="@Url.Action("Modules", "AdminTraining")" style="color: #bc112e;"><i style="font-size:20px; width:100%; float:right;" class="fa fa-gear"></i></a>
+                    @if (Model.Listmodulevirtual.Count == 0)
+                    {
+                        <center>
+                            <div>
+                                <img src="~/Content/Images/No_cursos_virtuales_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                            </div>
+                        </center>
+                    }
+                    else
+                    {
+                        <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @if (Model.Listmodulevirtual.Count > 1)
+                                {
+                                    <div class="item active" style="left:80px;">
+
+                                        <div class="row-fluid">
+                                            <center>
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@Model.Listmodulevirtual[0].Modu_ImageName">
+                                                    <div class="modulo-title">@Model.Listmodulevirtual[0].Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@Model.Listmodulevirtual[0].Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @Model.Listmodulevirtual[0].Modu_Validity @Model.Listmodulevirtual[0].Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmodulevirtual[0].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@Model.Listmodulevirtual[1].Modu_ImageName">
+                                                    <div class="modulo-title">@Model.Listmodulevirtual[1].Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@Model.Listmodulevirtual[1].Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @Model.Listmodulevirtual[1].Modu_Validity @Model.Listmodulevirtual[1].Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmodulevirtual[1].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item active" style="left:350px;">
+
+                                        <div class="row-fluid">
+                                            <div class="numero-modulo">
+                                                <img src="~/Resources/@Model.Listmodulevirtual[0].Modu_ImageName">
+                                                <div class="modulo-title">@Model.Listmodulevirtual[0].Modu_Name</div>
+                                                <br />
+                                                <div class="modulo-description">
+                                                    <div style='height:100px; overflow:hidden;'>@Model.Listmodulevirtual[0].Modu_Description</div>
+                                                    <br>
+                                                    Fecha limite: @Model.Listmodulevirtual[0].Modu_Validity @Model.Listmodulevirtual[0].Modu_Period<br>
+                                                    <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmodulevirtual[0].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                    <br /><br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.Listmodulevirtual.Count > 1)
+                                {
+                                    foreach (Module module in Model.Listmodulevirtual.Where(x => x.Modu_Id != Model.Listmodulevirtual[0].Modu_Id && x.Modu_Id != Model.Listmodulevirtual[1].Modu_Id))
+                                    {
+                                        <div class="item" style="left:80px;">
+                                            <div class="row-fluid">
+                                                <div class="numero-modulo">
+
+                                                    <img src="~/Resources/@Model.Listmodulevirtual[InicialA].Modu_ImageName">
+
+                                                    <div class="modulo-title">@Model.Listmodulevirtual[InicialA].Modu_Name</div>
+                                                    <br />
+
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@Model.Listmodulevirtual[InicialA].Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @Model.Listmodulevirtual[InicialA].Modu_Validity @Model.Listmodulevirtual[InicialA].Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmodulevirtual[InicialA].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@Model.Listmodulevirtual[InicialB].Modu_ImageName">
+                                                    <div class="modulo-title">@Model.Listmodulevirtual[InicialB].Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@Model.Listmodulevirtual[InicialB].Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @Model.Listmodulevirtual[InicialB].Modu_Validity @Model.Listmodulevirtual[InicialB].Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmodulevirtual[InicialB].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        InicialA = InicialA + 1;
+                                        InicialB = InicialB + 1;
+
+                                        if (InicialB > Model.Listmodulevirtual.Count)
+                                        {
+                                            InicialA = 1;
+                                            InicialB = 2;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (Module module in Model.Listmodulevirtual)
+                                    {
+                                        <div class="item" style="left:350px;">
+                                            <div class="row-fluid">
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@module.Modu_ImageName">
+                                                    <div class="modulo-title">@module.Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@module.Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @module.Modu_Validity @module.Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @module.Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev" style="background-color:transparent;">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only"> previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next" style="background-color:transparent;">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only"> next</span>
+                            </a>
+                        </div>
+                    }
+
+                    <!--/fin modulos-->
+
+
+                    <h1 class="title">@Model.Title2</h1>
+                    <!--/inicio recertificacion-->
+                    <a href="@Url.Action("Modules", "AdminTraining")" style="color: #bc112e;"><i style="font-size:20px; width:100%; float:right;" class="fa fa-gear"></i></a>
+                    <br /><br />
+                    @{ int InicialC = 1;}
+                    @{ int InicialD = 2;}
+                    @if (Model.Listmoduleevaluative.Count == 0)
+                    {
+                        <center>
+                            <div>
+                                <img src="~/Content/Images/No_cursos_evualitovos_v.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                            </div>
+                        </center>
+                    }
+                    else
+                    {
+
+
+                        <div id="myCarousel3" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @if (Model.Listmoduleevaluative.Count > 1)
+                                {
+                                    <div class="item active" style="left:80px;">
+
+                                        <div class="row-fluid">
+                                            <div class="numero-modulo">
+                                                <img src="~/Resources/@Model.Listmoduleevaluative[0].Modu_ImageName">
+                                                <div class="modulo-title">@Model.Listmoduleevaluative[0].Modu_Name</div>
+                                                <br />
+                                                <div class="modulo-description">
+                                                    <div style='height:100px; overflow:hidden;'>@Model.Listmoduleevaluative[0].Modu_Description</div>
+                                                    <br>
+                                                    Fecha limite: @Model.Listmoduleevaluative[0].Modu_Validity @Model.Listmoduleevaluative[0].Modu_Period<br>
+                                                    <a href="@Url.Action("Grades", "AdminTraining", new { id = @Model.Listmoduleevaluative[0].Modu_Id })" class="btn btn-primary">Ingresar</a>
+                                                    <br /><br />
+                                                </div>
+                                            </div>
+                                            <div class="numero-modulo">
+                                                <img src="~/Resources/@Model.Listmoduleevaluative[1].Modu_ImageName">
+                                                <div class="modulo-title">@Model.Listmoduleevaluative[1].Modu_Name</div>
+                                                <br />
+                                                <div class="modulo-description">
+                                                    <div style='height:100px; overflow:hidden;'>@Model.Listmoduleevaluative[1].Modu_Description</div>
+                                                    <br>
+                                                    Fecha limite: @Model.Listmoduleevaluative[1].Modu_Validity @Model.Listmoduleevaluative[1].Modu_Period<br>
+                                                    <a href="@Url.Action("Grades", "AdminTraining", new { id = @Model.Listmoduleevaluative[1].Modu_Id })" class="btn btn-primary">Ingresar</a>
+                                                    <br /><br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item active" style="left:350px;">
+                                        <div class="row-fluid">
+                                            <div class="numero-modulo">
+                                                <img src="~/Resources/@Model.Listmoduleevaluative[0].Modu_ImageName">
+                                                <div class="modulo-title">@Model.Listmoduleevaluative[0].Modu_Name</div>
+                                                <br />
+                                                <div class="modulo-description">
+                                                    <div style='height:100px; overflow:hidden;'>@Model.Listmoduleevaluative[0].Modu_Description</div>
+                                                    <br>
+                                                    Fecha limite: @Model.Listmoduleevaluative[0].Modu_Validity @Model.Listmoduleevaluative[0].Modu_Period<br>
+                                                    <a href="@Url.Action("Grades", "AdminTraining", new { id = @Model.Listmoduleevaluative[0].Modu_Id })" class="btn btn-primary">Ingresar</a>
+                                                    <br /><br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.Listmoduleevaluative.Count > 1)
+                                {
+                                    foreach (Module module in Model.Listmoduleevaluative.Where(x => x.Modu_Id != Model.Listmoduleevaluative[0].Modu_Id && x.Modu_Id != Model.Listmoduleevaluative[1].Modu_Id))
+                                    {
+                                        <div class="item" style="left:80px;">
+                                            <div class="row-fluid">
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@Model.Listmoduleevaluative[InicialC].Modu_ImageName">
+                                                    <div class="modulo-title">@Model.Listmoduleevaluative[InicialC].Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@Model.Listmoduleevaluative[InicialC].Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @Model.Listmoduleevaluative[InicialC].Modu_Validity @Model.Listmoduleevaluative[InicialC].Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmoduleevaluative[InicialC].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@Model.Listmoduleevaluative[InicialD].Modu_ImageName">
+                                                    <div class="modulo-title">@Model.Listmoduleevaluative[InicialD].Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@Model.Listmoduleevaluative[InicialD].Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @Model.Listmoduleevaluative[InicialD].Modu_Validity @Model.Listmoduleevaluative[InicialD].Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @Model.Listmoduleevaluative[InicialD].Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        InicialC = InicialC + 1;
+                                        InicialD = InicialD + 1;
+                                        if (InicialD > Model.Listmoduleevaluative.Count)
+                                        {
+                                            InicialC = 1;
+                                            InicialD = 2;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (Module module in Model.Listmoduleevaluative)
+                                    {
+                                        <div class="item" style="left:350px;">
+                                            <div class="row-fluid">
+                                                <div class="numero-modulo">
+                                                    <img src="~/Resources/@module.Modu_ImageName">
+                                                    <div class="modulo-title">@module.Modu_Name</div>
+                                                    <br />
+                                                    <div class="modulo-description">
+                                                        <div style='height:100px; overflow:hidden;'>@module.Modu_Description</div>
+                                                        <br>
+                                                        Fecha limite: @module.Modu_Validity @module.Modu_Period<br>
+                                                        <a href="@Url.Action("Grades", "AdminTraining", new {id = @module.Modu_Id})" class="btn btn-primary">Ingresar</a>
+                                                        <br /><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev" style="background-color:transparent;">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only"> previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next" style="background-color:transparent;">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only"> next</span>
+                            </a>
+                        </div>
+                    }
+                    <!--/inicio periodico-->
+                    <div class="jumbotron">
+                        @if (Model.EditionCurrentToActive != null)
+                        {
+                            <h1 class="title">@Model.EditionCurrentToActive.Edit_Name</h1>
+                            <a href="@Url.Action("Editions", "AdminInformation")" style="color: #bc112e;"><i style="font-size:20px; width:100%; float:right;" class="fa fa-gear"></i></a>
+
+                            <br /><br />
+                            <h1 style="color:#0053a0;">@Model.EditionCurrentToActive.Edit_Description</h1>
+                            <br />
+                            if (Model.EditionCurrentToActive.Edit_FinishDate <= DateTime.Now)
+                            {
+                                <h2 style="color:#888888"><strong>Edición vencida</strong></h2>
+                                <br />
+                                <img src="~/Content/Images/No_ediciones_w.png" style="width:50%; height:80%;" alt="Alternate Text" />
+                            }
+                            else
+                            {
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#modalInicio">INICIO</a></li>
+                                    @foreach (var sections in Model.EditionCurrentToActive.Sections)
+                                    {
+                                        <li><a data-toggle="tab" href="#@sections.sect_Id">@sections.sect_name</a></li>
+                                    }
+                                </ul>
+                                <br />
+                                <div class="tab-content">
+                                    <!--/inicio modulos-->
+                                    @{ int InicialE = 1;}
+                                    @{ int InicialF = 2;}
+
+                                    @if (Model.ListArticles.Count == 0)
+                                    {
+                                        <center>
+                                            <div>
+                                                <img src="~/Content/Images/No_articulos_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                                            </div>
+                                        </center>
+                                    }
+                                    else
+                                    { <div id="modalInicio" class="tab-pane fade in active">
+                                            <div id="myCarousel4" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    @if (Model.ListArticles.Count > 1)
+                                                    {
+                                                        <div class="item active" style="left:80px;">
+
+                                                            <div class="row-fluid">
+                                                                <center>
+                                                                    <div class="numero-modulo">
+                                                                        <div class="modulo-title"><h3>@Model.ListArticles[0].Arti_Name</h3></div>
+                                                                        <br />
+                                                                        <img src="~/Resources/SourceSection/@Model.ListArticles[0].Arti_imagen">
+
+                                                                        <br />
+                                                                        <a href="@Url.Action("ViewArticle", "User", new {id = @Model.ListArticles[0].Arti_Id})" class="btn btn-primary">Ingresar</a>
+                                                                        <br /><br />
+                                                                    </div>
+                                                                    <div class="numero-modulo">
+                                                                        <div class="modulo-title"><h3>@Model.ListArticles[1].Arti_Name</h3></div>
+                                                                        <br />
+                                                                        <img src="~/Resources/SourceSection/@Model.ListArticles[1].Arti_imagen">
+
+                                                                        <br />
+                                                                        <a href="@Url.Action("ViewArticle", "User", new {id = @Model.ListArticles[1].Arti_Id})" class="btn btn-primary">Ingresar</a>
+                                                                        <br /><br />
+                                                                    </div>
+                                                                </center>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="item active" style="left:350px;">
+
+                                                            <div class="row-fluid">
+                                                                <div class="numero-modulo">
+                                                                    <div class="modulo-title"><h3>@Model.ListArticles[0].Arti_Name</h3></div>
+                                                                    <br />
+                                                                    <img src="~/Resources/SourceSection/@Model.ListArticles[0].Arti_imagen">
+
+                                                                    <br />
+                                                                    <a href="@Url.Action("ViewArticle", "User", new {id = @Model.ListArticles[0].Arti_Id})" class="btn btn-primary">Ingresar</a>
+                                                                    <br /><br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    @if (Model.ListArticles.Count > 1)
+                                                    {
+                                                        foreach (var AllTheArticles in Model.ListArticles.Where(x => x.Arti_Id != Model.ListArticles[0].Arti_Id && x.Arti_Id != Model.ListArticles[1].Arti_Id))
+                                                        {
+                                                            <div class="item" style="left:80px;">
+                                                                <div class="row-fluid">
+                                                                    <div class="numero-modulo">
+                                                                        <div class="modulo-title"><h3>@Model.ListArticles[InicialE].Arti_Name</h3></div>
+                                                                        <br />
+                                                                        <img src="~/Resources/SourceSection/@Model.ListArticles[InicialE].Arti_imagen">
+
+                                                                        <br />
+                                                                        <a href="@Url.Action("ViewArticle", "User", new {id = @Model.ListArticles[InicialE].Arti_Id})" class="btn btn-primary">Ingresar</a>
+                                                                        <br /><br />
+                                                                    </div>
+                                                                    <div class="numero-modulo">
+                                                                        <div class="modulo-title"><h3>@Model.ListArticles[InicialF].Arti_Name</h3></div>
+                                                                        <br />
+                                                                        <img src="~/Resources/SourceSection/@Model.ListArticles[InicialF].Arti_imagen">
+
+                                                                        <br />
+                                                                        <a href="@Url.Action("ViewArticle", "User", new {id = @Model.ListArticles[InicialF].Arti_Id})" class="btn btn-primary">Ingresar</a>
+                                                                        <br /><br />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            InicialE = InicialE + 1;
+                                                            InicialF = InicialF + 1;
+
+                                                            if (InicialF > Model.ListArticles.Count)
+                                                            {
+                                                                InicialE = 1;
+                                                                InicialF = 2;
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (var AllTheArticles in Model.ListArticles)
+                                                        {
+                                                            <div class="item" style="left:350px;">
+                                                                <div class="row-fluid">
+                                                                    <div class="numero-modulo">
+                                                                        <div class="modulo-title"><h3>@AllTheArticles.Arti_Name</h3></div>
+                                                                        <br />
+                                                                        <img src="~/Resources/SourceSection/@AllTheArticles.Arti_imagen">
+
+                                                                        <br />
+                                                                        <a href="@Url.Action("ViewArticle", "User", new {id = @AllTheArticles.Arti_Id})" class="btn btn-primary">Ingresar</a>
+                                                                        <br /><br />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <a class="left carousel-control" href="#myCarousel4" role="button" data-slide="prev" style="background-color:transparent;">
+                                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                    <span class="sr-only"> previous</span>
+                                                </a>
+                                                <a class="right carousel-control" href="#myCarousel4" role="button" data-slide="next" style="background-color:transparent;">
+                                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                    <span class="sr-only"> next</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    @foreach (var SectionsContent in Model.EditionCurrentToActive.Sections)
+                                    {
+                                        <div id="@SectionsContent.sect_Id" class="tab-pane fade">
+                                            <div class="contenido-articulo">
+                                                <div class="col-md-12">
+                                                    @if (SectionsContent.Article.Count != 0)
+                                                    {
+                                                        foreach (var articlesOfSection in SectionsContent.Article)
+                                                        {
+                                                            <div class="edicion col-sm-6 col-lg-4">
+                                                                <div class="panel panel-info col-md-12">
+
+                                                                    <p style="color:#F57C00;">@articlesOfSection.Arti_Name</p>
+
+                                                                    <div>
+                                                                        <div>
+                                                                            <center><img src="~/Resources/SourceSection/@articlesOfSection.Arti_imagen" style="width:150px;height:150px;" class="img-responsive" alt="Imagen responsive" /></center>
+                                                                        </div>
+                                                                        <div>
+                                                                            <br />
+                                                                            @Html.ActionLink("Ingresar", "ViewArticle", "User", new { id = articlesOfSection.Arti_Id }, new { @class = "btn btn-primary" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <br />
+                                                        <center>
+                                                            <div class="col-lg-10">
+                                                                <div>
+                                                                    <img src="~/Content/Images/No_articulos_w.png" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                                                                </div>
+                                                            </div>
+                                                        </center>
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <h1 class="title">PERIÓDICO VIRTUAL</h1>
+                            <a href="@Url.Action("Editions", "AdminInformation")" style="color: #bc112e;"><i style="font-size:20px; width:100%; float:right;" class="fa fa-gear"></i></a>
+                            <img src="~/Content/Images/No_ediciones_w.png" style="width:50%; height:80%;" alt="Alternate Text" />
+                        }
+
+                    </div>
+                    <br />
+                    <br /><br /><br /><br /><br />
+                    <br /><br />
+                </div>
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models.Lms
+
+@model AdminTrainingTopicViewModel
+
+
+@{
+    ViewBag.Title = "ListTopic";
+}
+
+<h2>ListTopic</h2>
+
+<br /><br /><br /><br />
+<div class="panel panel-primary">
+@foreach (TopicsCourse detalles in Model.ListTopic)
+{
+    <div class="panel-heading panel-head"><center> Temas </center></div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_Name, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_Description, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_Description, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_Attempt, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_Attempt, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_Name, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_ExpectedScore, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_ExpectedScore, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_TotalQuestion, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_TotalQuestion, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_InintDate, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_InintDate, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_FinishDate, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.ToCo_FinishDate, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.modules, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-2 control-label">
+                    @Html.DisplayFor(model => detalles.Module.Modu_Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToCo_Content, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg9 control-label">
+                    @Html.Raw(detalles.ToCo_Content)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>
+ 
+  
+       
+         
+

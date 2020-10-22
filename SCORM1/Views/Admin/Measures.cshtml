@@ -1,0 +1,109 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model AdminMeasuresViewModel
+
+@{
+    ViewBag.Title = "Measures";
+}
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+    </div>
+</div>
+<div class="jumbotron col-md-12">
+    @using (Html.BeginForm("SearchMeasure", "Admin", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchMeasures, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la Medición" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Nombre del test</th>
+                    <th>Fecha de Incio</th>
+                    <th>Fecha de Finalización</th>
+                    <th>informe</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Measure Measure in Model.Measures)
+            {
+                    <tr>
+                        <td>@Measure.Test.TestDescription</td>
+                        <td>@Measure.MeasureInitDate</td>
+                        <td>@Measure.MeasureFinishDate</td>
+                                         
+                        <td>
+                            @Html.ActionLink("informe", "ReportUserMeasuare", "Admin", new { id = @Measure.MeasureId }, new { @class = "btn btn-primary" })
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Modificar" onclick="LoadUpdateMeasure(@Measure.MeasureId)" data-cname="@Measure.MeasureId" />
+                        </td>
+
+                        <td>
+                            <input type="submit" onclick="confirm_meth('@Measure.MeasureId')" data-cname="@Measure.MeasureId" class="btn btn-primary" value="Eliminar" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="UpdateMeasureSection">
+
+    </div>
+    <br><hr style="width:100%; clear:both; border:dashed; border-color: #A3DC68; border-width:thin; margin-bottom:10px;">
+    <div class="caja_botones" style="clear:both;">
+        <button id="BTN_ADD" class="botones_pregunta">Añadir Medición</button>
+    </div>
+    <br />
+    <div id="AddMeasureSection">
+
+    </div>
+
+    <script>
+        document.getElementById("BTN_ADD").onclick = function () { LoadMeasureDiv() };
+        function LoadMeasureDiv() {
+
+            $("#AddMeasureSection").load('@Url.Action("AddMeasure","Admin")');
+        }
+
+        function LoadUpdateMeasure(MeasureID) {
+            var link = '@Url.Action("UpdateMeasure", "Admin", new { id = "value" })';
+            link = link.replace("value", MeasureID)
+            $("#UpdateMeasureSection").load(link);
+        }
+    </script>
+
+</div>
+
+<script type="text/Javascript" language="javascript">
+        function confirm_meth(MeasureId)
+{
+  if( confirm("Quieres eliminar la medición ?")==true)
+  {
+      var M = MeasureId;
+      window.location.href = ' @Url.Action("DeleteMeasure", "Admin", new {id = "ID"})'.replace("ID",M);
+   }
+  else
+  {
+      var link = '@Url.Action("Measures", "Admin")';
+  }
+}
+</script>
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

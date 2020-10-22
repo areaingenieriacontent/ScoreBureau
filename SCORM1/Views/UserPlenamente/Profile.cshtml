@@ -1,0 +1,100 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@using SCORM1.Models
+@using Chart.Mvc.ComplexChart
+@using Chart.Mvc.Extensions
+@model UserProfileViewModel
+@using Microsoft.AspNet.Identity
+
+<div class="row">
+    <div class="jumbotron">
+        <div class="jumbotron" >
+    @foreach (ApplicationUser User in Model.user)
+            {
+                if (User.Area == null)
+                {
+            <div class="avatar"></div>
+                    <div class="nombre_perfil">@User.UserName</div>
+                    <br />
+                    <div class="nombre_area">Area</div>
+                    <div class="nombre_area"><h3>No hay Area definida para este usuario </h3></div><br><br>
+                    <hr>
+            if (Model.Ranking == 0)
+            {
+                         <div class="nombre_ranking">Ranking</div>
+                        <div class="ranking">
+                            <div class="page-header"><h3><small style="color:green"> Se Deben Hacer las Mediciones Primero</small> </h3></div>
+                         </div>
+            }
+            else
+            {
+                <div class="nombre_ranking">Ranking</div>
+                        <div class="ranking">
+                            @Model.Ranking
+                        </div>
+            }
+        }
+        else
+        {
+            if (Model.Ranking == 0)
+            {
+                <div class="avatar"></div>
+                        <div class="nombre_perfil">@User.UserName</div>
+                        <br />
+                        <div class="nombre_area">Area</div>
+                        <div class="nombre_area">@User.Area.AreaName</div><br><br>
+                        <div class="nombre_ranking">Ranking</div>
+                        <div class="ranking">
+                            <div class="page-header"><h3><small style="color:green"> Se Deben Hacer las Mediciones Primero</small> </h3></div>
+                           </div>
+            }
+            else
+            { <div class="avatar"></div>
+            <div class="nombre_perfil">@User.UserName</div>
+            <br />
+                     <div class="nombre_area">Area</div>
+                    <div class="nombre_area">@User.Area.AreaName</div><br><br>
+                    <div class="nombre_ranking">Ranking</div>
+                        <div class="ranking">
+                            @Model.Ranking
+                        </div>
+            }
+        }
+        <hr>
+    }
+    @if (Model.FirstResult != null)
+            {
+        <div class="contenedorCompetencias" >
+            @foreach (Score score in Model.FirstResult.Scores.ToList())
+            {
+            <div data-type="caja_contCompe" class="caja_contCompe col-md-2 col-sm-4 col-xs-6" style="width:auto; height:auto;">
+                <div class="HeaderBarThreshold">
+                    <div class="competencia">@score.Value</div>
+                    <asp:LinkButton ID="SetThreshold" OnClick="btnSetThreshold_Click" runat="server"></asp:LinkButton>
+                    <h6 style="color:black"> Competencia: @score.Proficiency.ProficiencyId </h6>
+                </div>
+                <div class="TextHiden">
+                    <p style="font-size:15px; color:white;" class="lead"> @score.Proficiency.ProficiencyDescription </p>
+                </div>
+            </div>
+            }
+        </div>
+    }
+    else
+    {
+                    <div class="caja_graficas">
+                        <div class="caja_graficas">
+                            <img src="~/Content/Images/background-no-data.png" class="img-responsive" alt="Imagen responsive">
+                            <center>  <h3> EL USUARIO DEBE REALIZAR LAS MEDICIONES PRIMERO </h3> </center>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+ 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+} 
+
+

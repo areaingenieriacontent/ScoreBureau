@@ -1,0 +1,111 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model AdminTrainingTestViewModel
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+
+<br /><br /><br /><br /><br /><br />
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 100,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '/Gastronomia' + '/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+ @using (Html.BeginForm("AddOptionMultiple", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+ { 
+@Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-5">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.BaQu_Id)
+            @Html.LabelFor(model => model.OpMu_Question, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.EditorFor(model => model.OpMu_Question, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre pregunta", @style = "width:70%" } })
+            @Html.ValidationMessageFor(model => model.OpMu_Question, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-7">
+            @Html.LabelFor(model => model.OpMu_Description, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.EditorFor(model => model.OpMu_Description, new { htmlAttributes = new { @class = "form-control", @style = "width:60%" } })
+            @Html.ValidationMessageFor(model => model.OpMu_Description, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.OpMult_Content, new { @class = "form-control", @row = 5 })
+            </div>
+        </div>
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.AnOp_TrueAnswer, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.EnumDropDownListFor(model => model.AnOp_TrueAnswer, new { @class = "form-control", @style = "width:60%" })
+            @Html.ValidationMessageFor(model => model.AnOp_TrueAnswer, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-7">
+            @Html.LabelFor(model => model.AnOp_OptionAnswer, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.EditorFor(model => model.AnOp_OptionAnswer, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+            @Html.ValidationMessageFor(model => model.AnOp_OptionAnswer, "", new { @class = "text-danger" })
+        </div>
+       
+        
+        <div class="col-md-12">
+            <br /><br />
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <center><button class="btn btn-primary" name="singin" type="submit">Crear Pregunta</button></center>
+            </div>
+        </div>
+    </div>
+ }
+<br><hr style="width:100%; clear:both; border:dashed; border-color: #F57C00; border-width:thin; margin-bottom:10px;">

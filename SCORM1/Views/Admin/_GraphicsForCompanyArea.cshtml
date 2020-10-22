@@ -1,0 +1,23 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model AdminResultsViewModel
+@using Chart.Mvc.ComplexChart
+@using Chart.Mvc.Extensions
+@Scripts.Render("~/Scripts/Chart.js")
+
+<div class="caja_graficas">
+    <canvas id="myCanvas"></canvas>
+    @if (Model.ResultCharcompany != null)
+    {
+        @Html.CreateChart("myCanvas", Model.ResultCharcompany)
+    }
+    @if (Model.ResultChart != null)
+    {
+        @Html.CreateChart("myCanvas", Model.ResultChart)
+    }
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

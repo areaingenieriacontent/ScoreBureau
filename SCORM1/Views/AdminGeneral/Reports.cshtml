@@ -1,0 +1,73 @@
+﻿
+@using SCORM1.Models;
+@using SCORM1.Models.Engagement;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+
+@model AdminReports
+
+@if (TempData["Menssages"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssages"]
+                </p>
+            </div>
+            <br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br /><br /><br /><br />
+<h1 class="title">GESTIÓN REPORTES</h1>
+
+
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+
+
+
+<div class="jumbotron3">
+    <div class="col-md-3">
+        <a href='@Url.Action("ExportToExcel27", "AdminGeneral")'>
+            <img src='@Url.Content("~/Content/Images/progreso_curso.png")' style="width:90%; height:80%;" />
+        </a>
+        <h4>@Html.ActionLink("Resultado Test", "ExportToExcel27", "AdminGeneral", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#bc112e;background-color:transparent;" })</h4>
+    </div>
+    <div class="col-md-3">
+        <a href='@Url.Action("ExportToExcel26", "AdminGeneral")'>
+            <img src='@Url.Content("~/Content/Images/matriculados_curso.png")' style="width:90%; height:80%;" />
+        </a>
+        <h4>@Html.ActionLink("Matriculados", "ExportToExcel26", "AdminGeneral", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#bc112e;background-color:transparent;" })</h4>
+    </div>
+    <div class="col-md-3">
+        <a href='@Url.Action("ExportToExcel29", "AdminGeneral")'>
+            <img src='@Url.Content("~/Content/Images/mejoras.png")' style="width:90%; height:80%;" />
+        </a>
+        <h4>@Html.ActionLink("Mejora", "ExportToExcel29", "AdminGeneral", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#bc112e;background-color:transparent;" })</h4>
+    </div>
+    <div class="col-md-3">
+        <a href='@Url.Action("ExportToExcel28", "AdminGeneral")'>
+            <img src='@Url.Content("~/Content/Images/buenas_practicas.png")' style="width:90%; height:80%;" />
+        </a>
+        <h4>@Html.ActionLink("Buenas Practicas", "ExportToExcel28", "AdminGeneral", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "", role = "form", @style = "color:#bc112e;background-color:transparent;" })</h4>
+    </div>
+
+</div>

@@ -1,0 +1,45 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model BossPlansViewModel 
+@{
+    ViewBag.Title = "Plans";
+}
+<br /><br />
+<div class="jumbotron">
+    <div class="titulo"><center><h3>PLANES DE MEJORAMIENTO ACTUALES DEL USUARIO JEFE</h3></center></div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Plan</th>
+                    <th>Competencia</th>
+                  
+                    <th>Recurso</th>
+                </tr>
+            </thead>
+                @if (Model.Plans.Count != 0)
+                {
+                 <tbody>
+                @if (Model.Plans != null)
+                {
+                    foreach (Plan plan in Model.Plans)
+                    {
+                        <tr>
+                            <td>@plan.PlanDescription</td>
+                            <td>@plan.Proficiency.ProficiencyDescription</td>
+                         
+                         
+                            <td>
+                                @Html.ActionLink("Link", "GetFileEmail", "File", new { id = Model.userId + "-" + plan.ResourceId }, new { @class = "btn btn-primary", target = "_blank" })
+                            </td>
+                        </tr>
+                          }
+                         }
+                       </tbody>
+                        }
+                        else
+                        {
+                            <img src="~/Content/Images/background-no-plan.jpg" style="width:50%;height:80%;" class="img-responsive" alt="Imagen responsive">
+                        }
+                    </table>
+                    </div>
+                    </div>

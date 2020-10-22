@@ -1,0 +1,149 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model AdminTrainingTestViewModel
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br /><br /><br /><br /><br /><br />
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["FormAnswer"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#EditAnswerOpenQuestion").modal();
+            });
+        </script>
+    }}
+else
+{
+
+}
+<br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Questions", "AdminTraining", new {id = Model.BaQu_Id})" class="btn btn-info">Evaluación</a>
+    </div>
+</div>
+<br /><br />
+<div class="panel panel-primary">
+    <div id="EditAnswerOpenQuestion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditAnswerPairings", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.BaQu_Id)
+                                @Html.HiddenFor(model => model.Pair_Id)
+                                @Html.HiddenFor(model => model.AnPa_Id)
+                                @Html.LabelFor(model => model.AnPa_OptionsQuestion, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.AnPa_OptionsQuestion, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+                                @Html.ValidationMessageFor(model => model.AnPa_OptionsQuestion, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.AnPa_OptionAnswer, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.AnPa_OptionAnswer, new { htmlAttributes = new { @class = "form-control", @style = "width:70%" } })
+                                @Html.ValidationMessageFor(model => model.AnPa_OptionAnswer, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <br /><br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-heading panel-head"><center><h1 style="font-size:35px"> Preguntas</h1></center></div>
+    <div class="panel-body">
+
+        @foreach (Pairing option in Model.ListPairings)
+        {
+            <br /><br />
+            <div class="comentario">
+                <div class="botones-edicion">
+                    <a href="@Url.Action("DeletePairing", "AdminTraining", new { id = @option.Pair_Id })"><i class="fa fa-remove"style="color: #f57c00"></i></a>
+                    <a href="@Url.Action("EditPairing", "AdminTraining", new { id = @option.Pair_Id })"><i class="fa fa-cog" style="color: #f57c00"></i></a>
+                </div>
+                <p>
+                    <h4 class="fecha">Pregunta</h4>
+                </p>
+                <p><strong>@option.Pair_Question</strong></p>
+                <p><em>@option.Pair_Description</em></p>
+                <br />
+                @foreach (AnswerPairing answeroptionmultiple in Model.ListAnswerpairing)
+                {
+                    if (answeroptionmultiple.Pairing.Pair_Id == option.Pair_Id)
+                    {
+                        <div class="comentario">
+                            <div class="botones-edicion">
+                                <a href="@Url.Action("DeleteAnswerPairing", "AdminTraining", new { id = @answeroptionmultiple.AnPa_Id })"><i class="fa fa-remove"style="color: #f57c00"></i></a>
+                                <a href="@Url.Action("EditAnswerPairing", "AdminTraining", new { id = @answeroptionmultiple.AnPa_Id })"><i class="fa fa-cog" style="color: #f57c00"></i></a>
+                            </div>
+                            <p>
+                                <h4 class="fecha">Respuesta</h4>
+                            </p>
+                            <p><strong>@answeroptionmultiple.AnPa_OptionsQuestion</strong></p>
+                            <p><em>@answeroptionmultiple.AnPa_OptionAnswer</em></p>
+                        </div>
+                        <br />
+                    }
+                }
+            </div>
+            <br />
+            <div class="col-md-4">
+                <p>
+                    <center><input type="submit" value="Añadir Respuesta" onclick="AddAnswerOM('@option.Pair_Id')" data-cname="@option.Pair_Id" class="btn btn-primary" /></center>
+                </p>
+            </div>
+            <br />
+        }
+        <div id="AddAnswerOptionMultiple">
+
+        </div>
+        <div id="AddOptionMultiple">
+
+        </div>
+        <br /><br /><br />
+        <div class="col-md-offset-2 col-md-8">
+            <p>
+                <center><input type="submit" value="Añadir otra Pregunta" onclick="AddQuestionOM('@Model.BaQu_Id')" data-cname="@Model.BaQu_Id" class="btn btn-primary" /></center>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    function AddAnswerOM(Pair_Id) {
+        var link = '@Url.Action("AddPairings", "AdminTraining", new { id = "value" })';
+        link = link.replace("value", OpMu_Id)
+        $("#AddAnswerOptionMultiple").load(link);
+    }
+    function AddQuestionOM(BaQu_Id) {
+        var link = '@Url.Action("AddOtherPairings", "AdminTraining", new { id = "value" })';
+        link = link.replace("value", BaQu_Id)
+        $("#AddOptionMultiple").load(link);
+    }
+</script>

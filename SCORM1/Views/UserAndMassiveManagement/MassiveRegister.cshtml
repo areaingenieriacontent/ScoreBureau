@@ -1,0 +1,100 @@
+﻿@using SCORM1.Models;
+@using SCORM1.Models.ViewModel;
+@using System.Data;
+@model comoustdlollame
+@{
+    ViewBag.Title = "MassiveRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+<br /><br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("ManagementUser", "UserAndMassiveManagement")" class="btn btn-info">GESTIÓN DE USUARIOS</a>
+    </div>
+</div>
+<div class="panel-primary">    
+        @using (Html.BeginForm("MassiveRegister", "UserAndMassiveManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h4>Registro Masivo de Usuarios</h4>
+            <div class="fecha">
+                <a href="~/Reports/CargaMasivaUsuarios.xlsx" target="_blank" download="CargaMasivaUsuarios.xlsx"><h1 style="color:red;">Descargar Formato</h1></a>
+            </div>
+            <br /><br />
+            <div class="logo_inicial">
+                <br />
+                @Html.Raw("<div class='center-block' style='width:500px;height:200px;'>" + "<br />" + Model.Logo + "</div>")
+            </div>
+            <br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group col-md-4">
+                    <label class="col-md-8">Selecciona el archivo Excel</label> 
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="file" name="excelUpload" class="col-md-7"/>
+                </div>
+       
+                <div class="form-group">
+                   <div class="col-md-offset-2 col-md-8">
+                      <input type = "submit" value="Registrar Usuarios" class="btn btn-default" />
+                   </div>
+                </div>
+        }
+
+      <br />
+    <div class="table-responsive">
+        @if (Model.data != null)
+        {
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        @foreach (DataColumn col in Model.data.Columns)
+                        {
+                            <th>@col.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in Model.data.Rows)
+                {
+                        <tr>
+                            @foreach (DataColumn col in Model.data.Columns)
+                            {
+                                <td>@row[col.ColumnName]</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

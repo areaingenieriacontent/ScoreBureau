@@ -1,0 +1,14 @@
+﻿
+@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model UserCertificado
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div >
+
+    <h1 style="color:#000;">Bogota @DateTime.Now </h1>
+
+</div>
+<a href="@Url.Action("Pdfcertificado", "User", new {id = Model.certificado.Cert_Id})" class="btn btn-info">CURSOsss</a>

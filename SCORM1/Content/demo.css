@@ -1,0 +1,1063 @@
+
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0;
+	padding:0;
+}
+
+
+/* Login */
+
+body{
+
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing:-0.2px;
+    margin: 0;
+    background-color: #fff;
+}
+
+.containerA {
+	position: relative;
+	text-align: center;
+    height:10000% !important;
+   
+}
+
+h1
+{
+    font-size: 20px;
+    color:#fff;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #B0002D;
+}
+
+.descripcion_incial{
+	color:#FFF;
+	font-size:18px;
+	font-weight:200;
+	line-height:25px;
+	width:40%;
+	margin:30px auto;
+	text-align:center;
+}
+
+.caja_login{
+	width:60%;
+	padding:30px;
+	margin:0 auto;
+	color: #007382;
+	background:rgba(255,255,255, 0.9);
+	margin-bottom:30px;
+	border-radius:5px;
+	height: 220px;
+    align-content:center;
+}
+
+
+.caja_login input{
+	width: 60%;
+	padding:3px;
+	margin:10px 5px;
+	float:left;
+	border-radius:2px;
+	border:none;
+	font-size:15px;
+	
+}
+
+.caja_login label{
+	width: 30%;
+	margin:7px 5px;
+	float:left;
+	text-align:left;
+	
+}
+
+.caja_login button{
+	width:45%;
+	margin:20px 5px;
+	float:left;
+	background:rgba(0,133,146,1.00);
+	color:rgba(255,255,255,1.00);
+	height:25px;
+	padding:2px 0px;
+	border-radius:5px;
+	border:none;
+	font-size:14px;
+	font-weight:200;
+	letter-spacing:0.5px;
+}
+
+.caja_login span{
+	color:#323232;
+	font-size:14px;
+	float:left;
+	width:100%;
+	text-align:center;
+}
+
+
+/* Register*/
+
+
+.caja_register{
+	width:60%;
+	padding:30px;
+	margin:0 auto;
+	color: #007382;
+	background:rgba(255,255,255, 0.9);
+	margin-bottom:30px;
+	border-radius:5px;
+	height: 600px;
+}
+
+.caja_register input{
+	width: 60%;
+	padding:3px;
+	margin:10px 5px;
+	float:left;
+	border-radius:2px;
+	border:none;
+	font-size:15px;
+	
+}
+
+.caja_register label{
+	width: 30%;
+	margin:7px 15px;
+	float:left;
+	text-align:left;
+	
+}
+
+.caja_register select{
+	width: 61%;
+	background:rgba(255,255,255,1.00);
+	color:rgba(170,170,170,1.00);
+	margin:7px 5px;
+	float:left;
+	text-align:left;
+	padding:3px;
+	border-radius:1px;
+	border:none;
+	font-size:15px;
+}
+
+
+.caja_register button{
+	width:33%;
+	margin:30px 33%;
+	float:left;
+	background:rgba(0,133,146,1.00);
+	color:rgba(255,255,255,1.00);
+	height:25px;
+	padding:2px 0px;
+	border-radius:5px;
+	border:none;
+	font-size:14px;
+	font-weight:200;
+	letter-spacing:0.5px;
+}
+
+.caja_register span{
+	color:#323232;
+	font-size:14px;
+	float:left;
+	width:100%;
+	text-align:center;
+}
+
+/* ForgotPassword*/
+
+.caja_forgotpassword{
+	width:30%;
+	padding:30px;
+	margin:0 auto;
+	color: #007382;
+	background:rgba(255,255,255, 0.9);
+	margin-bottom:30px;
+	border-radius:5px;
+	height: 110px;
+}
+
+.caja_forgotpassword input{
+	width: 100%;
+	padding:3px;
+	margin:10px 5px;
+	float:left;
+	border-radius:2px;
+	border:none;
+	font-size:15px;
+	text-align:center;
+	
+}
+
+.caja_forgotpassword button{
+	width:50%;
+	margin:20px auto;
+	background:rgba(0,133,146,1.00);
+	color:rgba(255,255,255,1.00);
+	height:25px;
+	padding:2px 0px;
+	border-radius:5px;
+	border:none;
+	font-size:14px;
+	font-weight:200;
+	letter-spacing:0.5px;
+}
+
+/* ResetPassword*/
+
+
+.caja_resetpassword{
+	width:50%;
+	padding:30px;
+	margin:0 auto;
+	color: #007382;
+	background:rgba(255,255,255, 0.9);
+	margin-bottom:30px;
+	border-radius:5px;
+	height: 200px;
+}
+
+.caja_resetpassword label{
+	width: 30%;
+	margin:7px 15px;
+	float:left;
+	text-align:left;
+	
+}
+
+.caja_resetpassword input{
+	width: 55%;
+	padding:3px;
+	margin:10px 5px;
+	float:right;
+	border-radius:2px;
+	border:none;
+	font-size:15px;
+	text-align:center;
+	
+}
+
+.caja_resetpassword button{
+	width:50%;	
+	clear:both;
+	margin:40px auto;
+	background:rgba(0,133,146,1.00);
+	color:rgba(255,255,255,1.00);
+	height:25px;
+	padding:2px 0px;
+	border-radius:5px;
+	border:none;
+	font-size:14px;
+	font-weight:200;
+	letter-spacing:0.5px;
+}
+
+
+/*UserMenu*/
+
+.container-menu {
+    position: relative;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+header{
+	background: url(Images/banner.jpg) no-repeat right;
+	background-size:cover;
+	width:100%;
+	height:120px;
+}
+
+.logo-header{
+	background: url(Images/logo_inicial.png) no-repeat center;
+	background-size:contain;
+	float: left;
+	width:30%;
+	height:110px;
+	margin-top:5px;
+}
+
+.searcher{
+	float: right;
+	width:30%;
+	height:110px;
+	margin-top:20px;
+}
+
+.username{
+	clear:both;
+	margin:15px;
+	color:#FFF;
+	font-size:14px;
+	text-align:center;
+}
+
+
+.caja-searcher input{
+	width:70%;
+	background: rgba(255,255,255,1.00);
+	color:rgba(255,255,255,1.00);
+	height:25px;
+	padding: 0px 10px;
+	border-radius:5px;
+	border:none;
+	font-size:12px;
+	font-weight:200;
+	float:left;
+}
+
+.caja-searcher button{
+	width:20%;
+	background: #323232;
+	color:rgba(255,255,255,1.00);
+	height:25px;
+	padding:2px 0px;
+	border-radius:5px;
+	border:none;
+	font-size:12px;
+	font-weight:200;
+	letter-spacing:0.5px;
+	float:right;
+	margin-right:10px;
+}
+
+
+
+/*Banner*/
+
+.banner{
+    width:100%;
+	height:300px;
+	float:left;
+	margin:20px 0;
+}
+
+.banner .carousel-inner>.item>img{
+    width:100%;
+	height:300px;
+}
+
+.banner .carousel-indicators{
+	width:100%;
+	position:absolute;
+}
+
+.banner2{
+    width:70%;
+	height:300px;
+	float:left;
+	margin:20px 0;
+}
+
+.banner2 .carousel-inner>.item>img{
+    width:100%;
+	height:300px;
+}
+
+.banner2 .carousel-indicators{
+	width:10%;
+	position:absolute;
+}
+
+.header-text {
+    position: absolute;
+	left:1%;
+	right:1%;
+    top: 40%;
+    width: 50%;
+    color: #fff;
+}
+
+.header-text .banner-title{
+    font-size: 20px;
+	text-shadow: 0px 0px 4px #323232;
+}
+
+.header-text .banner-description{
+    background-color: #008591;
+	text-shadow: 0px 0px 4px #323232;
+	padding: 7px 10px;
+}
+
+/*Sistema de Puntos*/
+
+.sistema-puntos{
+    width:28%;
+	height:300px;
+	float: right;
+	padding:5px;
+	margin-top:15px;
+    margin-left:-16px;
+	
+}
+
+.sistema-puntos button{
+	width:45%;
+	margin:0px 2.5%;
+	height:100px;
+	border:none;
+	background:#FFF;
+	border-radius:5px;
+	float:left;
+}
+
+.sistema-puntos button img{
+	width:80%;
+	height:70px;
+	margin:5px auto;
+}
+
+button[type=info-premios]{
+	width:50%;
+	height:30px;
+	margin:30px 25%;
+	background: #323232;
+	color:#FFFFFF;
+	font-weight:200;
+}
+
+
+/*Modulos*/
+
+
+#myCarousel2{
+	width:100%;
+	margin: 10px auto;
+	padding:10px 2px;
+	float:left;
+}
+
+#myCarousel2 .carousel-inner{
+	width:100%;
+}
+
+
+.numero-modulo{
+	box-shadow: 0px 0px 6px #D3D3D3;
+	margin:5px 1%;
+	width:40%;
+	float:left;
+	min-height:300px;
+	max-height:500px;
+    background-color: white;		
+    border: 3px solid  #B0002D;
+}
+
+
+.modulo-title{
+	width:90%;
+	margin:0 auto;
+	height:20px;
+	margin-bottom:10px;
+	color: #323232;
+	font-weight:700;
+}
+
+.numero-modulo img{
+	width:60%;
+	margin:10px auto;
+	height:180px;
+}
+
+.modulo-description{
+	width:90%;
+
+	margin:10px auto;
+	text-align:center;
+	font-size:12px;
+}
+
+.avance{
+	margin-top:20px;
+}
+
+.progress-bar{
+	background-color: #B0002D;
+}
+.progress-bar1{
+	background-color: red;
+}
+/*Recertificacion*/
+
+.recertificacion{
+	margin-bottom:50px;
+}
+
+.numero-recertificacion{
+	box-shadow: 0px 0px 6px #D3D3D3;
+	margin:20px 1%;
+	width:23%;
+	float:left;
+	min-height:300px;
+	max-height:500px;
+}
+
+.numero-recertificacion img{
+	width:90%;
+	margin:10px auto;
+	height:120px;
+}
+
+.recertificacion-title{
+	width:90%;
+	margin:0 auto;
+	height:20px;
+	margin-bottom:10px;
+	color: #F57C00;
+	font-weight:700;
+}
+
+.recertificacion-description{
+	width:90%;
+	margin:10px auto;
+	text-align:center;
+	font-size:12px;
+}
+
+/*Periodico*/
+
+.news-paper{
+	width:90%;
+	clear:both;
+	margin:0 auto;
+	padding:0 2%;
+}
+
+
+.carousel-inner>.item{
+    width:100%;
+	height:100%;
+}
+
+
+.articulos{
+	width:90%; 
+	margin:0 auto;
+}
+
+.span2{
+	width:31%;
+	margin: 1.1%;
+	list-style:none;
+	float:left;
+}
+
+.span2 a img{
+	width:100%;
+	height:150px;
+}
+
+.news-paper-description{
+	width:90%;
+	margin:10px auto;
+	text-align:center;
+	font-size:12px;
+}
+
+.title{
+    font-family: 'Roboto Slab', serif;
+    letter-spacing:-0.5px;
+	background: #B0002D;
+	background-size:cover;
+	border-radius:5px;
+	width:100%;
+	height:50px;
+	padding:15px;
+	clear:both;
+	color:#FFFFFF;
+	margin:30px auto;
+	font-size: 20px;
+	font-weight:300;
+	text-shadow: 0px 0px 7px #535353;
+}
+
+/*Sistema de Medicion*/
+
+.sistema-medicion{
+	width:90%;
+	height:230px;
+	float:left;
+	margin:10px 5%;
+}
+
+.image-sistema-medicion{
+	background:url(Images/sistema-medicion.png) no-repeat center;
+	background-size:contain;
+	width:50%;
+	height:200px;
+	float:left;
+}
+
+button[type=info-medicion]{
+	width:40%;
+	height:50px;
+	margin:15px auto;
+	letter-spacing:1px;
+	background: #323232;
+	border:none;
+	border-radius: 5px;
+	color:#FFFFFF;
+	font-weight:200;
+}
+
+
+.title-inside{
+	background:#B0002D;
+	width:100%;
+	height:35px;
+	padding:10px;
+	clear:both;
+	color:#fff;
+	letter-spacing:1px;
+	border-radius: 5px;
+	font-size: 15px;
+	font-weight:100;
+}
+
+
+/*Botones gestor*/
+
+.botones-gestor{
+	width:100%;
+	margin:0 auto;
+	height:200px;
+	clear:both;
+}
+
+
+.botones-gestor button {
+	border:none;
+	width:20%;
+	height:160px;
+	margin:10px 5.5%;
+	padding-top:150px;
+	font-weight:200;
+}
+
+
+.botones-gestor button:nth-child(1){
+	background: url(Images/gestor-usuarios.png) no-repeat center;
+	background-size:contain;
+}
+
+.botones-gestor button:nth-child(2){
+	background: url(Images/gestor-reportes.png) no-repeat center;
+	background-size:contain;
+}
+
+.botones-gestor button:nth-child(3){
+	background: url(Images/gestor-sitema.png) no-repeat center;
+	background-size:contain;
+}
+
+.botones-gestor button:nth-child(4){
+	background: url(Images/gestor-sitema.png) no-repeat center;
+	background-size:contain;
+}
+.botones-gestor button:nth-child(5){
+	background: url(Images/gestor-sitema.png) no-repeat center;
+	background-size:contain;
+}
+/*Footer*/
+
+footer{
+	width:100%;
+	height:130px;
+	background:#323232;
+	clear:both;
+}
+
+.container-footer{
+	position: relative;
+	text-align: center;
+	width:80%;
+	height:130px;
+	margin:0 auto;
+}
+
+
+.logo-footer{
+	background: url(Images/LOGOSA.png) no-repeat center;
+	background-size:contain;
+    position: relative;
+    left: 40%;
+	width:20%;
+	height:90px;
+	margin-top:5px;
+	
+}
+
+.info-footer{
+	float: right;
+	width:70%;
+	height:10px;
+	margin-top:10px;
+	font-size:12px;
+	color:#FFFFFF;
+	font-weight:300;
+	text-align:right;
+	letter-spacing:0.5px;
+}
+
+button[type=secciones-newspaper]{
+	width:30%;
+	height:30px;
+	margin:30px 1%;
+	letter-spacing:1px;
+	background: #323232;
+	color:#FFFFFF;
+	font-weight:200;
+	border:none;
+	border-radius:5px;
+}
+
+
+@media (min-width: 1300px){
+
+.caja_login{
+	width:60%;
+}
+
+
+}
+
+@media (max-width: 1150px){
+	
+.caja_register{
+	height:650px;
+}
+
+.caja_forgotpassword{
+	width:40%;
+}
+
+.caja_resetpassword {
+	width:60%;
+}
+}
+
+
+@media (max-width: 980px){
+
+.caja_login{
+	width:60%;
+}
+.logo_inicial{
+	width:50%;
+}
+
+.caja_register{
+	height:750px;
+}
+
+
+.caja_forgotpassword{
+	width:60%;
+}
+
+.caja_resetpassword label{
+	clear:both;
+}
+
+
+/*UserMenu*/
+
+.container-menu{
+	width:100%;
+}
+
+
+/*Modulos*/
+
+.numero-modulo{
+	width:70%;
+	min-height:200px;   
+	max-height:1000px;
+}
+
+/*Periodico*/
+
+.news-paper{
+	width:100%;
+}
+
+/*Sistema de Puntos*/
+
+.sistema-puntos{
+	width:100%;
+	height:300px;
+	margin:0 auto;
+	
+}
+
+.sistema-puntos button{
+	width:26%;
+	margin:20px 20px;
+	height:150px;
+}
+
+.sistema-puntos button img{
+	width:50%;
+}
+
+button[type=info-premios]{
+	width:20%;
+	height:30px;
+	margin:80px 40px 0 40px;
+}
+
+
+/*Banner*/
+
+.banner2{
+    width:100%;
+}
+
+
+.title{
+	width:98%;
+	height:35px;
+	padding:10px;
+	clear:both;
+	color:#FFFFFF;
+	margin:30px auto;
+	font-size: 16px;
+	font-weight:300;
+}
+
+/*Sistema de Medicion*/
+
+.sistema-medicion{
+	width:70%;
+	margin:0 15%;
+	clear:both;
+}
+
+/*Botones gestor*/
+
+.botones-gestor{
+	width:90%;
+	margin:0 auto;
+	height:200px;
+	clear:both;
+}
+
+
+.botones-gestor button{
+	width:30%;
+	height:150px;
+	margin:10px 1%;
+}
+
+
+
+}
+
+@media (max-width: 800px){
+	
+	.caja_register{
+	height:1300px;
+}
+
+.caja_resetpassword {
+	width:60%;
+}
+
+
+
+/*Recertificacion*/
+
+
+.numero-recertificacion{
+	margin:10px 2.5%;
+	width:45%;
+	float:left;
+	min-height:200px;
+	max-height:400px;
+}
+
+/*Periodico*/
+
+.articulos{
+	width:100%;
+}
+
+
+.span2{
+	width:31.3%;
+	margin:10px 1%;
+	list-style:none;
+	float:left;
+}
+
+button[type=secciones-newspaper]{
+	width:30%;
+	height:30px;
+	margin:10px 1%;
+	letter-spacing:1px;
+	background: #323232;
+	color:#FFFFFF;
+	font-weight:200;
+	border:none;
+	border-radius:5px;
+}
+
+/*Sistema de Puntos*/
+
+button[type=info-premios]{
+	width:20%;
+	height:40px;
+	letter-spacing:0px;
+	margin:80px 20px 0 20px;
+}
+
+/*Botones gestor*/
+
+.botones-gestor{
+	width:100%;
+}
+
+
+
+}
+
+
+
+}
+
+@media (max-width: 720px){
+
+.caja_login{
+	width:60%;
+}
+
+.logo_inicial{
+	width: 60%;
+}
+
+.caja_register{
+	height:1200px;
+}
+
+
+.caja_register label{
+	width:90%;
+}
+
+.caja_register input{
+	width: 90%;
+	
+}
+
+.caja_resetpassword {
+	height:310px;
+}
+
+.caja_resetpassword input{
+	width: 90%;
+}
+
+.caja_resetpassword label{
+	width: 90%;
+}
+
+}
+
+
+@media (max-width: 520px){
+
+.caja_login{
+	width:60%;
+	height:260px;
+}
+
+.logo_inicial{
+	width: 70%;
+}
+
+.caja_resetpassword {
+	width:70%;
+}
+
+.logo-header{
+	margin-left:10px;
+	height:90px;
+	width:50%;
+	margin-top:15px;
+}
+
+/*Sistema de Puntos*/
+
+.sistema-puntos{
+	height:470px;
+	
+}
+.sistema-puntos button{
+	width:45%;
+	margin:20px 2.5%;
+	height:100px;
+	float:left;
+}
+
+button[type=info-premios]{
+	width:40%;
+	height:30px;
+	margin:0px 30% 40px 30%;
+}
+
+
+/*Periodico*/
+
+.span2 a img{
+	width:100%;
+	height:70px;
+}
+
+/*Sistema de Medicion*/
+
+.sistema-medicion{
+	width:90%;
+	margin:0 7%;
+	clear:both;
+}
+
+/*Botones gestor*/
+
+.botones-gestor{
+	height:220px;
+}
+
+
+.botones-gestor button {
+	height:160px;
+	margin:20px 1%;
+}
+
+.logo-footer{
+	background: url(Images/logo_inicial.png) no-repeat center;
+	background-size:contain;
+	float: left;
+	width:10%;
+	height:90px;
+	margin-top:5px;
+	
+}
+.info-footer{
+	width:60%;
+	height:15px;
+	margin:5px 0;
+}
+
+
+}
+

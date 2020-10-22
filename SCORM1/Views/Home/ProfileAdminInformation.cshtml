@@ -1,0 +1,73 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Newspaper;
+
+@model AdminInformationHomeViewModel
+<br /><br /><br />
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="jumbotron">
+    <h1 class="title">@Html.DisplayFor(x => x.EditionCurrentToActive.Edit_Name) </h1>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#modalInicio">INICIO</a></li>
+        @foreach (var sections in Model.EditionCurrentToActive.Sections)
+            {
+            <li><a data-toggle="tab" href="#@sections.sect_Id">@sections.sect_name</a></li>
+        }
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="modalInicio" class="tab-pane fade in active">
+            <div class="img-container">
+                @foreach (var AllTheArticles in Model.ListArticles)
+                {
+                    <div class="edicion col-sm-6 col-lg-4">
+                        <div class="panel panel-info col-md-12">
+                            <div class="panel-heading">
+                                <h3>@AllTheArticles.Arti_Name</h3>
+                            </div>
+                            <div class="panel-body">
+                                <img src="~/Resources/SourceSection/@AllTheArticles.Arti_imagen" cl class="img-container col-md-12" />
+                                @Html.ActionLink(" ", "ViewArticle", "AdminInformation", new { id = AllTheArticles.Arti_Id }, new { @class = "fa fa-chevron-down" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @foreach (var SectionsContent in Model.EditionCurrentToActive.Sections)
+            {
+            <div id="@SectionsContent.sect_Id" class="tab-pane fade">
+                <div class="contenido-articulo">
+                    <div class="col-md-12">
+                        @if (SectionsContent.Article.Count != 0)
+                        {
+                            foreach (var articlesOfSection in SectionsContent.Article)
+                            {
+                                <div class="edicion col-sm-6 col-lg-4">
+                                    <div class="panel panel-info col-md-12">
+                                        <div class="panel-heading">
+                                            <h3>@articlesOfSection.Arti_Name</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <img src="~/Resources/SourceSection/@articlesOfSection.Arti_imagen" class="img-container col-md-12" />
+                                            @Html.ActionLink(" ", "ViewArticle", "AdminInformation", new { id = articlesOfSection.Arti_Id }, new { @class = "fa fa-chevron-down" })
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <h2>lo sentimos no hay Cursos disponibles</h2>
+                            <img src="~/Resources/SourceSection/NoneArticle.jpg" alt="Alternate Text" />
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

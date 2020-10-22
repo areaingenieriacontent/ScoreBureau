@@ -1,0 +1,62 @@
+﻿@using SCORM1.Models.ViewModel
+@model   AdminInformationProfileViewModel
+@*<div class="panel-primary">
+    <br /><br /><br /><br /><br />
+    <h1 style="color:#888888;"> Términos y Condiciones - Aviso de Privacidad</h1>
+    <br />
+    <embed src="~/TermsandConditions/@Model.FileTerms" width="800" height="375">
+    @using (Html.BeginForm("Validateterms", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+                    <div class="col-md-12">
+                        <br />
+                        @Html.CheckBoxFor(m => m.termsandconditions, htmlAttributes: new { @style = "margin-left:10px;" })
+                        @Html.LabelFor(m => m.termsandconditions)
+                    </div>
+                    <div class="col-md-offset-2 col-md-8">
+                        <br /><br />
+                        <center><button class="btn btn-primary" name="singin" type="submit">Continuar</button></center>
+                    </div>
+                </div>
+        }
+    </div>*@<div class="panel-primary">
+
+    <br /><br /><br />
+    <h1 class="title"> TÉRMINOS Y CONDICIONES</h1>
+    <embed src="~/TermsandConditions/@Model.FileTerms" width="800" height="375">
+    @using (Html.BeginForm("Validateterms", "AdminInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <h1 class="title">GUÍA DE NAVEGACIÓN</h1>
+                <p>
+                    <video controls="controls" width="400" height="375">
+                        <source src="https://www.aprendeyavanza2.com.co/SaludVida/Recursos/navegacion_Plataforma.mp4" type="video/mp4" />
+                    </video>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h1 class="title">ESTRATEGIA PROYECTO ECO</h1>
+                <p>
+                    <video controls="controls" width="400" height="375">
+                        <source src="https://www.aprendeyavanza2.com.co/SaludVida/Recursos/navegacion_Plataforma.mp4" type="video/mp4" />
+                    </video>
+                </p>
+            </div>
+        </div><br />
+        <br /><br />
+        <div class="col-md-offset-2 col-md-8">
+            <br /><br /><br />
+            @Html.CheckBoxFor(m => m.termsandconditions, htmlAttributes: new { @class = "", @style = "width: 50px;height: 30px; " })
+            @Html.LabelFor(m => m.termsandconditions)
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <br /><br />
+                <center><button class="btn btn-primary" name="singin" type="submit">Continuar</button></center>
+            </div>
+        </div>
+    }
+</div>

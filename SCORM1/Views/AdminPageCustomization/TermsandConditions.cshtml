@@ -1,0 +1,77 @@
+﻿
+@using SCORM1.Models.PageCustomization
+@using SCORM1.Models.ViewModel
+@model AdminPageTermsandConditionsViewModel
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+    $(document).ready(function () {
+        $("#Inform").modal();
+    });
+        </script>
+    }}
+<br /><br />
+<div id="Inform" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                @TempData["Info"]
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <br /><br /><br /><br />
+    <h1 class="title"> TÉRMINOS Y CONDICIONES</h1> 
+    <br />
+    <embed src="~/TermsandConditions/@Model.FileTerms" width="500" height="375">
+    @using (Html.BeginForm("TermsandConditions", "AdminPageCustomization", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <form class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <hr />
+            <h4><strong> Recuerde : Solo se aceptan documentos en formato pdf y que el tamaño del archivo no supere 1MB</strong></h4>
+            @Html.HiddenFor(model => model.companyId)
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.FileTerms, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    <input type="file" id="CoverpageModule" name="upload" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <center><button class="btn btn-primary" name="singin" type="submit">Actualizar</button></center>
+                </div>
+            </div>
+        </form>
+    }
+    @*<div class="col-md-12">
+        <div class="col-md-6">
+            <h1 class="title">GUÍA DE NAVEGACIÓN</h1>
+            <p>
+                <video controls="controls" width="400" height="375">
+                    <source src="https://www.aprendeyavanza2.com.co/SaludVida/Recursos/navegacion_Plataforma.mp4" type="video/mp4" />
+                </video>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h1 class="title">ESTRATEGIA PROYECTO ECO</h1>
+            <p>
+                <video controls="controls" width="400" height="375">
+                    <source src="https://www.aprendeyavanza2.com.co/SaludVida/Recursos/navegacion_Plataforma.mp4" type="video/mp4" />
+                </video>
+            </p>
+        </div>
+    </div><br />*@
+
+</div>

@@ -1,0 +1,187 @@
+﻿@using SCORM1.Models.ViewModel;
+
+@model UserProfileViewModel
+
+
+<html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+
+@if (TempData["Result"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Result").modal();
+            });
+        </script>
+    }}
+
+<div class="col-md-12">
+    <div class="col-md-12">
+        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-responsive">Modificar Información</button>
+        <hr />
+        <br />
+        <div class="col-md-6">
+
+            @if (Model.user.Foto_perfil != null)
+            {
+                <center>
+
+
+
+
+                    <img src="~/Resources/@Model.user.Foto_perfil" class='imgRedonda' />
+                    @*<img  src="~/Resources/@Model.user.Foto_perfil" class="imgRedonda" alt="Norway" solid = #FF0000 style="padding:40px;width:20%">*@
+
+
+
+
+                </center>
+            }
+
+            else
+            {
+                <center>
+
+                    <img src="~/Resources/perfil.png" class='imgRedonda' />
+
+                </center>
+
+            }
+        </div>
+        <div class="col-md-13">
+            <h2><strong style="color:black">Información personal</strong></h2>
+
+            <p> <strong style="color:black">Nombre completo: </strong>@Model.user.FirstName  @Model.user.LastName</p>
+            <p> <strong style="color:black">Usuario: </strong>@Model.user.UserName</p>
+            <p> <strong style="color:black">Documento: </strong>@Model.user.Document</p>
+            <p> <strong style="color:black">Rol: </strong>@Model.user.Role</p>
+            <p> <strong style="color:black">Ultima acceso: </strong>@Model.user.lastAccess</p><p></p>
+            <p> <strong style="color:black">Primer acceso: </strong> @Model.user.firstAccess</p>
+            <p> <strong style="color:black">Autorizado: </strong>@Model.user.Enable</p>
+            <p> <strong style="color:black">Email: </strong>@Model.user.Email</p>
+            @if (Model.user.Area != null)
+            {
+                <p> <strong style="color:black">Municipio: </strong>@Model.user.City.City_Name</p>
+            }
+            else
+            {
+                <p>No hay area</p>
+            }
+            @if (Model.user.Position != null)
+            {
+                <p> <strong style="color:black">Ocupación: </strong>@Model.user.Position.Posi_Description</p>
+            }
+            else
+            {
+                <p>No hay Cargo </p>
+            }
+            <br />
+            <br />
+            <h2 style="color:crimson"><strong>Documentos Importantes</strong></h2>
+            <p style="font-size:18px"> <strong style="color:black">Tratamiento de datos: <a style="color:crimson" href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank"><u>clic aquí para consultar</u></a></strong></p>
+            <p style="font-size:18px"> <strong style="color:black">Política de puntos: <a style="color:crimson" href="https://aprendeyavanza2.com.co/contentgroup/bureau/politica_puntos.pdf" target="_blank"><u>clic aquí para consultar</u></a></strong></p>
+        </div>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Modificar Datos</h2>
+                </div>
+                <div class="modal-body">
+
+                    @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+
+                            <p class="danger"> @TempData["Warning"]</p>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(x => x.user.Id)
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.user.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.user.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.user.UserName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.user.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "El nombre de usuario debe ser mayor a 6 caracteres" } })
+                                @Html.ValidationMessageFor(model => model.user.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.user.FirstName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.user.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.user.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.user.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.user.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.user.LastName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.user.Country, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EnumDropDownListFor(model => model.user.Country, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.user.Country, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.user.Document, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.user.Document, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.user.Document, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Foto", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <input type="file" id="CoverpageModule" name="upload" />
+                            </div>
+
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <br /><br />
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modificar</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="Result" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <strong> @TempData["Result"]</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

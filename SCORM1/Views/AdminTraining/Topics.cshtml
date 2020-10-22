@@ -1,0 +1,277 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model AdminTrainingTopicViewModel
+<script src="~/Scripts/Tinymce/tinymce.min.js"></script>
+<script src="~/Scripts/uploadify/jquery.uploadify.min.js"></script>
+<link href="~/Scripts/uploadify/uploadify.css" rel="stylesheet" />
+<script>
+tinymce.init({
+    selector: 'TextArea',
+    height: 500,
+    theme: 'modern',
+    plugins: [
+      'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen',
+      'insertdatetime media nonbreaking save table contextmenu directionality',
+      'emoticons template paste textcolor colorpicker textpattern imagetools'
+    ],
+    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+    toolbar2: 'print preview media | forecolor backcolor emoticons ',
+    image_advtab: true
+
+
+});
+</script>
+<script type="text/javascript">
+        $(function () {
+            $('#fileupload').uploadify({
+                'swf': '/Scripts/uploadify/uploadify.swf',
+                'uploader': "@Url.Action("UploadImage", "AdminTraining")",
+                'cancelImg': "@Url.Content("/Scripts/uploadify/uploadify-cancel.png")",
+                'fileSizeLimit': '2MB', // Add Kb, MB, GB
+                'buttonText': 'Insert Images...', //Text for button
+                'queueSizeLimit': 10, // Max number of files allowed
+                'fileTypeDesc': 'Image Files',
+              'fileTypeExts': '*.gif; *.jpg; *.png', // File type allowed
+                'onUploadSuccess' : function(file, data, response) {
+                 tinyMCE.activeEditor.execCommand("mceInsertContent", true, "<img src='" + data + "' alt='Uploaded Image' class='img-responsive' />");
+                }
+            })
+        }
+);
+</script>
+<script type="text/javascript">
+        $(function () {
+            $('#fileuploadVideo').uploadify({
+                'swf': '/Scripts/uploadify/uploadify.swf',
+                'uploader': "@Url.Action("UploadVideo", "AdminTraining")",
+                'cancelImg': "@Url.Content("/Scripts/uploadify/uploadify-cancel.png")",
+                'fileSizeLimit': '5MB', // Add Kb, MB, GB
+                'buttonText': 'Insert Videos...', //Text for button
+                'queueSizeLimit': 10, // Max number of files allowed
+                'fileTypeDesc': 'Video Files',
+              'fileTypeExts': '*.mp4; *.wmv; *.png', // File type allowed
+                'onUploadSuccess' : function(file, data, response) {
+                    tinyMCE.activeEditor.execCommand("mceInsertContent", true,"<embed src='" + data + "'>");
+                }
+            })
+        }
+);
+</script>
+
+@if (TempData["Edit"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Edit"]
+    </div>
+}
+
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@if (TempData["Delete"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Delete"]
+    </div>
+}
+<br /><br /><br /><br />
+<div class="jumbotron col-md-12">
+   
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["UpdateTopic"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+    $(document).ready(function () {
+        $("#FormUpdateTopic").modal();
+    });
+            </script>
+        }}
+
+    <div id="AddTopic" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("AddTopic", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h2> <center>NUEVO TEMA</center></h2>
+                        <form>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_Name, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_Name, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_Name, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_Description, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_Description, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_Description, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_Attempt, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_Attempt, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_Attempt, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_ExpectedScore, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_ExpectedScore, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_ExpectedScore, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.ToCo_TotalQuestion, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.ToCo_TotalQuestion, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.ToCo_TotalQuestion, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center>@Html.LabelFor(model => model.ToCo_ModuleId, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>   @Html.DropDownListFor(model => model.ToCo_ModuleId, Model.modules, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    @Html.ValidationMessageFor(model => model.ToCo_ModuleId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.Toco_Image, new { @class = "" })</center>
+                                <div class="col-lg-9">
+                                    <input type="file" name="Img" id="fileupload" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.Toco_Image, new { @class = "" })</center>
+                                <div class="col-lg-9">
+                                    <input type="file" name="Img" id="fileuploadVideo" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <center> @Html.LabelFor(model => model.ToCo_Content, new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>@Html.TextAreaFor(model => model.ToCo_Content, new { @class = "form-control", @row = 5 })</center>
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear Categoria</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @using (Html.BeginForm("SeachTopic", "AdminTraining", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchTopic, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Tema" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+        <div class="form-group">
+            <div class="caja_botones" style="clear:both;">
+                <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#AddTopic">Añadir Tema</button>
+            </div>
+        </div>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Nombre Tema</th>
+                    <th>Descripción</th>
+                    <th>Intentos permitidos</th>
+                    <th>Puntaje</th>
+                    <th>Total Preguntas</th>
+                    <th>Curso</th>
+
+
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (TopicsCourse topicscourses in Model.ListTopic)
+                {
+                    <tr>
+                        <td>@topicscourses.ToCo_Name</td>
+                        <td>@topicscourses.ToCo_Description</td>
+                        <td>@topicscourses.ToCo_Attempt</td>
+                        <td>@topicscourses.ToCo_ExpectedScore</td>
+                        <td>@topicscourses.ToCo_TotalQuestion</td>
+                        <td>@topicscourses.Module.Modu_Name</td>
+                        <td>
+                            <input type="submit" onclick="UpdateTopic('@topicscourses.ToCo_Id')" data-cname="@topicscourses.ToCo_Id" class="btn btn-primary" value="Modificar" />
+                        </td>
+                        <td>
+                            <input type="submit" onclick="DeleteTopic('@topicscourses.ToCo_Id')" data-cname="@topicscourses.ToCo_Id" class="btn btn-primary" value="Eliminar" />
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*Modificar Tema*@
+    <script type="text/Javascript" language="javascript">
+        function UpdateTopic(ToCo_Id)
+{
+  if( confirm("Quieres Modificar el Tema")==true)
+  {
+      var c = ToCo_Id;
+      window.location.href = ' @Url.Action("UpdateTopic", "AdminTraining", new {id = "ID"})'.replace("ID",c);
+   }
+  else
+  {
+      var link = '@Url.Action("Topics", "AdminTraining")';
+  }
+        }
+    </script>
+    @*Script eliminar Tema*@
+    <script type="text/Javascript" language="javascript">
+        function DeleteTopic(ToCo_Id)
+{
+  if( confirm("Quieres elimiar el Tema")==true)
+  {
+      var t = ToCo_Id;
+      window.location.href = ' @Url.Action("DeleteTopic", "AdminTraining", new {id = "ID"})'.replace("ID",t);
+   }
+  else
+  {
+      var link = '@Url.Action("Topics", "AdminTraining")';
+  }
+}
+    </script>
+</div>
+

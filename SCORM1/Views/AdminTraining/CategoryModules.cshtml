@@ -1,0 +1,184 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model AdminTrainingCategoryModuleViewModel
+@{
+    ViewBag.Title = "CategoryModules";
+}
+@if (TempData["Edit"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Edit"]
+    </div>
+}
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@if (TempData["Delete"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Delete"]
+    </div>
+}
+<h2>Categora Modulos</h2>
+<br /><br /><br />
+<div class="jumbotron col-md-12">
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["UpdateCategoryModule"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#FormUpdateCategoryModule").modal();
+                });
+            </script>
+        }}
+    @using (Html.BeginForm("UpdateCategoryModule", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="FormUpdateCategoryModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2> <center>MODIFICAR CATEGORIA</center></h2>
+                        <form>
+                            @Html.HiddenFor(model => model.CaMo_Id)
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.CaMo_Category, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.CaMo_Category, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center>  @Html.ValidationMessageFor(model => model.CaMo_Category, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Modifica Categoria</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("AddCategoryModule", "AdminTraining", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal fade" id="AddCategoryModule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2> <center>NUEVA CATEGORIA</center></h2>
+                        <form>
+                            <div class="form-group">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <center>@Html.LabelFor(model => model.CaMo_Category, htmlAttributes: new { @class = "" })</center>
+                                <div class="col-md-12">
+                                    <center>  @Html.EditorFor(model => model.CaMo_Category, new { htmlAttributes = new { @class = "form-control" } })</center>
+                                    <center> @Html.ValidationMessageFor(model => model.CaMo_Category, "", new { @class = "text-danger" })</center>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Crear Categoria</button></center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- breadCrumb -->
+    <ul class="breadcrumb">
+        <li><a href="#">@Html.ActionLink("HOME", "Index", "Home")</a></li>
+        <li><a href="#">@Html.ActionLink("Cursos", "Modules", "AdminTraining")</a></li>
+    </ul>
+
+
+    @using (Html.BeginForm("SeachCategoryModule", "AdminTraining", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.SearchCategoryModule, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre de la categoria" } })
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+        <div class="form-group">
+            <div class="caja_botones" style="clear:both;">
+                <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#AddCategoryModule">Añadir Categoria</button>
+            </div>
+        </div>
+    }
+    <br><hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Categoria</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CategoryModule categorymodules in Model.ListCategoryModule)
+                {
+                    <tr>
+                        <td>@categorymodules.CaMo_Category</td>
+                        <td>
+                            <input type="submit" onclick="UpdateCategoryModule('@categorymodules.CaMo_Id')" data-cname="@categorymodules.CaMo_Id" class="btn btn-primary" value="Modificar" />
+                        </td>
+                        <td>
+                            <input type="submit" onclick="DeleteCategoryModule('@categorymodules.CaMo_Id')" data-cname="@categorymodules.CaMo_Id" class="btn btn-primary" value="Eliminar" />
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*Modificar Categoria*@
+    <script type="text/Javascript" language="javascript">
+        function UpdateCategoryModule(CaMo_Id) {
+            if (confirm("Quieres Modificar la Categoria") == true) {
+                var c = CaMo_Id;
+                window.location.href = ' @Url.Action("UpdateCategoryModule", "AdminTraining", new {id = "ID"})'.replace("ID", c);
+            }
+            else {
+                var link = '@Url.Action("CategoryModules", "AdminTraining")';
+            }
+        }
+    </script>
+    @*Script eliminar Categoria*@
+    <script type="text/Javascript" language="javascript">
+        function DeleteCategoryModule(CaMo_Id) {
+            if (confirm("Quieres elimiar la Categoria") == true) {
+                var c = CaMo_Id;
+                window.location.href = ' @Url.Action("DeleteCategoryModule", "AdminTraining", new {id = "ID"})'.replace("ID", c);
+            }
+            else {
+                var link = '@Url.Action("CategoryModules", "AdminTraining")';
+            }
+        }
+    </script>
+</div>

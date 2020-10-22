@@ -1,0 +1,90 @@
+﻿@using SCORM1.Models.ViewModel
+@using System.Data;
+
+@model AdmingameMassiveQuestion
+@if (TempData["Menssage"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Menssages").modal();
+            });
+        </script>
+    }}
+
+<br /><br />
+<div class="contenido-articulo">
+    <div class="containerA container">
+        <div id="Menssages" class="modal fade" role="dialog">
+            <div class="modal-dialog1">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>
+                            @TempData["Menssage"]
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br /><br /><br />
+        <div class="row fecha">
+            <div class="btn-group btn-breadcrumb">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>              
+                <a href="@Url.Action("MgQuestions", "AdminGame", new {id = Model.Setting.Sett_Id})" class="btn btn-info">Preguntas</a>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <div class="cnt1 img-responsive">
+                <br />
+                <div class="logo_inicial">
+                    @Html.Raw(Model.Logo)
+                </div>
+                <div class="col-md-12">
+                    <br /><br /><br /><br /><br />
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <label>● Descargue este formato para crear las preguntas de la evaluación: <a href="~/Reports/CargaMasivaPreguntas.xlsx" target="_blank" download="CargaMasivaPreguntas.xlsx"> Descargar</a></label>
+                    </div>
+                    <div class="col-md-7">
+                        <label>● Una vez haya creado las preguntas, debe seleccionar el archivo para hacer la</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="col-md-6"> carga masiva de preguntas.</label>
+                    </div>
+                    @using (Html.BeginForm("MassiveQuestions", "AdminGame", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.Setting.Sett_Id)
+                        <div class="col-md-7">
+                            <label class="col-md-4">●Seleccione el archivo</label>
+                            <input type="file" name="excelUpload" alt="Imagen responsive" class="col-md-8" />
+                        </div>
+                                <div class="col-md-7">
+                                    <label>● Cuando este listo haga clic en el boton cargar,para poder subir el documento</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Cargar</button></center>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <br />
+                                    @Html.ValidationSummary("", new { @class = " col-md-4 text-danger" })
+                                </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

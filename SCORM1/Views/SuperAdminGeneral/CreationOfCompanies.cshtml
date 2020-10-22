@@ -1,0 +1,251 @@
+﻿@using SCORM1.Models.SCORM1;
+@using SCORM1.Enum;
+@using SCORM1.Models.ViewModel;
+
+<br /><br /><br /><br />
+
+@model SuperAdminGeneralControllerViewModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+@*Script sections modal*@
+@if (TempData["Menssage"] != null)
+{
+    <script type="text/JavaScript">
+        $(document).ready(function () {
+            $("#Menssages").modal();
+        });
+    </script>
+}
+
+@if (TempData["UpdateCompany"] != null)
+{
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#UpdateMyCompany").modal();
+            });
+        </script>
+    }
+<script>
+    //method UpdateCompany
+    function UpdateCompany(Company_Id) {
+        if (confirm("Actualizar la Compañia") == true) {
+            var CompanyID = Company_Id;
+            window.location.href = ' @Url.Action("UpdateCompanyCurrent", "SuperAdminGeneral", new {id = "ID"})'.replace("ID", CompanyID);
+        }
+    }
+</script>
+
+
+<div class="jumbotron">
+    <br /><br />
+    <h2>Mis Compañias</h2>
+    <br /><br />
+    <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Crear una compañia</button>
+    <br /><br />
+    <!--muestra la lista de compañias-->
+    <div class="col-md-12">
+
+        @if (Model.ListCompanies.Count() != 0)
+            {
+                foreach (Company companies in Model.ListCompanies)
+                {
+                <div class="edicion col-sm-6 col-lg-4">
+                    <div class="panel panel-info col-md-12">
+                        <div class="panel-heading">
+                            <h3>@Html.DisplayFor(x => companies.CompanyName)</h3>
+                        </div>
+                        <div id="galeria1">
+                            <div class="grises1">
+                                <center><img src="~/Resources/SourceOfThePage/icon-company.png" style="width:150px;height:150px;" class="img-responsive" alt="Imagen responsive" /></center>
+                            </div>
+                            <div>
+                                <h5> @Html.DisplayFor(x => companies.CompanySector)  </h5>
+                                <h5> @Html.DisplayFor(x => companies.CompanyNit)  </h5>
+                                <h5> @Html.DisplayFor(x => companies.CompanyType)  </h5>
+                                <i class="fa fa-cog" onclick="UpdateCompany('@companies.CompanyId')" data-cname="@companies.CompanyId"></i>
+                                <i>@Html.ActionLink(" ", "ShowTheUserAdministratorsOfTheCompany", "SuperAdminGeneral", new { idCompany = companies.CompanyId }, new { @class = "fa fa-plus-square" })</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- aqui la seccion de crear compañias-->
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nueva compañia</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("CreateCompany", "SuperAdminGeneral", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <div class="form-horizontal">
+                        
+                   
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyType, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.CompanyType, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanySector, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.CompanySector, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanySector, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyNit, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyNit, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyNit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyGame, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.CompanyGame, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyGame, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Crear" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--aqui esta la seccion de actualizar las compañias-->
+
+    <div class="modal fade" id="UpdateMyCompany" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="title_popup">Actualizar Compañia <button type="button" class="close" data-dismiss="modal">×</button></h5>
+                </div>
+                <div class="modal-body">
+
+                    @using (Html.BeginForm("UpdateCompanyCurrent", "SuperAdminGeneral", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyToUpdate.CompanyType, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.CompanyToUpdate.CompanyType, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyToUpdate.CompanyType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyToUpdate.CompanySector, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.CompanyToUpdate.CompanySector, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyToUpdate.CompanySector, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyToUpdate.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyToUpdate.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyToUpdate.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyToUpdate.CompanyNit, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyToUpdate.CompanyNit, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyToUpdate.CompanyNit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompanyToUpdate.CompanyGame, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.CompanyToUpdate.CompanyGame, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyToUpdate.CompanyGame, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @Html.HiddenFor(x => x.CompanyToUpdate.CompanyId)
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Actualizar" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- this is message-->
+<div id="Menssages" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>
+                    @TempData["Menssage"]
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

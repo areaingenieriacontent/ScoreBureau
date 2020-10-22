@@ -1,0 +1,402 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model RatingUserViewJobsT
+<script src="~/Scripts/Tinymce1/tinymce.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height: 500,
+        plugins: [
+          "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+        connector: '@Model.baseUrl' + '/Gastronomia/Upload/Index',
+        menubar: false,
+        toolbar_items_size: 'small',
+
+        style_formats: [{
+            title: 'Bold text',
+            inline: 'b'
+        }, {
+            title: 'Red text',
+            inline: 'span',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Red header',
+            block: 'h1',
+            styles: {
+                color: '#ff0000'
+            }
+        }, {
+            title: 'Example 1',
+            inline: 'span',
+            classes: 'example1'
+        }, {
+            title: 'Example 2',
+            inline: 'span',
+            classes: 'example2'
+        }, {
+            title: 'Table styles'
+        }, {
+            title: 'Table row 1',
+            selector: 'tr',
+            classes: 'tablerow1'
+        }],
+
+        templates: [{
+            title: 'Test template 1',
+            content: 'Test 1'
+        }, {
+            title: 'Test template 2',
+            content: 'Test 2'
+        }],
+
+    });
+</script>
+@if (TempData["Info"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#Inform").modal();
+            });
+        </script>
+    }}
+<br /><br /><br />
+@Scripts.Render("~/bundles/jqueryval")
+
+<br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Grades", "User", new {id=Model.JOBS.TopicsCourse.Modu_Id })" class="btn btn-info">CURSO</a>
+    </div>
+</div>
+<br /><br /><br />
+<div class="panel panel-primary">
+
+    <div id="Inform" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @TempData["Info"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-heading panel-head"><center><h1 style="font-size:35px;">@Model.JOBS.Job_Name</h1> </center></div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <br /><br />
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-10" style="text-align:left;font-size:16px">
+                <p>
+                    <strong>
+                        @Html.Raw(Model.JOBS.Job_Content)
+                    </strong>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-12"> <br /><br /></div>
+        @if (@Model.JOBS.Job_Resource != null)
+        {
+            <div class="col-md-2">
+                <strong>
+                    @* -  <a href="~/ResourcesJobs/@Model.JOBS.Job_Resource" target="_blank" download="Recurso" style="background-color:transparent;color:#f57c00;"><img src="~/Content/Images/@Model.Image" style="width:150px; height:100px" class="img-responsive" /></a>*@
+                </strong>
+            </div>
+        }
+
+        <div class="col-md-10">
+            <p style="color:#888888; font-size:30px; width:100%;text-align:left; ">@Model.JOBS.Job_Description</p>
+        </div>
+
+        <div class="col-md-12"> <br /><br /></div>
+
+        @if (Model.ListJobsT.Count != 0)
+        {
+
+            foreach (var item in Model.ListJobsT)
+            {
+                if (item.ReJo_Resource != null)
+                {
+                    <div class="col-md-2">
+                        <strong>
+                            <a href="~/ResourcesJobs/@item.ReJo_Resource" target="_blank" download="Recurso" style="background-color:transparent;color:#f57c00;"><img src="~/Content/Images/@Model.ImageR" style="width:150px; height:100px" class="img-responsive" /></a>
+                        </strong>
+                    </div>
+                }
+
+                <div class="col-md-10" style="border: 1px groove black">
+                    <br />
+                    <p class="fecha"><strong>Nombre:</strong> @item.ReJo_Name</p>
+                    <p class="fecha">@item.ReJo_Description</p>
+                    <p>
+                        @Html.Raw(item.ReJo_Content)
+                    </p>
+                    <h6 class="fecha">
+                        <strong>Fecha Publicación:</strong> @item.ReJo_InitDate
+                    </h6>
+                    @if (item.BookRatings.Count != 0)
+                    {
+                        foreach (var item1 in item.BookRatings)
+                        {
+                            @*<h6 class="fecha">
+                                <strong>Nota:</strong> @item1.BoRa_Score
+                            </h6>*@
+                            <h6 class="fecha">
+                                <strong>Puntos:</strong> @item1.BoRa_Point
+                            </h6>
+                            <h6 class="fecha">
+                                <strong>Estado:</strong> @item1.BoRa_StateScore
+                            </h6>
+                        }
+                    }
+
+                    <br />
+
+                </div>
+                <div class="col-md-12">
+                    @using (Html.BeginForm("EditResourceUserJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <hr />
+                            @*<h4><strong> Recuerde : Solo se aceptan documentos en formato Pdf,Word,Excel,PowerPoint y que el tamaño del archivo no supere 1MB</strong></h4>*@
+                            @Html.HiddenFor(model => model.JOBS.Job_Id)
+                            @Html.HiddenFor(model => model.ReJo_Id, new { @Value = item.ReJo_Id })
+                            <br />
+                            <div class="form-group">
+
+                                @*<div class="col-sm-10">
+                                    <input type="file" id="CoverpageModule" name="upload" />
+                                </div>*@
+                            </div>
+                            <div class="form-group">
+                                @*<div class="col-md-2">
+                                    <button class="btn btn-primary" name="singin" type="submit">Modificar Archivo</button>
+                                    <br />
+                                    <br />
+                                </div>*@
+                            </div>
+                        </form>
+                    }
+                </div>
+            }
+
+            <div class="col-md-2">
+                <a href='@Url.Action("Index", "Home")'>
+                    <p style="background: #b0002d;padding: 11px;border: #b0002d;font-size: 16px; border-radius:3px">Finalizar</p>
+                </a>
+            </div>
+            @*----------------------------------------------------------------------*@
+            <div class="col-md-12">
+                <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#AddJobs">Añadir Archivo</button>
+            </div>
+
+            <div id="AddJobs" class="modal fade" role="dialog">
+                <div class="modal-dialog1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("ResourceUserJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.HiddenFor(model => model.JOBS.Job_Id)
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    <br />
+                                    <div class="col-md-6">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.LabelFor(model => model.ReJo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.EditorFor(model => model.ReJo_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ReJo_Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="col-md-12">
+                                            @Html.TextAreaFor(model => model.ReJo_Content, 10, 15, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ReJo_Content, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.JOBS.Job_Resource, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                        <div class="col-sm-10">
+                                            <input type="file" id="CoverpageModule" name="upload" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-8">
+                                            <br /><br />
+                                            <center><button class="btn btn-primary" name="singin" type="submit">Crear</button></center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @*----------------------------------------------------------------------*@
+
+        }
+        else
+        {
+            <div class="col-md-12">
+                <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#AddJobs">Añadir Archivo</button>
+            </div>
+
+            <div id="AddJobs" class="modal fade" role="dialog">
+                <div class="modal-dialog1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("ResourceUserJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.HiddenFor(model => model.JOBS.Job_Id)
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    <br />
+                                    <div class="col-md-6">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.LabelFor(model => model.ReJo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.EditorFor(model => model.ReJo_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ReJo_Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="col-md-12">
+                                            @Html.TextAreaFor(model => model.ReJo_Content, 10, 15, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ReJo_Content, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.JOBS.Job_Resource, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                        <div class="col-sm-10">
+                                            <input type="file" id="CoverpageModule" name="upload" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-8">
+                                            <br /><br />
+                                            <center><button class="btn btn-primary" name="singin" type="submit">Crear</button></center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @*------------------------------------To-Do-----------------------------------*@
+        <div id="AddJobs" class="modal fade" role="dialog">
+            <div class="modal-dialog1">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("ResourceUserJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.HiddenFor(model => model.JOBS.Job_Id)
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <br />
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.ReJo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.ReJo_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ReJo_Name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12">
+                                    <br />
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.ReJo_Content, 10, 15, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ReJo_Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.JOBS.Job_Resource, htmlAttributes: new { @class = "control-label col-sm-2" })
+                                    <div class="col-sm-10">
+                                        <input type="file" id="CoverpageModule" name="upload" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <br /><br />
+                                        <center><button class="btn btn-primary" name="singin" type="submit">Crear</button></center>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*---------------------------------------------------------------------------*@
+    </div>
+</div>
+<br />
+<br />

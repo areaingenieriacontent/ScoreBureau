@@ -1,0 +1,109 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model AdminAreaViewModel
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+     <!-- Users of Area -->
+    <div class="form-horizontal">
+        <br />
+        <br />
+        <br />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+        </div>
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="success">
+                        <td>Nombre</td>
+                        <td>Apellidos</td>
+                        <td>documento</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var usuariosJefes in Model.UsersOfArea)
+                    {
+                        using (Html.BeginForm("DeleteUserArea", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            <tr>
+                                <td>
+                                    @usuariosJefes.FirstName
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => usuariosJefes.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => usuariosJefes.Document)
+                                </td>
+                                <td>
+                                    <input type="hidden" name="UsersOfAreaId" value="@usuariosJefes.Id" />
+                                    <input type="hidden" name="AreaId" value="@Model.AreaId" />
+                                    <button class="btn btn-primary" formaction="~/Admin/DeleteUserArea/@usuariosJefes.Id">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <!-- Users out Area -->
+    <div class="form-horizontal">
+        <br />
+        <br />
+        <br />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+        </div>
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="success">
+                        <td>Nombre</td>
+                        <td>Apellidos</td>
+                        <td>documento</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var usuariosJefes in Model.UsersOutArea)
+                    {
+                        using (Html.BeginForm("AddUserArea", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            <tr>
+                                <td>
+                                    @usuariosJefes.FirstName
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => usuariosJefes.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => usuariosJefes.Document)
+                                </td>
+                                <td>
+                                    <input type="hidden" name="UserId" value="@usuariosJefes.Id" /> 
+                                    <input type="hidden" name="AreaId" value="@Model.AreaId" />
+                                    <button class="btn btn-primary" formaction="~/Admin/AddUserArea/@usuariosJefes.Id">Agregar</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

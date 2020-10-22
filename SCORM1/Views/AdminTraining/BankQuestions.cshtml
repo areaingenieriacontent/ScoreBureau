@@ -1,0 +1,97 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model AdminTrainingBankQuestionViewModel 
+
+<link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br /><br /><br /><br /><br /><br />
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@if (TempData["delete"] != null)
+{
+    @section Scripts {
+        <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo").modal();
+            });
+        </script>
+    }}
+else
+{
+    if (TempData["deletePairing"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+            $(document).ready(function () {
+                $("#DeleteInfo").modal();
+            });
+            </script>
+        }}
+    else
+    {
+
+    }
+}
+<br /><br /><br />
+
+
+<div class="panel panel-primary">
+    <div id="DeleteInfo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <h4>No se puede eliminar la pregunta hasta que elimine las respuestas</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-heading panel-head"><center> BANCO DE PREGUNTAS</center></div>
+    <div class="panel-body">
+
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre</th>
+                        <th>Curso</th>
+                        <th>Total Preguntas</th>
+                        <th>Escoger</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (BankQuestion banquestion in Model.Listbank)
+                    {
+
+
+                    <tr>
+                        <td>@banquestion.BaQu_Name</td>
+                        <td>@banquestion.TopicsCourse.ToCo_Name</td>
+                        <td>@banquestion.OptionMultiple.Count() +@banquestion.Pairing.Count() + @banquestion.TrueOrFalse.Count()</td>
+                        <td>
+                            @Html.ActionLink("Seleccionar", "AddBanquestionTotal", "AdminTraining", new { Bank_Id = banquestion.BaQu_Id, BankActual_Id = Model.bankquestion.BaQu_Id }, new { @class = "btn btn-primary" })
+                            
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+
+

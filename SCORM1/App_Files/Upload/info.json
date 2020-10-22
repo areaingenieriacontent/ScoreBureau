@@ -1,0 +1,496 @@
+{
+    "titulo":"PROTECCIÓN DE DATOS PERSONALES",
+    "subTitulo":"",
+    "descripcion":"",
+    "video":"4.mp4",
+    "unidades":[
+        {
+            "nombre":"INICIO",
+            "key":"inicio",
+            "titulo":"Introducción",
+            "backgroundContenido":"files/inicio/1.jpg",
+            "iconActivi":"images/menuvertical/un-icon-white-0.png",
+            "contenidos":[
+                {
+                    "titulo":"Introducción",
+                    "tipo":"2",
+                    "img":"images/team/intro.png",
+                    "contenido":"files/inicio/introductorio.html"
+                },
+                {
+                    "titulo":"Contextualización",
+                    "tipo":"3",
+                    "img":"images/team/narrativa.png",
+                    "contenido":"files/inicio/Contextualizacion/infografia narrativa.html"
+                },
+                {
+                    "titulo":"Preguntas Orientadoras",
+                    "tipo":"2",
+                    "img":"images/team/pregunta-orientadora.png",
+                    "contenido":"files/inicio/pregunta.html"
+                }
+                ]
+             },
+        {
+            "nombre":"MÓDULO 1",
+            "key":"unidad1",
+            "titulo":"Contexto normativo",
+            "backgroundContenido":"files/unidad1/1.jpg",
+            "iconActivi":"images/menuvertical/un-icon-white-1.png",
+            "actividades":[
+                {
+                    "nombre":"¿Qué es privacidad, Habeas Data y Protección de Datos Personales?",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema1-1.png",
+                    "items":[
+                        {
+                            "nombre":"¿Qué es privacidad, Habeas Data y Protección de Datos Personales? ",
+                            "imgactivi":"images/team/recurso-1.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 1/proteccion/index.html"
+                            
+                        },
+                        {
+                            "nombre":"K-APSULA 1",
+                            "imgactivi":"images/team/capsula-1.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 1/videoCap1.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"El contexto internacional",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema2-1.png",
+                    "items":[
+                        {
+                            "nombre":"El contexto internacional",
+                            "imgactivi":"images/team/recurso-1.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 1/El contexto internacional/Contexto_intenacional.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 2",
+                            "imgactivi":"images/team/capsula-1.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 1/videoCap2.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"El marco regulatorio en Colombia",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema3-1.png",
+                    "items":[
+                        {
+                            "nombre":"El marco regulatorio en Colombia",
+                            "imgactivi":"images/team/recurso-1.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo%201/El%20marco%20regulatorio%20en%20colombia/index.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 3",
+                            "imgactivi":"images/team/capsula-1.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 1/videoCap3.html"
+                            
+                        }
+                        ]
+                }
+                ],"contenidos":[
+                {
+                    "titulo":"Desafío de conocimiento",
+                    "tipo":"3",
+                    "img":"images/team/tema4-2.png",
+                    "contenido":"../DesafioConocimiento/index.html"
+                },
+                {
+                    "titulo":"Glosario de términos",
+                    "tipo":"3",
+                    "img":"images/team/glosario1.png",
+                    "contenido":"files/Modulo 1/GLOSARIO PROTE  DATOS PER/Glosario.html"
+                },
+                {
+                    "titulo":"Prueba de conocimiento",
+                    "tipo":"3",
+                    "img":"images/team/certificado1.png",
+                    "contenido":"https://www.aprendeyavanza2.com.co/User/TestUser/18"
+                }
+                ]
+        },
+        {
+            "nombre":"MÓDULO 2",
+            "key":"unidad2",
+            "titulo":"El dato:objeto de la protección",
+            "backgroundContenido":"files/unidad2/1.jpg",
+            "iconActivi":"images/menuvertical/un-icon-white-2.png",
+            "actividades":[
+                {
+                    "nombre":"¿Qué es dato personal?",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema1-2.png",
+                    "items":[
+                        {
+                            "nombre":"¿Qué es dato personal?",
+                            "imgactivi":"images/team/recurso-2.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo%202/Que%20es%20dato%20personal/Infografia%20multimedia.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 1",
+                            "imgactivi":"images/team/capsula-2.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 2.2/videoCap1.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"¿Qué datos tratamos a nivel empresarial e institucional?",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema2-2.png",
+                    "items":[
+                        {
+                            "nombre":"¿Qué datos tratamos a nivel empresarial e institucional?",
+                            "imgactivi":"images/team/recurso-2.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 2.2/Datos a nivel empresarial/Infografia multimedia.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 2",
+                            "imgactivi":"images/team/capsula-2.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 2.2/videoCap2.html"
+                            
+                        }                       
+                        ]
+                },
+                {
+                    "nombre":"Principios o reglas a tener en cuenta frente a los datos",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema3-2.png",
+                    "items":[
+                        {
+                            "nombre":"Principios o reglas a tener en cuenta frente a los datos",
+                            "imgactivi":"images/team/recurso-2.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo%202.2/Recursos y herramientas/Principios_o_reglas.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 3",
+                            "imgactivi":"images/team/capsula-2.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 2.2/videoCap3.html"
+                            
+                        }
+                        ]
+                }
+                ],
+            	"contenidos":[
+                {
+                    "titulo":"Caso práctico",
+                    "tipo":"3",
+                    "img":"images/team/tema4-1.png",
+                    "contenido":"../caso_practico/index.html"
+                },
+                {
+                    "titulo":"Glosario de términos",
+                    "tipo":"3",
+                    "img":"images/team/glosario2.png",
+                    "contenido":"files/Modulo 1/GLOSARIO PROTE  DATOS PER/Glosario.html"
+                },
+                {
+                    "titulo":"Prueba de conocimiento",
+                    "tipo":"3",
+                    "img":"images/team/certificado2.png",
+                    "contenido":"https://www.aprendeyavanza2.com.co/User/TestUser/19"
+                }
+                ]
+        },
+        {
+            "nombre":"MÓDULO 3",
+            "key":"unidad3",
+            "titulo":"Sujetos que intervienen",
+            "backgroundContenido":"files/unidad3/1.jpg",
+           "iconActivi":"images/menuvertical/un-icon-white-3.png",
+            "actividades":[
+                {
+                    "nombre":"Calidades de las personas que intervienen en la protección de datos",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema1-3.png",
+                    "items":[
+                        {
+                            "nombre":"Calidades de las personas que intervienen en la protección de datos",
+                            "imgactivi":"images/team/recurso-3.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 3/CALIDADES DE LAS PERSONAS tema 1/calidades_de_las_personas.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 1",
+                            "imgactivi":"images/team/capsula-3.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 3/videoCap1.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"Relaciones contractuales entre responsables y encargados",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema2-3.png",
+                    "items":[
+                        {
+                            "nombre":"Relaciones contractuales entre responsables y encargados",
+                            "imgactivi":"images/team/recurso-3.png",
+                           "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 3/RELACIONES CONTRACTUALES tema 2/Infografia multimedia.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 2",
+                            "imgactivi":"images/team/capsula-3.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 3/videoCap2.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"Principios o reglas a tener en cuenta desde la perspectiva de los sujetos que intervienen",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema3-3.png",
+                    "items":[
+                        {
+                            "nombre":"Principios o reglas a tener en cuenta desde la perspectiva de los sujetos que intervienen",
+                            "imgactivi":"images/team/recurso-3.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 3/PRINCIPIOS O REGLAS/principios_o_regalas.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 3",
+                            "imgactivi":"images/team/capsula-3.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 3/videoCap3.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"Organismos de control y el estado",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema4-3.png",
+                    "items":[
+                           {
+                            "nombre":"Organismos de control y el estado",
+                            "descripcion":"Clic para ver la información",
+                            "imgactivi":"images/team/recurso-3.png",
+                            "link":"files/Modulo 3/ORGANISMOS  tema 4/index.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 4",
+                            "imgactivi":"images/team/capsula-3.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 3/videoCap4.html"
+                            
+                        }
+
+                        ]
+                }
+                ],
+            	"contenidos":[
+                {
+                    "titulo":"Glosario de términos",
+                    "tipo":"3",
+                    "img":"images/team/glosario3.png",
+                    "contenido":"files/Modulo 1/GLOSARIO PROTE  DATOS PER/Glosario.html"
+                },
+                {
+                    "titulo":"Prueba de conocimiento",
+                    "tipo":"3",
+                    "img":"images/team/certificado3.png",
+                    "contenido":"https://www.aprendeyavanza2.com.co/User/TestUser/22"
+                }
+                ]
+        },
+     {
+            "nombre":"MÓDULO 4",
+            "key":"unidad5",
+            "titulo":"Tratamiento de datos",
+            "backgroundContenido":"files/unidad4/1.jpg",
+            "iconActivi":"images/menuvertical/un-icon-white-4.png",
+            "actividades":[
+                {
+                    "nombre":"Derechos de las personas frente a sus datos personales",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema1-4.png",
+                    "items":[
+                        {
+                            "nombre":"Derechos de las personas frente a sus datos personales",
+                            "imgactivi":"images/team/recurso-4.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 4/DERECHOS tema1/Infografia multimedia.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 1",
+                            "imgactivi":"images/team/capsula-4.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 4/videoCap1.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"Procedimiento de habeas data: ¿en qué consiste?",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema2-4.png",
+                    "items":[
+                        {
+                            "nombre":"Procedimiento de habeas data: ¿en qué consiste?",
+                            "imgactivi":"images/team/recurso-4.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 4/Procedimiento tema2/Procedimiento_De_Habeas_data.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 2",
+                            "imgactivi":"images/team/capsula-4.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 4/videoCap2.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"Principios aplicables a los procesos de tratamiento de datos",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema3-4.png",
+                    "items":[
+                        {
+                            "nombre":"Principios aplicables a los procesos de tratamiento de datos",
+                            "imgactivi":"images/team/recurso-4.png",
+                            "descripcion":"Clic para ver la información",
+                            "link":"files/Modulo 4/index.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 3",
+                            "imgactivi":"images/team/capsula-4.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 4/videoCap3.html"
+                            
+                        }
+                        ]
+                },
+                {
+                    "nombre":"Transferencia internacional de datos",
+                    "tipo":"1",
+                    "imagenes":"images/team/tema4-4.png",
+                    "items":[
+                           {
+                            "nombre":"Transferencia internacional de datos",
+                            "descripcion":"Clic para ver la información",
+                            "imgactivi":"images/team/recurso-4.png",
+                            "link":"files/Modulo 4/Transferencia tema4/index.html"
+                        },
+                        {
+                            "nombre":"K-APSULA 4",
+                            "imgactivi":"images/team/capsula-4.png",
+                            "descripcion":"Clic para ver",
+                            "link":"files/Modulo 4/videoCap4.html"
+                            
+                        }
+
+                        ]
+                }
+                ],
+            	"contenidos":[
+                {
+                    "titulo":"Glosario de términos",
+                    "tipo":"3",
+                    "img":"images/team/glosario4.png",
+                    "contenido":"files/Modulo 1/GLOSARIO PROTE  DATOS PER/Glosario.html"
+                },
+                {
+                    "titulo":"Prueba de conocimiento",
+                    "tipo":"3",
+                    "img":"images/team/certificado4.png",
+                    "contenido":"https://www.aprendeyavanza2.com.co/User/TestUser/25"
+                }
+                ]
+        },
+        {
+            "nombre":"MÓDULO 5",
+            "key":"unidad6",
+            "titulo":"Registro nacional de base datos",
+            "backgroundContenido":"files/unidad5/1.jpg",
+           "iconActivi":"images/menuvertical/un-icon-white-5.png",
+            "contenidos":[
+                {
+                    "titulo":"Inventario de bases de datos de carácter personal",
+                    "tipo":"3",
+                    "img":"images/team/tema1-5.png",
+                    "contenido":"files/modulo 5/ova/index.html"
+                },
+                {
+                    "titulo":"Glosario de términos",
+                    "tipo":"3",
+                    "img":"images/team/glosario5.png",
+                    "contenido":"files/Modulo 1/GLOSARIO PROTE  DATOS PER/Glosario.html"
+                }
+                ]
+        },
+        {
+            "nombre":"MÓDULO 6",
+            "key":"unidad7",
+            "titulo":"Kit Básico de Cumplimiento - Guías Normativas de Trabajo",
+            "backgroundContenido":"files/unidad6/1.jpg",
+           "iconActivi":"images/menuvertical/un-icon-white-6.png",
+           "contenidos":[
+                
+                 {
+                    "titulo":"Acuerdo de confidencialidad",
+                    "tipo":"3",
+                    "img":"images/team/tema1-6.png",
+                    "contenido":"files/modulo 7/ACDO DE CONFIDENCIALIDAD SOBRE DP.html"
+                },
+                 {
+                    "titulo":"Aviso de Privacidad General",
+                    "tipo":"3",
+                    "img":"images/team/tema2-6.png",
+                    "contenido":"files/modulo 7/aviso de privacidad general.html"
+                },
+                 {
+                    "titulo":"Acuerdo de Privacidad para videovigilancia",
+                    "tipo":"3",
+                    "img":"images/team/tema3-6.png",
+                    "contenido":"files/modulo 7/AVISO DE PRIVACIDAD VIDEOVIGILANCIA.html"
+                },
+                 {
+                    "titulo":"Cláusula De Protección De Datos Para Proveedores",
+                    "tipo":"3",
+                    "img":"images/team/tema4-6.png",
+                    "contenido":"files/modulo 7/clausula pd proveedores.html"
+                },
+                 {
+                    "titulo":"Norma General de Protección de Datos Personales",
+                    "tipo":"3",
+                    "img":"images/team/tema5-6.png",
+                    "contenido":"files/modulo 7/Norma General de Proteccion de Datos Personales.html"
+                },
+                 {
+                    "titulo":"Política de Protección de Datos Personales",
+                    "tipo":"3",
+                    "img":"images/team/tema6-6.png",
+                    "contenido":"files/modulo 7/politica de privacidad general.html"
+                },
+                {
+                    "titulo":"Glosario de términos",
+                    "tipo":"3",
+                    "img":"images/team/glosario6.png",
+                    "contenido":"files/Modulo 1/GLOSARIO PROTE  DATOS PER/Glosario.html"
+                }
+
+                ]
+            }
+        ]
+    
+}

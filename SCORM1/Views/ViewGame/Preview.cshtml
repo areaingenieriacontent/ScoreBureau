@@ -1,0 +1,39 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model AdminPreviw
+
+
+
+<body onload="setInterval('contador()',700)" style="background:url(../../ResourceGame/FondoInicio.png); background-size: cover;background-position: center center;background-repeat: no-repeat;background-attachment: fixed;">
+    <br /><br /><br /><br /><br /><br />
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+            <a href="@Url.Action("Setting", "AdminGame")" class="btn btn-info">Ajuste Juego</a>
+            <a href="@Url.Action("MgQuestions", "AdminGame", new {id = Model.Sett_Id})" class="btn btn-info">Preguntas</a>
+        </div>
+    </div>
+        <div class="jumbotron3">
+            <div class="col-md-12">
+                <img src="~/ResourceGame/Gif (1).gif"/>
+                <br /><br /><br />
+            </div>
+            <div class="col-md-12">
+                <br /><br /><br />
+                <audio src="~/ResourceGame/@Model.setting.Sett_Audio3" autoplay loop></audio>
+            </div>
+            <br /><br /><br />
+        </div>
+</body>
+
+<script type="text/javascript">
+
+var num=13;
+function contador() {
+  num--;
+  if (num == 0) location = '@Url.Action("Instructions", "ViewGame", new { id = Model.Sett_Id })';
+  document.getElementById('seg').innerHTML=num;
+}
+</script>  
+

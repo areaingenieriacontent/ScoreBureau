@@ -1,0 +1,41 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model UserPlansViewModel
+@{
+    ViewBag.Title = "Plans";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br />
+
+<div class="jumbotron col-md-12">
+    <div class="titulo"><center><h3>PLANES ACTUALES DEL USUARIO</h3></center></div>
+
+    <div class="table-responsive col-md-12 col-sm-12">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr class="success">
+                    <th>Plan</th>
+                    <th>Competencia</th>
+                 
+                    <th>Recurso</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Plans != null)
+                {
+                    foreach (Plan plan in Model.Plans)
+                    {
+                        <tr>
+                            <td>@plan.PlanDescription</td>
+                            <td>@plan.Proficiency.ProficiencyDescription</td>
+                          
+                            <td>
+                                @Html.ActionLink("Link", "GetFile", "File", new { id = plan.ResourceId }, new { @class = "btn btn-primary", target = "_blank" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

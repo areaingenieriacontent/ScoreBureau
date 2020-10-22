@@ -1,0 +1,46 @@
+﻿@using SCORM1.Models.ViewModel
+@using SCORM1.Models.Lms
+@using SCORM1.Enum
+@model AdminManagementBankQuestions
+
+<script type="text/javascript">
+    function ViewQestions(id) {
+        var link = '@Url.Action("ShowBankQuestions", "AdminTraining", new { id = "value", idBanckReiceiving=Model.bankReceiving})';
+        link = link.replace("value", id)
+        $("#show").load(link)
+    }
+</script>
+<br /><br /><br /><br /><br />
+<div class="jumbotron">
+    <div class="col-md-12">
+        <div class="col-md-4">
+
+            <table>
+                <thead>
+                    <tr>
+                        <td><h3> banco de preguntas</h3></td>
+                    </tr>
+                    <tr>
+                        <td>nombre del banco</td>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                        @foreach (var banks in Model.bankquestion)
+                        {
+                            <tr>
+                                <td>
+                                    @banks.BaQu_Name
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="ViewQestions(@banks.BaQu_Id, @Model.bankReceiving)" data-cname="@banks.BaQu_Id">ver</button>
+                                </td>
+                            </tr>
+                        }
+                    
+                </tbody>
+            </table>
+        </div>
+        <div id="show" class="col-md-8"></div>
+    </div>
+</div>

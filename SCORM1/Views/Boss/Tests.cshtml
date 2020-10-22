@@ -1,0 +1,72 @@
+﻿@using SCORM1.Models.MeasuringSystem
+@model BossTestViewModel
+@{
+    ViewBag.Title = "Tests";
+}
+
+<br /> <br />
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <div class="titulo"><strong>Mediciones Pendientes</strong></div>
+
+
+            <table class="lista_test table table-striped table-hover  col-md-12">
+
+                <tr style="font-weight:700">
+
+                    <td>Nombre de la Medición</td>
+                    <td>Fecha de inicio</td>
+                    <td>Fecha de finalización</td>
+                    <td>Relación</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Estado</td>
+                </tr>
+
+                @foreach (UserTestIndiv measure in Model.PendanteMeasures)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(Model => measure.Measure.Test.TestDescription)</td>
+                        <td>@Html.DisplayFor(Model => measure.Measure.MeasureInitDate)</td>
+                        <td>@Html.DisplayFor(Model => measure.Measure.MeasureFinishDate)</td>
+                        <td>@Html.DisplayFor(Model => measure.description)</td>
+                        @if (measure.User != null)
+                        {
+                            <td>@Html.DisplayFor(Model => measure.User.FirstName)</td>
+                            <td>@Html.DisplayFor(Model => measure.User.LastName)</td>
+                        }
+
+                        <td><input type="submit" class="btn btn-success" value="Pendiente" onclick="location.href='@Url.Action("Test", "Boss", new { testId = measure.Measure.Test.TestId, userId = Model.UserId, measureId = measure.Measure.MeasureId, UserEvaluated = measure.User.Id, UserType=measure.description})'" /></td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+        <br><hr style="width:100%; clear:both; border:dashed; border-color: #A3DC68; border-width:thin; margin-bottom:10px;">
+
+        <div class="col-md-12 table-responsive">
+            <div class="titulo"><strong>Mediciones Realizadas</strong></div>
+            <table class="lista_test col-md-12 table table-striped table-hover  col-md-12">
+                <tbody></tbody>
+                <tr style="font-weight:700">
+                    <td>Nombre de Test</td>
+                    <td>Fecha de finalización</td>
+                    <td>Estado</td>
+                </tr>
+                @foreach (Result results in Model.Results)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(Model => results.Measure.Test.TestDescription)</td>
+                        <td>@Html.DisplayFor(Model => results.ResultDate)</td>
+                        <td>Finalizado</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

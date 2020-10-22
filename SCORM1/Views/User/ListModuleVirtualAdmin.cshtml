@@ -1,0 +1,81 @@
+﻿
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.Lms;
+@model UserEnrollmentViewmodel
+<br />
+<br />
+
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br />
+
+<div class="panel-primary">
+    @using (Html.BeginForm("SearchMVirtual", "User", FormMethod.Post, new { @class = "row", role = "search" }))
+    {
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.SearchModuleVirtual, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre del Curso" } })
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-default">Buscar</button>
+        </div>
+    }
+
+    @if (Model.enrollment != null)
+    {
+
+        <br />
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th>Nombre del Contenido</th>
+                        <th>Fecha de Incio</th>
+                        <th>Vigencia</th>
+
+                        <th>Portada</th>
+                        <th>Ver</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var modules in Model.enrollment)
+                    {
+                        <tr>
+                            <td>@modules.Module.Modu_Name</td>
+                            <td>@modules.Enro_InitDateModule</td>
+                            <td>@modules.Enro_FinishDateModule</td>
+                            <td>
+                                <img src="~/Resources/@modules.Module.Modu_ImageName" style="width:50px; height:50px" />
+                            </td>
+                            <td>
+                                <a href='@Url.Action("ExportToExcel5","AdminGeneral", new { idCurso = @modules.Module.Modu_Id })'>
+                                    <button style="background: #b0002d;padding: 7px;border: #b0002d;font-size: 16px;">Descargar</button>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <br /><br /><br /><br /><br />
+        <div class="row">
+
+            <center> <img src="~/Content/Images/No_cursos_virtuales_w.png" style="width:600px;" alt="Imagen responsive" class="img-responsive" /></center>
+
+        </div>
+    }
+</div>
+
+
+
+

@@ -1,0 +1,108 @@
+﻿@using SCORM1.Models.MeasuringSystem
+
+@model UserResultsViewModel
+@{
+    ViewBag.Title = "Results";
+}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<br /><br /><br /><br /><br /><br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info">INICIO</a>
+
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="jumbotron">
+        @if (Model.FirstScore.Scores.Count == 0)
+        {
+            <div class="caja_graficas">
+                <div class="caja_graficas">
+                    <center><h2>No hay Competencias que Mostrar</h2> </center>
+
+                    <img src="~/Content/Images/background-no-result.jpg" class="img-responsive" alt="Imagen responsive">
+
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="contenedorCompetencias">
+                @foreach (Score score in Model.FirstScore.Scores.ToList())
+                {
+                    <div data-type="caja_contCompe" class="caja_contCompe col-md-2 col-sm-4 col-xs-6" style="width:auto; height:auto;">
+                        <div class="HeaderBarThreshold">
+                            <div class="competencia">@score.Value</div>
+                            <asp:LinkButton ID="SetThreshold" OnClick="btnSetThreshold_Click" runat="server"></asp:LinkButton>
+                            <h5 style="color:black"> @score.Proficiency.ProficiencyDescription </h5>
+                        </div>
+                      
+                    </div>
+                }
+            </div>
+            <div class="titulo"><center><h3>Resultados Obtenidos por el Usuario</h3></center></div>
+
+        <!--div of grafics for Company-->
+            <div id="Graphic">
+                <div class="caja_graficas">
+                    <canvas id="bar-chart" width="800" height="450"></canvas>
+                    <script>
+                        new Chart(document.getElementById("bar-chart"), {
+                            type: 'bar',
+                            data: {
+                                labels: ["Competencia 1", "Competencia 2", "Competencia 3", "Competencia 4", "Competencia 5"],
+                                datasets: [
+                                  {
+                                      label: "Puntaje",
+                                      backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                                      data: [@Model.ResultChart[0]]
+       
+                                  }
+                                ]
+                            },
+                            options: {
+                                legend: { display: false },
+                                title: {
+                                    display: true,
+                                    text: 'Resumen General'
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <!--
+            if (Model.NumberMesuare > 1)
+            {
+                foreach (Score score in Model.FirstScore.Scores.ToList())
+                {
+                <button class="btn btn-success btn-susess" onclick='GraphicsForCompany(score.Proficiency.ProficiencyId)'> Competencia: score.Proficiency.ProficiencyId </button>
+                }
+            <button class="btn btn-success btn-susess" onclick="GraficsForCompanyGeneral()">General</button>
+            }
+            -->
+
+        <!--div of grafics for Company-->
+            <script>
+                function GraphicsForCompany(Graphic) {
+                    var link = '@Url.Action("GraphicsForUser", "UserPlenamente", new { GraphicId = "value"})';
+                    link = link.replace("value", Graphic)
+                    $("#Graphic").load(link);
+                }
+                function GraficsForCompanyGeneral() {
+                    var link = '@Url.Action("GraphicsForUserGeneral", "UserPlenamente")';
+                    $("#Graphic").load(link);
+                }
+            </script>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
