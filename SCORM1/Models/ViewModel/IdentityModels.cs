@@ -21,6 +21,7 @@ using SCORM1.Models.Games;
 using System;
 using SCORM1.Models.MainGame;
 using SCORM1.Models.ratings;
+using SCORM1.Models.ClientProfile;
 
 namespace SCORM1.Models
 {
@@ -235,6 +236,11 @@ namespace SCORM1.Models
         public virtual DbSet<AnswersForum> AnswersForum { get; set; }
         public virtual DbSet<BookRatings> BookRatings { get; set; }
         public virtual DbSet<QuienSabeMasPuntaje> QuienSabeMasPuntajes { get; set; }
+
+        //Perfilamiento de Clientes
+        public virtual DbSet<Dia> Dias { get; set; }
+        public virtual DbSet<Clasificacion> Clasificaciones { get; set; }
+        public virtual DbSet<Cliente> Clientes { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

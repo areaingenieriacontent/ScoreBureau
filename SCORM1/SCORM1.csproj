@@ -290,6 +290,7 @@
     <Compile Include="Controllers\LogsComunidadController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MassiveEnrollmentController.cs" />
+    <Compile Include="Controllers\PerfilamientoClienteController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
@@ -413,6 +414,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAuthenticationAttribute.cs" />
+    <Compile Include="Models\ClientProfile\Clasificacion.cs" />
+    <Compile Include="Models\ClientProfile\Cliente.cs" />
     <Compile Include="Models\Lms\AdvanceLoseUser.cs" />
     <Compile Include="Models\Lms\AnserPairingStudent.cs" />
     <Compile Include="Models\Lms\AnswerOptionMultipleStudent.cs" />
@@ -492,6 +495,7 @@
     <Compile Include="Models\Newspaper\ResourceNw.cs" />
     <Compile Include="Models\Newspaper\Section.cs" />
     <Compile Include="Models\PageCustomization\StylesLogos.cs" />
+    <Compile Include="Models\ClientProfile\Dia.cs" />
     <Compile Include="Models\Personalizations\Changeinterface.cs" />
     <Compile Include="Models\ratings\AnswersForum.cs" />
     <Compile Include="Models\ratings\BookRatings.cs" />
@@ -2324,6 +2328,7 @@
     <Folder Include="Scripts\Tinymce1\plugins\toc\" />
     <Folder Include="uploads\images\" />
     <Folder Include="Views\File\" />
+    <Folder Include="Views\PerfilamientoCliente\" />
     <Folder Include="Views\ReportController\" />
     <Folder Include="Views\SendOfEmails\" />
     <Folder Include="Views\WebService\" />
