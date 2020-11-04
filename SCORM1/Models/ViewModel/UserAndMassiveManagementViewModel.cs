@@ -52,6 +52,12 @@ namespace SCORM1.Models.ViewModel
         [Display(Name = "Ubicación")]
         public int? LocationId { get; set; }
 
+        [Display(Name = "Comunidad Activa")]
+        public int ComunidadActiva { get; set; }
+
+        [Display(Name = "Sistema de clientes")]
+        public bool hasClientProfile { get; set; }
+
         [Display(Name = "Activo")]
         public ACTIVEUSERTOENTER enable { get; set; }
 

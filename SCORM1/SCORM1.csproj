@@ -290,7 +290,7 @@
     <Compile Include="Controllers\LogsComunidadController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MassiveEnrollmentController.cs" />
-    <Compile Include="Controllers\PerfilamientoClienteController.cs" />
+    <Compile Include="Controllers\ClientProfileController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
@@ -412,6 +412,10 @@
     <Compile Include="Migrations\202009010337159_QuienSabeMas.Designer.cs">
       <DependentUpon>202009010337159_QuienSabeMas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011031754240_client_addon.cs" />
+    <Compile Include="Migrations\202011031754240_client_addon.Designer.cs">
+      <DependentUpon>202011031754240_client_addon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAuthenticationAttribute.cs" />
     <Compile Include="Models\ClientProfile\Clasificacion.cs" />
@@ -521,6 +525,7 @@
     <Compile Include="Models\ViewModel\AdminPointViewModel.cs" />
     <Compile Include="Models\ViewModel\AdminTrainingControllerViewmodel.cs" />
     <Compile Include="Models\ViewModel\AdminViewModel.cs" />
+    <Compile Include="Models\ViewModel\ClienteViewModel.cs" />
     <Compile Include="Models\ViewModel\ContactoModel.cs" />
     <Compile Include="Models\ViewModel\CorreoModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModels.cs" />
@@ -2312,6 +2317,9 @@
     <Content Include="Views\User\ViewEvaluaciones.cshtml" />
     <Content Include="Views\Contacto\Create.cshtml" />
     <Content Include="Views\User\ListModuleVirtualAdmin.cshtml" />
+    <Content Include="Views\ClientProfile\Index.cshtml" />
+    <Content Include="Views\ClientProfile\ViewClient.cshtml" />
+    <Content Include="Views\ClientProfile\MassiveRegister1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2419,6 +2427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009010337159_QuienSabeMas.resx">
       <DependentUpon>202009010337159_QuienSabeMas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011031754240_client_addon.resx">
+      <DependentUpon>202011031754240_client_addon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

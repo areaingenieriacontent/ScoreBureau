@@ -12,11 +12,6 @@ namespace SCORM1.Models.ClientProfile
     public class Cliente
     {
 
-        public Cliente()
-        {
-            this.Dias = new HashSet<Dia>();
-        }
-
         [Key]
         public int id { get; set; }
         [Display(Name ="Nombres")]
@@ -31,9 +26,13 @@ namespace SCORM1.Models.ClientProfile
         [Display(Name = "Calificación")]
         public int idClasificacion { get; set; }
         [ForeignKey("User")]
+
         public string userId { get; set; }
+        [ForeignKey("Dia")]
+        [Display(Name = "Día")]
+        public int idDia { get; set; }
         public virtual Clasificacion Clasificacion { get; set; }
-        public virtual ICollection<Dia> Dias { get; set; }
+        public virtual Dia Dia { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
 }

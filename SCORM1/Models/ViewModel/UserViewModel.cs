@@ -98,7 +98,7 @@ namespace SCORM1.Models.ViewModel
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public Int32? ComunidadActiva { get; set; }
-
+        public bool hasClientProfile { get; set; }
 
     }
 

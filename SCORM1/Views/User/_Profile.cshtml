@@ -204,7 +204,7 @@
         <!-- Titulos De Los Botones Del Menu/-->
 
         <a class="col-md-4 aDiv active"  data-toggle="tab" href="#home">ZONA DE APRENDIZAJE INTERACTIVO</a>
-        @if (Model.ComunidadActiva != 0)
+        @if (Model.ComunidadActiva == 1)
         {<a class="col-md-4 aDiv" data-toggle="tab" href="#menu1" >COMUNIDAD SOCIAL DE CONOCIMIENTO</a>
         }
         <a class="col-md-4 aDiv" data-toggle="tab" href="#menu2">TABLERO DE CONTROL</a>
@@ -229,21 +229,27 @@
                         </style>
 
                     </div>
-                    @*<div class="col-md-3">
-                    <a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/aprendizaje-extendido.png" style="width:150px; height:150px;"><h1>APRENDIZAJE <b>EXTENDIDO</b></h1></a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://www.aprendeyavanza2.com.co/UnAula/User/ViewArticle/7" style="background-color:#fff">
-                        <img src="~/Content/Images/base-de-datos.png" style="width:150px; height:150px;"><h1>
-                            <b>BASES DE DATOS</b>
-                        </h1>
-                    </a>
-                </div>
+                    @if (Model.hasClientProfile!=null&&Model.hasClientProfile)
+                    {
+                    <div class="col-md-3 ">
+                        <a href="@Url.Action("Index", "ClientProfile")" style="background-color:#fff"><img src="~/Content/Images/icon_admin_resultados.png" style="width:150px; height:150px;"><h1>SISTEMA DE <b>CLIENTES</b></h1></a>
+                    </div>
+                    }
+                        @*<div class="col-md-3">
+                <a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/aprendizaje-extendido.png" style="width:150px; height:150px;"><h1>APRENDIZAJE <b>EXTENDIDO</b></h1></a>
+            </div>
+            <div class="col-md-3">
+                <a href="https://www.aprendeyavanza2.com.co/UnAula/User/ViewArticle/7" style="background-color:#fff">
+                    <img src="~/Content/Images/base-de-datos.png" style="width:150px; height:150px;"><h1>
+                        <b>BASES DE DATOS</b>
+                    </h1>
+                </a>
+            </div>
 
 
-                <div class="col-md-3" style="padding-bottom:20px">
-                    <a href="https://www.aprendeyavanza2.com.co/UnAula/Recursos/pdf_(1).pdf" target="_blank"><img src="~/Content/Images/sistema-de-evaluacion.png" style="width:150px; height:150px;"><h1>SISTEMA  <b>DE EVALUACIÓN</b></h1></a>
-                </div>*@
+            <div class="col-md-3" style="padding-bottom:20px">
+                <a href="https://www.aprendeyavanza2.com.co/UnAula/Recursos/pdf_(1).pdf" target="_blank"><img src="~/Content/Images/sistema-de-evaluacion.png" style="width:150px; height:150px;"><h1>SISTEMA  <b>DE EVALUACIÓN</b></h1></a>
+            </div>*@
                 </center>
             </div>
 

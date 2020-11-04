@@ -1,0 +1,72 @@
+﻿@using SCORM1.Models.ViewModel;
+@using SCORM1.Models.ClientProfile;
+@model ClienteViewModel
+@{
+    ViewBag.Title = "ViewClient";
+}
+
+<!--Para regresar al home-->
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "ClientProfile")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+    </div>
+</div>
+<br/>
+        <br />
+        <div class="table-responsive">
+                <div class="modal-body">
+                    @using (Html.BeginForm("EditClient", "ClientProfile", FormMethod.Post, new { @class = "row", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <br />
+                            <div>
+                                <div class="col-md-6">
+                                    @Html.HiddenFor(model => model.cliente.id)
+                                    @Html.LabelFor(model => model.cliente.firstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.cliente.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombres" } })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.cliente.lastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.EditorFor(model => model.cliente.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellidos", @style = "width:70%" } })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.cliente.identification, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.cliente.identification, new { htmlAttributes = new { @class = "form-control", @placeholder = "Documento", @style = "width:70%" } })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.cliente.enterpriseName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.EditorFor(model => model.cliente.enterpriseName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Razón Social", @style = "width:70%" } })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.cliente.idDia, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.DropDownListFor(model => model.cliente.idDia, new SelectList(Model.listOfDays, "id", "name"), "Seleccione un día")
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.LabelFor(model => model.cliente.idClasificacion, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.DropDownListFor(model => model.cliente.idClasificacion, new SelectList(Model.listOfCalification, "id", "name"), "Clasificación")
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <br /><br />
+                                    <center><button class="btn btn-primary" name="singin" type="submit">Editar Cliente</button></center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+        </div>

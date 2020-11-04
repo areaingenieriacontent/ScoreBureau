@@ -311,7 +311,9 @@ namespace SCORM1.Controllers
                     TermsandConditions = Terms_and_Conditions.No_apceptado,
                     Videos = VIDEOS.No_apceptado,
                     SesionUser = SESION.No,
-                    TermsJuego = Terms_and_Conditions.No_apceptado
+                    TermsJuego = Terms_and_Conditions.No_apceptado,
+                    ComunidadActiva = UserObtainedOfTheView.ComunidadActiva,
+                    hasClientProfile = UserObtainedOfTheView.hasClientProfile
                 };
                 string next = VerifyUserFields(UserToCreate);
 
@@ -939,7 +941,9 @@ namespace SCORM1.Controllers
                                 TermsandConditions = Terms_and_Conditions.No_apceptado,
                                 Videos = VIDEOS.No_apceptado,
                                 SesionUser = SESION.No,
-                                TermsJuego = Terms_and_Conditions.No_apceptado
+                                TermsJuego = Terms_and_Conditions.No_apceptado,
+                                ComunidadActiva=0,
+                                hasClientProfile=false
                             };
                             IdentityResult results = await UserManager.CreateAsync(user, user.UserName);
                             AddErrors(results);
@@ -1332,6 +1336,8 @@ namespace SCORM1.Controllers
                                     Company = GetActualUserId().Company,
                                     TermsandConditions = Terms_and_Conditions.No_apceptado,
                                     SesionUser = SESION.No,
+                                    ComunidadActiva = 0,
+                                    hasClientProfile = false
                                 };
                                 IdentityResult results = await UserManager.CreateAsync(user, user.UserName);
                                 AddErrors(results);

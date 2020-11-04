@@ -613,6 +613,7 @@ namespace SCORM1.Controllers
         public new ActionResult Profile(UserProfileViewModel model)
         {
             var ComunidadActiva = ApplicationDbContext.Users.Find(GetActualUserId().Id).ComunidadActiva;
+            var hasCliente = ApplicationDbContext.Users.Find(GetActualUserId().Id).hasClientProfile;
             model.ComunidadActiva = ComunidadActiva;
             var GetModuleCompany = GetActualUserId().CompanyId;
             try
@@ -627,7 +628,8 @@ namespace SCORM1.Controllers
                     ListArticles = ListArticlesToSend,
                     Logo = GetUrlLogo(),
                     Form = new FormViewModel(),
-                    ComunidadActiva = ComunidadActiva
+                    ComunidadActiva = ComunidadActiva,
+                    hasClientProfile=hasCliente
                 };
                 model.Form.ListModule = GetModule();
             }

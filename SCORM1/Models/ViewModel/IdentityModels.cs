@@ -67,6 +67,7 @@ namespace SCORM1.Models
         public Terms_and_Conditions TermsJuego { get; set; }
         public String Foto_perfil { get; set; }
         public Int32? ComunidadActiva { get; set; }
+        public bool hasClientProfile { get; set; }
 
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
