@@ -40,7 +40,23 @@ namespace SCORM1.Controllers
                 cliente = new Cliente(),
                 listOfClients = db.Clientes.Where(x => x.userId == userId).ToList(),
                 listOfCalification = db.Clasificaciones.ToList(),
-                listOfDays=db.Dias.ToList()
+                listOfDays = db.Dias.ToList()
+            };
+            cl.Sesion = db.Users.Find(userId).SesionUser;
+            return View(cl);
+        }
+
+        // GET: PerfilamientoCliente
+        [Authorize]
+        public ActionResult IndexAdmin()
+        {
+            var userId = User.Identity.GetUserId();
+            ClienteViewModel cl = new ClienteViewModel
+            {
+                cliente = new Cliente(),
+                listOfClients = db.Clientes.ToList(),
+                listOfCalification = db.Clasificaciones.ToList(),
+                listOfDays = db.Dias.ToList()
             };
             cl.Sesion = db.Users.Find(userId).SesionUser;
             return View(cl);
@@ -112,6 +128,21 @@ namespace SCORM1.Controllers
         }
 
         [Authorize]
+        public ActionResult ViewClientAdmin(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            ClienteViewModel cvm = new ClienteViewModel
+            {
+                cliente = db.Clientes.Find(id),
+                listOfClients = db.Clientes.Where(x => x.userId == userId).ToList(),
+                listOfCalification = db.Clasificaciones.ToList(),
+                listOfDays = db.Dias.ToList()
+            };
+            cvm.Sesion = db.Users.Find(userId).SesionUser;
+            return View(cvm);
+        }
+
+        [Authorize]
         public ActionResult DeleteClient(int id)
         {
             Cliente c = db.Clientes.Find(id);
@@ -127,7 +158,7 @@ namespace SCORM1.Controllers
                 listOfDays = db.Dias.ToList()
             };
             cvm.Sesion = db.Users.Find(userId).SesionUser;
-            return View("Index", cvm);
+            return View("IndexAdmin", cvm);
         }
 
         [Authorize]
@@ -144,11 +175,55 @@ namespace SCORM1.Controllers
             cvm.Sesion = db.Users.Find(userId).SesionUser;
             return View("ViewClient", cvm);
         }
-        
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditClient(ClienteViewModel cl)
+        {
+            if (ModelState.IsValid)
+            {
+                Cliente clientToUpdate = db.Clientes.Find(cl.cliente.id);
+                //clientToUpdate.firstName = cl.cliente.firstName;
+                //clientToUpdate.lastName = cl.cliente.lastName;
+                //clientToUpdate.identification = cl.cliente.identification;
+                //clientToUpdate.enterpriseName = cl.cliente.enterpriseName;
+                clientToUpdate.idDia = cl.cliente.idDia;
+                clientToUpdate.idClasificacion = cl.cliente.idClasificacion;
+                db.SaveChanges();
+            }
+
+            var userId = User.Identity.GetUserId();
+            ClienteViewModel cvm = new ClienteViewModel
+            {
+                cliente = new Cliente(),
+                listOfClients = db.Clientes.Where(x => x.userId == userId).ToList(),
+                listOfCalification = db.Clasificaciones.ToList(),
+                listOfDays = db.Dias.ToList()
+            };
+            cvm.Sesion = db.Users.Find(userId).SesionUser;
+            return View("Index", cvm);
+        }
+
+        [Authorize]
+        public ActionResult EditClientAdmin(int id)
+        {
+
+            var userId = User.Identity.GetUserId();
+            ClienteViewModel cvm = new ClienteViewModel
+            {
+                cliente = db.Clientes.Find(id),
+                listOfCalification = db.Clasificaciones.ToList(),
+                listOfDays = db.Dias.ToList()
+            };
+            cvm.Sesion = db.Users.Find(userId).SesionUser;
+            return View("ViewClientAdmin", cvm);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditClientAdmin(ClienteViewModel cl)
         {
             if (ModelState.IsValid)
             {
@@ -166,12 +241,12 @@ namespace SCORM1.Controllers
             ClienteViewModel cvm = new ClienteViewModel
             {
                 cliente = new Cliente(),
-                listOfClients = db.Clientes.Where(x => x.userId == userId).ToList(),
+                listOfClients = db.Clientes.ToList(),
                 listOfCalification = db.Clasificaciones.ToList(),
                 listOfDays = db.Dias.ToList()
             };
             cvm.Sesion = db.Users.Find(userId).SesionUser;
-            return View("Index", cvm);
+            return View("IndexAdmin", cvm);
         }
 
         [HttpGet]
