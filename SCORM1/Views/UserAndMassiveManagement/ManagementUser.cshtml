@@ -148,81 +148,88 @@
 
         </div>
     }
-    @using (Html.BeginForm("MassiveRegister1", "ClientProfile", FormMethod.Get, new { @class = "row" }))
-    {
-        <button type="submit" class="btn btn-primary btn-responsive">Cargar Clientes</button>
-    }
-    <br>
-    <hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
-    <div class="table-responsive col-md-12 col-sm-12">
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr class="success">
-                    <th><center>Nombre Completo</center></th>
-                    <th><center>Usuario</center></th>
-                    <th><center>Documento</center></th>
-                    <th><center> Rol</center></th>
-                    <th><center>Último Acceso</center></th>
-                    <th><center>Primer Acceso</center></th>
-                    <th><center>Autorizado</center></th>
-                    <th><center>Modificar</center></th>
-                    <th><center>Eliminar</center></th>
+    <br />
+<div class="row">
+        @using (Html.BeginForm("IndexAdmin", "ClientProfile", FormMethod.Get, new { @class = "btn btn-primary btn-responsive" }))
+        {
+            <button type="submit" class="btn btn-primary btn-responsive">Ver Clientes</button>
+        }
+        @using (Html.BeginForm("MassiveRegister1", "ClientProfile", FormMethod.Get, new { @class = "btn btn-primary btn-responsive" }))
+        {
+            <button type="submit" class="btn btn-primary btn-responsive">Cargar Clientes</button>
+        }
+</div>
+        <br>
+        <hr style="width:100%; float:left; border:dashed; border-color: #A3DC68; border-width:thin;">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th><center>Nombre Completo</center></th>
+                        <th><center>Usuario</center></th>
+                        <th><center>Documento</center></th>
+                        <th><center> Rol</center></th>
+                        <th><center>Último Acceso</center></th>
+                        <th><center>Primer Acceso</center></th>
+                        <th><center>Autorizado</center></th>
+                        <th><center>Modificar</center></th>
+                        <th><center>Eliminar</center></th>
 
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (ApplicationUser User in Model.UserOfCompany)
-                {
-                    <tr>
-                        <td>
-
-                            @User.FirstName @User.LastName
-                        </td>
-                        <td>@User.UserName</td>
-                        <td>
-                            @User.Document
-                        </td>
-                        <td>@User.Role.ToString()</td>
-                        @if (User.lastAccess != null)
-                        {
-                            <td>@User.lastAccess</td>
-                        }
-                        else
-                        {
-
-                            <td>No ha ingresado</td>
-                        }
-
-                        @if (User.firstAccess != null)
-                        {
-                            <td>@User.firstAccess</td>
-                        }
-                        else
-                        {
-
-                            <td>No ha ingresado</td>
-                        }
-
-
-                        <td>@User.Enable</td>
-                        <td>
-                            <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateUser('@User.Id')" id="@User.Id" />
-                        </td>
-                        <td>
-                            <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="DeleteUser('@User.Id')" data-cname="@User.Id" />
-                        </td>
-                        <td></td>
                     </tr>
-                }
-            </tbody>
-        </table>
-        @Html.PagedListPager(Model.UserOfCompany, page => Url.Action("ManagementUser", new { page }))
+                </thead>
+                <tbody>
+                    @foreach (ApplicationUser User in Model.UserOfCompany)
+                    {
+                        <tr>
+                            <td>
 
+                                @User.FirstName @User.LastName
+                            </td>
+                            <td>@User.UserName</td>
+                            <td>
+                                @User.Document
+                            </td>
+                            <td>@User.Role.ToString()</td>
+                            @if (User.lastAccess != null)
+                            {
+                                <td>@User.lastAccess</td>
+                            }
+                            else
+                            {
+
+                                <td>No ha ingresado</td>
+                            }
+
+                            @if (User.firstAccess != null)
+                            {
+                                <td>@User.firstAccess</td>
+                            }
+                            else
+                            {
+
+                                <td>No ha ingresado</td>
+                            }
+
+
+                            <td>@User.Enable</td>
+                            <td>
+                                <input type="image" src="~/Content/Images/Editar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="UpdateUser('@User.Id')" id="@User.Id" />
+                            </td>
+                            <td>
+                                <input type="image" src="~/Content/Images/eliminar_1.png" style="width:60px;height:15%;" class="img img-responsive" onclick="DeleteUser('@User.Id')" data-cname="@User.Id" />
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model.UserOfCompany, page => Url.Action("ManagementUser", new { page }))
+
+
+        </div>
 
     </div>
-
-</div>
 
 
     <div id="myModal" class="modal fade" role="dialog">

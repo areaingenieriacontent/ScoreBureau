@@ -2321,6 +2321,8 @@
     <Content Include="Views\ClientProfile\Index.cshtml" />
     <Content Include="Views\ClientProfile\ViewClient.cshtml" />
     <Content Include="Views\ClientProfile\MassiveRegister1.cshtml" />
+    <Content Include="Views\ClientProfile\ViewClientAdmin.cshtml" />
+    <Content Include="Views\ClientProfile\IndexAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
