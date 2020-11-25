@@ -23,7 +23,7 @@ namespace SCORM1.Models.ClientProfile
         [Display(Name = "Razón Social")]
         public string enterpriseName { get; set; }
         [ForeignKey("Clasificacion")]
-        [Display(Name = "Calificación")]
+        [Display(Name = "Tipo Perfil")]
         public int idClasificacion { get; set; }
         [ForeignKey("User")]
 
