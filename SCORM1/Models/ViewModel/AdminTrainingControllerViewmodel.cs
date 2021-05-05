@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using SCORM1.Models.SCORM1;
 using PagedList;
 using SCORM1.Models.ratings;
+using SCORM1.Models.RigidCourse;
 
 namespace SCORM1.Models.ViewModel
 {
@@ -124,8 +125,60 @@ namespace SCORM1.Models.ViewModel
         public FORO Modu_Test { get; set; }
         [Display(Name = "Quien Sabe Mas")]
         public FORO QSMActive { get; set; }
+        [Display(Name = "Falla Protegida")]
+        public FORO HasProtectedFailure { get; set; }
     }
 
+    #region Protected Failure Viewmodels
+
+    //For creating a protected failure test
+    public class AdminProtectedFailure : BaseViewModel
+    {
+        public int modu_id { get; set; }
+        public ProtectedFailureTest protectedFailureTest { get; set; }
+        public List<Category> categoryList { get; set; }
+        public List<bool> bankToCreateList { get; set; }
+        public List<int> questionQuantityList { get; set; }
+        public List<float> approvedPercentageList { get; set; }
+    }
+
+    //for creating protected failuire questions and answers
+    public class ProtectedFailureConfiguration : BaseViewModel
+    {
+        public List<CategoryQuestionBank> listOfQuestionBanks { get; set; }
+        public List<ProtectedFailureMultiChoice> questionsList { get; set; }
+        public List<ProtectedFailureMultiChoiceAnswer> answersList { get; set; }
+    }
+
+    //To-Do for reading user protected failure results
+    public class ProtectedFailureUserResultsViewModel : BaseViewModel
+    {
+
+    }
+
+    //To-Do Protected failure test user
+    public class ProtectedFailureTestViewModel : BaseViewModel
+    {
+        public Module actualModule { get; set; }
+        public Enrollment enrollment { get; set; }
+        public ProtectedFailureTest protectedFailureTest { get; set; }
+        public List<Category> listOfCategories { get; set; }
+        public List<CategoryQuestionBank> questionBanks { get; set; }
+        public List<ProtectedFailureMultiChoice> questionsList { get; set; }
+        public List<ProtectedFailureAnswer> answersList { get; set; }
+        public List<ProtectedFailureResults> resultList { get; set; }
+        public List<int> selectedAnswers { get; set; }
+        public bool isRecoverySession { get; set; }
+    }
+
+    public class UserSelectedAnswers
+    {
+        public int answerId { get; set; }
+        public int isCorrect { get; set; }
+        public int questionId { get; set; }
+    }
+
+    #endregion
     public class AdminTrainingCategoryModuleViewModel : BaseViewModel
     {
         public List<CategoryModule> ListCategoryModule { get; set; }
@@ -139,7 +192,6 @@ namespace SCORM1.Models.ViewModel
 
     public class AdminTrainingTopicViewModel : BaseViewModel
     {
-
         public IEnumerable<SelectListItem> modules { get; set; }
         [Display(Name = "Cursos Disponibles")]
         public int ToCo_ModuleId { get; set; }
@@ -388,7 +440,6 @@ namespace SCORM1.Models.ViewModel
 
     }
 
-
     public class AdminTrainingTestViewModel : BaseViewModel
     {
         public IEnumerable<SelectListItem> AnswerPairing { get; set; }
@@ -514,7 +565,6 @@ namespace SCORM1.Models.ViewModel
         public int TotalQuestion { get; set; }
     }
 
-
     // copia del banco de pregunta
     public class AdminManagementBankQuestions : BaseViewModel
     {
@@ -526,7 +576,6 @@ namespace SCORM1.Models.ViewModel
         public List<ListOptionmultiple> OptionMultiple { get; set; }
 
     }
-
 
     public class ListOptionmultiple : BaseViewModel
     {

@@ -1,0 +1,103 @@
+﻿@using SCORM1.Models.ViewModel;
+@model UserProfileViewModel
+
+@{
+    ViewBag.Title = "TableroControl";
+}
+<div id="encabezadocursos">
+    <img src="~/Content/Images/sistema de puntos/banner-sistema-de-puntos.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder;">INICIO / </a>
+    <a href="@Url.Action("TableroControl", "Home")" style="font-weight: bolder;color:#FC3650">TABLERO DE CONTROL</a>
+</div>
+<br />
+<br />
+<div>
+    <div class="page-intro">
+        <div id="block-slider-home" class="block block-block-content block-block-content21c852d5-6755-4fd2-b36b-480e462c4b14">
+            <div class="field field--name-field-image-slider field--type-entity-reference-revisions field--label-hidden field__items">
+                <div class="field__item">
+                    <div class="paragraph paragraph--type--image-slider paragraph--view-mode--alternate">
+                        <div class="layer-markets alternate">
+                            <div class="container">
+                                <div class="layer-markets--container">
+                                    <h2 class="layer-markets--title field__item">
+                                        TABLERO DE CONTROL
+                                    </h2>
+                                    <div class="slider-markets">
+                                        <div class="responsive-slider--wrapper" style="overflow: hidden; width: 100%;">
+                                            <ul class="slider-markets--list field field--name-field-image-slider-items field--type-entity-reference-revisions field--label-hidden field__items" style="overflow: hidden; position: relative; width: 700%; display: -ms-flexbox; display: flex;">
+                                                <li class="field__item" style="width: 4%;">
+                                                    <div class="paragraph paragraph--type--image-slider-items paragraph--view-mode--default">
+                                                        <a href="@Url.Action("VistaAvances", "User")" class="field-group-link teaser-market">
+                                                            <div class="teaser-market--picture">
+                                                                <picture>
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" type="image/jpg">
+                                                                    <img src="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" alt="" typeof="foaf:Image">
+                                                                </picture>
+                                                            </div>
+                                                            <div class="teaser-market--content">
+                                                                <p class="teaser-market--title field__item" style="color:black">
+                                                                    MIS CALIFICACIONES
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li class="field__item" style="width: 6%;">
+                                                    <div class="paragraph paragraph--type--image-slider-items paragraph--view-mode--default">
+                                                        <a href="@Url.Action("Create","Contacto")" style="background-color:#fff" class="field-group-link teaser-market">
+                                                            <div class="teaser-market--picture">
+                                                                <picture>
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" type="image/jpg">
+                                                                    <img src="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" alt="" typeof="foaf:Image">
+                                                                </picture>
+                                                            </div>
+                                                            <div class="teaser-market--content">
+                                                                <p class="teaser-market--title field__item " style="color:black">
+                                                                    MESA DE SERVICIO
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li class="field__item" style="width: 4%;">
+                                                    <div class="paragraph paragraph--type--image-slider-items paragraph--view-mode--default">
+                                                        <a href="@Url.Action("Exchange", "User")" class="field-group-link teaser-market">
+                                                            <div class="teaser-market--picture">
+                                                                <picture>
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpgg" media="all and (min-width: 640px)" type="image/jpg">
+                                                                    <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" type="image/jpg">
+                                                                    <img src="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" alt="" typeof="foaf:Image">
+                                                                </picture>
+                                                            </div>
+                                                            <div class="teaser-market--content">
+                                                                <p class="teaser-market--title field__item" style="color:black">
+                                                                    SISTEMA DE PUNTOS
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

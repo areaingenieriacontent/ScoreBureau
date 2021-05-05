@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SCORM1.Models
 {
-    public class HomeViewModels : ViewModel.HomeViewModels
+    public class HomeViewModels : BaseViewModel
     {
      
     }

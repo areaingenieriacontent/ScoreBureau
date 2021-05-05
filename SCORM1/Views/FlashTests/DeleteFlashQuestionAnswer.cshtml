@@ -1,0 +1,43 @@
+﻿@using SCORM1.Models.RigidCourse;
+@using SCORM1.Models.ViewModel;
+@model CursoRigidoViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FlashQuestionAnswer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorrectAnswer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrectAnswer)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+                @Html.ActionLink("Delete", "DeleteConfirmedFlashQuestionAnswer", new { FlashQuestionAnswerId = Model.FlashQuestionAnswerId}) |
+
+        </div>
+    }
+</div>

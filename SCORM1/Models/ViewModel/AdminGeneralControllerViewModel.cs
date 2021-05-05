@@ -150,7 +150,7 @@ namespace SCORM1.Models.ViewModel
         public List<ApplicationUser> Users { get; set; }
         public List<Exchange> Exchanges { get; set; }
 
-
+        public List<Advance> AdvanceList { get; set; }         
 
 
 

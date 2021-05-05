@@ -1,4 +1,4 @@
-namespace SCORM1.Migrations
+﻿namespace SCORM1.Migrations
 {
     using System;
     using System.Data.Entity;

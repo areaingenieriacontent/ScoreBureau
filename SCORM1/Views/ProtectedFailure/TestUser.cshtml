@@ -1,0 +1,111 @@
+﻿@using SCORM1.Models.RigidCourse;
+@using SCORM1.Models.ViewModel;
+@model ProtectedFailureTestViewModel
+
+
+
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+else
+{
+    if (TempData["Info"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+            </script>
+        }}
+}
+@Scripts.Render("~/bundles/jqueryval")
+
+@{
+    ViewBag.Title = "Test Falla Protegída";
+}
+
+<br />
+<div class="row fecha">
+    <div class="btn-group btn-breadcrumb">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="@Url.Action("Grades", "User", new {id = Model.protectedFailureTest.Modu_Id})" class="btn btn-info">CURSO</a>
+    </div>
+</div>
+<br />
+<h2>@Model.protectedFailureTest.PF_Name</h2>
+<br />
+<br />
+@using (Html.BeginForm("EvaluateProtectedFailureTest", "ProtectedFailure", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(modelItem => Model.protectedFailureTest.Modu_Id)
+    @Html.HiddenFor(modelItem => Model.isRecoverySession)
+    @Html.HiddenFor(modelItem => Model.protectedFailureTest.testAvailable)
+    @Html.HiddenFor(modelItem => Model.enrollment.Enro_Id)
+    if (Model.resultList.Count > 0)
+    {
+        for (int i = 0; i < Model.resultList.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => Model.resultList[i].Enro_id)
+            @Html.HiddenFor(modelItem => Model.resultList[i].Cate_Id)
+            @Html.HiddenFor(modelItem => Model.resultList[i].correctAnswersQuantity)
+            @Html.HiddenFor(modelItem => Model.resultList[i].Score)
+        }
+    }
+    if (Model.questionBanks.Count >= 1)
+    {
+        for (int cont = 0; cont < Model.questionBanks.Count; cont++)
+        {
+            <div class="col-md-12">
+                @Html.HiddenFor(modelItem => Model.questionBanks[cont].Cate_Id)
+                @Html.HiddenFor(modelItem => Model.questionBanks[cont].Modu_Id)
+                @Html.HiddenFor(modelItem => Model.questionBanks[cont].EvaluatedQuestionQuantity)
+                @Html.HiddenFor(modelItem => Model.questionBanks[cont].AprovedCategoryPercentage)
+                <h2>@Html.DisplayFor(modelItem => Model.questionBanks[cont].Category.Cate_Name)</h2>
+                <hr style="border:1px solid #ff6a00;" />
+            </div>
+            <div class="col-md-12">
+                @if (Model.questionsList.Count >= 1)
+                {
+                    for (int cont1 = 0; cont1 < Model.questionsList.Count; cont1++)
+                    {
+                        @Html.HiddenFor(modelItem => Model.questionsList[cont1].QuestionId)
+                        @Html.HiddenFor(modelItem => Model.questionsList[cont1].Modu_Id)
+                        @Html.HiddenFor(modelItem => Model.questionsList[cont1].Category_Id)
+                        if (Model.questionBanks[cont].Cate_Id == Model.questionsList[cont1].Category_Id)
+                        {
+                            <div class="fecha">
+                                @Html.DisplayFor(modelItem => Model.questionsList[cont1].Content)
+                            </div>
+                            for (int cont2 = 0; cont2 < Model.answersList.Count; cont2++)
+                            {
+                                if (Model.questionsList[cont1].QuestionId == Model.answersList[cont2].QuestionId)
+                                {
+                                    @Html.HiddenFor(modelItem => Model.answersList[cont2].QuestionId)
+                                    @Html.HiddenFor(modelItem => Model.answersList[cont2].answerId)
+                                    @Html.HiddenFor(modelItem => Model.answersList[cont2].isCorrectQuestion)
+                                    @Html.HiddenFor(modelItem => Model.answersList[cont2].ProtectedFailureMultiChoice.Category_Id)
+                                    @Html.HiddenFor(modelItem => Model.answersList[cont2].ProtectedFailureMultiChoice.QuestionId)
+                                    <div class="fecha">
+                                        @Html.RadioButtonFor(modelItem => Model.selectedAnswers[cont1], Model.answersList[cont2].answerId, htmlAttributes: new { @class = " control-label col-sm-1" })
+                                        @Html.DisplayFor(modelItem => Model.answersList[cont2].AnswerContent)
+                                    </div>
+                                }
+                            }
+                            <hr style="border:1px solid #ff0000;" />
+                            <br />
+                        }
+                    }
+                }
+            </div>
+        }
+    }
+    <button class="btn btn-default">Enviar</button>
+}
+<br />
+<br />
+<br />

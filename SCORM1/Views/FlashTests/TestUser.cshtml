@@ -1,0 +1,96 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model CursoRigidoViewModel
+@Styles.Render("~/Content/Site.css")
+    
+       
+   @if (TempData["Add"] != null)
+   {
+       <div class="alert alert-danger fade in">
+           <a href="#" class="close" data-dismiss="alert">&times;</a>
+           @TempData["Add"]
+       </div>
+   }
+   else
+   {
+       if (TempData["Info"] != null)
+       {
+           @section Scripts {
+               <script type="text/JavaScript">
+                   $(document).ready(function () {
+                       $("#Inform").modal();
+                   });
+               </script>
+           }}
+   }
+   @Scripts.Render("~/bundles/jqueryval")
+
+   @{
+       ViewBag.Title = "Flash Test";
+   }
+
+   <br />
+   <br />
+   <div class="row fecha">
+       <div class="btn-group btn-breadcrumb">
+           <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+           <a href="@Url.Action("Grades", "User", new {id = Model.module.Modu_Id})" class="btn btn-info">CURSO</a>
+       </div>
+   </div>
+   <br />
+   <br />
+
+   <div>
+       <h2>@Model.flashTest.FlashTestName</h2>
+   </div>
+   <hr style="border:1px solid #EAEAEA; width:500px" />
+   <br />
+   <br />
+
+   @using (Html.BeginForm("EvaluateFlashTest", "FlashTests", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+   {
+       @Html.HiddenFor(modelItem => Model.module.Modu_Id)
+       @Html.HiddenFor(modelItem => Model.flashTest.FlashTestId)
+       @Html.HiddenFor(modelItem => Model.flashTest.AprovedPercentage)
+       @Html.HiddenFor(modelItem => Model.flashTest.ToCo_Id)
+       @Html.HiddenFor(modelItem => Model.ToCo_Id)
+       if (Model.flashQuestions.Count >= 1)
+       {
+           for (int cont1 = 0; cont1 < Model.flashQuestions.Count; cont1++)
+           {
+               <div class="row">
+                   <div class="col-md-12">
+                       <div class="card text-center ">
+                           <div class="">
+                               <h2 class="card-title-question" style="text-align:justify">
+                                   <br />
+                                   @Html.DisplayFor(modelItem => Model.flashQuestions[cont1].Enunciado)
+                               </h2>
+
+                               @if (Model.ListFlashQuestionAnswer.Count >= 1)
+                               {
+                                   for (int cont = 0; cont < Model.ListFlashQuestionAnswer.Count; cont++)
+                                   {
+                                       if (Model.flashQuestions[cont1].FlashQuestionId == Model.ListFlashQuestionAnswer[cont].FlashQuestionId)
+                                       {
+                                           <div class="card-answer-question">
+                                               @Html.DisplayFor(modelItem => Model.ListFlashQuestionAnswer[cont].Content)
+                                               @Html.RadioButtonFor(modelItem => Model.userAnswers[cont1], Model.ListFlashQuestionAnswer[cont].FlashQuestionAnswerId, htmlAttributes: new { @class = "col-md-1" })
+                                           </div>
+                                       }
+                                   }
+                               }
+
+                           </div>
+                           <br />
+                       </div>
+                   </div>
+                   <hr style="border:1px solid #EAEAEA; width:500px" />
+               </div>
+           }
+       }
+       <button class="flash-test-button btn btn-warning text-white">Enviar</button>
+   }
+   <br />
+   <br />
+   <br />

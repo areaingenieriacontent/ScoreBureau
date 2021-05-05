@@ -3,10 +3,6 @@
 @model UserProfileViewModel
 
 
-<html>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 @Scripts.Render("~/bundles/jqueryval")
 
@@ -22,72 +18,92 @@
         </script>
     }}
 
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/perfil-usuario/banner-perfil-usuario.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
+    <a href="#" style="font-weight: bolder">TABLERO DE CONTROL/</a>
+    <a href="@Url.Action("ProfileUser", "User")" style="font-weight: bolder; color:#FC3650">SISTEMA DE PUNTOS</a>
+</div>
+<br />
+<br />
+<div class="container">
+    <p style="text-align:center;font-size:50px">MI <b>PERFÍL</b></p>
+    <br />
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <img src="~/Content/Images/perfil-usuario/user.png" alt="" style="width:50%;margin-left: 250px" />
+        </div>
+        <div class="col-md-6 col-xs-12" style="column-count:2">
+            <h2><strong style="color:black; margin-left: 10px">  Información personal</strong></h2>
+            <br />
+            <div class="col-md-12">
+                <p> <strong style="color:black">Nombre completo: </strong></p>
+                <p> <strong style="color:black">Usuario: </strong></p>
+                <p> <strong style="color:black">Documento: </strong></p>
+                <p> <strong style="color:black">Rol: </strong></p>
+                <p> <strong style="color:black">Ultima acceso: </strong></p>
+                <p> <strong style="color:black">Primer acceso: </strong></p>
+                <p> <strong style="color:black">Autorizado: </strong></p>
+                <p> <strong style="color:black">Email: </strong></p>
+                @if (Model.user.Area != null)
+                {
+                    <p> <strong style="color:black">Municipio: </strong></p>
+                }
+                else
+                {
+                    <p>No hay area</p>
+                }
+                @if (Model.user.Position != null)
+                {
+                    <p> <strong style="color:black">Ocupación: </strong></p>
+                }
+                else
+                {
+                    <p>No hay Cargo </p>
+                }
+            </div>
+            <div class="col-md-12" style="margin-left: -100px">
+                <br />
+                <br />
+                <p> @Model.user.FirstName  @Model.user.LastName</p>
+                <p> @Model.user.UserName</p>
+                <p> @Model.user.Document</p>
+                <p> @Model.user.Role</p>
+                <p> @Model.user.lastAccess</p><p></p>
+                <p> @Model.user.firstAccess</p>
+                <p> @Model.user.Enable</p>
+                <p> @Model.user.Email</p>
+                @if (Model.user.Area != null)
+                {
+                    <p>@Model.user.City.City_Name</p>
+                }
+                else
+                {
+                    <p>No hay area</p>
+                }
+                @if (Model.user.Position != null)
+                {
+                    <p>@Model.user.Position.Posi_Description</p>
+                }
+                else
+                {
+                    <p>No hay Cargo </p>
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <center><button data-toggle="modal" data-target="#myModal" class="button-action btn-responsive">Modificar Información</button></center>
+</div>
+
 <div class="col-md-12">
-    <div class="col-md-12">
-        <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-responsive">Modificar Información</button>
-        <hr />
+    <div class="col-md-12">     
         <br />
-        <div class="col-md-6">
-
-            @if (Model.user.Foto_perfil != null)
-            {
-                <center>
-
-
-
-
-                    <img src="~/Resources/@Model.user.Foto_perfil" class='imgRedonda' />
-                    @*<img  src="~/Resources/@Model.user.Foto_perfil" class="imgRedonda" alt="Norway" solid = #FF0000 style="padding:40px;width:20%">*@
-
-
-
-
-                </center>
-            }
-
-            else
-            {
-                <center>
-
-                    <img src="~/Resources/perfil.png" class='imgRedonda' />
-
-                </center>
-
-            }
-        </div>
-        <div class="col-md-13">
-            <h2><strong style="color:black">Información personal</strong></h2>
-
-            <p> <strong style="color:black">Nombre completo: </strong>@Model.user.FirstName  @Model.user.LastName</p>
-            <p> <strong style="color:black">Usuario: </strong>@Model.user.UserName</p>
-            <p> <strong style="color:black">Documento: </strong>@Model.user.Document</p>
-            <p> <strong style="color:black">Rol: </strong>@Model.user.Role</p>
-            <p> <strong style="color:black">Ultima acceso: </strong>@Model.user.lastAccess</p><p></p>
-            <p> <strong style="color:black">Primer acceso: </strong> @Model.user.firstAccess</p>
-            <p> <strong style="color:black">Autorizado: </strong>@Model.user.Enable</p>
-            <p> <strong style="color:black">Email: </strong>@Model.user.Email</p>
-            @if (Model.user.Area != null)
-            {
-                <p> <strong style="color:black">Municipio: </strong>@Model.user.City.City_Name</p>
-            }
-            else
-            {
-                <p>No hay area</p>
-            }
-            @if (Model.user.Position != null)
-            {
-                <p> <strong style="color:black">Ocupación: </strong>@Model.user.Position.Posi_Description</p>
-            }
-            else
-            {
-                <p>No hay Cargo </p>
-            }
-            <br />
-            <br />
-            <h2 style="color:crimson"><strong>Documentos Importantes</strong></h2>
-            <p style="font-size:18px"> <strong style="color:black">Tratamiento de datos: <a style="color:crimson" href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank"><u>clic aquí para consultar</u></a></strong></p>
-            <p style="font-size:18px"> <strong style="color:black">Política de puntos: <a style="color:crimson" href="https://aprendeyavanza2.com.co/contentgroup/bureau/politica_puntos.pdf" target="_blank"><u>clic aquí para consultar</u></a></strong></p>
-        </div>
     </div>
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog1">

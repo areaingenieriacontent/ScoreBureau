@@ -2,44 +2,461 @@
 @using SCORM1.Models.ViewModel;
 @using SCORM1.Enum;
 @model UserProfileViewModel
-<br /><br /><br />
 <link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @{
     ViewBag.Title = "Profile";
 }
-<script type="text/javascript">
-    window.alert = function () { };
-    var defaultCSS = document.getElementById('bootstrap-css');
-    function changeCSS(css) {
-        if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
-        else $('head > link').filter(':first').replaceWith(defaultCSS);
-    }
+@Styles.Render("~/Content/style1.css")
+@Styles.Render("~/Content/StyleHome.css")
 
 
-    $('.slider-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
-    });
-    $('.slider-nav').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: true,
-        centerMode: true,
-        focusOnSelect: true
-    });
 
-</script>
+<body class="path-frontpage eu-cookie-compliance-status-null eu-cookie-compliance-popup-open" style="position: relative; overflow-y: auto;">
+    <div class="page-wrapper">
+        <noscript aria-hidden="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTWSFNR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+            <div id="block-homepage-cover-local" class="block block-block-content block-block-content01f17a1b-15d1-4a30-b5f0-df2818d6a3fd">
+                <div style="position:relative">
+                    <div class="slideshow-container">
+                        <!-- Full-width images with number and caption text -->
+                        <div class="mySlides fade">
+                            <img src="~/Content/Images/slider-zona-de-informacion/1-slide-1-guia-de-navegacion.jpg" style="width:100%">
+                            <div class="container" style="position:relative">
+                                <div class="row justify-content-end">
+                                    <a id="btn-landing" href="https://aprendeyavanza2.com.co/contentGroup/bureau/Documentos/Guia%20navegacion%20bv.pdf" target="_blank" class="button-action" style="margin-top:-12vw;">CLIC AQUÍ</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mySlides fade">
+                            <img src="~/Content/Images/slider-zona-de-informacion/2-slide-2-politica-de-puntos.jpg" style="width:100%">
+                            <div class="container" style="position:relative">
+                                <div class="row justify-content-end">
+                                    <a id="btn-landing" href="https://aprendeyavanza2.com.co/contentgroup/bureau/politica_puntos.pdf" target="_blank" class="button-action" style="margin-top:-12vw;">CLIC AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mySlides fade">
+                            <img src="~/Content/Images/slider-zona-de-informacion/3-slide-3-oferta-de-cursos.jpg" style="width:100%">
+                            <div class="container" style="position:relative">
+                                <div class="row justify-content-end">
+                                    <a id="btn-landing" href="https://www.bvtrainingcommunity.com/tienda/" target="_blank" class="button-action" style="margin-top:-12vw;">CLIC AQUÍ</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Next and previous buttons -->
+                        <a class="prev" onclick="plusSlides(-1)" style="z-index:10"><img src="~/Content/Images/slider-zona-de-informacion/before-slide-icon.png" /></a>
+                        <a class="next" onclick="plusSlides(1)" style="z-index:10"><img src="~/Content/Images/slider-zona-de-informacion/after-slide-icon.png" /></a>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    var slideIndex = 1;
+                    showSlides(slideIndex);
+
+                    // Next/previous controls
+                    function plusSlides(n) {
+                        showSlides(slideIndex += n);
+                    }
+
+                    // Thumbnail image controls
+                    function currentSlide(n) {
+                        showSlides(slideIndex = n);
+                    }
+
+                    function showSlides(n) {
+                        var i;
+                        var slides = document.getElementsByClassName("mySlides");
+                        var dots = document.getElementsByClassName("dot");
+                        if (n > slides.length) { slideIndex = 1 }
+                        if (n < 1) { slideIndex = slides.length }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex - 1].style.display = "block";
+                        dots[slideIndex - 1].className += " active";
+                    }
+                </script>
+            </div>
+        </div>
+
+        @*
+        <div class="page-hat simple" style="margin-top: -28%; position: inherit" id="tituloprincipal">
+            <div class="page-hat--content">
+                <div class="page-hat--title js-letters-effect clearfix text-formatted field field--name-field-text-animation field--type-text-long field--label-hidden field__items" style=" opacity: 1;">
+                    <p>
+                        <div class="word-container"><span>E</span><span>N</span><span>C</span><span>U</span><span>E</span><span>N</span><span>T</span><span>R</span><span>A</span></div> <div class="word-container"><span>A</span><span>Q</span><span>U</span><span>Í</span></div> <div class="word-container"><span>L</span><span>A</span></div><br />
+                        <div class="word-container"><strong><span>G</span><span>U</span><span>Í</span><span>A</span></strong></div> <div class="word-container"><strong><span>D</span><span>E</span></strong></div> <div class="word-container"><strong><span>N</span><span>A</span><span>V</span><span>E</span><span>G</span><span>A</span><span>C</span><span>I</span><span>Ó</span><span>N</span></strong></div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        *@
+        <br />
+        <div>
+            <div class="page-intro">                
+                    <div id="block-ourmarketssync" class="block block-block-content block-block-content15642d29-61f3-4219-bc83-2976579cec1e">
+                        <div class="page-hat simple row" style="margin-top:5vw">
+                            <div class="page-hat--content">
+                                <div class="page-hat--title js-letters-effect clearfix text-formatted field field--name-field-text-animation field--type-text-long field--label-hidden field__items" style="opacity: 1;margin-top: 20%;color:#333333">
+                                    <p>
+                                        <div class="word-container"><span>Z</span><span>O</span><span>N</span><span>A</span></div> <div class="word-container"><span>D</span><span>E</span></div> <div class="word-container"><strong><span>A</span><span>P</span><span>R</span><span>E</span><span>N</span><span>D</span><span>I</span><span>Z</span><span>A</span><span>J</span><span>E</span></strong></div>
+                                        <div class="word-container"><strong><span>I</span><span>N</span><span>T</span><span>E</span><span>R</span><span>A</span><span>C</span><span>T</span><span>I</span><span>V</span><span>O</span></strong></div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
+                <br />
+                <br />
+                <div class="container">
+                    <div class="paragraph paragraph--type--button paragraph--view-mode--default" style="margin-top:12%">
+                        <div class="container">
+                            <div class="marger text-center-from-mobile">
+                                <a id="btn-landing" href="@Url.Action("ListModuleVirtual", "User")" class="button-action" style="position:relative">INGRESA A TUS CURSOS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-gallery">
+                    <div class="section-gallery--container">
+                        <h2 class="section-gallery--title field__item">
+                            <p style="color:black">COMUNIDAD SOCIAL&nbsp;<strong>DE CONOCIMIENTOS</strong></p>
+                        </h2>
+                        <div class="section-gallery--slider">
+                            <ul class="section-gallery--list field field--name-field-gallery-items field--type-entity-reference-revisions field--label-hidden field__items">
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="../logscomunidad/clickobl" class="field-group-link">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/lecciones-aprendidas.jpg" media="all and (min-width: 1280px)" type="image/jgp">
+                                                            <source srcset="~/Content/Images/lecciones-aprendidas.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/lecciones-aprendidas.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/lecciones-aprendidas.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/lecciones-aprendidas.jpg" alt=" " typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <h2 class="tag-std field__item c-1-c-3">
+                                                        APRENDIZAJE BASADO<br />
+                                                        EN EXPERIENCIAS
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="#" class="field-group-link">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/competencias-estrategicas.jpg" media="all and (min-width: 1280px)" type="image/jgp">
+                                                            <source srcset="~/Content/Images/competencias-estrategicas.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/competencias-estrategicas.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/competencias-estrategicas.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/competencias-estrategicas.jpg" alt="" typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <h2 class="tag-std field__item c-1-c-3">
+                                                        COMPETENCIAS
+                                                        ESTRATÉGICAS
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="../logscomunidad/ClickVideoteca" class="field-group-link" target="_blank">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/comunidad/zona-videoteca.jpg" alt="" typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <h2 class="tag-std field__item c-1-c-3">
+                                                        ZONA DE
+                                                        VIDEOTECA
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="../logscomunidad/clickperiodico" target="_blank" class="field-group-link">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/comunidad/periodico-virtual.jpg" alt=" " typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <h2 class="tag-std field__item c-1-c-3">
+                                                        REVISTA
+                                                        VIRTUAL
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="section-gallery--list field field--name-field-gallery-items field--type-entity-reference-revisions field--label-hidden field__items">
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="../logscomunidad/clickjuego" target="_blank" class="field-group-link">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/comunidad/juegos-serios.jpg" alt="" typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <h2 class="tag-std field__item c-1-c-3">
+                                                        JUEGOS SERIOS<br />
+                                                        DE APRENDIZAJE
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="#" class="field-group-link">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/comunidad/salon-debate.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/salon-debate.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/salon-debate.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/salon-debate.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/comunidad/salon-debate.jpg" alt="" typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <div class="teaser-img--action">
+                                                        <span class="link-std">
+                                                            PROXIMAMENTE
+                                                        </span>
+                                                    </div>
+                                                    <h2 class="tag-std field__item c-3-c-6">
+                                                        SALÓN DE DEBATE<br />
+                                                        INTERACTIVO DEL<br />
+                                                        CONOCIMIENTO<br />
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="#" class="field-group-link" target="_blank">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/comunidad/cafeteria-virtual.jpg" alt="" typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <div class="teaser-img--action">
+                                                        <span class="link-std">
+                                                            PROXIMAMENTE
+                                                        </span>
+                                                    </div>
+                                                    <h2 class="tag-std field__item c-3-c-6">
+                                                        CAFETERÍA VIRTUAL
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="section-gallery--item field__item">
+                                    <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                                        <div class="teaser-img">
+                                            <a href="#" class="field-group-link">
+                                                <div class="teaser-img--picture field__item">
+                                                    <div class="teaser-img--picture">
+                                                        <picture>
+                                                            <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                            <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" type="image/jpg">
+                                                            <img src="~/Content/Images/comunidad/congreso-virtual.jpg" alt=" " typeof="foaf:Image">
+                                                        </picture>
+                                                    </div>
+                                                </div>
+                                                <div class="teaser-img--content">
+                                                    <div class="teaser-img--action">
+                                                        <span class="link-std">
+                                                            PROXIMAMENTE
+                                                        </span>
+                                                    </div>
+                                                    <h2 class="tag-std field__item c-3-c-6">
+                                                        CONGRESO
+                                                        VIRTUAL
+                                                    </h2>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div id="block-slider-home" class="block block-block-content block-block-content21c852d5-6755-4fd2-b36b-480e462c4b14">
+                <div class="field field--name-field-image-slider field--type-entity-reference-revisions field--label-hidden field__items">
+                    <div class="field__item">
+                        <div class="paragraph paragraph--type--image-slider paragraph--view-mode--alternate">
+                            <div class="layer-markets alternate">
+                                <div class="container">
+                                    <div class="layer-markets--container">
+                                        <h2 class="layer-markets--title field__item">
+                                            TABLERO DE CONTROL
+                                        </h2>
+                                        <div class="slider-markets">
+                                            <div class="responsive-slider--wrapper" style="overflow: hidden; width: 100%;">
+                                                <ul class="slider-markets--list field field--name-field-image-slider-items field--type-entity-reference-revisions field--label-hidden field__items" style="overflow: hidden; position: relative; width: 700%; display: -ms-flexbox; display: flex;">
+                                                    <li class="field__item" style="width: 4%;">
+                                                        <div class="paragraph paragraph--type--image-slider-items paragraph--view-mode--default">
+                                                            <a href="@Url.Action("VistaAvances", "User")" class="field-group-link teaser-market">
+                                                                <div class="teaser-market--picture">
+                                                                    <picture>
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" type="image/jpg">
+                                                                        <img src="~/Content/Images/tablerodecontrol/mis-calificaciones.jpg" alt="" typeof="foaf:Image">
+                                                                    </picture>
+                                                                </div>
+                                                                <div class="teaser-market--content">
+                                                                    <p class="teaser-market--title field__item" style="color:black">
+                                                                        MIS CALIFICACIONES
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="field__item" style="width: 6%;">
+                                                        <div class="paragraph paragraph--type--image-slider-items paragraph--view-mode--default">
+                                                            <a href="@Url.Action("Create","Contacto")" style="background-color:#fff" target="_blank" class="field-group-link teaser-market">
+                                                                <div class="teaser-market--picture">
+                                                                    <picture>
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" type="image/jpg">
+                                                                        <img src="~/Content/Images/tablerodecontrol/mesa-de-servicio.jpg" alt="" typeof="foaf:Image">
+                                                                    </picture>
+                                                                </div>
+                                                                <div class="teaser-market--content">
+                                                                    <p class="teaser-market--title field__item " style="color:black">
+                                                                        MESA DE SERVICIO
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="field__item" style="width: 4%;">
+                                                        <div class="paragraph paragraph--type--image-slider-items paragraph--view-mode--default">
+                                                            <a href="@Url.Action("Exchange", "User")" class="field-group-link teaser-market">
+                                                                <div class="teaser-market--picture">
+                                                                    <picture>
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                                        <source srcset="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" type="image/jpg">
+                                                                        <img src="~/Content/Images/tablerodecontrol/sistema-de-puntos.jpg" alt="" typeof="foaf:Image">
+                                                                    </picture>
+                                                                </div>
+                                                                <div class="teaser-market--content">
+                                                                    <p class="teaser-market--title field__item" style="color:black">
+                                                                        SISTEMA DE PUNTOS
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+
+
+
+
+
 
 <!-- Carousel Modulos -->
+<!--<script>
 
-<script>
-
-    $(document).ready(function () {
+  <!--  $(document).ready(function () {
         $('#myCarousel2').carousel({
             interval: 10000
         })
@@ -60,13 +477,9 @@
         })
     });
 
-</script>
-
-
+</script>-->
 <!-- Carousel Newspaper -->
-
-
-<script type="text/javascript">
+<!--<script type="text/javascript">
     window.alert = function () { };
     var defaultCSS = document.getElementById('bootstrap-css');
     function changeCSS(css) {
@@ -102,10 +515,12 @@
             $('#carousel-text').html($('#slide-content-' + id).html());
             1
         });
-  
-    
+
+
 </script>
 <br />
+
+
 
 <div class="container-fluid" id="ContenedorPrincipal">
     <div class="row" style="margin-bottom:20px;">
@@ -118,256 +533,238 @@
                         </div>
                         <div class="modal-body">
                             <div class="center-block">
-                                @{ Html.RenderPartial("_Form", Model.Form); }
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         </div>
-                    </div>@*../../App_Files/Upload/20181029170027-banner-1.jpg*@
-                </div>
-            </div>
-            <div class="col-md-6" style="margin-bottom:20px;">
+                    </div>-->
+@*../../App_Files/Upload/20181029170027-banner-1.jpg*@
+<!--</div>
+</div>
+<div class="col-md-6" style="margin-bottom:20px;">-->
+<!-- Inicio Del Banner El Carousel Con Sus Imagebes     -->
+<!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
+<!-- Inicio Los Indicadores De La Imagen    -->
+<!--@*<ul class="carousel-indicators" style="margin-left:-12%;">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="a1ctive" style="border: 1px solid #e92c4d;background-color: #B0002D;"></li>
+                <br />
+                <li data-target="#carousel-example-generic" data-slide-to="1" class="" style="border: 1px solid #B0002D;background-color: #B0002D;"></li>
+                <br />
+                <li data-target="#carousel-example-generic" data-slide-to="2" class="" style="border: 1px solid #B0002D;background-color: #B0002D;"></li>
+                <br />
+                <li data-target="#carousel-example-generic" data-slide-to="3" class="" style="border: 1px solid #B0002D;background-color: #B0002D;"></li>
 
-                <!-- Inicio Del Banner El Carousel Con Sus Imagebes     -->
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Inicio Los Indicadores De La Imagen    -->
-                    @*<ul class="carousel-indicators" style="margin-left:-12%;">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="a1ctive" style="border: 1px solid #e92c4d;background-color: #B0002D;"></li>
-                            <br />
-                            <li data-target="#carousel-example-generic" data-slide-to="1" class="" style="border: 1px solid #B0002D;background-color: #B0002D;"></li>
-                            <br />
-                            <li data-target="#carousel-example-generic" data-slide-to="2" class="" style="border: 1px solid #B0002D;background-color: #B0002D;"></li>
-                            <br />
-                            <li data-target="#carousel-example-generic" data-slide-to="3" class="" style="border: 1px solid #B0002D;background-color: #B0002D;"></li>
+            </ul>*@
 
-                        </ul>*@
-                    <div class="carousel-inner" style="width:100% !important; height:100%; margin-left:1%;margin-top:3%;">
-                        <div class="item active">
-                            <a href="@Model.Banners[0].Bann_Link" target="_blank">@Html.Raw(Model.Banners[0].Bann_Image)</a>
+        @*<div class="carousel-inner" style="width:100% !important; height:100%; margin-left:1%;margin-top:3%;">
+                <div class="item active">
+                    <a href="@Model.Banners[0].Bann_Link" target="_blank">@Html.Raw(Model.Banners[0].Bann_Image)</a>
 
-                            <div class="header-text">
-                                <div class="col-md-12">
+                    <div class="header-text">
+                        <div class="col-md-12">
 
-                                </div>
-                            </div>
                         </div>
-
-                        @foreach (var imageOfBanner in Model.Banners.Where(x => x.Bann_Id != Model.Banners[0].Bann_Id))
-                        {
-                            <div class="item">
-                                <a href="@imageOfBanner.Bann_Link" target="_blank">
-                                    @Html.Raw(imageOfBanner.Bann_Image)
-                                </a>
-                                <div class="header-text">
-                                    <div class="col-md-12">
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
                     </div>
                 </div>
 
-            </div>
-
-            <!--/fin banner-->
-            <!--/Inicio De Las Dos Imagenes Que estan al lado del carousel Mensajeria Y Sistema De Puntos-->
-
-            <div class="col-md-3 col-xs-6">
-                <!-- Imagen 1 Mensajeria  -->
-                <a href="~/contacto/create" target="_blank"><img src="~/Content/Images/mesa-de-servicio3.jpg" style="width:100%;"></a><br>
-
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <!-- Imagen 2 Sistema De Puntos     -->
-                 <a href="@Url.Action("Exchange", "User")">
-                
-                <img src="~/Content/Images/sistema-de-puntos3.jpg" style="width:100%;"><br>
-                <!--habilitar sistema de puntos mas adelante-->
-                </a>
+                @foreach (var imageOfBanner in Model.Banners.Where(x => x.Bann_Id != Model.Banners[0].Bann_Id))
+                {
+                    <div class="item">
+                        <a href="@imageOfBanner.Bann_Link" target="_blank">
+                            @Html.Raw(imageOfBanner.Bann_Image)
+                        </a>
+                        <div class="header-text">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                    </div>
+                }
 
             </div>
+        *@
+    <!--</div>
+</div>-->
+<!--/fin banner-->
+<!--/Inicio De Las Dos Imagenes Que estan al lado del carousel Mensajeria Y Sistema De Puntos-->
+<!--@* <div class="col-md-3 col-xs-6">
+    <!-- Imagen 1 Mensajeria  -->
+    <a href="~/contacto/create" target="_blank"><img src="~/Content/Images/mesa-de-servicio3.jpg" style="width:100%;"></a><br>
+    </div>
+*@
+@*
+    <div class="col-md-3 col-xs-6">
+        <!-- Imagen 2 Sistema De Puntos     -->
+         <a href="@Url.Action("Exchange", "User")">
 
-            <!--/fin sistema de puntos-->
+        <img src="~/Content/Images/sistema-de-puntos3.jpg" style="width:100%;"><br>
+        <!--habilitar sistema de puntos mas adelante-->
+        </a>
 
+    </div>
+*@-->
+<!--<!--/fin sistema de puntos-->
+<!--</div>
+    </div>
+</div>-->
+<!-- Inicio Del Menu De Contenidos     -->
+<!--<div class="menuunuevo" style="width:100%">-->
+<!-- Propiedad Se Encuentra En El Archivo Bootstrap Contiene Los Estilos Y Posicion DeL Menu    -->
+<!--<div class="nav nav-tabs " id="tabuser">-->
+<!-- TabUser Es El Identificador Que Se Encuentra En El Archivo De Bootstrap Contiene La Posicion De Los Titulos Y Sus Estilos   -->
+<!-- Titulos De Los Botones Del Menu/-->
+<!--<a class="col-md-4 aDiv active" data-toggle="tab" href="#home">ZONA </a>-->
+@*
+    @if (Model.ComunidadActiva != 0)
+    {<a class="col-md-4 aDiv" data-toggle="tab" href="#menu1" >COMUNIDAD SOCIAL DE CONOCIMIENTO</a>
+    }
+*@
+<!--<a class="col-md-4 aDiv" data-toggle="tab" href="#menu2">TABLERO DE CONTROL</a>-->
+<!-- Fin De Los Titulos/-->
+<!--</div>
+<div class="container" style="border-style:solid;border-color: #B0002D; width:100%; margin-bottom:50px">
+    <div class="tab-content">-->
+<!--Contenedor Del Menu 1 (ZONA DE AORENDIZAJE INTERACTIVO)/-->
+<!--<div id="home" class="tab-pane fade in active text-center">
+    <br>
+    <br>
+    <center>
+        <div class="col-md-3 ">
+            <a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/ISO450001.png" style="width:150px; height:150px;"><h1>MIS <b>CURSOS</b></h1></a>
+            <style>
+                h1 {
+                    color: #000;
+                }
+            </style>
+
+        </div>-->
+@*<div class="col-md-3">
+        <a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/aprendizaje-extendido.png" style="width:150px; height:150px;"><h1>APRENDIZAJE <b>EXTENDIDO</b></h1></a>
+    </div>
+    <div class="col-md-3">
+        <a href="https://www.aprendeyavanza2.com.co/UnAula/User/ViewArticle/7" style="background-color:#fff">
+            <img src="~/Content/Images/base-de-datos.png" style="width:150px; height:150px;"><h1>
+                <b>BASES DE DATOS</b>
+            </h1>
+        </a>
+    </div>
+
+
+    <div class="col-md-3" style="padding-bottom:20px">
+        <a href="https://www.aprendeyavanza2.com.co/UnAula/Recursos/pdf_(1).pdf" target="_blank"><img src="~/Content/Images/sistema-de-evaluacion.png" style="width:150px; height:150px;"><h1>SISTEMA  <b>DE EVALUACIÓN</b></h1></a>
+    </div>*@
+<!--</center>
+</div>-->
+<!-- Fin Del Menu 1 (ZONA DE AORENDIZAJE INTERACTIVO) -->
+<!-- Contenedor Del Menu 2 (COMUNIDAD SOCIAL DEL CONOCIMIENTO) -->
+<!--@*
+        @if (Model.ComunidadActiva == 0)
+        {
+            <div id="menu1" class="tab-pane fade">
+                <br />
+                <br />
+                <!--To-Do agregar imagen comunidad no disponible -->
+            </div>
+        }
+        else
+        {
+            <div id="menu1" class="tab-pane fade">
+                <br />
+                <br />
+                <!-- Inicio Del Contenido Del Menu 2 Con sus Imagenes Y Links -->
+                <div class="col-md-3">
+                    <a href="../logscomunidad/clickobl"><img src="~/Content/Images/pbl.png" style="width:150px; height:150px;"><h1>LECCIONES <b>APRENDIDAS</b></h1></a>
+                </div>
+
+                <div class="col-md-3">
+                    <a id="clear" href="../logscomunidad/clicksoftkills" style="background-color:#fff"><img src="~/Content/Images/softkills.png" style="width:150px; height:150px;"></a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="../logscomunidad/clickbiblioteca" target="_blank" style="background-color:#fff"><img src="~/Content/Images/zona-bibliotecas.png" style="width:150px; height:150px;"><h1>ZONA DE <b>BIBLIOTECA</b></h1></a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="../logscomunidad/clickvideoteca" target="_blank" style="background-color:#fff"><img src="~/Content/Images/zona-videoteca.png" style="width:150px; height:150px;"><h1>ZONA DE <b>VIDEOTECA</b></h1></a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="../logscomunidad/clickperiodico" target="_blank" style="background-color:#fff"><img src="~/Content/Images/periodico-virtual.png" style="width:150px; height:150px;"><h1>PERIODICO <b>VIRTUAL</b></h1></a>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="../logscomunidad/clickjuego" target="_blank" style="background-color:#fff"><img src="~/Content/Images/bateria-juegos.png" style="width:150px; height:150px;"><h1>SERIOUS LEARNING <b>GAMES</b></h1></a>
+                </div>
+            </div>
+        }
+    *@
+    <!--<div id="menu2" class="tab-pane fade">
+        <br />
+        <br />
+        <div class="col-md-3">
+            <a href="@Url.Action("VistaAvances", "User")" style="background-color:#fff"><img src="~/Content/Images/libro-calificaciones.png" style="width:100px; height:100px;"><h1>MIS <b>AVANCES</b></h1></a>
         </div>
+
+    </div>
+</div>-->
+<!--Sub-Menu-Lateral --
+<!--@*<div id="MainMenu" style="width:50px;">
+        <div class="list-group panel">
+            <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu" style="background-color:#B0002D !important;"><span class="glyphicon glyphicon-cog"></span> <i class="fa fa-caret-down"></i></a>
+            <div class="collapse" id="demo3">
+                <a href="#" data-toggle="modal" data-target="#soporte" class="list-group-item"><span class="glyphicon glyphicon-book" data-toggle="tooltip" data-placement="right" title="Mesa De Ayuda"></span></a>
+                <a href="#" data-toggle="modal" data-target="#myModal" class="list-group-item"><span class="glyphicon glyphicon-earphone" data-toggle="tooltip" data-placement="right" title="Contactos"></span> </a>
+                <a href="#" data-toggle="modal" data-target="#form" class="list-group-item"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="right" title="Contacte A Su Tutor"></span> </a>
+            </div>
+        </div>
+    </div>*@
+<!--<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>-->
+<!-- Fin De Todo El Contenido -->
+<!-- Modales Del Menu Lateral (Boton De Soporte) -->
+<!--<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body-contactenos">
+                <div class="a" align="center">
+                    <img src="~/Content/Images/Recurso6.png" style="width:70%;height:70%;" class="img-responsive" alt="Imagen responsive" />
+                </div>
+                <div class="b" align="center">
+                    <img src="~/Content/Images/Recurso7.png" style="width:80%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+                </div>
+                <div class="c" align="center">
+                    <img src="~/Content/Images/Recurso5.png" style="width:80%;height:80%;" class="img-responsive" alt="Imagen responsive" />
+@*<video controls="controls" class="videoooo" autoplay>
+        <source src="~/Resources/video.mp4" type="video/mp4" />
+    </video>*@
+<!--</div>
+</div>
+<div class="modal-footer">-->
+@*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+<!--</div>
+        </div>
+
     </div>
 </div>
-
-
-<!-- Inicio Del Menu De Contenidos     -->
-<div class="menuunuevo" style="width:100%">
-    <!-- Propiedad Se Encuentra En El Archivo Bootstrap Contiene Los Estilos Y Posicion DeL Menu    -->
-    <div class="nav nav-tabs " id="tabuser">
-        <!-- TabUser Es El Identificador Que Se Encuentra En El Archivo De Bootstrap Contiene La Posicion De Los Titulos Y Sus Estilos   -->
-        <!-- Titulos De Los Botones Del Menu/-->
-
-        <a class="col-md-4 aDiv active"  data-toggle="tab" href="#home">ZONA DE APRENDIZAJE INTERACTIVO</a>
-        @if (Model.ComunidadActiva != 0)
-        {<a class="col-md-4 aDiv" data-toggle="tab" href="#menu1" >COMUNIDAD SOCIAL DE CONOCIMIENTO</a>
-        }
-        <a class="col-md-4 aDiv" data-toggle="tab" href="#menu2">TABLERO DE CONTROL</a>
-        <!-- Fin De Los Titulos/-->
-    </div>
-    <div class="container" style="border-style:solid;border-color: #B0002D; width:100%; margin-bottom:50px">
-        <div class="tab-content">
-
-            <!--Contenedor Del Menu 1 (ZONA DE AORENDIZAJE INTERACTIVO)/-->
-
-
-            <div id="home" class="tab-pane fade in active text-center">
-                <br>
-                <br>
-                <center>
-                    <div class="col-md-3 ">
-                        <a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/ISO450001.png" style="width:150px; height:150px;"><h1>MIS <b>CURSOS</b></h1></a>
-                        <style>
-                            h1 {
-                                color: #000;
-                            }
-                        </style>
-
-                    </div>
-                    @*<div class="col-md-3">
-                    <a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/aprendizaje-extendido.png" style="width:150px; height:150px;"><h1>APRENDIZAJE <b>EXTENDIDO</b></h1></a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://www.aprendeyavanza2.com.co/UnAula/User/ViewArticle/7" style="background-color:#fff">
-                        <img src="~/Content/Images/base-de-datos.png" style="width:150px; height:150px;"><h1>
-                            <b>BASES DE DATOS</b>
-                        </h1>
-                    </a>
-                </div>
-
-
-                <div class="col-md-3" style="padding-bottom:20px">
-                    <a href="https://www.aprendeyavanza2.com.co/UnAula/Recursos/pdf_(1).pdf" target="_blank"><img src="~/Content/Images/sistema-de-evaluacion.png" style="width:150px; height:150px;"><h1>SISTEMA  <b>DE EVALUACIÓN</b></h1></a>
-                </div>*@
-                </center>
+<div id="form" class="modal fade" role="dialog">
+    <div class="modal-dialog1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
-            <!-- Fin Del Menu 1 (ZONA DE AORENDIZAJE INTERACTIVO) -->
-            <!-- Contenedor Del Menu 2 (COMUNIDAD SOCIAL DEL CONOCIMIENTO) -->
-            @if (Model.ComunidadActiva == 0)
-            {
-                <div id="menu1" class="tab-pane fade">
-                    <br />
-                    <br />
-                    <!--To-Do agregar imagen comunidad no disponible -->
+            <div class="modal-body">
+                <div class="center-block">
                 </div>
-            }
-            else
-            {
-                <div id="menu1" class="tab-pane fade">
-                    <br />
-                    <br />
-                    <!-- Inicio Del Contenido Del Menu 2 Con sus Imagenes Y Links -->
-                    <div class="col-md-3">
-                        <a href="../logscomunidad/clickobl"><img src="~/Content/Images/pbl.png" style="width:150px; height:150px;"><h1>LECCIONES <b>APRENDIDAS</b></h1></a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <a id="clear" href="../logscomunidad/clicksoftkills" style="background-color:#fff"><img src="~/Content/Images/softkills.png" style="width:150px; height:150px;"></a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <a href="../logscomunidad/clickbiblioteca" target="_blank" style="background-color:#fff"><img src="~/Content/Images/zona-bibliotecas.png" style="width:150px; height:150px;"><h1>ZONA DE <b>BIBLIOTECA</b></h1></a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <a href="../logscomunidad/clickvideoteca" target="_blank" style="background-color:#fff"><img src="~/Content/Images/zona-videoteca.png" style="width:150px; height:150px;"><h1>ZONA DE <b>VIDEOTECA</b></h1></a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <a href="../logscomunidad/clickperiodico" target="_blank" style="background-color:#fff"><img src="~/Content/Images/periodico-virtual.png" style="width:150px; height:150px;"><h1>PERIODICO <b>VIRTUAL</b></h1></a>
-                    </div>
-
-                    <div class="col-md-3">
-                        <a href="../logscomunidad/clickjuego" target="_blank" style="background-color:#fff"><img src="~/Content/Images/bateria-juegos.png" style="width:150px; height:150px;"><h1>JUEGOS SERIOS <b>DE APRENDIZAJE</b></h1></a>
-                    </div>
-                    <!-- <div class="col-md-3" style="padding-bottom:20px">
-                @*<a href="@Url.Action("ListModuleVirtual", "User")" style="background-color:#fff"><img src="~/Content/Images/foro.png" style="width:150px; height:150px;"><h1>FORO</h1></a>*@
-            </div>-->
-                    <!-- Fin Del Menu 2 (COMUNIDAD SOCIAL DEL CONOCIMIENTO) -->
-                    <!-- Contenedor Del Menu 3 ( TABLERO DE CONTROL ) -->
-
-                </div>
-            }
-
-            <div id="menu2" class="tab-pane fade">
-                <br />
-                <br />
-
-                @*<div class="col-md-3">
-                <a href="@Url.Action("VistaPendientes", "User")" style="background-color:#fff"><img src="~/Content/Images/calendario.png" style="width:100px; height:100px;"><h1>MIS <b>PENDIENTES</b></h1></a>
-            </div>*@
-                <div class="col-md-3">
-                    <a href="@Url.Action("VistaAvances", "User")" style="background-color:#fff"><img src="~/Content/Images/libro-calificaciones.png" style="width:100px; height:100px;"><h1>MIS <b>CALIFICACIONES</b></h1></a>
-                </div>
-
             </div>
-        </div>
-        <!--Sub-Menu-Lateral -->
-        @*<div id="MainMenu" style="width:50px;">
-                <div class="list-group panel">
-                    <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu" style="background-color:#B0002D !important;"><span class="glyphicon glyphicon-cog"></span> <i class="fa fa-caret-down"></i></a>
-                    <div class="collapse" id="demo3">
-                        <a href="#" data-toggle="modal" data-target="#soporte" class="list-group-item"><span class="glyphicon glyphicon-book" data-toggle="tooltip" data-placement="right" title="Mesa De Ayuda"></span></a>
-                        <a href="#" data-toggle="modal" data-target="#myModal" class="list-group-item"><span class="glyphicon glyphicon-earphone" data-toggle="tooltip" data-placement="right" title="Contactos"></span> </a>
-                        <a href="#" data-toggle="modal" data-target="#form" class="list-group-item"><span class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="right" title="Contacte A Su Tutor"></span> </a>
-                    </div>
-                </div>
-            </div>*@
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-        </script>
-        <!-- Fin De Todo El Contenido -->
-        <!-- Modales Del Menu Lateral (Boton De Soporte) -->
-
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog1">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body-contactenos">
-                        <div class="a" align="center">
-                            <img src="~/Content/Images/Recurso6.png" style="width:70%;height:70%;" class="img-responsive" alt="Imagen responsive" />
-                        </div>
-                        <div class="b" align="center">
-                            <img src="~/Content/Images/Recurso7.png" style="width:80%;height:80%;" class="img-responsive" alt="Imagen responsive" />
-                        </div>
-                        <div class="c" align="center">
-                            <img src="~/Content/Images/Recurso5.png" style="width:80%;height:80%;" class="img-responsive" alt="Imagen responsive" />
-                            @*<video controls="controls" class="videoooo" autoplay>
-                                    <source src="~/Resources/video.mp4" type="video/mp4" />
-                                </video>*@
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        @*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="form" class="modal fade" role="dialog">
-            <div class="modal-dialog1">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="center-block">
-                            @{ Html.RenderPartial("_Form", Model.Form); }
-                        </div>
-                    </div>
-                    <div class="modal-footer-form">
-                        @*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-                    </div>
+            <div class="modal-footer-form">-->
+@*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+<!--</div>
                 </div>
             </div>
         </div>
@@ -416,42 +813,42 @@
                 </div>
             </div>
         }
-iv class="modal-body">
+div class="modal-body">
                         <div class="center-block">
-                            @{ Html.RenderPartial("_Soporte", Model.Form); }
                         </div>
                 </div>
-                <div class="modal-footer-form">
-                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
-                </div>
+                <div class="modal-footer-form">-->
+@*<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>*@
+@*</div>
             </div>
         </div>
-    </div>
+    </div>*@
 
-    <!-- FIN De Los Modales Del Menu Lateral (Boton De Soporte) -->
-    <script>
-      function eliminarCookies() {
-          document.cookie.split(";").forEach(function (c) {
-              document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-              window.location.assign("https://aprendeyavanza2.com.co/DCOBureau/Account/Login?id="@ViewData["Usuario"]);
+<!-- FIN De Los Modales Del Menu Lateral (Boton De Soporte) -->
+<script>
+  function eliminarCookies() {
+      document.cookie.split(";").forEach(function (c) {
+          document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+          window.location.assign("https://aprendeyavanza2.com.co/DCOBureau/Account/Login?id="@ViewData["Usuario"]);
 
-        });
-      }
-        $('#clear').click(function () {
-            eliminarCookies();
+    });
+  }
+    $('#clear').click(function () {
+        eliminarCookies();
 
-        });
+    });
 
-         function ClickObl() {
-            alert("click1");
-             @Html.ActionLink("ClickObl", "LogsComunidad")
+     function ClickObl() {
+        alert("click1");
+         @Html.ActionLink("ClickObl", "LogsComunidad")
 
-        }
-    </script>
+    }
+</script>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <div>
-    </div>
+<br />
+<br />
+<br />
+<br />
+<div>
+</div>
+

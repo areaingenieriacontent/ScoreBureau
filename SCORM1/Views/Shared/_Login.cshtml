@@ -1,81 +1,63 @@
 ﻿@model SCORM1.Models.LoginViewModel
 
-<div class="jumbotron1" id="jumbotron1">
-    <div id="margendellogin">
-
-        <img src="~/Content/Images/logoBlanco.png" width="20%" />
-
+<div class="jumbotron1" id="jumbotron1" style="width:35%;height:110% 
+">
+    <div id="margendellogin">        
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="container-fluid" id="logeo">
-
-                <div class="row">
-
-
-                    <div class="col-md-10">
-
-                        @Html.TextBoxFor(m => m.Email, new { @placeholder = Html.DisplayNameFor(x => x.Email), @class = "form-control", @style = "color:#000 !important;background-color: transparent; border:none" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-
+        <div style="border: solid 1px #FFFFFF; border-radius: 5px; margin-bottom:50px;margin-left:50px ;margin-right:20px;margin-top:30%; padding: 10px;">
+                    <div class="form-group">
+                        <div class="row" style="margin-top:5%">
+                            <img src="~/Content/Images/slider-login/logo-bv-fondo-claro.png" style="margin:auto; width:75%" />
+                        </div>
                     </div>
-                    <div class="col-md-2 col-sm-1">
-                        <img src="~/Content/Images/userBlanco.png" class="imagenesiconos" style="padding-bottom:50%" />
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="background-color:#FFFFFF">
+                                <span class="input-group-btn">
+                                    <img src="~/Content/Images/slider-login/user-icon.png" style="background-color:#FFFFFF;margin-right:-10px;margin-left:10px;margin-top: 8px;"/>
+                                </span>
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = Html.DisplayNameFor(x => x.Email), @class = "form-control", @style = "color:#000 !important;background-color: white; border:none; margin-left:5%;margin-right:5%; " })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="background-color:#FFFFFF">
+                                <span class="input-group-btn">
+                                    <img src="~/Content/Images/slider-login/password-icon.png" style="background-color:#FFFFFF;margin-right:-13px;margin-left:10px;margin-top: 8px;" />
+                                </span>
+                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Contraseña", @class = "form-control", @style = "color:#000 !important;background-color: whiter; border:none; margin-left:5%;margin-right:5%;" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="INGRESAR" style="background-color: #fc3650;color:#FFFFFF;text-align:center;margin-right:5%; margin-bottom:10%; width:100%;line-height:2;max-width:none;border-style: none;" />
+                            <br />
+                            @*<p style="position:center;margin-top: 5%; margin-right:0%;" id="RecordarPass">
+                            @Html.ActionLink("¿Olvidaste tu contraseña?", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { @class = "", @style = "color:#fff;  background-color:transparent;" })
 
+                            <br />
+                            <a href="https://bvtrainingcommunity.com/" style = "color:#fff;  background-color:transparent;">¿No estás registrado?</a>
+                        </p>*@
+                        </div>
+                    </div>
             </div>
+        
+            }
 
-
-
-            <div class="container-fluid" id="logeo" style="margin-top:5%;">
-
-                <div class="row">
-
-
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Contraseña", @class = "form-control", @style = "color:#000 !important;background-color: transparent; border:none" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-2 col-sm-1">
-                        <img src="~/Content/Images/passwordBlanco.png" class="imagenesiconos" style="padding-bottom:50%" />
-                    </div>
-                </div>
-
-
-            </div>
-
-
-
-
-            <div class="row">
-                <div class="col-xs-12">
-
-                    <p style="position:center;margin-top: 5%; margin-right:0%;" id="RecordarPass">
-                        @Html.ActionLink("¿Olvidaste tu contraseña?", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { @class = "", @style = "color:#000;  background-color:transparent;" })
-
-                        @*<br />
-            <a href="https://bvtrainingcommunity.com/" style = "color:#fff;  background-color:transparent;">¿No estás registrado?</a>*@
-                    </p>
-
-                    <input type="submit" value="Ingresar" class="btn btn-info" style="background: #cc023b;margin-left:0%;padding: 0;padding-left: 20px;margin-top:5%;font-size: 30px;padding-right: 20px;border-radius: 20px;" id="ingresarlogin" />
-                    <br />
-
-                    <p style="position:center;margin-top: 5%; margin-right:0%;" id="RecordarPass">
-                        ¿Aún no eres miembro?
-                        <br />
-                        <u><b>Adquiere algún curso</b></u>
-                        @*<br />
-            <a href="https://bvtrainingcommunity.com/" style = "color:#fff;  background-color:transparent;">¿No estás registrado?</a>*@
-                    </p>
-                    <br />
-                    <br />
-                    <br />
-
-                </div>
-            </div>
-        }
-
+        </div>
+    <div class="row justify-content-center" style="margin-top:2%">
+        <div>
+            <p style="font-family: 'Source Sans Pro'; color: white; margin-left: auto"> 
+                Desarrollado por<strong> Content Group <br />
+                Tratamiento de datos</strong>
+            </p>
+        </div>
     </div>
 
 

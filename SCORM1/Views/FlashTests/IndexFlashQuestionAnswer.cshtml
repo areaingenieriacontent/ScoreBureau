@@ -1,0 +1,50 @@
+﻿@using SCORM1.Models.RigidCourse;
+@using SCORM1.Models.ViewModel;
+@model CursoRigidoViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create", "CreateFlashQuestionAnswer", new { FlashTestId = ViewData["IdTest"] })
+    @Html.ActionLink("Volver", "Index", new { ToCo_Id = ViewData["TocoId"] })
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Enunciado
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrectAnswer)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListFlashQuestionAnswer)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlashQuestion.Enunciado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectAnswer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditFlashQuestionAnswer", new { FlashQuestionAnswerId = item.FlashQuestionAnswerId }) |
+                @Html.ActionLink("Delete", "DeleteFlashQuestionAnswer", new { FlashQuestionAnswerId = item.FlashQuestionAnswerId })
+            </td>
+        </tr>
+    }
+
+</table>

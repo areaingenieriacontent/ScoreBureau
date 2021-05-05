@@ -1,0 +1,250 @@
+﻿@using SCORM1.Models.ViewModel;
+@model UserProfileViewModel
+
+@{
+    ViewBag.Title = "ComunidadSocial";
+}
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/sistema de puntos/banner-sistema-de-puntos.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder;">INICIO /</a>
+    <a href="@Url.Action("ComunidadSocial", "Home")" style="font-weight: bolder;color:#FC3650">COMUNIDAD SOCIAL DE CONOCIMIENTOS</a>
+</div>
+<br />
+<div>
+    <div class="section-gallery">
+        <div class="section-gallery--container">
+            <h2 class="section-gallery--title field__item">
+                <p style="color:black">COMUNIDAD SOCIAL&nbsp;<strong>DE CONOCIMIENTOS</strong></p>
+            </h2>
+            <div class="section-gallery--slider">
+                <ul class="section-gallery--list field field--name-field-gallery-items field--type-entity-reference-revisions field--label-hidden field__items">
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="../logscomunidad/clickobl" class="field-group-link">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/lecciones-aprendidas.jpg" media="all and (min-width: 1280px)" type="image/jgp">
+                                                <source srcset="~/Content/Images/lecciones-aprendidas.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/lecciones-aprendidas.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/lecciones-aprendidas.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/lecciones-aprendidas.jpg" alt=" " typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <h2 class="tag-std field__item c-1-c-3">
+                                            APRENDIZAJE BASADO<br />
+                                            EN EXPERIENCIAS
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="#" class="field-group-link">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/competencias-estrategicas.jpg" media="all and (min-width: 1280px)" type="image/jgp">
+                                                <source srcset="~/Content/Images/competencias-estrategicas.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/competencias-estrategicas.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/competencias-estrategicas.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/competencias-estrategicas.jpg" alt="" typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <h2 class="tag-std field__item c-1-c-3">
+                                            COMPETENCIAS
+                                            ESTRATÉGICAS
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="../logscomunidad/ClickVideoteca" class="field-group-link" target="_blank">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/zona-videoteca.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/comunidad/zona-videoteca.jpg" alt="" typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <h2 class="tag-std field__item c-1-c-3">
+                                            ZONA DE
+                                            VIDEOTECA
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="../logscomunidad/clickperiodico" target="_blank" class="field-group-link">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/periodico-virtual.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/comunidad/periodico-virtual.jpg" alt=" " typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <h2 class="tag-std field__item c-1-c-3">
+                                            REVISTA
+                                            VIRTUAL
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="section-gallery--list field field--name-field-gallery-items field--type-entity-reference-revisions field--label-hidden field__items">
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="../logscomunidad/clickjuego" target="_blank" class="field-group-link">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/juegos-serios.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/comunidad/juegos-serios.jpg" alt="" typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <h2 class="tag-std field__item c-1-c-3">
+                                            JUEGOS SERIOS<br />
+                                            DE APRENDIZAJE
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="#" class="field-group-link">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/comunidad/salon-debate.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/salon-debate.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/salon-debate.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/salon-debate.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/comunidad/salon-debate.jpg" alt="" typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <div class="teaser-img--action">
+                                            <span class="link-std">
+                                                PROXIMAMENTE
+                                            </span>
+                                        </div>
+                                        <h2 class="tag-std field__item c-3-c-6">
+                                            SALÓN DE DEBATE<br />
+                                            INTERACTIVO DEL<br />
+                                            CONOCIMIENTO<br />
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="#" class="field-group-link" target="_blank">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/cafeteria-virtual.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/comunidad/cafeteria-virtual.jpg" alt="" typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <div class="teaser-img--action">
+                                            <span class="link-std">
+                                                PROXIMAMENTE
+                                            </span>
+                                        </div>
+                                        <h2 class="tag-std field__item c-3-c-6">
+                                            CAFETERÍA VIRTUAL
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="section-gallery--item field__item">
+                        <div class="paragraph paragraph--type--gallery-items paragraph--view-mode--default">
+                            <div class="teaser-img">
+                                <a href="#" class="field-group-link">
+                                    <div class="teaser-img--picture field__item">
+                                        <div class="teaser-img--picture">
+                                            <picture>
+                                                <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" media="all and (min-width: 1280px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" media="all and (min-width: 960px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" media="all and (min-width: 640px)" type="image/jpg">
+                                                <source srcset="~/Content/Images/comunidad/congreso-virtual.jpg" type="image/jpg">
+                                                <img src="~/Content/Images/comunidad/congreso-virtual.jpg" alt=" " typeof="foaf:Image">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="teaser-img--content">
+                                        <div class="teaser-img--action">
+                                            <span class="link-std">
+                                                PROXIMAMENTE
+                                            </span>
+                                        </div>
+                                        <h2 class="tag-std field__item c-3-c-6">
+                                            CONGRESO
+                                            VIRTUAL
+                                        </h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+ 
+    
+</div>
+

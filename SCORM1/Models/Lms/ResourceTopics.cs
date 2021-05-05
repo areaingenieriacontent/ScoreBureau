@@ -20,6 +20,7 @@ namespace SCORM1.Models.Lms
 
         [ForeignKey("TopicsCourse")]
         public int ToCo_Id { get; set; }
+
         public virtual TopicsCourse TopicsCourse { get; set; }
 
     }

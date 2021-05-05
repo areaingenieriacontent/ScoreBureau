@@ -1,0 +1,68 @@
+﻿@using SCORM1.Models.Lms;
+@using SCORM1.Models.ViewModel;
+@model CursoRigidoViewModel
+
+
+
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+else
+{
+    if (TempData["Info"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+            </script>
+        }}
+}
+@Scripts.Render("~/bundles/jqueryval")
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    Ya existe un test creado en este curso
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.topic.ToCo_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flashTest.FlashTestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flashTest.AprovedPercentage)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ListFlashTest)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicsCourse.ToCo_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlashTestName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AprovedPercentage)
+            </td>
+            <td>
+                @Html.ActionLink("Preguntas", "IndexQuestion", new { FlashTestId = item.FlashTestId, ToCo_Id = ViewData["ToCo_Id"] })
+            </td>
+        </tr>
+    }
+</table>

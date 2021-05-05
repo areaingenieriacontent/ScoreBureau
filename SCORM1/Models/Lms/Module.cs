@@ -45,8 +45,6 @@ namespace SCORM1.Models.Lms
         public FORO Modu_Improvement { get; set; }
         [Display(Name = "Evaluación")]
         public FORO Modu_Test { get; set; }
-
-
         //[ForeignKey("CategoryModule")]
         //public int CaMo_Id { get; set; }
         //public virtual CategoryModule CategoryModule { get; set; }
@@ -57,7 +55,8 @@ namespace SCORM1.Models.Lms
         public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
 
-        public int QSMActive { get; set; }
+        public int QSMActive { get; set; }//tiene QSM?
+        public FORO hasProtectedFailure { get; set; }//tiene falla protegida?
         public virtual ICollection<Improvement> Improvement { get; set; }
         public virtual ICollection<BetterPractice> BetterPractice { get; set; }
         public virtual ICollection<TopicsCourse> TopicsCourse { get; set; }

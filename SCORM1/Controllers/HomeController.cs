@@ -94,7 +94,10 @@ namespace SCORM1.Controllers
                     }
                     else
                     {
+                        //To-Do removed
+                        /*
                         model.Logo = ApplicationDbContext.StylesLogos.Find(1).UrlLogo;
+                        */
                     }
                     return View(model);
                 }
@@ -103,12 +106,13 @@ namespace SCORM1.Controllers
             {
                 indexMain model = new indexMain();
                 model.Login = new LoginViewModel();
-                var CompanySearch = ApplicationDbContext.StylesLogos.Find(2);
+                //To-Do removed
+                /*var CompanySearch = ApplicationDbContext.StylesLogos.Find(2);
                 model.UrlImage1 = CompanySearch.UrlImage1;
                 model.UrlImage2 = CompanySearch.UrlImage2;
                 model.UrlImage3 = CompanySearch.UrlImage3;
                 model.UrlImage4 = CompanySearch.UrlImage4;
-                model.UrlLogo = CompanySearch.UrlLogo;
+                model.UrlLogo = CompanySearch.UrlLogo;*/
                 model.Login = new LoginViewModel();
                 model.Form = new FormViewModel();
                 model.Sesion = SESION.Si;
@@ -231,6 +235,15 @@ namespace SCORM1.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
+
+        }
+        public ActionResult ComunidadSocial()
+        {
+            return View();
+        }
+        public ActionResult TableroControl()
+        {
+            return View();
         }
     }
 }

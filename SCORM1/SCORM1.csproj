@@ -307,112 +307,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802132154537_testyg.cs" />
-    <Compile Include="Migrations\201802132154537_testyg.Designer.cs">
-      <DependentUpon>201802132154537_testyg.cs</DependentUpon>
+    <Compile Include="Migrations\202105042159407_abc.cs" />
+    <Compile Include="Migrations\202105042159407_abc.Designer.cs">
+      <DependentUpon>202105042159407_abc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802231659003_ssss.cs" />
-    <Compile Include="Migrations\201802231659003_ssss.Designer.cs">
-      <DependentUpon>201802231659003_ssss.cs</DependentUpon>
+    <Compile Include="Migrations\202105051337011_uno.cs" />
+    <Compile Include="Migrations\202105051337011_uno.Designer.cs">
+      <DependentUpon>202105051337011_uno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802261352564_dddd.cs" />
-    <Compile Include="Migrations\201802261352564_dddd.Designer.cs">
-      <DependentUpon>201802261352564_dddd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803061513335_tertyk.cs" />
-    <Compile Include="Migrations\201803061513335_tertyk.Designer.cs">
-      <DependentUpon>201803061513335_tertyk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803161616134_prueba.cs" />
-    <Compile Include="Migrations\201803161616134_prueba.Designer.cs">
-      <DependentUpon>201803161616134_prueba.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803212028541_sdfg.cs" />
-    <Compile Include="Migrations\201803212028541_sdfg.Designer.cs">
-      <DependentUpon>201803212028541_sdfg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807182149570_htmopcionmultiple.cs" />
-    <Compile Include="Migrations\201807182149570_htmopcionmultiple.Designer.cs">
-      <DependentUpon>201807182149570_htmopcionmultiple.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807190143598_htmoanswerpcionmultiple.cs" />
-    <Compile Include="Migrations\201807190143598_htmoanswerpcionmultiple.Designer.cs">
-      <DependentUpon>201807190143598_htmoanswerpcionmultiple.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807191626148_htmoanswerTrFa.cs" />
-    <Compile Include="Migrations\201807191626148_htmoanswerTrFa.Designer.cs">
-      <DependentUpon>201807191626148_htmoanswerTrFa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807211541560_dateAdvanceUser.cs" />
-    <Compile Include="Migrations\201807211541560_dateAdvanceUser.Designer.cs">
-      <DependentUpon>201807211541560_dateAdvanceUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807231448527_modelAdvanceLoseUser.cs" />
-    <Compile Include="Migrations\201807231448527_modelAdvanceLoseUser.Designer.cs">
-      <DependentUpon>201807231448527_modelAdvanceLoseUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807231534093_removevirtualadvacecourse.cs" />
-    <Compile Include="Migrations\201807231534093_removevirtualadvacecourse.Designer.cs">
-      <DependentUpon>201807231534093_removevirtualadvacecourse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808012123544_tablafalsetrue.cs" />
-    <Compile Include="Migrations\201808012123544_tablafalsetrue.Designer.cs">
-      <DependentUpon>201808012123544_tablafalsetrue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808012317119_tablaparing.cs" />
-    <Compile Include="Migrations\201808012317119_tablaparing.Designer.cs">
-      <DependentUpon>201808012317119_tablaparing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808022201273_tablaoptionmultiplestudent.cs" />
-    <Compile Include="Migrations\201808022201273_tablaoptionmultiplestudent.Designer.cs">
-      <DependentUpon>201808022201273_tablaoptionmultiplestudent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808031541556_tablaoptionmultipluserId.cs" />
-    <Compile Include="Migrations\201808031541556_tablaoptionmultipluserId.Designer.cs">
-      <DependentUpon>201808031541556_tablaoptionmultipluserId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808132355144_fechatest.cs" />
-    <Compile Include="Migrations\201808132355144_fechatest.Designer.cs">
-      <DependentUpon>201808132355144_fechatest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901141605080_UserInfo.cs" />
-    <Compile Include="Migrations\201901141605080_UserInfo.Designer.cs">
-      <DependentUpon>201901141605080_UserInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004070406169_nuevocampo.cs" />
-    <Compile Include="Migrations\202004070406169_nuevocampo.Designer.cs">
-      <DependentUpon>202004070406169_nuevocampo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004151429554_Agregar-descripcion-pregunta.cs" />
-    <Compile Include="Migrations\202004151429554_Agregar-descripcion-pregunta.Designer.cs">
-      <DependentUpon>202004151429554_Agregar-descripcion-pregunta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005140633594_LogsComunidad.cs" />
-    <Compile Include="Migrations\202005140633594_LogsComunidad.Designer.cs">
-      <DependentUpon>202005140633594_LogsComunidad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005200513314_correo.cs" />
-    <Compile Include="Migrations\202005200513314_correo.Designer.cs">
-      <DependentUpon>202005200513314_correo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007221539245_ContactoCorreo.cs" />
-    <Compile Include="Migrations\202007221539245_ContactoCorreo.Designer.cs">
-      <DependentUpon>202007221539245_ContactoCorreo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007221551266_ContactoCorreos.cs" />
-    <Compile Include="Migrations\202007221551266_ContactoCorreos.Designer.cs">
-      <DependentUpon>202007221551266_ContactoCorreos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008031401405_point_enddate.cs" />
-    <Compile Include="Migrations\202008031401405_point_enddate.Designer.cs">
-      <DependentUpon>202008031401405_point_enddate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009010337159_QuienSabeMas.cs" />
-    <Compile Include="Migrations\202009010337159_QuienSabeMas.Designer.cs">
-      <DependentUpon>202009010337159_QuienSabeMas.cs</DependentUpon>
+    <Compile Include="Migrations\202105051345174_dos.cs" />
+    <Compile Include="Migrations\202105051345174_dos.Designer.cs">
+      <DependentUpon>202105051345174_dos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAuthenticationAttribute.cs" />
+    <Compile Include="Models\Lms\Advance.cs" />
     <Compile Include="Models\Lms\AdvanceLoseUser.cs" />
     <Compile Include="Models\Lms\AnserPairingStudent.cs" />
     <Compile Include="Models\Lms\AnswerOptionMultipleStudent.cs" />
@@ -498,6 +407,17 @@
     <Compile Include="Models\ratings\Job.cs" />
     <Compile Include="Models\ratings\ResourceForum.cs" />
     <Compile Include="Models\ratings\ResourceJobs.cs" />
+    <Compile Include="Models\RigidCourse\Category.cs" />
+    <Compile Include="Models\RigidCourse\CategoryQuestionBank.cs" />
+    <Compile Include="Models\RigidCourse\FlashQuestion.cs" />
+    <Compile Include="Models\RigidCourse\FlashQuestionAnswer.cs" />
+    <Compile Include="Models\RigidCourse\FlashTest.cs" />
+    <Compile Include="Models\RigidCourse\ProtectedFailureAnswer.cs" />
+    <Compile Include="Models\RigidCourse\ProtectedFailureMultiChoice.cs" />
+    <Compile Include="Models\RigidCourse\ProtectedFailureMultiChoiceAnswer.cs" />
+    <Compile Include="Models\RigidCourse\ProtectedFailureResults.cs" />
+    <Compile Include="Models\RigidCourse\ProtectedFailureTest.cs" />
+    <Compile Include="Models\RigidCourse\UserModuleAdvance.cs" />
     <Compile Include="Models\Scorm\Area.cs" />
     <Compile Include="Models\Scorm\City.cs" />
     <Compile Include="Models\Scorm\Company.cs" />
@@ -506,6 +426,14 @@
     <Compile Include="Models\Scorm\UserInfo.cs" />
     <Compile Include="Models\ServiceBlock\BlockService.cs" />
     <Compile Include="Models\ServiceBlock\TypeServiceBlock.cs" />
+    <Compile Include="Models\Survey\MultipleOptionsSurveyAnswer.cs" />
+    <Compile Include="Models\Survey\MultipleOptionsSurveyQuestion.cs" />
+    <Compile Include="Models\Survey\MultipleOptionsSurveyUser.cs" />
+    <Compile Include="Models\Survey\SurveyModule.cs" />
+    <Compile Include="Models\Survey\SurveyQuestionBank.cs" />
+    <Compile Include="Models\Survey\TrueFalseSurveyQuestion.cs" />
+    <Compile Include="Models\Survey\TrueFalseSurveyUser.cs" />
+    <Compile Include="Models\Survey\UserSurveyResponse.cs" />
     <Compile Include="Models\ValidationUser.cs" />
     <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\ViewModel\AdminGameViewModel.cs" />
@@ -519,6 +447,7 @@
     <Compile Include="Models\ViewModel\AdminViewModel.cs" />
     <Compile Include="Models\ViewModel\ContactoModel.cs" />
     <Compile Include="Models\ViewModel\CorreoModel.cs" />
+    <Compile Include="Models\ViewModel\CursoRigidoViewModel.cs" />
     <Compile Include="Models\ViewModel\HomeViewModels.cs" />
     <Compile Include="Models\ViewModel\ICONPRIZE.cs" />
     <Compile Include="Models\ViewModel\IdentityModels.cs" />
@@ -529,17 +458,25 @@
     <Compile Include="Models\ViewModel\ServiceWebModel.cs" />
     <Compile Include="Models\ViewModel\StandarModels.cs" />
     <Compile Include="Models\ViewModel\SuperAdminGeneralControllerViewModel.cs" />
+    <Compile Include="Models\ViewModel\SurveyViewModel.cs" />
     <Compile Include="Models\ViewModel\UploadViewModel.cs" />
     <Compile Include="Models\ViewModel\UserAndMassiveManagementViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ViewModel\ViewDataUploadFileResults.cs" />
     <Compile Include="Models\ViewModel\ViewGameViewModel.cs" />
+    <Compile Include="Models\ViewModel\VsdrUserVM.cs" />
+    <Compile Include="Models\VSDR\VsdrEnrollment.cs" />
+    <Compile Include="Models\VSDR\VsdrSession.cs" />
+    <Compile Include="Models\VSDR\VsdrTeacherComment.cs" />
+    <Compile Include="Models\VSDR\VsdrUserFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Files\Upload\1920x1080_HD_Wallpaper_147_Zixpk.jpg" />
     <Content Include="App_Files\Upload\433100-1.jpg" />
+    <Content Include="bin\SCORM1.dll" />
+    <Content Include="bin\SCORM1.pdb" />
     <Content Include="Content\background-no-plan.jpg" />
     <Content Include="Content\background-no-result.jpg" />
     <Content Include="Content\background-no-test.jpg" />
@@ -800,6 +737,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\Site1.css" />
     <Content Include="Content\style1.css" />
+    <Content Include="Content\StyleHome.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2308,6 +2246,24 @@
     <Content Include="Views\User\ViewEvaluaciones.cshtml" />
     <Content Include="Views\Contacto\Create.cshtml" />
     <Content Include="Views\User\ListModuleVirtualAdmin.cshtml" />
+    <Content Include="Views\Home\ComunidadSocial.cshtml" />
+    <Content Include="Views\Home\TableroControl.cshtml" />
+    <Content Include="Views\FlashTests\Create.cshtml" />
+    <Content Include="Views\FlashTests\CreateFlashQuestion.cshtml" />
+    <Content Include="Views\FlashTests\CreateFlashQuestionAnswer.cshtml" />
+    <Content Include="Views\FlashTests\DeleteFlashQuestion.cshtml" />
+    <Content Include="Views\FlashTests\DeleteFlashQuestionAnswer.cshtml" />
+    <Content Include="Views\FlashTests\EditFlashQuestion.cshtml" />
+    <Content Include="Views\FlashTests\EditFlashQuestionAnswer.cshtml" />
+    <Content Include="Views\FlashTests\Index.cshtml" />
+    <Content Include="Views\FlashTests\IndexFlashQuestionAnswer.cshtml" />
+    <Content Include="Views\FlashTests\IndexQuestion.cshtml" />
+    <Content Include="Views\FlashTests\TestUser.cshtml" />
+    <Content Include="Views\ProtectedFailure\TestUser.cshtml" />
+    <Content Include="Views\ProtectedFailure\UserResults.cshtml" />
+    <Content Include="Views\Survey\Survey.cshtml" />
+    <Content Include="Views\VSDR\VsdrContent.cshtml" />
+    <Content Include="Views\VSDR\VsdrUserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2337,83 +2293,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802132154537_testyg.resx">
-      <DependentUpon>201802132154537_testyg.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105042159407_abc.resx">
+      <DependentUpon>202105042159407_abc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802231659003_ssss.resx">
-      <DependentUpon>201802231659003_ssss.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105051337011_uno.resx">
+      <DependentUpon>202105051337011_uno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802261352564_dddd.resx">
-      <DependentUpon>201802261352564_dddd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803061513335_tertyk.resx">
-      <DependentUpon>201803061513335_tertyk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803161616134_prueba.resx">
-      <DependentUpon>201803161616134_prueba.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803212028541_sdfg.resx">
-      <DependentUpon>201803212028541_sdfg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807182149570_htmopcionmultiple.resx">
-      <DependentUpon>201807182149570_htmopcionmultiple.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807190143598_htmoanswerpcionmultiple.resx">
-      <DependentUpon>201807190143598_htmoanswerpcionmultiple.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807191626148_htmoanswerTrFa.resx">
-      <DependentUpon>201807191626148_htmoanswerTrFa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807211541560_dateAdvanceUser.resx">
-      <DependentUpon>201807211541560_dateAdvanceUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807231448527_modelAdvanceLoseUser.resx">
-      <DependentUpon>201807231448527_modelAdvanceLoseUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807231534093_removevirtualadvacecourse.resx">
-      <DependentUpon>201807231534093_removevirtualadvacecourse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808012123544_tablafalsetrue.resx">
-      <DependentUpon>201808012123544_tablafalsetrue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808012317119_tablaparing.resx">
-      <DependentUpon>201808012317119_tablaparing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808022201273_tablaoptionmultiplestudent.resx">
-      <DependentUpon>201808022201273_tablaoptionmultiplestudent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808031541556_tablaoptionmultipluserId.resx">
-      <DependentUpon>201808031541556_tablaoptionmultipluserId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808132355144_fechatest.resx">
-      <DependentUpon>201808132355144_fechatest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901141605080_UserInfo.resx">
-      <DependentUpon>201901141605080_UserInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004070406169_nuevocampo.resx">
-      <DependentUpon>202004070406169_nuevocampo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004151429554_Agregar-descripcion-pregunta.resx">
-      <DependentUpon>202004151429554_Agregar-descripcion-pregunta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005140633594_LogsComunidad.resx">
-      <DependentUpon>202005140633594_LogsComunidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005200513314_correo.resx">
-      <DependentUpon>202005200513314_correo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007221539245_ContactoCorreo.resx">
-      <DependentUpon>202007221539245_ContactoCorreo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007221551266_ContactoCorreos.resx">
-      <DependentUpon>202007221551266_ContactoCorreos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008031401405_point_enddate.resx">
-      <DependentUpon>202008031401405_point_enddate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009010337159_QuienSabeMas.resx">
-      <DependentUpon>202009010337159_QuienSabeMas.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105051345174_dos.resx">
+      <DependentUpon>202105051345174_dos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

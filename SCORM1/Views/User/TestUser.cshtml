@@ -2,27 +2,28 @@
 @using SCORM1.Models.ViewModel;
 @using SCORM1.Enum;
 @model UserTestViewModel
-
+@Styles.Render("~/Content/StyleHome.css")
 
 @if (Model.acces == false)
 {
 
-    <br /><br /><br /><br /><br /><br />
-
-    <div class="message">
-        <h3>Estimado(a) estudiante @Model.UserLog Usted ya ha realizado el cuestionario</h3>
-        <h4>
-            su nota correspondiente es @Model.pointsObtained de 100%
-
-        </h4>
-      
-
-
-    </div>
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    @*
+        <div class="message">
+            <h3>Estimado(a) estudiante @Model.UserLog Usted ya ha realizado el cuestionario</h3>
+            <h4>
+                su nota correspondiente es @Model.pointsObtained de 100%
+            </h4>
+        </div>
+    *@
     <script type="text/javascript">
 
-     window.history.forward(1);
+        window.history.forward(1);
 
     </script>
 
@@ -30,35 +31,80 @@
 }
 else
 {
-    <br /><br /><br /><br /><br /><br />
-    <div class="row fecha">
-        <div class="btn-group btn-breadcrumb">
-            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
-            <a href="@Url.Action("Grades", "User", new {id = Model.topic.Module.Modu_Id})" class="btn btn-info">CURSO</a>
-        </div>
+   
+    <div id="encabezadocursos">
+        <img src="~/Content/Images/evaluaciones/banner-evaluaciones.jpg" style="height:200px;width:100%" />
     </div>
-    <br /><br />
+    <div id="hiperlink">
+        <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+        <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO / </a>
+        <a href="@Url.Action("ListModuleVirtual", "User")" style="font-weight: bolder">CURSOS ACTIVOS / </a>
+        <a style="font-weight: bolder; color:#FC3650">EVALUACIÓN</a>
+    </div>
+    <div class="panel-body">
+        <br />
+        <br />
+        <p style="text-align:center; font-size: 70px;"><b>EVALUACIÓN</b></p>
+        <br />
+        <br />
+        <div class="container" style="border:2px solid #FC3650;width:95%;padding:0px ">
+            <br />
+            <p style="text-align:left;padding: 0px 25px;color:#FC3650"><b>INSTRUCCIONES</b></p>
+            <ul id="listaevaluacion" style="margin: 0px 30px">
+                <li>El examen está dividido en tres secciones, las cuales suman un total de 100 puntos.</li>
+                <li>Se debe contestar todas las secciones.</li>
+                <li>El puntaje mínimo para aprobar el examen, sumando las tres secciones es de 70 puntos y como mínimo se deebe obtener 50% en cada una de las seccines.</li>
+                <li>Durante el examen se pueden consultar el Decreto 1072 de 2015, la Resolución 0312 de 2019 y la norma ISO 45001:2018.</li>
+                <li>Entiéndase por SGSST:"Sistema de Gestión en Seguridad y Salud en el Trabajo".</li>
+                <li>El tiempo estimado para resolver el examen es de DOS horas.</li>
+                <li>El examen se estructura en tres (3) secciones que incluye:</li>
+                <li>Preguntas de opción Múltiple que requieren la sección de uan sola opción.</li>
+                <li>Enunciados relacionados con los temas vistos, sobre los que deberá indicar si es Falso o Verdadero.</li>
+                <li>Analísis de casos</li>
+                <li class="li-interna">SECCIÓN 1(30 puntos) Conocimientos Marco Legas</li>
+                <li class="li-interna">SECCIÓN 2(40 puntos) Conocimientos Marco Legas</li>
+                <li class="li-interna">SECCIÓN 3(30 puntos) Conocimientos Marco Legas</li>
+                <li>Analísis de casos:</li>
+                <li class="li-interna">Comprende una serie de situaciones en las que puede requerir llenar un reporte de no conforminadad(RNC).</li>
+            </ul>
+            <br />
+            <p style="color:white;background-color:#FC3650;height:40px;padding :10px;text-align:center"><b>RECUERDA QUE TIENE UN TOTAL DE @Model.topic.ToCo_Attempt INTENTOS PARA APROBAR LA EVALUACIÓN</b></p>
+        </div>
+        <br />
+        <br />
+
+        @* <div class="container " style="width:95%;border:2px solid #000000">
+                <br />
+                <p style="font-size:25px;color:#FC3650;margin:10px"><b>TIPO DE PREGUNTA: FALSO / VERDADERO</b></p>
+                <p style="margin:10px"><b>PREGUNTA #2.Titulo de la pregunta</b></p>
+                <p style="margin:10px">Lorem</p>
+                <br />
+                <div class="list-group list-group-horizontal">
+                    <a href="" class="list-group-item list-group-item-action">Falso</a>
+                    <a class="list-group-item" style=" visibility: hidden">      </a>
+                    <br />
+                    <a href="" class="list-group-item list-group-item-action">Verdadero</a>
+                </div>
+                <br />
+            </div>
+        *@
+    </div>
+
 
     using (Html.BeginForm("AnswerTest", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
     {
         <div class="panel panel-primary">
-            <div class="panel-heading panel-head"><h1 style="font-size:35px;"> Evaluación</h1> </div>
             <div class="panel-body">
                 @Html.HiddenFor(model => model.ToCo_Id)
                 @Html.HiddenFor(model => model.BaQu_Id)
                 @Html.HiddenFor(model => model.topic.Module.Modu_Id)
                 @Html.AntiForgeryToken()
-                <div class="contenido-articulo">
-                    <br /><br />
-                    @*<p><strong>Las preguntas que se encuentran a continuación están basadas en los cursos virtuales del Programa Eco, </strong></p>*@
-
+                @*<p><strong>Las preguntas que se encuentran a continuación están basadas en los cursos virtuales del Programa Eco, </strong></p>*@
+                @*
                     <p>@Html.Raw(Model.BankQuestion.BaQu_Description)</p>
                     <br />
                     <p><strong>Recuerda que tienes  @Model.topic.ToCo_Attempt intentos para aprobar la evaluación.</strong></p>
-
-                </div>
-                <br /><br />
-
+                *@
 
                 @if (Model.Listgeneralquestion.Count == 0)
                 {
@@ -71,58 +117,80 @@ else
 
                         if (Model.Listgeneralquestion[i].TypeQuestion == TYPEQUESTIONS.OptionMultiple)
                         {
-                            <div class="panel panel-primary">
-                                <div class="panel-heading panel-head"><h1 style="font-size:35px;"> Pregunta Opción Múltiple</h1> </div>
-                                <div class="panel-body">
 
-                                    @Html.HiddenFor(model => model.Listgeneralquestion[i].BaQu_Id)
-                                    @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Id)
-                                    @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Question)
-                                    @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Description)
-                                    @*@Html.Raw(Model.Listgeneralquestion[i].OpMu_Description)*@
+                            <div class="container" style="width:95%;border:2px solid #000000">
+                                <br />
+                                <p style="font-size:25px;color:#FC3650;margin:10px"><b>TIPO DE PREGUNTA:OPCIÓN MÚLTIPLE</b></p>
+                                <p style="margin:10px;color:#333"><b> @Model.Listgeneralquestion[i].OpMu_Question</b></p>
+                                <p style="margin:10px;color:#333">Descripción: @Model.Listgeneralquestion[i].OpMu_Description </p>
 
-
-
-
-                                    @Html.HiddenFor(model => model.Listgeneralquestion[i].TypeQuestion)
-                                    <div class="comentario">
-                                        <br />
-                                        <p><strong>Pregunta: @Model.Listgeneralquestion[i].OpMu_Question</strong></p>
-                                        <br />
-                                        <p><strong>Descripción: @Model.Listgeneralquestion[i].OpMu_Description</strong></p>
-                                        <p><strong>@Html.Raw(Model.Listgeneralquestion[i].OpMult_Content)</strong></p>
-
-
-                                        <br />
-
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].BaQu_Id)
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Id)
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Question)
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Description)
+                                @*@Html.Raw(Model.Listgeneralquestion[i].OpMu_Description)*@
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].TypeQuestion)
+                                <div class="bs-example">
+                                    <div class="btn-group btn-group-toggle btn-group-vertical" data-toggle="buttons">
+                                        @{var cont = 0; }
                                         @foreach (AnswerOptionMultiple answeroptionmultiple in Model.Listgeneralquestion[i].listanswerOM)
                                         {
+                                            cont = 1 + cont;
+                                            var letra = "";
+
                                             if (answeroptionmultiple.OptionMultiple.OpMu_Id == Model.Listgeneralquestion[i].OpMu_Id)
                                             {
-                                                <br />
-                                                <div class="fecha">
-                                                    @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].AnOp_Id, answeroptionmultiple.AnOp_Id, htmlAttributes: new { @class = "col-md-1" })
-                                                    <strong>@Html.Raw(answeroptionmultiple.Answer_OpMult_Content)</strong>
-                                                      <label class = "col-md-11" > @answeroptionmultiple.AnOp_OptionAnswer</label>
+                                                if (cont == 1) { letra = "A) "; }
+                                                if (cont == 2) { letra = "B) "; }
+                                                if (cont == 3) { letra = "C) "; }
+                                                if (cont == 4) { letra = "D) "; }
+                                                if (cont == 5) { letra = "E) "; }
+                                                if (cont == 6) { letra = "F) "; }
+                                                if (cont == 7) { letra = "G) "; }
+                                                if (cont == 8) { letra = "H) "; }
+                                                if (cont > 8)
+                                                {
+                                                    letra = "Ha superado el numero de respuestas permitidas";
+                                                }
 
+                                                <div class="">
+                                                    <label class="btn btn-cuestionario">
+                                                        <b>@letra</b> @answeroptionmultiple.AnOp_OptionAnswer
+                                                        @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].AnOp_Id, answeroptionmultiple.AnOp_Id, htmlAttributes: new { @type = "radio" })
+                                                        @*<input class="form-control" type="radio" name="options" id="@answeroptionmultiple.AnOp_Id" autocomplete="off" > @answeroptionmultiple.AnOp_OptionAnswer*@
+                                                    </label>
                                                 </div>
-                                                <br />
 
+
+                                                @*
+                                                    <a class="list-group-item list-group-item-action" value="@Model.Listgeneralquestion[i].AnOp_Id" id="@answeroptionmultiple.AnOp_Id">
+                                                        <span>
+                                                            <b>@letra</b>
+                                                        </span>@answeroptionmultiple.AnOp_OptionAnswer
+                                                    </a>
+                                                *@
+                                                @* @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].AnOp_Id, answeroptionmultiple.AnOp_Id, htmlAttributes: new { @class = "col-md-1" })
+                                                    <strong>@Html.Raw(answeroptionmultiple.Answer_OpMult_Content)</strong>
+                                                    <label class="col-md-11"> @answeroptionmultiple.AnOp_OptionAnswer</label>
+                                                *@
+                                                <br />
                                             }
+
                                         }
                                     </div>
-
+                                    @{cont = 0; }
                                 </div>
                             </div>
+                            <br />
+
                         }
                         else
                         {
                         }
-                        <br />
+
                         if (Model.Listgeneralquestion[i].TypeQuestion == TYPEQUESTIONS.Pairing)
                         {
                             <div class="panel panel-primary">
-                                <div class="panel-heading panel-head"><h1 style="font-size:35px;"> Pregunta Apareamiento</h1></div>
                                 <div class="panel-body">
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].BaQu_Id)
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].Pair_Id)
@@ -130,41 +198,52 @@ else
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].Pair_Description)
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].TypeQuestion)
                                     <br />
-                                    <div class="comentario">
-                                        <br />
-                                        <p><strong>Pregunta: @Model.Listgeneralquestion[i].Pair_Question</strong></p>
-                                        <br />
-                                        <p><strong>Descripción: @Model.Listgeneralquestion[i].Pair_Description</strong></p>
-                                        <br />
-                                        @for (int a = 0; a < Model.Listrequestpairing.Count; a++)
-                                        {
-                                            @Html.HiddenFor(model => model.Listrequestpairing[a].Pair_Id)
-                                            @Html.HiddenFor(model => model.Listrequestpairing[a].AnPa_IdOption)
-                                            @Html.HiddenFor(model => model.Listrequestpairing[a].AnPa_OptionsQuestion)
-                                            if (Model.Listrequestpairing[a].Pair_Id == Model.Listgeneralquestion[i].Pair_Id)
-                                            {
+                                    <div class="container " style="border:2px solid #000000;width:95%">
+                                        <div class="row">
+                                            <div class="col-md-6 col-xs-12">
                                                 <br />
-                                                <p>
-                                                    <strong>Respuesta: @Model.Listrequestpairing[a].AnPa_OptionsQuestion</strong>
-                                                    @Html.DropDownListFor(model => Model.Listrequestpairing[a].AnPa_IdRequest, Model.Listgeneralquestion[i].AnswerPairing, new { htmlAttributes = new { @class = "" } })
-                                                </p>
-                                                <br />
-                                                <br />
-                                                <br />
-                                            }
-                                        }
+                                                <p style="font-size:25px;color:#FC3650;margin:10px"><b>TIPO DE PREGUNTA: EMPAREJAMIENTO </b></p>
+                                                <p style="margin:10px;color:#333"><strong>@Model.Listgeneralquestion[i].Pair_Question</strong></p>
+                                                <p style="margin:10px;color:#333"><strong>Descripción: @Model.Listgeneralquestion[i].Pair_Description</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-xs-12" style="margin:10px">
+                                                @for (int a = 0; a < Model.Listrequestpairing.Count; a++)
+                                                {
+                                                    @Html.HiddenFor(model => model.Listrequestpairing[a].Pair_Id)
+                                                    @Html.HiddenFor(model => model.Listrequestpairing[a].AnPa_IdOption)
+                                                    @Html.HiddenFor(model => model.Listrequestpairing[a].AnPa_OptionsQuestion)
+                                                    if (Model.Listrequestpairing[a].Pair_Id == Model.Listgeneralquestion[i].Pair_Id)
+                                                    {
+                                                        <div class="row">
+                                                            <br />
+                                                            <p>
+                                                                <div class="col-md-6">
+                                                                    <strong style="color:black">Respuesta: @Model.Listrequestpairing[a].AnPa_OptionsQuestion</strong>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    @Html.DropDownListFor(model => Model.Listrequestpairing[a].AnPa_IdRequest, Model.Listgeneralquestion[i].AnswerPairing, new { htmlAttributes = new { @class = "dropdown ", @style = "color:black" } })
+                                                                </div>
+                                                            </p>
+                                                            <br />
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <br />
                         }
                         else
                         {
                         }
-                        <br />
+
                         if (Model.Listgeneralquestion[i].TypeQuestion == TYPEQUESTIONS.TrueorFalse)
                         {
                             <div class="panel panel-primary">
-                                <div class="panel-heading panel-head"><h1 style="font-size:35px;"> Pregunta Verdadero Falso</h1></div>
                                 <div class="panel-body">
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].BaQu_Id)
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].TrFa_Id)
@@ -172,49 +251,92 @@ else
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].TrFa_Description)
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].TrFa_State)
                                     @Html.HiddenFor(model => model.Listgeneralquestion[i].TypeQuestion)
-                                    <br />
-                                    <div class="comentario">
-                                        <br />
-                                        <p><strong>Pregunta: @Model.Listgeneralquestion[i].TrFa_Question</strong></p>
-                                        <br />
-                                        <p><strong>Descripción: @Model.Listgeneralquestion[i].TrFa_Description</strong></p>
-                                        <br />
-                                        <p><strong>@Html.Raw(Model.Listgeneralquestion[i].TrFa_Content)</strong></p>
 
+                                    <div class="container " style="width:95%;border:2px solid #000000">
+                                        <br />
+                                        <p style="font-size:25px;color:#FC3650;margin:10px"><b>TIPO DE PREGUNTA: FALSO / VERDADERO</b></p>
+                                        <p style="margin:10px;color:black"><b>@Model.Listgeneralquestion[i].TrFa_Question</b></p>
+                                        <p style="margin:10px;color:black">@Model.Listgeneralquestion[i].TrFa_Description</p>
+                                        <br />
 
-                                        <br />
-                                        <div class="fecha">
-                                            @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Verdadero, htmlAttributes:  new { @class = " control-label col-sm-1" })
-                                            <label>@OPTIONANSWER.Verdadero</label>
+                                        <div class="bs-example row justify-content-between">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons" style="display: contents">
+                                                <div class="col">
+                                                    <label class="btn btn-cuestionario">
+                                                        @OPTIONANSWER.Falso
+                                                    @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Falso, htmlAttributes: new { @type = "radio" })
+                                                    @*<input class="form-control" type="radio" name="options" autocomplete="off" id="@Model.Listgeneralquestion[i].TrFa_Answer"> Falso*@
+                                                </label>
+                                            </div>
+                                            <div class="col">
+                                                <label class="btn btn-cuestionario">
+                                                    @OPTIONANSWER.Verdadero
+                                                @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Verdadero, htmlAttributes: new { @type = "radio" })
+                                                @*<input class="form-control" type="radio" name="options" autocomplete="off" id="@Model.Listgeneralquestion[i].TrFa_Answer"> Verdadero*@
+                                            </label>
                                         </div>
-                                        <br />
-                                        <br />
-                                        <div class="fecha">
-                                            @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, OPTIONANSWER.Falso, htmlAttributes:  new { @class = " control-label col-sm-1" })
-                                            <label>@OPTIONANSWER.Falso</label>
-                                        </div>
-                                        <br />
                                     </div>
                                 </div>
+                                <br />
                             </div>
-                            
-                        }
-                        else
-                        {
-
-                        }
-
-                    }
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <center><input type="submit" class="btn btn-default" value="Finalizar" /></center>
+                            @*<div class="comentario" style="color:black">
+                                    <div class="fecha">
+                                        @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Verdadero, htmlAttributes: new { @class = " control-label col-sm-1" })
+                                        <label>@OPTIONANSWER.Verdadero</label>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="fecha">
+                                        @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, OPTIONANSWER.Falso, htmlAttributes: new { @class = " control-label col-sm-1" })
+                                        <label>@OPTIONANSWER.Falso</label>
+                                    </div>
+                                </div>   *@
                         </div>
                     </div>
+                    <br />
+
                 }
+                else
+                {
+
+                }
+            }
+
+            <div class="container" style="width:95%">
+                <div class="row justify-content-end">
+                    <input id="btn-landing" class="col-md-4 button-action" style="position:relative;font-size:x-large;font-weight:bolder" type="submit" value="FINALIZAR EVALUACIÓN" />
+                </div>
+            </div>
+
+            @*
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <center><input type="submit" class="btn btn-default" value="Finalizar" /></center>
+                    </div>
+                </div>
+            *@
+
+
+        }
             </div>
         </div>
     }
 }
+
+<script>
+    // Add active class to the current button (highlight it)
+    var header = document.getElementById("falseortrue");
+    var btns = header.getElementsByClassName("list-group-item");
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            var current = document.getElementsByClassName("active");
+            if (current.length > 0) {
+                current[0].className = current[0].className.replace(" active", "");
+            }
+            this.className += " active";
+        });
+    }
+</script>
 
 
 @section Scripts {

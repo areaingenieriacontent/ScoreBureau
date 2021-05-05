@@ -1,0 +1,70 @@
+﻿@using SCORM1.Models.RigidCourse;
+@using SCORM1.Models.ViewModel;
+@model CursoRigidoViewModel
+
+
+
+@if (TempData["Add"] != null)
+{
+    <div class="alert alert-danger fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        @TempData["Add"]
+    </div>
+}
+else
+{
+    if (TempData["Info"] != null)
+    {
+        @section Scripts {
+            <script type="text/JavaScript">
+                $(document).ready(function () {
+                    $("#Inform").modal();
+                });
+            </script>
+        }}
+}
+@Scripts.Render("~/bundles/jqueryval")
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <td>
+        @Html.ActionLink("Create", "CreateFlashQuestion", new { FlashTestId = ViewData["IdTest"]})
+    </td>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.flashTest.FlashTestName)
+        </th>
+        <th>
+            Enunciado
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.flashQuestions)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlashTest.FlashTestName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enunciado)
+            </td>
+
+            <td>
+                @Html.ActionLink("Respuestas", "IndexFlashQuestionAnswer", new { FlashTestId = item.FlashQuestionId })
+                @Html.ActionLink("Editar", "EditFlashQuestion", new { FlashQuestionId = item.FlashQuestionId })
+                @Html.ActionLink("Borrar", "DeleteFlashQuestion", new { FlashQuestionId = item.FlashQuestionId })
+             </td>
+        </tr>
+    }
+    @Html.ActionLink("Volver", "Index", new { ToCo_Id = ViewData["TocoId"] })
+
+</table>

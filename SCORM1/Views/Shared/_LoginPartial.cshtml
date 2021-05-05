@@ -1,28 +1,76 @@
 ﻿@using Microsoft.AspNet.Identity
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
         <!-- Inicio Del Contenedor General Del Banner   -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!--Logo De La San Mateo   -->
-    <a style="background:transparent" href="https://aprendeyavanza2.com.co/bureauveritastrainingcommunity/Home/Index"><img src="~/Content/Images/logosan2.png" width="15%" class="d-inline-block align-top" alt="" style="margin-top:20px;"></a>
-    <!-- fin Logo  -->
-    <!-- Inicio Del Icono User Y Cerrar Sesion    -->
-    <div class="collapse navbar-collapse justify-content-end" id="navbarText" style="float:right;">
 
-        <span class="navbar-text">
-            <img src="~/Content/Images/user.png" width="35px" /><a>@Html.ActionLink("Hola " + Session["FirstName"] + " " + Session["LastName"] + "!", "ProfileUser", "User", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:#bc112e;  background-color:#fff;" })</a>
-        </span>
-        <span class="navbar-text">
-            <img src="~/Content/Images/password.png" width="30px" /><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#bc112e;background-color:transparent;">Cerrar sesión</a>
-        </span>
-    </div>
-</nav>
+        <nav class="navbar navbar-expand-lg" style=" background-color:#333333;padding:initial">
+            <span class="menu-scroll" onclick="openNav()">&#9776;</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="button" href="javascript:document.getElementById('logoutForm').submit()" style=" color: #FFFFFF;background-color: #fc3650;display: block;text-align: center;padding: 14px 16px;z-index:10000;font-family: 'BureauVeritas-ThinUltraCondensed'">CERRAR SESIÓN</a>
+                </li>
+            </ul>
+            <header class="site-header" style="visibility: visible;">
+                <div class="site-heading" style="margin-top: 50px;">
+                    <div class="site-logo">
+                        <div id="block-sitebranding" class="site-logo--inner block block-system block-system-branding-block">
+                            <h1>C</h1>
+                        </div>
+                    </div>
+                    <nav role="navigation" aria-labelledby="block-mainnavigation-menu" id="block-mainnavigation" class="main-menu block block-menu navigation menu--main">
+                        <ul class="menu menu-level-0" style="text-align:center; margin-left:12vw">
+                            <li class="menu-item menu-item--collapsed">
+                                <a href="@Url.Action("Index", "Home")" data-drupal-link-system-path="node/236">INICIO</a>
+                                <div class="menu_link_content menu-link-contentmain view-mode-mega-menu menu-dropdown">
+                                </div>
+                            </li>
+                            <li class="menu-item menu-item--collapsed">
+                                <a href="@Url.Action("ListModuleVirtual", "User")" data-drupal-link-system-path="node/236">ZONA DE APRENDIZAJE</a>
+                                <div class="menu_link_content menu-link-contentmain view-mode-mega-menu menu-dropdown">
+                                </div>
+                            </li>
+                            <li class="menu-item menu-item--collapsed">
+                                <a href="@Url.Action("ComunidadSocial", "Home")" data-drupal-link-system-path="node/236">COMUNIDAD SOCIAL DE CONOCIMIENTO</a>
+                                <div class="menu_link_content menu-link-contentmain view-mode-mega-menu menu-dropdown">
+                                </div>
+                            </li>
+                            <li class="menu-item menu-item--collapsed">
+                                <a href="@Url.Action("TableroControl", "Home")">TABLERO DE CONTROL</a>
+                                <div class="menu_link_content menu-link-contentmain view-mode-mega-menu menu-dropdown">
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+        </nav>
+
+        <div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="overlay-content">
+                <a href="@Url.Action("Index", "Home")">INICIO</a>
+                <a href="@Url.Action("ListModuleVirtual", "User")">ZONA DE APRENDIZAJE</a>
+                <a href="@Url.Action("ComunidadSocial", "Home")">COMUNIDAD SOCIAL DE CONOCIMIENTO</a>
+                <a href="@Url.Action("TableroControl", "Home")">TABLERO DE CONTROL</a>
+            </div>
+        </div>
+
+        <script>
+            function openNav() {
+                document.getElementById("myNav").style.display = "block";
+            }
+            function closeNav() {
+                document.getElementById("myNav").style.display = "none";
+            }
+        </script>
         <!--  Fin Del Contenedor -->
+        <!--Inicio del header-->
 
-
+        <!--fin de el header-->
     }
 }
 else

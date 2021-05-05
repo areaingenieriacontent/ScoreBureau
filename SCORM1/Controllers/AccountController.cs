@@ -75,6 +75,7 @@ namespace SCORM1.Controllers
             }
             else
             {
+
                 Logo = ApplicationDbContext.StylesLogos.Find(2).UrlLogo;
             }
             return Logo;
@@ -97,7 +98,7 @@ namespace SCORM1.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-  
+
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -374,7 +375,7 @@ namespace SCORM1.Controllers
             ForgotPasswordViewModel model = new ForgotPasswordViewModel
             {
                 UrlLogo = CompanySearch.UrlLogo,
-                Sesion =SESION.Si
+                Sesion = SESION.Si
             };
             return View(model);
         }
@@ -517,7 +518,7 @@ namespace SCORM1.Controllers
             MailMessage solicitud = new MailMessage();
             solicitud.Subject = "Bienvenida a la Comunidad Social de Conocimiento Bureau Veritas";
             solicitud.Body = "<img src='http://aprendeyavanza2.com.co/bureauveritastrainingcommunity/content/images/image6.jpg' width='45%' />"
-            +"<br/>"+ "Cordial saludo, " + "<br/>" +"<br/>" +
+            + "<br/>" + "Cordial saludo, " + "<br/>" + "<br/>" +
                 "Respetado Sr(a). " + NameUser +
                "<br/>" + "Es un gusto darle la bienvenida a la comunidad social de conocimiento de Bureau Veritas." +
                "<br/>" + "Agradecemos ingresar y comenzar con su experiencia de aprendizaje con los siguientes datos de acceso:" + "<br/>" +
@@ -527,7 +528,7 @@ namespace SCORM1.Controllers
             "<br/>" + "https://www.aprendeyavanza2.com.co/bureauveritastrainingcommunity/" +
             "" + "<br/>" +
                "<br/>" + "Bureau Veritas" +
-               "<br/>" + "Construyendo Confianza"+
+               "<br/>" + "Construyendo Confianza" +
                "<br/>" + "<img src='http://aprendeyavanza2.com.co/bureauveritastrainingcommunity/content/images/firmabureau.png' width='80%' />";
             solicitud.To.Add(Email);
             solicitud.IsBodyHtml = true;

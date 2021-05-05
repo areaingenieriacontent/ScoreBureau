@@ -1,0 +1,126 @@
+﻿@using SCORM1.Models.Survey;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Enum;
+@model SurveyViewModel
+@{
+    ViewBag.Title = "Survey";
+}
+
+<h2>Survey</h2>
+
+@if (Model.validSession)
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row fecha">
+        <div class="btn-group btn-breadcrumb">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
+            <a href="@Url.Action("Grades", "User", new { id = Model.survey.Module.Modu_Id })" class="btn btn-info">CURSO</a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    using (Html.BeginForm("SurveyResponse", "Survey", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+
+        <div class="panel panel-primary">
+            <div class="panel-heading panel-head"><h1 style="font-size:35px;"> @Html.Raw(Model.survey.survey_name) </h1> </div>
+            <div class="panel-body">
+                @Html.HiddenFor(model => model.survey.survey_id)
+                @Html.AntiForgeryToken()
+                <div class="contenido-articulo">
+                    <br /><br />
+                    <p>@Html.Raw(Model.survey.survey_instructions)</p>
+                </div>
+            </div>
+            <br /><br />
+            @if (Model.multipleOptionQuestions.Count > 0)
+            {
+                for (int cont = 0; cont < Model.multipleOptionQuestions.Count; cont++)
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading panel-head"><h1 style="font-size:35px;">Pregunta Opción Múltiple</h1> </div>
+                        <div class="panel-body">
+                            @Html.HiddenFor(model => model.multipleOptionQuestions[cont].question.mosq_id)
+                            <div class="comentario">
+                                <br />
+                                <p><strong>Pregunta: @Model.multipleOptionQuestions[cont].question.title</strong></p>
+                                <br />
+                                <p><strong>@Html.Raw(Model.multipleOptionQuestions[cont].question.content)</strong></p>
+                                <br />
+                                @for (int cont2 = 0; cont2 < Model.multipleOptionQuestions[cont].answers.Count; cont2++)
+                                {
+                                    @Html.HiddenFor(model => Model.multipleOptionQuestions[cont].answers[cont2].mosa_id)
+                                    @Html.HiddenFor(model => Model.multipleOptionQuestions[cont].answers[cont2].mosq_id)
+                                    <div class="fecha">
+                                        @Html.HiddenFor(model => Model.userAnswers[cont].questionId)
+                                        @Html.RadioButtonFor(model => Model.userAnswers[cont].answerId, Model.multipleOptionQuestions[cont].answers[cont2].mosa_id, htmlAttributes: new { @class = "col-md-1" })
+                                        <strong>@Html.Raw(Model.multipleOptionQuestions[cont].answers[cont2].content)</strong>
+                                    </div>
+                                }
+                                <hr style="border:1px solid #ff0000;" />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <br /><br />
+            @if (Model.multipleOptionQuestions.Count > 0)
+            {
+                for (int cont = 0; cont < Model.trueFalseSurveyQuestions.Count; cont++)
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading panel-head"><h1 style="font-size:35px;">Pregunta Verdadero Falso</h1> </div>
+                        <div class="panel-body">
+                            @Html.HiddenFor(model => model.trueFalseSurveyQuestions[cont].tfsq_id)
+                            @Html.HiddenFor(model => model.userAnswerTrueFalse[cont].questionId)
+                            <div class="comentario">
+                                <br />
+                                <p><strong>Pregunta: @Model.trueFalseSurveyQuestions[cont].title</strong></p>
+                                <br />
+                                <p><strong>@Html.Raw(Model.trueFalseSurveyQuestions[cont].content)</strong></p>
+                                <br />
+                                <div class="fecha">
+                                    @Html.RadioButtonFor(model => Model.userAnswerTrueFalse[cont].value, 1, htmlAttributes: new { @class = " control-label col-sm-1" })
+                                    <label>Verdadero</label>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="fecha">
+                                    @Html.RadioButtonFor(model => Model.userAnswerTrueFalse[cont].value, 0, htmlAttributes: new { @class = " control-label col-sm-1" })
+                                    <label>Verdadero</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+    <button class="btn btn-default">Enviar</button>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="message">
+        <h3>Estimado(a) estudiante @Model.UserLog Usted ya ha realizado el cuestionario o su sesión ya venció</h3>
+        <h4>
+        </h4>
+    </div>
+}
+<br />
+<br />
+<br />
+<br />
+<br />

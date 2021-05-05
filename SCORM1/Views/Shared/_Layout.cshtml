@@ -1,66 +1,127 @@
 ﻿@using SCORM1.Enum
+@using Microsoft.AspNet.Identity
 <!DOCTYPE html>
 <html>
-<head>
+<head class="site-header" style="visibility: visible;">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scade=1.0">
     <meta http-equiv='X-UA-Compatible' content='IE=8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bureau Veritas</title> @*se establece el nombre de la pestaña*@
     <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:300,400,400i,700" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scade=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>@ViewBag.Title UnAula MI</title>
     @using Microsoft.AspNet.Identity
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/style1.css")
-    @Styles.Render("~/Content/demo.css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/StyleHome.css")
+    @Styles.Render("~/Content/style1.css")
+    @Html.Partial("_LoginPartial")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="margin-top:-5px;background: #B0002D; min-height:1.5% !important;">
-
-    </div>
-    <div class="container-fluid">
-        @Html.Partial("_LoginPartial")
-
-    </div>
-
-
-    <div class="container containerA">
+    <div>
         @RenderBody()
 
     </div>
 
-
-    @if (Model.Sesion == SESION.No)
+    @*To-Do remove model null chek*@
+    @if (Model != null && Model.Sesion == SESION.No)
     {
         <script>
              window.location.href = '@Url.Action("Index", "Home")';
         </script>
     }
-   
 
-        <div class="footer2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <img src="~/Content/Images/facebook.png" class="imagenesiconos" style=" width:30px" />
-            <img src="~/Content/Images/twitter.png" class="imagenesiconos" style=" width:30px" />
-            <img src="~/Content/Images/youtube.png" class="imagenesiconos" style=" width:30px" />
-            <img src="~/Content/Images/instagram.png" class="imagenesiconos" style=" width:30px" />
-            <img src="~/Content/Images/linkedin.png" class="imagenesiconos" style=" width:30px" />
+    @if (Request.IsAuthenticated)
+    {
+        <br />
+        <br />       
+                        <footer class="site-footer">
+                                <div id="block-footer-highlight-footer" class="block block-block-content block-block-contentb1b63cd5-a33b-46d1-9d3e-a058a2d93893" >
+                                    <div class="teaser">
+                                        <div class="teaser">
+                                            <div class="page-hat simple">
+                                                <div class="page-hat--content">
+                                                    <div class="page-hat--title js-letters-effect clearfix text-formatted field field--name-field-text-animation field--type-text-long field--label-hidden field__items" id="textfooter" style=" opacity: 1;margin-left:-10vw;margin-top:10vh;position:absolute">
+                                                        <p id="pfooter1" style="">CONOCE AQUÍ NUESTRA</p><p id="pfooter2" style="text-align: -webkit-auto"><b>OFERTA DE CURSOS</b></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container" style="position:relative">
+                                                <div class="row justify-content-end">
+                                                    <a id="btn-landing" class="button-action" href="https://www.bvtrainingcommunity.com/tienda/" target="_blank" style=" margin-right:50px; margin-top: 45%;">CLIC AQUÍ</a>
+                                                </div>
+                                            </div>
+                                            <img src="~/Content/Images/footer/slide-footer.jpg" alt=" " typeof="foaf:Image" style="width:100%;margin-bottom: -6px">
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="site-footer--sitemap" style="background-color:#333333">
+                                <nav role="navigation" aria-labelledby="block-footer-menu" id="block-footer" class="list-links block block-menu navigation menu--footer" style="column-count: auto;">
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="#" target="_blank" style="font-weight: 100">MESA DE SERVICIOS</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" target="_blank" style="font-weight: 100">GUÍA DE NAVEGACIÓN</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank" style="font-weight: 100">TRATAMIENTO DE DATOS PERSONALES</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" target="_self" style="font-weight: 100">TÉRMINOS Y CONDICIONES</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" style="font-weight: 100" data-drupal-link-system-path="node/526">SITIO WEB BUREAU VERITAS</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <nav role="navigation" aria-labelledby="block-sociallinks-menu" id="block-sociallinks" class="list-community block block-menu navigation menu--social-links">
+                                    <h2 class="list-community--title" id="block-sociallinks-menu">VISÍTANOS</h2>
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <a href="#" class="facebook" target="_blank">Facebook</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" class="twitter" target="_blank">Twitter</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" class="linkedin" target="_blank">Instagram</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" class="youtube" target="_blank">YouTube</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" class="linkedin" target="_blank">Linkedin</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <nav role="navigation" aria-labelledby="block-legalmenu-menu" id="block-legalmenu" class="list-simple block block-menu navigation menu--legal">
+                                    <ul class="menu">
+                                        <li class="menu-item">
+                                            <span>© 2021</span>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="#" data-drupal-link-system-path="node/461">Content Group S.A.S</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                    </footer>
 
-            <div class="info-footer" style="margin-top:0px">
-                <B style="color:#000;background-color:transparent;">Content Group </B>-
-                <a href="http://contentgrp.com/" target="_blank" style="color:#000;background-color:transparent;">Visítanos</a><br />
-                <B style="color:#000;background-color:transparent;">Tratamiento de datos </B>- <a style="color:#000;background-color:transparent;" href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank">Clic aquí</a><br />
-                @*<B>Política de privacidad </B>- <a href="https://contentgroup.com.co" target="_blank">Clic aquí</a>*@
-            </div><br>
-
-        </div>
-
-    @RenderSection("scripts", required: false)
+            }
+            @RenderSection("scripts", required: false)
 </body>
 </html>

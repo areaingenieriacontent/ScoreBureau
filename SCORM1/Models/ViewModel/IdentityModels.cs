@@ -21,6 +21,9 @@ using SCORM1.Models.Games;
 using System;
 using SCORM1.Models.MainGame;
 using SCORM1.Models.ratings;
+using SCORM1.Models.RigidCourse;
+using SCORM1.Models.VSDR;
+using SCORM1.Models.Survey;
 
 namespace SCORM1.Models
 {
@@ -186,10 +189,9 @@ namespace SCORM1.Models
         public virtual DbSet<AnswerOptionMultiple> AnswerOptionMultiples { get; set; }
         public virtual DbSet<AnswerOptionMultipleStudent> AnswerOptionMultipleStudent { get; set; }
 
-
+        public virtual DbSet<Advance> Advances {get;set;}
 
         //Creating table Of Logs
-
         public virtual DbSet<CodeLogs> CodeLogs { get; set; }
         public virtual DbSet<TableChange> TableChanges { get; set; }
         public virtual DbSet<IdChange> IdChanges { get; set; }
@@ -197,6 +199,7 @@ namespace SCORM1.Models
         public virtual DbSet<Attempts> Attempts { get; set; }
         public virtual DbSet<ResourceTopics> ResourceTopicss { get; set; }
         public virtual DbSet<NewAttempts> NewAttempts { get; set; }
+
         //Creating table Of Newspaper
         public virtual DbSet<Edition> Editions { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
@@ -207,15 +210,18 @@ namespace SCORM1.Models
 
         //Creating table Of Personalizations
         public virtual DbSet<Changeinterface> Changeinterfaces { get; set; }
+
         //Creating table Of Service Block
         public virtual DbSet<TypeServiceBlock> TypeServiceBlocks { get; set; }
         public virtual DbSet<BlockService> BlockServices { get; set; }
+
         //Creating table Of LockGame
         public virtual DbSet<TypeBaneo> TypeBaneos { get; set; }
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<LockGame> LockGame { get; set; }
         public virtual DbSet<PointsObtainedForUser> PointsObtainedForUser { get; set; }
         public virtual DbSet<ImageUpload> ImageUpload { get; set; }
+
         //Creating table of Main Game
         public virtual DbSet<MG_AnswerMultipleChoice> MG_AnswerMultipleChoice { get; set; }
         public virtual DbSet<MG_AnswerOrder> MG_AnswerOrder { get; set; }
@@ -228,6 +234,7 @@ namespace SCORM1.Models
         public virtual DbSet<MG_Template> MG_Template { get; set; }
         public virtual DbSet<MG_AnswerUser> MG_AnswerUser { get; set; }
         public virtual DbSet<MG_BlockGameUser> MG_BlockGameUser { get; set; }
+
         //Creating table Of Ratings
         public virtual DbSet<Job> Job { get; set; }
         public virtual DbSet<ResourceJobs> ResourceJobs { get; set; }
@@ -235,6 +242,36 @@ namespace SCORM1.Models
         public virtual DbSet<AnswersForum> AnswersForum { get; set; }
         public virtual DbSet<BookRatings> BookRatings { get; set; }
         public virtual DbSet<QuienSabeMasPuntaje> QuienSabeMasPuntajes { get; set; }
+
+        //Rigid Course 
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<ProtectedFailureTest> ProtectedFailureTests { get; set; }
+        public virtual DbSet<CategoryQuestionBank> CategoryQuestionsBanks { get; set; }
+        public virtual DbSet<ProtectedFailureMultiChoice> ProtectedFailureMultiChoices { get; set; }
+        public virtual DbSet<ProtectedFailureResults> ProtectedFailureResults { get; set; }
+        public virtual DbSet<ProtectedFailureAnswer> ProtectedFailureAnswer { get; set; }
+        public virtual DbSet<FlashTest> FlashTest { get; set; }
+        public virtual DbSet<FlashQuestion> FlashQuestion { get; set; }
+        public virtual DbSet<FlashQuestionAnswer> FlashQuestionAnswer { get; set; }
+        public virtual DbSet<UserModuleAdvance> UserModuleAdvances { get; set; }
+        public virtual DbSet<ProtectedFailureMultiChoiceAnswer> ProtectedFailureMultiChoiceAnswers { get; set; }
+
+        //Virtual Syncronic Debate Room
+        public virtual DbSet<VsdrSession> VsdrSessions { get; set; }
+        public virtual DbSet<VsdrEnrollment> VsdrEnrollments { get; set; }
+        public virtual DbSet<VsdrTeacherComment> VsdrTeacherComments { get; set; }
+        public virtual DbSet<VsdrUserFile> VsdrUserFiles { get; set; }
+
+        //Survey
+        public virtual DbSet<SurveyModule> Surveys { get; set; }
+        public virtual DbSet<SurveyQuestionBank> SurveyQuestionBanks { get; set; }
+        public virtual DbSet<UserSurveyResponse> UserSurveyResponses { get; set; }
+        public virtual DbSet<MultipleOptionsSurveyQuestion> MultipleOptionsSurveyQuestions { get; set; }
+        public virtual DbSet<MultipleOptionsSurveyAnswer> MultipleOptionsSurveyAnswers { get; set; }
+        public virtual DbSet<MultipleOptionsSurveyUser> MultipleOptionsSurveyUsers { get; set; }
+        public virtual DbSet<TrueFalseSurveyQuestion> TrueFalseSurveyQuestions { get; set; }
+        public virtual DbSet<TrueFalseSurveyUser> TrueFalseSurveyUsers { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -249,7 +286,7 @@ namespace SCORM1.Models
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
-
+            modelBuilder.Entity<Advance>().ToTable("Advance");
             modelBuilder.Entity<ApplicationUser>()
                 .HasOptional(a => a.Area)
                 .WithMany()
@@ -296,6 +333,21 @@ namespace SCORM1.Models
                 {
                     ma.ToTable("MyOfficeUser");
                 });
+
+
+            modelBuilder.Entity<VsdrSession>().ToTable("VsdrSession");
+            modelBuilder.Entity<VsdrEnrollment>().ToTable("VsdrEnrollment");
+            modelBuilder.Entity<VsdrTeacherComment>().ToTable("VsdrTeacherComment");
+            modelBuilder.Entity<VsdrUserFile>().ToTable("VsdrUserFile");
+
+            modelBuilder.Entity<SurveyModule>().ToTable("SurveyModule");
+            modelBuilder.Entity<SurveyQuestionBank>().ToTable("SurveyQuestionBank");
+            modelBuilder.Entity<UserSurveyResponse>().ToTable("UserSurveyResponse");
+            modelBuilder.Entity<MultipleOptionsSurveyQuestion>().ToTable("MultipleOptionsSurveyQuestion");
+            modelBuilder.Entity<MultipleOptionsSurveyAnswer>().ToTable("MultipleOptionsSurveyAnswer");
+            modelBuilder.Entity<MultipleOptionsSurveyUser>().ToTable("MultipleOptionsSurveyUser");
+            modelBuilder.Entity<TrueFalseSurveyQuestion>().ToTable("TrueFalseSurveyQuestion");
+            modelBuilder.Entity<TrueFalseSurveyUser>().ToTable("TrueFalseSurveyUser");
 
             modelBuilder.Entity<Question>()
                 .HasMany(question => question.Tests)
@@ -351,6 +403,7 @@ namespace SCORM1.Models
          .WillCascadeOnDelete(false);
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
     }
