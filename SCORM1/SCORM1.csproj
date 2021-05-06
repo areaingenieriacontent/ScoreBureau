@@ -286,38 +286,34 @@
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\ContentAdminController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FlashTestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogsComunidadController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MassiveEnrollmentController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
+    <Compile Include="Controllers\ProtectedFailureController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\SendOfEmailsController.cs" />
     <Compile Include="Controllers\ServiciosMovilController.cs" />
     <Compile Include="Controllers\SuperAdminGeneralController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserAndMassiveManagementController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserPlenamenteController.cs" />
     <Compile Include="Controllers\ViewGameController.cs" />
     <Compile Include="Controllers\ViewGameUserController.cs" />
+    <Compile Include="Controllers\VSDRController.cs" />
     <Compile Include="Controllers\WebServiceController.cs" />
     <Compile Include="Enum\Enum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105042159407_abc.cs" />
-    <Compile Include="Migrations\202105042159407_abc.Designer.cs">
-      <DependentUpon>202105042159407_abc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105051337011_uno.cs" />
-    <Compile Include="Migrations\202105051337011_uno.Designer.cs">
-      <DependentUpon>202105051337011_uno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105051345174_dos.cs" />
-    <Compile Include="Migrations\202105051345174_dos.Designer.cs">
-      <DependentUpon>202105051345174_dos.cs</DependentUpon>
+    <Compile Include="Migrations\202105051644027_abcdos.cs" />
+    <Compile Include="Migrations\202105051644027_abcdos.Designer.cs">
+      <DependentUpon>202105051644027_abcdos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAuthenticationAttribute.cs" />
@@ -2264,6 +2260,7 @@
     <Content Include="Views\Survey\Survey.cshtml" />
     <Content Include="Views\VSDR\VsdrContent.cshtml" />
     <Content Include="Views\VSDR\VsdrUserList.cshtml" />
+    <Content Include="Views\Ratings\CargarEvidencias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2293,14 +2290,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202105042159407_abc.resx">
-      <DependentUpon>202105042159407_abc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105051337011_uno.resx">
-      <DependentUpon>202105051337011_uno.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105051345174_dos.resx">
-      <DependentUpon>202105051345174_dos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105051644027_abcdos.resx">
+      <DependentUpon>202105051644027_abcdos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

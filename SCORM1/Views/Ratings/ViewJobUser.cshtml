@@ -73,17 +73,18 @@
             });
         </script>
     }}
-<br /><br /><br />
 @Scripts.Render("~/bundles/jqueryval")
 
-<br /><br /><br /><br />
-<div class="row fecha">
-    <div class="btn-group btn-breadcrumb">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
-        <a href="@Url.Action("Grades", "User", new {id=Model.JOBS.TopicsCourse.Modu_Id })" class="btn btn-info">CURSO</a>
-    </div>
+<div id="encabezadocursos">
+    <img src="~/Content/Images/carga-de-evidencias/banner-carga-de-evidencias.jpg" style="height:200px;width:100%" />
 </div>
-<br /><br /><br />
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO /</a>
+    <a href="@Url.Action("ComunidadSocial", "Home")" style="font-weight: bolder">COMUNIDAD SOCIAL DE CONOCIMIENTOS /</a>
+    <a href="#" style="font-weight: bolder; color:#FC3650">CARGA DE EVIDENTES</a>
+</div>
+
 <div class="panel panel-primary">
 
     <div id="Inform" class="modal fade" role="dialog">
@@ -102,15 +103,14 @@
             </div>
         </div>
     </div>
-
-    <div class="panel-heading panel-head"><center><h1 style="font-size:35px;">@Model.JOBS.Job_Name</h1> </center></div>
-    <div class="panel-body">
+    <br />
+    <br />
+    <div class="panel-heading panel-head"><center><p style="text-align:center; font-size: 50px;"><b>@Model.JOBS.Job_Name</b></p> </center></div>
+    <br />
+    <br />
+    <div class="container" style="border:2px solid black;width:95%">
         <div class="col-md-12">
-            <br /><br />
-            <div class="col-md-2">
-
-            </div>
-            <div class="col-md-10" style="text-align:left;font-size:16px">
+            <div class="col-md-10" style="text-align:left;font-size:16px;padding-top: 20px;padding-right:10px">
                 <p>
                     <strong>
                         @Html.Raw(Model.JOBS.Job_Content)
@@ -118,7 +118,6 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-12"> <br /><br /></div>
         @if (@Model.JOBS.Job_Resource != null)
         {
             <div class="col-md-2">
@@ -127,13 +126,12 @@
                 </strong>
             </div>
         }
+        <br />
 
         <div class="col-md-10">
             <p style="color:#888888; font-size:30px; width:100%;text-align:left; ">@Model.JOBS.Job_Description</p>
         </div>
-
-        <div class="col-md-12"> <br /><br /></div>
-
+        <br />
         @if (Model.ListJobsT.Count != 0)
         {
 
@@ -148,7 +146,7 @@
                     </div>
                 }
 
-                <div class="col-md-10" style="border: 1px groove black">
+                <div class="container" style="border: 1px solid black;width:95%">
                     <br />
                     <p class="fecha"><strong>Nombre:</strong> @item.ReJo_Name</p>
                     <p class="fecha">@item.ReJo_Description</p>
@@ -163,8 +161,8 @@
                         foreach (var item1 in item.BookRatings)
                         {
                             @*<h6 class="fecha">
-                                <strong>Nota:</strong> @item1.BoRa_Score
-                            </h6>*@
+                                    <strong>Nota:</strong> @item1.BoRa_Score
+                                </h6>*@
                             <h6 class="fecha">
                                 <strong>Puntos:</strong> @item1.BoRa_Point
                             </h6>
@@ -191,37 +189,36 @@
                             <div class="form-group">
 
                                 @*<div class="col-sm-10">
-                                    <input type="file" id="CoverpageModule" name="upload" />
-                                </div>*@
+                                        <input type="file" id="CoverpageModule" name="upload" />
+                                    </div>*@
                             </div>
                             <div class="form-group">
                                 @*<div class="col-md-2">
-                                    <button class="btn btn-primary" name="singin" type="submit">Modificar Archivo</button>
-                                    <br />
-                                    <br />
-                                </div>*@
+                                        <button class="btn btn-primary" name="singin" type="submit">Modificar Archivo</button>
+                                        <br />
+                                        <br />
+                                    </div>*@
                             </div>
                         </form>
                     }
                 </div>
             }
-
-            <div class="col-md-2">
-                <a href='@Url.Action("Index", "Home")'>
-                    <p style="background: #b0002d;padding: 11px;border: #b0002d;font-size: 16px; border-radius:3px">Finalizar</p>
-                </a>
-            </div>
-            @*----------------------------------------------------------------------*@
-            <div class="col-md-12">
-                <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#AddJobs">Añadir Archivo</button>
+            <div class="container " style="width:95%">
+                <div class="row justify-content-between">
+                    <a href="@Url.Action("Index", "Home")" id="btn-landing" class="col-md-4 button-action" style="position:relative;font-size:x-large;font-weight:bolder">FINALIZAR</a>
+                    <button id="BTN_ADD" type="button" class="col-md-4 button-action" data-toggle="modal" data-target="#AddJobs">Añadir Archivo</button>
+                </div>
             </div>
 
-            <div id="AddJobs" class="modal fade" role="dialog">
-                <div class="modal-dialog1">
+            <!-- Modal -->
+            <div class="modal fade" id="AddJobs" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"></h4>
+                            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             @using (Html.BeginForm("ResourceUserJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
@@ -232,8 +229,8 @@
                                     <br />
                                     <div class="col-md-6">
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        @Html.LabelFor(model => model.ReJo_Name, htmlAttributes: new { @class = "control-label col-md-3" })
-                                        @Html.EditorFor(model => model.ReJo_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.LabelFor(model => model.ReJo_Name, htmlAttributes: new { @class = "control-label col-md-3", @style = "color:black" })
+                                        @Html.EditorFor(model => model.ReJo_Name, new { htmlAttributes = new { @class = "form-control", @style = "color:black" } })
                                         @Html.ValidationMessageFor(model => model.ReJo_Name, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="col-md-12">
@@ -266,27 +263,30 @@
                             }
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+                        </div>
                     </div>
                 </div>
             </div>
-            @*----------------------------------------------------------------------*@
+
+
 
         }
         else
         {
             <div class="col-md-12">
-                <button id="BTN_ADD" type="button" class="btn btn-default" data-toggle="modal" data-target="#AddJobs">Añadir Archivo</button>
+                <button id="BTN_ADD" type="button" class="button-action" data-toggle="modal" data-target="#AddJobs">Añadir Archivo</button>
             </div>
 
-            <div id="AddJobs" class="modal fade" role="dialog">
-                <div class="modal-dialog1">
+            <div class="modal fade" id="AddJobs" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"></h4>
+                            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             @using (Html.BeginForm("ResourceUserJobsT", "Ratings", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
@@ -331,9 +331,9 @@
                             }
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -396,6 +396,7 @@
             </div>
         </div>
         @*---------------------------------------------------------------------------*@
+        <br />
     </div>
 </div>
 <br />

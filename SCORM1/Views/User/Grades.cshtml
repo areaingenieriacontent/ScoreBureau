@@ -358,7 +358,7 @@ else
                          @foreach (TopicsCourse topic in Model.Enrollment.Module.TopicsCourse.OrderBy(x => x.ToCo_Id).Where(x => x.ToCo_Visible == FORO.Si))
                         {
                             @*Agregar condición si el tema tiene predecesor y si ya cumplio la evaluación, siempre y cuando sea curso rígido*@
-                            if (topic.Module.Modu_TypeOfModule == CURSO.Rigido)
+                            if (topic.Module.Modu_TypeOfModule == CURSO.Evaluativo)
                             {
                                 if (topic.First_Topic == FORO.Si)
                                 {

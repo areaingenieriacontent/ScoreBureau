@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -33,6 +34,7 @@
                                 <div class="menu_link_content menu-link-contentmain view-mode-mega-menu menu-dropdown">
                                 </div>
                             </li>
+
                             <li class="menu-item menu-item--collapsed">
                                 <a href="@Url.Action("ComunidadSocial", "Home")" data-drupal-link-system-path="node/236">COMUNIDAD SOCIAL DE CONOCIMIENTO</a>
                                 <div class="menu_link_content menu-link-contentmain view-mode-mega-menu menu-dropdown">

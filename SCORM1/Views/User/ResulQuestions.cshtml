@@ -337,18 +337,29 @@ else
                             <p style="margin:10px;color:#333"><strong>@option.Pair_Description</strong></p>
                             <br />
                             <p style="margin:10px"><b>Respuesta del estudiante:</b></p>
+                            @{var cont = 0;}
                             @foreach (AnserPairingStudent answeroptionmultiple in option.AnserPairingStudent)
                             {
+
                                 if (answeroptionmultiple.User_Id == Model.userId)
                                 {
                                     if (answeroptionmultiple.Pairing.Pair_Id == option.Pair_Id)
                                     {
 
-                                        <div class="container" style="border:1px solid #000000">
-                                            <p style="margin:10px"><strong>@answeroptionmultiple.AnPa_OptionsQuestion</strong></p>
-                                            <p style="margin:10px"><em>@answeroptionmultiple.AnPa_OptionAnswer</em></p>
-                                        </div>
-                                        <br />
+                                        if (answeroptionmultiple.Pairing.AnswerPairing.Count() >= cont)
+                                        {
+                                            <div class="container" style="border:1px solid #000000">
+                                                <p style="margin:10px"><strong>@answeroptionmultiple.AnPa_OptionsQuestion</strong></p>
+                                                <p style="margin:10px"><em>@answeroptionmultiple.AnPa_OptionAnswer</em></p>
+                                            </div>
+                                            <br />
+                                            cont = 1 + cont;
+                                        }
+                                        if (answeroptionmultiple.Pairing.AnswerPairing.Count() == cont)
+                                        {
+                                            cont = 0;
+                                            break;
+                                        }
                                     }
                                 }
 

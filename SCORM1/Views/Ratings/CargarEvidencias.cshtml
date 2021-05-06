@@ -1,0 +1,70 @@
+﻿
+
+@{
+    ViewBag.Title = "CargarEvidencias";
+}
+
+
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/carga-de-evidencias/banner-carga-de-evidencias.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO /</a>
+    <a href="@Url.Action("ComunidadSocial", "Home")" style="font-weight: bolder">COMUNIDAD SOCIAL DE CONOCIMIENTOS /</a>
+    <a href="#" style="font-weight: bolder; color:#FC3650">CARGA DE EVIDENTES</a>
+</div>
+<br />
+<br />
+<div class="container">
+    <p style="text-align:center; font-size: 50px;">CARGA DE <b>EVIDENCIAS</b></p>
+    <br />
+    <br />
+    <ul class="nav nav-tabs" id="nav-carga" style="justify-content: right;border-bottom:10px solid #dee2e6">
+        <li class="nav-item active">
+            <a class="nav-link " id="ABE-tab" data-toggle="tab" href="#ABE" role="tab" aria-controls="ABE" style="font-size:40px;">ABE</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="BIBLIOTECA-tab" data-toggle="tab" href="#BIBLIOTECA" role="tab" aria-controls="BIBLIOTECA" style="font-size:40px;">BIBLIOTECA</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="VIDEOTECA-tab" data-toggle="tab" href="#VIDEOTECA" role="tab" aria-controls="VIDEOTECA" style="font-size:40px;">VIDEOTECA</a>
+        </li>
+    </ul>
+    <br />
+    <br />
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade active" id="ABE" role="tabpanel" aria-labelledby="ABE"><img src="~/Content/Images/carga-de-evidencias/portada-abe.jpg" style="width:100%" /></div>
+        <div class="tab-pane fade" id="BIBLIOTECA" role="tabpanel" aria-labelledby="BIBLIOTECA"><img src="~/Content/Images/carga-de-evidencias/portada-biblioteca.jpg" style="width:100%" /></div>
+        <div class="tab-pane fade" id="VIDEOTECA" role="tabpanel" aria-labelledby="VIDEOTECA"><img src="~/Content/Images/carga-de-evidencias/portada-videoteca.jpg" style="width:100%" /></div>
+    </div>
+    <br />
+    <br />
+    <hr style="border-width:10px;color: #dee2e6" />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
