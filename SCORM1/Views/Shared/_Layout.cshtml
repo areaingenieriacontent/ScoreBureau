@@ -1,5 +1,7 @@
 ﻿@using SCORM1.Enum
 @using Microsoft.AspNet.Identity
+
+
 <!DOCTYPE html>
 <html>
 <head class="site-header" style="visibility: visible;">
@@ -28,6 +30,7 @@
     @Styles.Render("~/Content/StyleHome.css")
     @Styles.Render("~/Content/style1.css")
     @Html.Partial("_LoginPartial")
+    @*@if (Model.ActualRol ) { }*@
 
 </head>
 <body>
@@ -44,84 +47,84 @@
         </script>
     }
 
-    @if (Request.IsAuthenticated)
+    @if (Request.IsAuthenticated )
     {
         <br />
-        <br />       
-                        <footer class="site-footer">
-                                <div id="block-footer-highlight-footer" class="block block-block-content block-block-contentb1b63cd5-a33b-46d1-9d3e-a058a2d93893" >
-                                    <div class="teaser">
-                                        <div class="teaser">
-                                            <div class="page-hat simple">
-                                                <div class="page-hat--content">
-                                                    <div class="page-hat--title js-letters-effect clearfix text-formatted field field--name-field-text-animation field--type-text-long field--label-hidden field__items" id="textfooter" style=" opacity: 1;margin-left:-10vw;margin-top:10vh;position:absolute">
-                                                        <p id="pfooter1" style="">CONOCE AQUÍ NUESTRA</p><p id="pfooter2" style="text-align: -webkit-auto"><b>OFERTA DE CURSOS</b></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="container" style="position:relative">
-                                                <div class="row justify-content-end">
-                                                    <a id="btn-landing" class="button-action" href="https://www.bvtrainingcommunity.com/tienda/" target="_blank" style=" margin-right:50px; margin-top: 45%;">CLIC AQUÍ</a>
-                                                </div>
-                                            </div>
-                                            <img src="~/Content/Images/footer/slide-footer.jpg" alt=" " typeof="foaf:Image" style="width:100%;margin-bottom: -6px">
-                                        </div>
+        <br />
+        <footer class="site-footer">
+            <div id="block-footer-highlight-footer" class="block block-block-content block-block-contentb1b63cd5-a33b-46d1-9d3e-a058a2d93893">
+                <div class="teaser">
+                    <div class="teaser">
+                        <div class="page-hat simple">
+                            <div class="page-hat--content">
+                                <div class="page-hat--title js-letters-effect clearfix text-formatted field field--name-field-text-animation field--type-text-long field--label-hidden field__items" id="textfooter" style=" opacity: 1;margin-left:-10vw;margin-top:10vh;position:absolute">
+                                    <p id="pfooter1" style="">CONOCE AQUÍ NUESTRA</p><p id="pfooter2" style="text-align: -webkit-auto"><b>OFERTA DE CURSOS</b></p>
                                 </div>
                             </div>
-                            <div class="site-footer--sitemap" style="background-color:#333333">
-                                <nav role="navigation" aria-labelledby="block-footer-menu" id="block-footer" class="list-links block block-menu navigation menu--footer" style="column-count: auto;">
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#" target="_blank" style="font-weight: 100">MESA DE SERVICIOS</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" target="_blank" style="font-weight: 100">GUÍA DE NAVEGACIÓN</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank" style="font-weight: 100">TRATAMIENTO DE DATOS PERSONALES</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" target="_self" style="font-weight: 100">TÉRMINOS Y CONDICIONES</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" style="font-weight: 100" data-drupal-link-system-path="node/526">SITIO WEB BUREAU VERITAS</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <nav role="navigation" aria-labelledby="block-sociallinks-menu" id="block-sociallinks" class="list-community block block-menu navigation menu--social-links">
-                                    <h2 class="list-community--title" id="block-sociallinks-menu">VISÍTANOS</h2>
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <a href="#" class="facebook" target="_blank">Facebook</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" class="twitter" target="_blank">Twitter</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" class="linkedin" target="_blank">Instagram</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" class="youtube" target="_blank">YouTube</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" class="linkedin" target="_blank">Linkedin</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <nav role="navigation" aria-labelledby="block-legalmenu-menu" id="block-legalmenu" class="list-simple block block-menu navigation menu--legal">
-                                    <ul class="menu">
-                                        <li class="menu-item">
-                                            <span>© 2021</span>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="#" data-drupal-link-system-path="node/461">Content Group S.A.S</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                        </div>
+                        <div class="container" style="position:relative">
+                            <div class="row justify-content-end">
+                                <a id="btn-landing" class="button-action" href="https://www.bvtrainingcommunity.com/tienda/" target="_blank" style=" margin-right:50px; margin-top: 45%;">CLIC AQUÍ</a>
                             </div>
-                    </footer>
+                        </div>
+                        <img src="~/Content/Images/footer/slide-footer.jpg" alt=" " typeof="foaf:Image" style="width:100%;margin-bottom: -6px">
+                    </div>
+                </div>
+            </div>
+            <div class="site-footer--sitemap" style="background-color:#333333">
+                <nav role="navigation" aria-labelledby="block-footer-menu" id="block-footer" class="list-links block block-menu navigation menu--footer" style="column-count: auto;">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#" target="_blank" style="font-weight: 100">MESA DE SERVICIOS</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" target="_blank" style="font-weight: 100">GUÍA DE NAVEGACIÓN</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="https://aprendeyavanza2.com.co/contentgroup/bureau/global_data_protection_policy.pdf" target="_blank" style="font-weight: 100">TRATAMIENTO DE DATOS PERSONALES</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" target="_self" style="font-weight: 100">TÉRMINOS Y CONDICIONES</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" style="font-weight: 100" data-drupal-link-system-path="node/526">SITIO WEB BUREAU VERITAS</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav role="navigation" aria-labelledby="block-sociallinks-menu" id="block-sociallinks" class="list-community block block-menu navigation menu--social-links">
+                    <h2 class="list-community--title" id="block-sociallinks-menu">VISÍTANOS</h2>
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="#" class="facebook" target="_blank">Facebook</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="twitter" target="_blank">Twitter</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="linkedin" target="_blank">Instagram</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="youtube" target="_blank">YouTube</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="linkedin" target="_blank">Linkedin</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav role="navigation" aria-labelledby="block-legalmenu-menu" id="block-legalmenu" class="list-simple block block-menu navigation menu--legal">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <span>© 2021</span>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" data-drupal-link-system-path="node/461">Content Group S.A.S</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
 
-            }
-            @RenderSection("scripts", required: false)
+    }
+    @RenderSection("scripts", required: false)
 </body>
 </html>

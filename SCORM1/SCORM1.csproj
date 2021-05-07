@@ -311,9 +311,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105051644027_abcdos.cs" />
-    <Compile Include="Migrations\202105051644027_abcdos.Designer.cs">
-      <DependentUpon>202105051644027_abcdos.cs</DependentUpon>
+    <Compile Include="Migrations\202105061431068_abcuno.cs" />
+    <Compile Include="Migrations\202105061431068_abcuno.Designer.cs">
+      <DependentUpon>202105061431068_abcuno.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BasicAuthenticationAttribute.cs" />
@@ -324,6 +324,10 @@
     <Compile Include="Models\Lms\ImageUpload.cs" />
     <Compile Include="Models\Lms\QuienSabeMasPuntaje.cs" />
     <Compile Include="Models\Lms\TrueOrFalseStudent.cs" />
+    <Compile Include="Models\Logs\CodeLogs.cs" />
+    <Compile Include="Models\Logs\IdChange.cs" />
+    <Compile Include="Models\Logs\Log.cs" />
+    <Compile Include="Models\Logs\TableChange.cs" />
     <Compile Include="Models\MainGame\MG_AnswerMultipleChoice.cs" />
     <Compile Include="Models\MainGame\MG_AnswerOrder.cs" />
     <Compile Include="Models\MainGame\MG_AnswerPairing.cs" />
@@ -378,10 +382,6 @@
     <Compile Include="Models\Lms\ResourceTopic.cs" />
     <Compile Include="Models\Lms\TopicsCourse.cs" />
     <Compile Include="Models\Lms\TrueOrFalse.cs" />
-    <Compile Include="Models\Logs\CodeLogs.cs" />
-    <Compile Include="Models\Logs\IdChange.cs" />
-    <Compile Include="Models\Logs\Log.cs" />
-    <Compile Include="Models\Logs\TableChange.cs" />
     <Compile Include="Models\MeasuringSystem\Measure.cs" />
     <Compile Include="Models\MeasuringSystem\Plan.cs" />
     <Compile Include="Models\MeasuringSystem\Proficiency.cs" />
@@ -482,7 +482,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap1.min.css" />
-    <Content Include="Content\demo.css" />
+    <Content Include="Content\demo1.css" />
     <Content Include="Content\dropzone.css" />
     <Content Include="Content\flexslider.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
@@ -2261,6 +2261,7 @@
     <Content Include="Views\VSDR\VsdrContent.cshtml" />
     <Content Include="Views\VSDR\VsdrUserList.cshtml" />
     <Content Include="Views\Ratings\CargarEvidencias.cshtml" />
+    <Content Include="TermsandConditions\Global_Data_Protection_Policy.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2290,8 +2291,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202105051644027_abcdos.resx">
-      <DependentUpon>202105051644027_abcdos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105061431068_abcuno.resx">
+      <DependentUpon>202105061431068_abcuno.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

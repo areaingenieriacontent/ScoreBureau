@@ -63,6 +63,7 @@
 
                     //}
                 }
+
             </div>
             break;
 
@@ -110,8 +111,8 @@
             </div>
             break;
         case ROLES.AdministradoGeneral:           
+            
             <div class="center-block">
-
                 @if (Model.TermsandConditions.terms == Terms_and_Conditions.No_apceptado)
                 {
                     { Html.RenderAction("Admin", "AdminGeneral"); }
@@ -120,6 +121,8 @@
                 {
                     { Html.RenderAction("Admin", "AdminGeneral"); }
                 }
+                @Styles.Render("~/Content/demo1.css")
+
             </div>
             break;
         case ROLES.AdministradordePuntos:        

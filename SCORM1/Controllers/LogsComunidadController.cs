@@ -51,7 +51,7 @@ namespace SCORM1.Controllers
 
                 ApplicationDbContext.SaveChanges();
             }
-            return Redirect("https://aprendeyavanza2.com.co/contentGroup/Bureau/COMUNIDAD/OBL/uno/OBL/index.html");
+            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/ABE/contenedor/index.html");
 
 
         }
@@ -162,7 +162,7 @@ namespace SCORM1.Controllers
 
                 ApplicationDbContext.SaveChanges();
             }
-            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/Periodico/agosto/index.html");
+            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/Revista/contenedor/index.html");
 
         }
 
@@ -199,7 +199,7 @@ namespace SCORM1.Controllers
 
                 ApplicationDbContext.SaveChanges();
             }
-            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/CiudadVeritas/index.html");
+            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/Juegos/index.html");
 
 
         }
