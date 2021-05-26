@@ -211,7 +211,7 @@ sub {
 }
 
 .advanced-search-field--content, .back-to-top, .breadcrumb, .burger-menu--container .main-menu > ul > li > a, .burger-menu--container .main-menu > ul > li > span, .burger-menu--container .site-link, .burger-menu--fixed--content .share-price strong, .burger-menu--scrollable .site-portals--current, .burger-menu--scrollable .site-portals--list li a, .burger-menu--scrollable .site-portals--list li span, .chosen-container .chosen-results li.active-result, .chosen-container .chosen-single .group-name, .chosen-container .search-choice .group-name, .content-filters-tabs--reset[type=reset], .cross-news--title, .data-table, .descripted-image--caption, .download-link, .dropdown-links--icon.help, .generic-title, .greybox--container, .greybox--content, .history-dates, .latest-articles--title, .layer-accordion-info--trigger, .layer-accordion-info.documents .layer-accordion-info--content .layer-accordion-info .expanded > .layer-accordion-info--trigger, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.layer-banner, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.layer-cover, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a .layer-cover, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.layer-cover .breadcrumb, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a .layer-cover .breadcrumb, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.layer-cover .tag-highlighted, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a .layer-cover .tag-highlighted, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.page-hat .page-hat--content, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.page-heading .page-heading--bg-img + .page-heading--content, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a .page-heading .page-heading--bg-img + .page-heading--content, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.teaser-highlight-news .teaser-highlight-news--picture, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.teaser-keydata .teaser-keydata--overlay, .layer-banner.reversed, .layer-cover--hat, .layer-cover.alternate .tag-highlighted, .layer-cover.reversed, .layer-cover.reversed .breadcrumb, .layer-cover.reversed .tag-highlighted, .layer-history--container, .layer-images-group--desc, .layer-major-markets--link a.link, .layer-media--container, .list-content--list li, .list-info--tooltip-action, .main-menu.js-open > ul > li > a, .main-menu.js-open > ul > li > span, .main-menu > ul > .menu-item.alternate .main-menu--content > .sub-menu > .menu .menu-item > a, .main-menu > ul > .menu-item.alternate .main-menu--content > .sub-menu > .menu .menu-item > span, .main-menu > ul > .menu-item.alternate .main-menu--content > .sub-menu > ul .menu-item > a, .main-menu > ul > .menu-item.alternate .main-menu--content > .sub-menu > ul .menu-item > span, .main-menu > ul > li.alternate .main-menu--content > .sub-menu > .menu .menu-item > a, .main-menu > ul > li.alternate .main-menu--content > .sub-menu > .menu .menu-item > span, .main-menu > ul > li.alternate .main-menu--content > .sub-menu > ul .menu-item > a, .main-menu > ul > li.alternate .main-menu--content > .sub-menu > ul .menu-item > span, .needs-form, .no-js .search-tool input[type=submit]:hover, .page-hat.reversed .page-hat--content, .page-heading, .page-heading.reversed .page-heading--bg-img + .page-heading--content, .page-landing-heading, .push-text--content, .quick-access--title, .reversed .layer-cover, .reversed .layer-cover .breadcrumb, .reversed .layer-cover .tag-highlighted, .reversed .page-heading .page-heading--bg-img + .page-heading--content, .search-results-page .view-empty, .search-tool.expanded input[type=submit]:hover, .search-tool form input[type=text], .section-gallery--title, .simple-sentence-form, .site-header.sticky .dropdown-links--current, .site-header.sticky .dropdown-links--list li a, .site-header.sticky .dropdown-links--list li span, .site-header.sticky .dropdown-links select, .site-header.sticky .main-menu > ul > li > a, .site-header.sticky .main-menu > ul > li > span, .site-header.sticky .share-price strong, .site-header.sticky .site-brand, .site-header.sticky .site-lang--current, .site-header.sticky .site-lang--list li a, .site-header.sticky .site-lang--list li span, .site-header.sticky .site-lang select, .site-header.sticky .site-logo .heading-highlights--brand, .site-header.sticky .site-portals--current, .site-header.sticky .site-portals--list li a, .site-header.sticky .site-portals--list li span, .site-header.sticky .site-portals select, .site-header:not(.sticky).js-nav .js-collapsed > ul > li a, .site-header:not(.sticky).js-nav .js-collapsed > ul > li span, .steps-slider .responsive-slider--close, .steps-slider .responsive-slider--tooltip, .sub-menu > .menu, .sub-menu > ul, .table-of-content [class*=toc-h], .tabs ul.primary a:active, .tabs ul.primary a:hover, .tag-category *, .tag-highlighted, .tag-states.cancelled, .teaser-comparison, .teaser-highlight--text, .teaser-highlight-news.reversed .teaser-highlight-news--picture, .teaser-keydata.reversed .teaser-keydata--overlay, .teaser-light, .teaser-links--desc, .teaser-links--item, .teaser-market--desc, .teaser-market--title, .teaser-menu, .teaser-offer, .teaser-step--content, .teaser-verbatim--author, .teaser-verbatim--content, .teaser-verbatim--quotation-marks, .type-link, .ui-autocomplete, .ui-datepicker, .wysiwyg, div#sliding-popup, form, form input[type=date]:focus, form input[type=datetime-local]:focus, form input[type=email]:focus, form input[type=number]:focus, form input[type=password]:focus, form input[type=search]:focus, form input[type=tel]:focus, form input[type=text]:focus, form select:focus, form textarea:focus, html.ie .content-filters select:not([multiple]) option {
-    color: transparent
+    
 }
 
     .advanced-search-field--submit, .advanced-search-field--text, .advanced-search-field button[type=button], .advanced-search-field input[type=button], .advanced-search-field input[type=search], .advanced-search-field input[type=text], .dropdown-links--icon.help, .layer-accordion-info--content, .layer-accordion-info--trigger, .search-results-page .view-filters .advanced-search-field--content input[type=text], .site-header.sticky .main-menu > ul > li > a:before, .site-header.sticky .main-menu > ul > li > span:before, .tag-states.cancelled, div#sliding-popup .cookie-popup--text .cookie-popup--categories .cookie-popup--category input[type=checkbox] + label:before, form input[type=checkbox] + .form-label:before, form input[type=checkbox] + label:before, form input[type=date]:focus, form input[type=datetime-local]:focus, form input[type=email]:focus, form input[type=number]:focus, form input[type=password]:focus, form input[type=radio] + .form-label:before, form input[type=radio] + label:before, form input[type=search]:focus, form input[type=tel]:focus, form input[type=text]:focus, form select:focus, form textarea:focus {
@@ -17513,7 +17513,7 @@ input:-webkit-autofill:active {
 
 @-webkit-keyframes fade {
     from {
-        opacity: 1
+        opacity: 0.9
     }
 
     to {
@@ -17523,7 +17523,7 @@ input:-webkit-autofill:active {
 
 @keyframes fade {
     from {
-        opacity: 1
+        opacity: 0.9
     }
 
     to {
@@ -17796,3 +17796,24 @@ li.nav-item.active {
         margin-left: 1vw;
     }
 }
+.btn-modal {
+    padding: 10px;
+    border: 1px solid #fc3650;
+    border-radius: 5px;
+    display: block;
+    color: white;
+    background-color: #fc3650;
+    font-weight: bolder;
+    width: 20vw;
+}
+    .btn-modal:hover {
+        padding: 10px;
+        border: 1px solid #fc3650;
+        border-radius: 5px;
+        display: block;
+        color: white;
+        background-color: #fc3650;
+        font-weight: bolder;
+        width: 20vw;
+        transform: scale(1.09)
+    }

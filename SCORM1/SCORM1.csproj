@@ -2262,6 +2262,9 @@
     <Content Include="Views\VSDR\VsdrUserList.cshtml" />
     <Content Include="Views\Ratings\CargarEvidencias.cshtml" />
     <Content Include="TermsandConditions\Global_Data_Protection_Policy.pdf" />
+    <Content Include="Views\VSDR\CreateVSDR.cshtml" />
+    <Content Include="Views\VSDR\MatriculaVSDR.cshtml" />
+    <Content Include="Views\VSDR\UpdateSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
