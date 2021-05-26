@@ -123,13 +123,13 @@ else
                                 <p style="font-size:25px;color:#FC3650;margin:10px"><b>TIPO DE PREGUNTA:OPCIÓN MÚLTIPLE</b></p>
                                 <p style="margin:10px;color:#333"><b> @Model.Listgeneralquestion[i].OpMu_Question</b></p>
                                 <p style="margin:10px;color:#333">Descripción: @Model.Listgeneralquestion[i].OpMu_Description </p>
-                                <p><strong>@Html.Raw(@Model.Listgeneralquestion[i].OpMult_Content) </strong></p>
-                                @Html.HiddenFor(model => model.Listgeneralquestion[i].BaQu_Id)
-                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Id)
-                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Question)
-                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Description)
+                                <p style="color:#000000"><strong>@Html.Raw(@Model.Listgeneralquestion[i].OpMult_Content) </strong></p>
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].BaQu_Id, htmlAttributes: new {  @style = "color:black !important,margin:10px " })
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Id, htmlAttributes: new {  @style = "color:black !important,margin:10px " })
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Question, htmlAttributes: new { @style = "color:black !important,margin:10px" })
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].OpMu_Description, htmlAttributes: new { @style = "color:black !important,margin:10px" } )
                                 @*@Html.Raw(Model.Listgeneralquestion[i].OpMu_Description)*@
-                                @Html.HiddenFor(model => model.Listgeneralquestion[i].TypeQuestion)
+                                @Html.HiddenFor(model => model.Listgeneralquestion[i].TypeQuestion, htmlAttributes: new { @style = "color:black !important," })
                                 <div class="bs-example">
                                     <div class="btn-group btn-group-toggle btn-group-vertical" data-toggle="buttons">
                                         @{var cont = 0; }
