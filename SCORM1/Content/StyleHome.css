@@ -209,9 +209,8 @@ sub {
 .list-notifications table .notification-actions-default {
     background-color: #fff
 }
-
     .advanced-search-field--submit, .advanced-search-field--text, .advanced-search-field button[type=button], .advanced-search-field input[type=button], .advanced-search-field input[type=search], .advanced-search-field input[type=text], .dropdown-links--icon.help, .layer-accordion-info--content, .layer-accordion-info--trigger, .search-results-page .view-filters .advanced-search-field--content input[type=text], .site-header.sticky .main-menu > ul > li > a:before, .site-header.sticky .main-menu > ul > li > span:before, .tag-states.cancelled, div#sliding-popup .cookie-popup--text .cookie-popup--categories .cookie-popup--category input[type=checkbox] + label:before, form input[type=checkbox] + .form-label:before, form input[type=checkbox] + label:before, form input[type=date]:focus, form input[type=datetime-local]:focus, form input[type=email]:focus, form input[type=number]:focus, form input[type=password]:focus, form input[type=radio] + .form-label:before, form input[type=radio] + label:before, form input[type=search]:focus, form input[type=tel]:focus, form input[type=text]:focus, form select:focus, form textarea:focus {
-        border-color: transparent
+        /*border-color: transparent*/
     }
 
     .bloc-recap-agenda--date:after, .chosen-container .chosen-results li.highlighted, .chosen-container .chosen-results li.no-results, .content-filters, .content-filters-tabs--header, .content-filters-tabs--nav--wrapper, .content-filters-tabs--tag[type=button]:hover, .display-per-page--label:after, .dropdown-links, .dropdown-links--icon.user, .dropdown-links--list, .dropdown-links--list li a:hover, .dropdown-links--list li span:hover, .expanded > .layer-accordion-info--trigger, .expanded > div > .layer-accordion-info--trigger, .filter-guidelines-item .tips li:before, .heading-highlights, .item-list ul li:before, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.veristar-login-menu .veristar-login-menu--list, .layer-accordion-info.documents > li.expanded > .layer-accordion-info--trigger + .layer-accordion-info--tools a.veristar-login-menu > ul, .layer-boiler--desc ul li:before, .layer-cover--picture:before, .layer-tabs-switcher--trigger:after, .messages__list li:before, .needs-filters, .page-hat, .pager__item:after, .pager li:after, .password-suggestions li:before, .responsive-slider--pager-dot, .search-results-page .view-filters fieldset[data-drupal-selector=edit-items-per-page] .form-radios label:after, .search-tool--close, .site-footer, .site-header:not(.sticky) .site-logo--inner, .site-header:not(.sticky) .veristar-login-menu .veristar-login-menu--list, .site-header:not(.sticky) .veristar-login-menu > ul, .site-lang--list li a:hover, .site-lang select option:active, .site-lang select option:focus, .site-lang select option:hover, .site-portals--list li a:hover, .site-portals--list li span:hover, .teaser-gallery--content, .teaser-highlight-news--category:before, .teaser-highlight-news--picture:before, .teaser-links--picture:before, .ui-datepicker table tbody td.ui-datepicker-today, .veristar-login-menu.reversed .veristar-login-menu--list, .veristar-login-menu.reversed > ul, .wysiwyg ul li:before {
@@ -17509,7 +17508,7 @@ input:-webkit-autofill:active {
 
 @-webkit-keyframes fade {
     from {
-        opacity: 1
+        opacity: 0.9
     }
 
     to {
@@ -17519,7 +17518,7 @@ input:-webkit-autofill:active {
 
 @keyframes fade {
     from {
-        opacity: 1
+        opacity: 0.9
     }
 
     to {
@@ -17792,3 +17791,24 @@ li.nav-item.active {
         margin-left: 1vw;
     }
 }
+.btn-modal {
+    padding: 10px;
+    border: 1px solid #fc3650;
+    border-radius: 5px;
+    display: block;
+    color: white;
+    background-color: #fc3650;
+    font-weight: bolder;
+    width: 20vw;
+}
+    .btn-modal:hover {
+        padding: 10px;
+        border: 1px solid #fc3650;
+        border-radius: 5px;
+        display: block;
+        color: white;
+        background-color: #fc3650;
+        font-weight: bolder;
+        width: 20vw;
+        transform: scale(1.09)
+    }

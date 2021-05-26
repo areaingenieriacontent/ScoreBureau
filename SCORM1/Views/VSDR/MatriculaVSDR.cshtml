@@ -1,0 +1,105 @@
+﻿@using SCORM1.Models.VSDR;
+@using SCORM1.Models.ViewModel;
+@using SCORM1.Models
+@using PagedList.Mvc;
+@model SCORM1.Models.ViewModel.CreateVsdrSession
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/debate/banner-salon-de-debate.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
+    <a href="#" style="font-weight: bolder; color:#FC3650"> VSDR </a>
+</div>
+<div class="container">
+    <br />
+    <p style="text-align:center; font-size: 70px;"><b>VSDR</b> </p>
+    <br />
+</div>
+<div class="container">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        @using (Html.BeginForm("SearchUserManager", "VSDR", FormMethod.Post, new { @class = "row", role = "search" }))
+        {
+        <div class="col-md-6" style="color:#fff;">
+            @Html.HiddenFor(Model => Model.Id_VSDR)
+            @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", placeholder = "Nombre del Usuario" } })
+
+            @Html.ActionLink("Buscar", "SearchUserManager", "VSDR", new {  id_vsdr = @Model.Id_VSDR }, new { @class = "btn btn-primary", style = "margin: 10px" })
+        </div>
+          
+        }        
+    </div>
+</div>
+
+@using (Html.BeginForm("VSDR2", "VSDR", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(Model => Model.Id_VSDR);
+
+    <div class="container">
+        <div class="table-responsive col-md-12 col-sm-12">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="success">
+                        <th><center>Nombre Completo</center></th>
+                        <th><center>Usuario</center></th>
+                        <th><center>Documento</center></th>
+                        <th><center>Rol</center></th>
+                        <th><center>Último Acceso</center></th>
+                        <th><center>Primer Acceso</center></th>
+                        <th><center>Autorizado</center></th>
+                        <th><center>Inscripcion</center></th>
+                        <th><center>Desmatricular</center></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; Model.UserOfCompany.Count() > i; i++)
+                    {
+                    <tr>
+                        <td>
+                            @Model.UserOfCompany[i].FirstName @Model.UserOfCompany[i].LastName
+                        </td>
+                        <td>@Model.UserOfCompany[i].UserName</td>
+                        <td>
+                            @Model.UserOfCompany[i].Document
+                        </td>
+                        <td>@Model.UserOfCompany[i].Role.ToString()</td>
+                        @if (Model.UserOfCompany[i].lastAccess != null)
+                        {
+                            <td>@Model.UserOfCompany[i].lastAccess</td>
+                        }
+                        else
+                        {
+
+                            <td>No ha ingresado</td>
+                        }
+
+                        @if (Model.UserOfCompany[i].firstAccess != null)
+                        {
+                            <td>@Model.UserOfCompany[i].firstAccess</td>
+                        }
+                        else
+                        {
+
+                            <td>No ha ingresado</td>
+                        }
+                        @{ Model.User = Model.UserOfCompany[i].Id; }
+                        @Html.HiddenFor(Model => Model.User)
+                        <td>@Model.UserOfCompany[i].Enable</td>
+                        
+
+                        <td>@Html.ActionLink("Inscribir", "VSDR2", "VSDR", new { id = @Model.UserOfCompany[i].Id, id_vsdr = @Model.Id_VSDR }, new { @class = "btn btn-primary", style = "margin: 10px" })</td>
+                        <td>@Html.ActionLink("Cancelar", "DeleteVSDR", "VSDR", new { id = @Model.UserOfCompany[i].Id, id_vsdr = @Model.Id_VSDR }, new { @class = "btn btn-primary", style = "margin: 10px" })</td>
+
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model.UserOfCompany, page => Url.Action("MatriculaVSDR", new { page, id_vsdr=Model.Id_VSDR }))
+           
+        </div>
+    </div>
+
+}
+

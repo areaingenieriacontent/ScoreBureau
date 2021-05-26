@@ -1,0 +1,104 @@
+﻿@model SCORM1.Models.ViewModel.CreateVsdrSession
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/debate/banner-salon-de-debate.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
+    <a href="@Url.Action("CreateVSDR", "VSDR")" style="font-weight: bolder;"> VSDR / </a>
+    <a href="#" style="font-weight: bolder; color:#FC3650"> MODIFICAR VSDR</a>
+</div>
+<br />
+<br />
+<div class="container">
+    <br />
+    <p style="text-align:center; font-size: 70px;"><b>MODIFICAR VSDR</b> </p>
+    <br />
+</div>
+<div class="container">
+
+    @using (Html.BeginForm("UpdateSession2", "VSDR", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.actualVsdr1.id)
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.actualVsdr1.id)
+                    @Html.LabelFor(model => model.actualVsdr1.name, htmlAttributes: new { @class = "control-label", @style = "color:black " })
+                    @Html.EditorFor(model => model.actualVsdr1.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre" } })
+                    @Html.ValidationMessageFor(model => model.actualVsdr1.name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.actualVsdr1.case_content, htmlAttributes: new { @class = "control-label", @style = "color:black " })
+                    @Html.EditorFor(model => model.actualVsdr1.case_content, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contenido" } })
+                    @Html.ValidationMessageFor(model => model.actualVsdr1.case_content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.actualVsdr1.start_date, htmlAttributes: new { @class = "control-label", @style = "color:black " })                    
+                        @Html.EditorFor(model => model.actualVsdr1.start_date, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.ValidationMessageFor(model => model.actualVsdr1.start_date, "", new { @class = "text-danger" })
+                    
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.actualVsdr1.end_date, htmlAttributes: new { @class = "control-label", @style = "color:black" })
+                    @Html.EditorFor(model => model.actualVsdr1.end_date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.actualVsdr1.end_date, "", new { @class = "text-danger" })
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.actualVsdr1.resource_url, htmlAttributes: new { @class = "control-label", @style = "color:black " })                    
+                    @Html.EditorFor(model => model.actualVsdr1.resource_url, new { htmlAttributes = new { @class = "form-control", @placeholder = "URL" } })
+                    @Html.ValidationMessageFor(model => model.actualVsdr1.resource_url, "", new { @class = "text-danger" })
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.CheckBoxFor(model => model.actualVsdr1.available, new { @class = "text-danger", @style = "color:black;opacity:1;pointer-events: all;margin: 6px;position:relative;margin-left: 15px " })
+                    @Html.LabelFor(model => model.actualVsdr1.available, htmlAttributes: new { @class = "control-label col-md-6", @style = "color:black " })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.ValidationMessageFor(model => model.actualVsdr1.available, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.CheckBoxFor(model => model.actualVsdr1.open, htmlAttributes: new { @style = "color:black;opacity:1;pointer-events: all;margin: 6px;position:relative;margin-left: 15px " })
+                    @Html.LabelFor(model => model.actualVsdr1.open, htmlAttributes: new { @class = "control-label col-md-6", @style = "color:black " })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.ValidationMessageFor(model => model.actualVsdr1.open, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row justify-content-end">
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <button type="submit" class="btn" id="btn-modal">Modificar VSDR</button>
+                    </div>
+                </div>               
+            </div>
+        </div>
+
+    }
+
+
+
+</div>

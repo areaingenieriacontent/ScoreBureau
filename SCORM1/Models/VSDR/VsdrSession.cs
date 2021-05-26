@@ -12,13 +12,18 @@ namespace SCORM1.Models.VSDR
     {
         [Key]
         public int id { get; set; }
-        [Display(Name ="Título de la sesión")]
+        [Display(Name = "Título de la sesión")]
         public string name { get; set; }
-        [Display(Name ="Caso o contenido")]
+        [Display(Name = "Caso o contenido")]
         [AllowHtml]
         public string case_content { get; set; }
-        [Display(Name ="Fecha de inicio")]
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha de inicio")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime start_date { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode =true )]
         [Display(Name = "Fecha de finalización")]
         public DateTime end_date { get; set; }
         [Display(Name = "URL para recurso adicional")]
