@@ -51,21 +51,12 @@ else
             <br />
             <p style="text-align:left;padding: 0px 25px;color:#FC3650"><b>INSTRUCCIONES</b></p>
             <ul id="listaevaluacion" style="margin: 0px 30px">
-                <li>El examen está dividido en tres secciones, las cuales suman un total de 100 puntos.</li>
-                <li>Se debe contestar todas las secciones.</li>
-                <li>El puntaje mínimo para aprobar el examen, sumando las tres secciones es de 70 puntos y como mínimo se deebe obtener 50% en cada una de las seccines.</li>
-                <li>Durante el examen se pueden consultar el Decreto 1072 de 2015, la Resolución 0312 de 2019 y la norma ISO 45001:2018.</li>
-                <li>Entiéndase por SGSST:"Sistema de Gestión en Seguridad y Salud en el Trabajo".</li>
-                <li>El tiempo estimado para resolver el examen es de DOS horas.</li>
-                <li>El examen se estructura en tres (3) secciones que incluye:</li>
-                <li>Preguntas de opción Múltiple que requieren la sección de uan sola opción.</li>
-                <li>Enunciados relacionados con los temas vistos, sobre los que deberá indicar si es Falso o Verdadero.</li>
-                <li>Analísis de casos</li>
-                <li class="li-interna">SECCIÓN 1(30 puntos) Conocimientos Marco Legas</li>
-                <li class="li-interna">SECCIÓN 2(40 puntos) Conocimientos Marco Legas</li>
-                <li class="li-interna">SECCIÓN 3(30 puntos) Conocimientos Marco Legas</li>
-                <li>Analísis de casos:</li>
-                <li class="li-interna">Comprende una serie de situaciones en las que puede requerir llenar un reporte de no conforminadad(RNC).</li>
+                <br />
+                <p>Apreciado Estudiante</p>
+                <br />
+                <p>El examen está dividido en secciones, las cuales suman un total de 100 puntos. Te invitamos a que diligencies cada una de las preguntas de acuerdo al conocimiento adquirido en nuestro curso de formación. </p>
+                <br />
+                <p>Para aprobar correctamente el curso de formación, deberas aprobar con un puntaje mínimo del 70%.</p>
             </ul>
             <br />
             <p style="color:white;background-color:#FC3650;height:40px;padding :10px;text-align:center"><b>RECUERDA QUE TIENE UN TOTAL DE @Model.topic.ToCo_Attempt INTENTOS PARA APROBAR LA EVALUACIÓN</b></p>
@@ -223,7 +214,7 @@ else
                                                                     <strong style="color:black">Respuesta: @Model.Listrequestpairing[a].AnPa_OptionsQuestion</strong>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    @Html.DropDownListFor(model => Model.Listrequestpairing[a].AnPa_IdRequest, Model.Listgeneralquestion[i].AnswerPairing, new { htmlAttributes = new { @class = "dropdown ", @style = "color:black" } })
+                                                                    @Html.DropDownListFor(model => Model.Listrequestpairing[a].AnPa_IdRequest, Model.Listgeneralquestion[i].AnswerPairing,"-Selecciona la opción correcta-", new { htmlAttributes = new { @class = "form-control ", @style = "color:black" } })
                                                                 </div>
                                                             </p>
                                                             <br />

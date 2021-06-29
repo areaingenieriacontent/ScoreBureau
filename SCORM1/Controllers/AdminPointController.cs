@@ -901,7 +901,8 @@ namespace SCORM1.Controllers
                         TyPo_Id = cate.TyPo_Id,
                         Quantity_Points = model.puntos,
                         User_Id = user.Id,
-                        Poin_Date = DateTime.Now
+                        Poin_Date = DateTime.Now,
+                        Poin_End_Date = DateTime.Now.AddYears(1)
                     };
                     ApplicationDbContext.Points.Add(point);
                     ApplicationDbContext.SaveChanges();
@@ -1041,7 +1042,8 @@ namespace SCORM1.Controllers
                             Quantity_Points = model.puntos,
                             TypePoint = cat,
                             TyPo_Id = cat.TyPo_Id,
-                            User_Id = item.Id
+                            User_Id = item.Id,
+                            Poin_End_Date = DateTime.Now.AddYears(1)
                         };
                         ApplicationDbContext.Points.Add(po);
                         ApplicationDbContext.SaveChanges();
@@ -1159,7 +1161,8 @@ namespace SCORM1.Controllers
                             Quantity_Points = model.puntos,
                             TypePoint = cat,
                             TyPo_Id = cat.TyPo_Id,
-                            User_Id = item.Id
+                            User_Id = item.Id,
+                            Poin_End_Date = DateTime.Now.AddYears(1)
                         };
                         ApplicationDbContext.Points.Add(po);
                         ApplicationDbContext.SaveChanges();
@@ -1277,7 +1280,8 @@ namespace SCORM1.Controllers
                             Quantity_Points = model.puntos,
                             TypePoint = cat,
                             TyPo_Id = cat.TyPo_Id,
-                            User_Id = item.Id
+                            User_Id = item.Id,
+                            Poin_End_Date = DateTime.Now.AddYears(1)
                         };
                         ApplicationDbContext.Points.Add(po);
                         ApplicationDbContext.SaveChanges();
@@ -1395,7 +1399,8 @@ namespace SCORM1.Controllers
                             Quantity_Points = model.puntos,
                             TypePoint = cat,
                             TyPo_Id = cat.TyPo_Id,
-                            User_Id = item.Id
+                            User_Id = item.Id,
+                            Poin_End_Date = DateTime.Now.AddYears(1)
                         };
                         ApplicationDbContext.Points.Add(po);
                         ApplicationDbContext.SaveChanges();

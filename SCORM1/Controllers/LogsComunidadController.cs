@@ -162,7 +162,7 @@ namespace SCORM1.Controllers
 
                 ApplicationDbContext.SaveChanges();
             }
-            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/Revista/contenedor/index.html");
+            return Redirect("https://aprendeyavanza2.com.co/contentGroup/bureau/COMUNIDAD/Revista/contenedor/revisiones.html");
 
         }
 

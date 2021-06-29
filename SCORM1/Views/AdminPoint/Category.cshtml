@@ -2,15 +2,21 @@
 @using SCORM1.Models.Engagement
 
 @model AdminPointCategory
-<br /><br /><br /><br /><br /><br />
-<div class="row fecha">
-    <div class="btn-group btn-breadcrumb">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
-    </div>
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/evaluaciones/banner-evaluaciones.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO / </a>
+    <a href="#" style="font-weight: bolder;color:#FC3650">CATEGORIA</a>    
 </div>
 <br />
-<h1 class="title">ADMINISTRADOR DE CATEGORIAS</h1>
+<br />
+<h1 class="title" style="text-align:center;font-size: 70px">ADMINISTRADOR DE CATEGORIAS</h1>
 
+<br />
+<br />
 @if (TempData["Edit"] != null)
 {
     <div class="alert alert-danger fade in">
@@ -33,7 +39,7 @@
     </div>
 }
 
-<div class="jumbotron col-md-12">
+<div class="jumbotron container">
     @Scripts.Render("~/bundles/jqueryval")
     @if (TempData["UpdateCategoryPrize"] != null)
     {

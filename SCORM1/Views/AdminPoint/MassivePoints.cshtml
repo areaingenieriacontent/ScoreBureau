@@ -1,29 +1,32 @@
 ﻿@using SCORM1.Models.ViewModel;
 @using SCORM1.Models.Lms;
-<br /><br /><br />
 @model AdminPointMassive
 
 @if (TempData["Info"] != null)
 {
     @section Scripts {
         <script type="text/JavaScript">
-                $(document).ready(function () {
-                    $("#Inform").modal();
-                });
+            $(document).ready(function () {
+                $("#Inform").modal();
+            });
         </script>
     }}
 
-<br /><br /><br /><br />
-<div class="row fecha">
-    <div class="btn-group btn-breadcrumb">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
-    </div>
+<div id="encabezadocursos">
+    <img src="~/Content/Images/evaluaciones/banner-evaluaciones.jpg" style="height:200px;width:100%" />
 </div>
-<br /><br />
-<div class="panel panel-primary">
-    <div class="panel-heading panel-head"> Matriculas Masivas </div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO / </a>
+    <a href="#" style="font-weight: bolder;color:#FC3650">CURSOS ACTIVOS</a>
+</div>
+<br />
+<br />
+<h1 class="title" style="text-align:center;font-size: 70px">Matriculas Masivas</h1>
+<br />
+<br />
+<div class="panel panel-primary container">  
     <div class="panel-body">
-       
 
         @Html.AntiForgeryToken()
 
@@ -36,18 +39,18 @@
         </ul>
         <div class="tab-content">
 
-        
+
             <div id="menu2" class="tab-pane fade in active">
                 <div class="contenido-articulo">
                     @using (Html.BeginForm("PointAreas", "AdminPoint", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
                     {
-                    <br /><br />
+                        <br /><br />
                         <div class="row">
                             <div class="col-md-6">
                                 @Html.LabelFor(model => model.Area_Id, htmlAttributes: new { @class = "control-label col-md-3" })
                                 @Html.DropDownListFor(model => model.Area_Id, Model.Areas, new { @class = "form-control", @style = "width:50%" })
                                 @Html.ValidationMessageFor(model => model.Area_Id, "", new { @class = "text-danger" })
-                            </div>     
+                            </div>
                             <div class="col-md-6">
                                 @Html.LabelFor(model => model.Cate_Id, htmlAttributes: new { @class = "control-label col-md-3" })
                                 @Html.DropDownListFor(model => model.Cate_Id, Model.Categorias, new { @class = "form-control", @style = "width:50%" })
