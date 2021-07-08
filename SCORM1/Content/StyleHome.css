@@ -17713,10 +17713,10 @@ li.nav-item.active {
     text-align: left;
 }
 
-    .btn-cuestionario:active{
+    .btn-cuestionario:active, .btn-cuestionario:hover {
         background-color: #e7e7e7;
         color: black;
-        border:0px;
+        border:1px solid transparent;
         
     }
 

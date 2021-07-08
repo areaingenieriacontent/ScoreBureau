@@ -14,12 +14,28 @@
             });
         </script>
     }}
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/evaluaciones/banner-evaluaciones.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO / </a>
+    <a href="#" style="font-weight: bolder;color:#FC3650"> Puntos</a>
+</div>
+
+<br />
+<br />
+<h1 style="text-align:center;font-size: 70px">ASIGNACIÓN DE PUNTOS</h1>
+<br />
+<br />
+
 <div id="DeleteInfo" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Puntos Adicionales</h4>
+                <h4 class="modal-title" style="text-align:center">Puntos Adicionales</h4>
             </div>
             <div class="modal-body">
                 <br />
@@ -54,7 +70,7 @@
                                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width:50%" } })
                                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                             </div>
-                           
+
                             <div class="col-md-12">
                                 <br />
                             </div>
@@ -78,14 +94,8 @@
         </div>
     </div>
 </div>
-<br /><br /><br /><br /><br /><br />
-<div class="row fecha">
-    <div class="btn-group btn-breadcrumb">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
-    </div>
-</div>
 <br />
-<div class="panel-primary">
+<div class="panel-primary container">
 
     @if (Model.UserEnrolllment.Count == 0)
     {
