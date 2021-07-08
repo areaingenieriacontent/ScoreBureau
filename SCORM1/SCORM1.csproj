@@ -690,6 +690,14 @@
     <Content Include="Content\Images\repor.png" />
     <Content Include="Content\Images\reportes.png" />
     <Content Include="Content\Images\reportess.png" />
+    <Content Include="Content\Images\salon-de-debate\banner-aportes-docente.png" />
+    <Content Include="Content\Images\salon-de-debate\banner-salon-de-debate.jpg" />
+    <Content Include="Content\Images\salon-de-debate\btn-eliminar.PNG" />
+    <Content Include="Content\Images\salon-de-debate\btn-modificar.PNG" />
+    <Content Include="Content\Images\salon-de-debate\btn-ok.PNG" />
+    <Content Include="Content\Images\salon-de-debate\icon-aporte.png" />
+    <Content Include="Content\Images\salon-de-debate\portada-debate-hover.png" />
+    <Content Include="Content\Images\salon-de-debate\portada-debate.png" />
     <Content Include="Content\Images\SCORE3.png" />
     <Content Include="Content\Images\sistema-de-puntos2.jpg" />
     <Content Include="Content\Images\sistema-de-puntos3.jpg" />
@@ -2265,6 +2273,10 @@
     <Content Include="Views\VSDR\CreateVSDR.cshtml" />
     <Content Include="Views\VSDR\MatriculaVSDR.cshtml" />
     <Content Include="Views\VSDR\UpdateSession.cshtml" />
+    <Content Include="Views\VSDR\EnrollmentMasiveVSDR.cshtml" />
+    <Content Include="Views\VSDR\VsdrUserListTeacher.cshtml" />
+    <Content Include="Views\VSDR\VsdrContentTeacher.cshtml" />
+    <Content Include="Views\ViewGameUser\_Comentario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

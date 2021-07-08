@@ -406,5 +406,6 @@ namespace SCORM1.Models
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
+        object placeHolderVariable;
     }
 }

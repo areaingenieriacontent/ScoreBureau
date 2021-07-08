@@ -264,15 +264,13 @@ else
                                                 <div class="col">
                                                     <label class="btn btn-cuestionario">
                                                         @OPTIONANSWER.Falso
-                                                    @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Falso, htmlAttributes: new { @type = "radio" })
-                                                    @*<input class="form-control" type="radio" name="options" autocomplete="off" id="@Model.Listgeneralquestion[i].TrFa_Answer"> Falso*@
-                                                </label>
+                                                        @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Falso, htmlAttributes: new { @type = "radio" })
+                                                     </label>
                                             </div>
                                             <div class="col">
                                                 <label class="btn btn-cuestionario">
                                                     @OPTIONANSWER.Verdadero
                                                 @Html.RadioButtonFor(model => Model.Listgeneralquestion[i].TrFa_Answer, @OPTIONANSWER.Verdadero, htmlAttributes: new { @type = "radio" })
-                                                @*<input class="form-control" type="radio" name="options" autocomplete="off" id="@Model.Listgeneralquestion[i].TrFa_Answer"> Verdadero*@
                                             </label>
                                         </div>
                                     </div>
@@ -307,36 +305,11 @@ else
                     <input id="btn-landing" class="col-md-4 button-action" style="position:relative;font-size:x-large;font-weight:bolder" type="submit" value="FINALIZAR EVALUACIÓN" />
                 </div>
             </div>
-
-            @*
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <center><input type="submit" class="btn btn-default" value="Finalizar" /></center>
-                    </div>
-                </div>
-            *@
-
-
         }
             </div>
         </div>
     }
 }
-
-<script>
-    // Add active class to the current button (highlight it)
-    var header = document.getElementById("falseortrue");
-    var btns = header.getElementsByClassName("list-group-item");
-    for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            if (current.length > 0) {
-                current[0].className = current[0].className.replace(" active", "");
-            }
-            this.className += " active";
-        });
-    }
-</script>
 
 
 @section Scripts {

@@ -3,17 +3,6 @@
 @using SCORM1.Models.Lms;
 @model UserEnrollmentViewmodel
 
-
-
-@*
-    <div class="row fecha">
-        <div class="btn-group btn-breadcrumb">
-            <a href="@Url.Action("Index", "Home")" class="btn btn-info"><i class="glyphicon glyphicon-home"></i></a>
-        </div>
-    </div>
-    <br />
-*@
-
 <div class="panel-primary" style="background-image: url(../Content/Images/cursos/portada.jpg);height: 800px; background-repeat: no-repeat">
     @using (Html.BeginForm("SearchMVirtual", "User", FormMethod.Post, new { @class = "row", role = "search" }))
     {
@@ -52,7 +41,6 @@
                     <div class="row">
                         @foreach (var modules in Model.enrollment)
                         {
-
                             <div class="col-lg-4 col-md-6 col-xs-12">
                                 <div class="card card-border">
                                     @if (modules.Enro_FinishDateModule > DateTime.Today)
@@ -76,46 +64,6 @@
                                     <p><b>Termina:</b>@modules.Enro_FinishDateModule</p>
                                 </div>
                             </div>
-
-                            @*
-                        <tr>
-                            <td>@modules.Module.Modu_Name</td>
-                            <td>@modules.Enro_InitDateModule</td>
-                            <td>@modules.Enro_FinishDateModule</td>
-                            <td>
-                                <img src="~/Resources/@modules.Module.Modu_ImageName" style="width:50px; height:50px" />
-                            </td>
-                            <td>
-                                @if (modules.Enro_FinishDateModule > DateTime.Today)
-                                {
-                                    <a href='@Url.Action("Grades", "User", new { id = @modules.Module.Modu_Id })'>
-                                        <button style="background: #b0002d;padding: 7px;border: #b0002d;font-size: 16px;">Ingresar</button>
-                                    </a>
-                                }
-                            </td>
-                        </tr>
-
-                       else if (modules.User_Id == "46c9ac7f-39d0-4300-a0fc-b21e404ccbe8")
-            {
-                <tr>
-                    <td>@modules.Module.Modu_Name</td>
-                    <td>@modules.Enro_InitDateModule</td>
-                    <td>@modules.Enro_FinishDateModule</td>
-                    <td>
-                        <img src="~/Resources/@modules.Module.Modu_ImageName" style="width:50px; height:50px" />
-                    </td>
-                    <td>
-                        @if (modules.Enro_FinishDateModule > DateTime.Today)
-                        {
-                            <a href='@Url.Action("Grades", "User", new { id = @modules.Module.Modu_Id })'>
-                                <button style="background: #b0002d;padding: 7px;border: #b0002d;font-size: 16px;">Ingresar</button>
-                            </a>
-                        }
-                    </td>
-
-
-                </tr>
-            }*@
                         }
                     </div>
                     </tbody>

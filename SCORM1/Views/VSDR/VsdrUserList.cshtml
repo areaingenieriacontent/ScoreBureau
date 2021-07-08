@@ -38,17 +38,20 @@
         for (int i = 0; i < Model.listOfVsdr.Count; i++)
         {
             <div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        @Html.HiddenFor(modelItem => Model.listOfVsdr[i].id)
-                        <a href="http://localhost:50035/VSDR/VsdrContent/@Model.listOfVsdr[i].id"><img style="width:100%" src="~/Content/Images/debate/ejemplo-debate1.jpg" alt="Ingresar" /></a>
+                <div class="contenedor">
+                   <div class="img-prueba">
+                   </div>
+                    <img style="width:100%" src="~/Content/Images/salon-de-debate/portada-debate.png" alt="Ingresar" />
+                    <div class="texto-central">
+                        <h2 style="font-size: 40px; font-weight: bolder">@Html.DisplayFor(modelItem => Model.listOfVsdr[i].name)</h2>
+                        <p><b>Comienza:</b> @Html.DisplayFor(modelItem => Model.listOfVsdr[i].start_date)</p>
+                        <p><b>Fin:</b> @Html.DisplayFor(modelItem => Model.listOfVsdr[i].end_date)</p>                        
                     </div>
-                </div>
-                @* @Html.ActionLink("Ingresar", "VsdrContent", "VSDR", new { id = Model.listOfVsdr[i].id }, new { @class = "btn btn-primary" }) *@
-                <div class=" justify-content-start">
-                    <h2 style="color: #FC3650;font-weight: bolder">@Html.DisplayFor(modelItem => Model.listOfVsdr[i].name)</h2>
-                    <p class="">Comienza: @Html.DisplayFor(modelItem => Model.listOfVsdr[i].start_date)</p>
-                </div>
+                    <div class="aling-btn-ingresar-vsdr" >
+                        <a class="btn-ingresar-vsdr" href="../VSDR/VsdrContent/@Model.listOfVsdr[i].id">INGRESAR</a>
+                    </div>
+                    @Html.HiddenFor(modelItem => Model.listOfVsdr[i].id)
+                </div>   
             </div>
             <br />
         }

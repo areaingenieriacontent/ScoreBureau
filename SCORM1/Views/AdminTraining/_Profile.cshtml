@@ -3,12 +3,15 @@
 
 @model AdminTrainingProfileViewModel
 
+@Styles.Render("~/Content/StyleHome.css")
+
 <link href="https://fonts.googleapis.com/css?family=Catamaran:200,300,400,700,800&amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @{
     ViewBag.Title = "Profile";
 }
-<br /><br />
+<br />
+<br />
 <script type="text/javascript">
     window.alert = function () { };
     var defaultCSS = document.getElementById('bootstrap-css');
@@ -168,183 +171,186 @@
             <!--/fin sistema de puntos-->
 
         </div>
+        <div class="container">
 
+            <!-- INICIO DEL MENU SU IDENTIFICADOR ES(menuunuevo2) ESTA EN  EL ARCHIVO DE BOOTSTRAP  -->
+            <div class="menuunuevo" style="width:100% !important;">
+                <!-- CONTIENE UN MARGIN LEFT PARA CENTRARLO A LA DERECHA UN POCO-->
+                <!-- INICIO DE LOS TABS QUE TIENEN COMO IDENTIFICADOR (tabuser) AQUI INICIAN LOS TITULOS DEL MENU-->
+                <ul class="nav nav-tabs" id="tabuser" style="margin-top: 30px;">
+                    <!-- INICIO DE LOS TITULOS -->
+                    <div class="active col-md-4" style="padding:13px; font-size: 15px;font-weight: 600;"><a data-toggle="tab" href="#home">ZONA DE APRENDIZAJE INTERACTIVO</a></div>
+                    <div class="col-md-4" style="padding:13px; font-size: 15px;font-weight: 600;"><a data-toggle="tab" href="#menu1">COMUNIDAD SOCIAL DE CONOCIMIENTO</a></div>
+                    <div class="col-md-4" style="padding:13px; font-size: 15px;font-weight: 600;"><a data-toggle="tab" href="#menu2">TABLERO DE CONTROL</a></div>
+                    <!-- Fin De Los Titulos/-->
 
-        <!-- INICIO DEL MENU SU IDENTIFICADOR ES(menuunuevo2) ESTA EN  EL ARCHIVO DE BOOTSTRAP  -->
-        <div class="menuunuevo" style="width:100% !important;">
-            <!-- CONTIENE UN MARGIN LEFT PARA CENTRARLO A LA DERECHA UN POCO-->
-            <!-- INICIO DE LOS TABS QUE TIENEN COMO IDENTIFICADOR (tabuser) AQUI INICIAN LOS TITULOS DEL MENU-->
-            <ul class="nav nav-tabs" id="tabuser" style="margin-top: 30px;">
-                <!-- INICIO DE LOS TITULOS -->
-                <div class="active col-md-4" style="padding:13px; font-size: 15px;font-weight: 600;"><a data-toggle="tab" href="#home">ZONA DE APRENDIZAJE INTERACTIVO</a></div>
-                <div class="col-md-4" style="padding:13px; font-size: 15px;font-weight: 600;"><a data-toggle="tab" href="#menu1">COMUNIDAD SOCIAL DE CONOCIMIENTO</a></div>
-                <div class="col-md-4" style="padding:13px; font-size: 15px;font-weight: 600;"><a data-toggle="tab" href="#menu2">TABLERO DE CONTROL</a></div>
-                <!-- Fin De Los Titulos/-->
+                </ul>
+                <!-- FIN DE LOS NAVS -->
+                <div class="container" style="border-style:solid;border-color: #f3a62a; width: 100%">
+                    <!-- INICIO DE LOS CONTENIDOS -->
+                    <div class="tab-content">
+                        <!-- Contenedor Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
+                        <div id="home" class="tab-pane fade in active">
+                            <br>
+                            <br>
+                            <!-- INICIO DEL Contenido Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
+                            <div class="col-md-3">
+                                <a href="@Url.Action("ListModuleVirtual"/*Vista*/, "User"/*Carpeta de la vista*/)" style="background-color:#fff"><img src="~/Content/Images/aprendizaje-extendido.png" style="width:150px; height:150px;"><h1>CONTENIDO MALLA <b>POR SEMESTRE</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="https://www.aprendeyavanza2.com.co/UnAula/User/ViewArticle/7" style="background-color:#fff"><img src="~/Content/Images/base-de-datos.png" style="width:150px; height:150px;"><h1>BASE <b> DE DATOS</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action("ListModuleEvaluative", "User")" style="background-color:#fff"><img src="~/Content/Images/contenido-malla.png" style="width:150px; height:150px;"><h1>LEARNING BY <b>DOING</b></h1></a>
+                                <style>
+                                    h1 {
+                                        color: #000;
+                                    }
+                                </style>
 
-            </ul>
-            <!-- FIN DE LOS NAVS -->
-            <div class="container" style="border-style:solid;border-color: #f3a62a; width: 100%">
-                <!-- INICIO DE LOS CONTENIDOS -->
-                <div class="tab-content">
-                    <!-- Contenedor Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
-                    <div id="home" class="tab-pane fade in active">
-                        <br>
-                        <br>
-                        <!-- INICIO DEL Contenido Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
-                        <div class="col-md-3">
-                            <a href="@Url.Action("ListModuleVirtual"/*Vista*/, "User"/*Carpeta de la vista*/)" style="background-color:#fff"><img src="~/Content/Images/aprendizaje-extendido.png" style="width:150px; height:150px;"><h1>CONTENIDO MALLA <b>POR SEMESTRE</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="https://www.aprendeyavanza2.com.co/UnAula/User/ViewArticle/7" style="background-color:#fff"><img src="~/Content/Images/base-de-datos.png" style="width:150px; height:150px;"><h1>BASE <b> DE DATOS</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action("ListModuleEvaluative", "User")" style="background-color:#fff"><img src="~/Content/Images/contenido-malla.png" style="width:150px; height:150px;"><h1>LEARNING BY <b>DOING</b></h1></a>
-                            <style>
-                                h1 {
-                                    color: #000;
-                                }
-                            </style>
+                            </div>
 
+                            <div class="col-md-3">
+                                <a href="https://www.aprendeyavanza2.com.co/UnAula/Recursos/pdf_(1).pdf" target="_blank" style="background-color:#fff"><img src="~/Content/Images/sistema-de-evaluacion.png" style="width:150px; height:150px;"><h1>SISTEMA  <b>DE EVALUACION</b></h1></a>
+                            </div>
+                            <!-- FIN DEL CONTENIDO Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
                         </div>
+                        <!-- FIN Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
+                        <!-- INICIO DEL Contenedor Del Menu 2 (COMUNIDAD SOCIAL) -->
+                        <div id="menu1" class="tab-pane fade">
+                            <br />
+                            <br />
+                            <!-- INICIO DEL CONTENIDO Del Menu 2 (COMUNIDAD SOCIAL) -->
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ViewFobUser", "Ratings", new {id = 454 }*/)" style="background-color:#fff"><img src="~/Content/Images/tablero-interactivo.png" style="width:150px; height:150px;"><h1>TABLERO <b>INTERACTIVO</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/periodico-virtual.png" style="width:150px; height:150px;"><h1>PERIÓDICO <b>VIRTUAL</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/bateria-de-juegos.png" style="width:150px; height:150px;"><h1>BATERÍA <b> DE JUEGOS</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/magazine-de-noticias.png" style="width:150px; height:150px;"><h1>MAGAZINE <b>DE NOTICIAS</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/compartir-conocimientos.png" style="width:150px; height:150px;"><h1>ZONA DE <b>COMPARTIR CONOCIMIENTO</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/base-de-datos-ra.png" style="width:150px; height:150px;"><h1>REALIDAD<b>  VIRTUAL</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/zona-de-innovacion.png" style="width:150px; height:150px;"><h1>ZONA <b>DE INNOVACIÓN</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/zona-de-videoteca.png" style="width:150px; height:150px;"><h1>ZONA <b>DE VIDEOTECA</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/laboratorio-empresarial.png" style="width:150px; height:150px;"><h1>LABORATORIO <b>EMPRESARIAL</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action("VsdrUserListTeacher", "VSDR")" style="background-color:#fff"><img src="~/Content/Images/laboratorio-empresarial.png" style="width:150px; height:150px;"><h1>VSDR</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <img src="~/Content/Images/medicion-desarrollo-comportamientos.png" data-toggle="modal" data-target="#myModal2" style="width:150px; height:150px;"><h1>MEDICIÓN Y <b>DESARROLLO DE COMPORTAMIENTOS</b></h1>
+                                <!-- INICIO DEL MODAL QUE ACTIVA LA IMAGEN MEDICION Y DESARROLLO -->
+                                <div id="myModal2" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
 
-                        <div class="col-md-3">
-                            <a href="https://www.aprendeyavanza2.com.co/UnAula/Recursos/pdf_(1).pdf" target="_blank" style="background-color:#fff"><img src="~/Content/Images/sistema-de-evaluacion.png" style="width:150px; height:150px;"><h1>SISTEMA  <b>DE EVALUACION</b></h1></a>
-                        </div>
-                        <!-- FIN DEL CONTENIDO Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
-                    </div>
-                    <!-- FIN Del Menu 1 (ZONA DE APRENDIZAJE INTERACTIVO) -->
-                    <!-- INICIO DEL Contenedor Del Menu 2 (COMUNIDAD SOCIAL) -->
-                    <div id="menu1" class="tab-pane fade">
-                        <br />
-                        <br />
-                        <!-- INICIO DEL CONTENIDO Del Menu 2 (COMUNIDAD SOCIAL) -->
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ViewFobUser", "Ratings", new {id = 454 }*/)" style="background-color:#fff"><img src="~/Content/Images/tablero-interactivo.png" style="width:150px; height:150px;"><h1>TABLERO <b>INTERACTIVO</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/periodico-virtual.png" style="width:150px; height:150px;"><h1>PERIÓDICO <b>VIRTUAL</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/bateria-de-juegos.png" style="width:150px; height:150px;"><h1>BATERÍA <b> DE JUEGOS</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/magazine-de-noticias.png" style="width:150px; height:150px;"><h1>MAGAZINE <b>DE NOTICIAS</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/compartir-conocimientos.png" style="width:150px; height:150px;"><h1>ZONA DE <b>COMPARTIR CONOCIMIENTO</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/base-de-datos-ra.png" style="width:150px; height:150px;"><h1>REALIDAD<b>  VIRTUAL</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/zona-de-innovacion.png" style="width:150px; height:150px;"><h1>ZONA <b>DE INNOVACIÓN</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/zona-de-videoteca.png" style="width:150px; height:150px;"><h1>ZONA <b>DE VIDEOTECA</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/laboratorio-empresarial.png" style="width:150px; height:150px;"><h1>LABORATORIO <b>EMPRESARIAL</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="~/Content/Images/medicion-desarrollo-comportamientos.png" data-toggle="modal" data-target="#myModal2" style="width:150px; height:150px;"><h1>MEDICIÓN Y <b>DESARROLLO DE COMPORTAMIENTOS</b></h1>
-                            <!-- INICIO DEL MODAL QUE ACTIVA LA IMAGEN MEDICION Y DESARROLLO -->
-                            <div id="myModal2" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Sistema De Medicion</h4>
+                                            </div>
+                                            <div class="modal-body">
 
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Sistema De Medicion</h4>
-                                        </div>
-                                        <div class="modal-body">
+                                                <div class="sistema-medicion">
+                                                    <div class="image-sistema-medicion">
+                                                    </div>
+                                                    <button type="info-medicion">
+                                                        @Html.ActionLink("Ver detalles resultados", "Results", "UserPlenamente", routeValues: null, htmlAttributes: new { @type = "info-medicion", @class = "btn btn-success btn-responsive" })
+                                                    </button>
 
-                                            <div class="sistema-medicion">
-                                                <div class="image-sistema-medicion">
+                                                    <button type="info-medicion">
+                                                        @Html.ActionLink("Realizar medición", "Tests", "UserPlenamente", routeValues: null, htmlAttributes: new { @type = "info-medicion", @class = "btn btn-success btn-responsive" })
+                                                    </button>
+
+                                                    <button type="info-medicion">
+                                                        @Html.ActionLink("Consulta tus Planes", "Plans", "UserPlenamente", routeValues: null, htmlAttributes: new { @type = "info-medicion", @class = "btn btn-success btn-responsive" })
+                                                    </button>
                                                 </div>
-                                                <button type="info-medicion">
-                                                    @Html.ActionLink("Ver detalles resultados", "Results", "UserPlenamente", routeValues: null, htmlAttributes: new { @type = "info-medicion", @class = "btn btn-success btn-responsive" })
-                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
 
-                                                <button type="info-medicion">
-                                                    @Html.ActionLink("Realizar medición", "Tests", "UserPlenamente", routeValues: null, htmlAttributes: new { @type = "info-medicion", @class = "btn btn-success btn-responsive" })
-                                                </button>
-
-                                                <button type="info-medicion">
-                                                    @Html.ActionLink("Consulta tus Planes", "Plans", "UserPlenamente", routeValues: null, htmlAttributes: new { @type = "info-medicion", @class = "btn btn-success btn-responsive" })
-                                                </button>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
 
-                                        </div>
                                     </div>
-
                                 </div>
+                                <!-- FIN DEL MODAL -->
+
                             </div>
-                            <!-- FIN DEL MODAL -->
-
+                            <!-- FIN DEL CONTENIDO Del Menu 2 (COMUNIDAD SOCIAL) -->
                         </div>
-                        <!-- FIN DEL CONTENIDO Del Menu 2 (COMUNIDAD SOCIAL) -->
-                    </div>
-                    <!-- FIN DEL Contenedor Del Menu 2 (COMUNIDAD SOCIAL) -->
-                    <!-- INICIO DEL Contenedor Del Menu 3 (TABLERO DE CONTROL) -->
-                    <div id="menu2" class="tab-pane fade">
-                        <br />
-                        <br />
-                        <div class="col-md-3">
-                            <img src="~/Content/Images/avances.png" data-toggle="modal" data-target="#myModal" style="width:100px; height:100px;"><h1>GESTOR</h1>
+                        <!-- FIN DEL Contenedor Del Menu 2 (COMUNIDAD SOCIAL) -->
+                        <!-- INICIO DEL Contenedor Del Menu 3 (TABLERO DE CONTROL) -->
+                        <div id="menu2" class="tab-pane fade">
+                            <br />
+                            <br />
+                            <div class="col-md-3">
+                                <img src="~/Content/Images/avances.png" data-toggle="modal" data-target="#myModal" style="width:100px; height:100px;"><h1>GESTOR</h1>
 
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
 
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">GESTOR</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="col-md-6 col-sm-6">
-                                                @Html.ActionLink(" ", "NewAttempts", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = " dieciocho icon_menu", role = "form" })<h4>@Html.ActionLink("Gestor  de Intentos", "NewAttempts", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "col-md-10", role = "form", style = "color:#bc112e; background-color:transparent;" })</h4>
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">GESTOR</h4>
                                             </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                @Html.ActionLink(" ", "ModuleAdmin", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = " dieciocho icon_menu", role = "form" })<h4>@Html.ActionLink("Usuarios Matriculados", "ModuleAdmin", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "col-md-10", role = "form", style = "color:#bc112e; background-color:transparent;" })</h4>
-                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-md-6 col-sm-6">
+                                                    @Html.ActionLink(" ", "NewAttempts", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = " dieciocho icon_menu", role = "form" })<h4>@Html.ActionLink("Gestor  de Intentos", "NewAttempts", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "col-md-10", role = "form", style = "color:#bc112e; background-color:transparent;" })</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6">
+                                                    @Html.ActionLink(" ", "ModuleAdmin", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = " dieciocho icon_menu", role = "form" })<h4>@Html.ActionLink("Usuarios Matriculados", "ModuleAdmin", "AdminTraining", new { ReturnUrl = ViewBag.ReturnUrl }, new { @class = "col-md-10", role = "form", style = "color:#bc112e; background-color:transparent;" })</h4>
+                                                </div>
 
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
+
                                     </div>
-
                                 </div>
+
+
+
+
                             </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/calendario.png" style="width:100px; height:100px;"><h1>MIS <b>PENDIENTES</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/libro-calificaciones.png" style="width:100px; height:100px;"><h1>MIS <b>AVANCES</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/pendientes.png" style="width:100px; height:100px;"><h1>MI <b>CALENDARIO</b></h1></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/puntos-premios.png" style="width:100px; height:100px;"><h1>MIS PUNTOS <b>Y PREMIOS</b></h1></a>
+                            </div>
+                        </div>
+                        <!-- FIN DEL Contenedor Del Menu 3 (TABLERO DE CONTROL) -->
 
-
-
-
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/calendario.png" style="width:100px; height:100px;"><h1>MIS <b>PENDIENTES</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/libro-calificaciones.png" style="width:100px; height:100px;"><h1>MIS <b>AVANCES</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/pendientes.png" style="width:100px; height:100px;"><h1>MI <b>CALENDARIO</b></h1></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action(/*"ListModuleVirtual", "User"*/)" style="background-color:#fff"><img src="~/Content/Images/puntos-premios.png" style="width:100px; height:100px;"><h1>MIS PUNTOS <b>Y PREMIOS</b></h1></a>
-                        </div>
                     </div>
-                    <!-- FIN DEL Contenedor Del Menu 3 (TABLERO DE CONTROL) -->
-
                 </div>
+
             </div>
-
         </div>
-
 
     </div>
 
@@ -353,7 +359,6 @@
 <!--/fin banner-->
 <!--/inicio modulos-->
 <!--/fin modulos-->
-
 <!--/inicio botones gestor -->
 
 

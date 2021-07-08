@@ -1,0 +1,54 @@
+﻿@using SCORM1.Models.ViewModel;
+
+@model VsdrUserVM
+
+
+<div id="encabezadocursos">
+    <img src="~/Content/Images/debate/banner-salon-de-debate.jpg" style="height:200px;width:100%" />
+</div>
+<div id="hiperlink">
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
+    <a href="@Url.Action("ComunidadSocial", "Home")" style="font-weight: bolder">COMUNIDAD SOCIAL DE CONOCIMIENTOS/</a>
+    <a href="@Url.Action("VsdrUserList", "VSDR")" style="font-weight: bolder; color:#FC3650">SALÓN DE DEBATE</a>
+</div>
+<br />
+<br />
+<div class="container">
+    <p style="text-align:center; font-size: 70px;"><b>SALÓN DE DEBATE INTERACTIVO</b><br />DEL CONOCIMIENTO</p>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row justify-content-around align-items-center">
+            <div>@Html.ActionLink("MANUAL DE USO - ESTUDIANTE", "", "", new { @class = "button-action btn-responsive" })</div>
+            <div>@Html.ActionLink("MANUAL DE USO - DOCENTE", "", "", new { @class = "button-action btn-responsive" })</div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <p style="text-align:center; font-weight: bolder; color:#FC3650">DEBATES DISPONIBLES </p>
+    <br />
+    <br />
+    <br />
+    @if (Model.listOfVsdr.Count > 0)
+    {
+        for (int i = 0; i < Model.listOfVsdr.Count; i++)
+        {           
+                <div class="container">
+                    <div class="row justify-content-center">
+                        @Html.HiddenFor(modelItem => Model.listOfVsdr[i].id)                        
+                        <a href="../VSDR/VsdrContentTeacher/@Model.listOfVsdr[i].id"><img style="width:100%" src="~/Content/Images/debate/ejemplo-debate1.jpg" alt="Ingresar" /></a>
+                    </div>
+                </div>
+                <div class=" justify-content-start">
+                    <h2 style="color: #FC3650;font-weight: bolder">@Html.DisplayFor(modelItem => Model.listOfVsdr[i].name)</h2>
+                    <p><b>Comienza:</b> @Html.DisplayFor(modelItem => Model.listOfVsdr[i].start_date)</p>
+                    <p><b>Fin:</b> @Html.DisplayFor(modelItem => Model.listOfVsdr[i].end_date)</p>
+                </div>
+           
+            <br />
+        }
+    }
+</div>
+
+

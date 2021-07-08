@@ -1,0 +1,264 @@
+﻿@using SCORM1.Models.VSDR;
+@using SCORM1.Models.ViewModel;
+@model VsdrUserVM
+
+<div class="panel-body">
+    <div id="encabezadocursos">
+        <img src="~/Content/Images/debate/banner-salon-de-debate.jpg" style="height:200px;width:100%" />
+    </div>
+    <div id="hiperlink">
+        <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+        <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
+        <a href="@Url.Action("ComunidadSocial", "Home")" style="font-weight: bolder">COMUNIDAD SOCIAL DE CONOCIMIENTOS/</a>
+        <a href="@Url.Action("VsdrUserList", "VSDR")" style="font-weight: bolder">SALÓN DE DEBATE/</a>
+        <a href="#" style="font-weight: bolder; color:#FC3650">@Model.actualVsdr.name</a>
+    </div>
+    <br />
+    <br />
+    <p style="text-align:center; font-size: 70px;">@Model.actualVsdr.name</p>
+    <br />
+    <br />
+    <p style="text-align:center; font-size: 40px;">APORTES <b>ESTUDIANTES</b></p>
+
+    @for (int i = 0; i < Model.listOfUsers.Count; i++)
+    {
+        <div class="panel panel-primary">
+            <br />
+            <div class="container border">
+                <br />
+                <div class="row justify-content-between ">
+                    <div style="margin:5px">
+                        <p style="font-weight: bolder">@Model.listOfUsers[i].FirstName @Model.listOfUsers[i].LastName</p>
+                        <p style="font-weight: bolder;color:#FC3650">@Model.actualVsdr.start_date</p>
+                        @if (Model.ListEnrollment[i].qualification == 0)
+                        {
+                             <p style="font-weight: bolder;">Sin calificar</p>
+                        }
+                        else
+                        {
+                            <p style="font-weight: bolder">Nota: @Model.ListEnrollment[i].qualification</p>                            
+                        }
+                    </div>
+                    <div style="margin:5px; margin-right:10px">
+                        @for (int y = 0; y < Model.listOfIssuedFiles.Count; y++)
+                        {
+                            if (Model.listOfUsers[i].Id == Model.listOfIssuedFiles[y].user_id)
+                            {
+                                <a href="~/VSDRUploads/@Model.listOfIssuedFiles[y].file_name" target="_blank" download="@Model.listOfIssuedFiles[y].file_name" class="btn-fondo-negro" style="margin-right: 5px">
+                                    DESCARGAR
+                                </a>
+                                break;
+                            }
+                        }
+                        @* <button id="btn-coment" type="button" class="btn-fondo-negro btn-responsive" data-toggle="modal" data-target="#ModalComent" onclick="Confirm(@Model.listOfUsers[i].Id)" style="margin-right:10px">COMENTAR</button>*@
+                        <a id="btn-1" class="btn-fondo-negro" data-toggle="modal" onclick="Comentar('@Model.listOfUsers[i].Id')">COMENTAR</a>
+                        <a id="btn-2" class="btn-fondo-negro" data-toggle="modal" onclick="Evaluar('@Model.listOfUsers[i].Id')">EVALUAR</a>
+
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div>
+                        
+                    </div>
+                </div>
+                <hr />
+                <p style="text-align:center; font-size: 20px;">COMENTARIOS <b>DOCENTE</b></p>
+                <br />
+                <div class="row">
+                    @if (Model.listOfComments.Count() != 0)
+                    {
+                        for (int x = 0; x < Model.listOfComments.Count(); x++)
+                        {
+                            if (Model.listOfUsers[i].Id == Model.listOfComments[x].user_id)
+                            {
+                                <div class="col-lg-4 col-md-6 col-xs-12" style="text-align:center;margin:10px">
+                                    <p><b>@Model.teacherName @Model.teacherLastName</b></p>
+                                    <p>@Model.listOfComments[x].content</p>
+                                    <p>@Model.listOfComments[x].commentDate</p>
+                                </div>
+                            }
+
+                        }
+                        <br />
+                    }
+                    else
+                    {
+                        <p>Sin comentarios</p>
+                    }
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<div id="modalcoment" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:50%">
+            <div class="modal-header" style="background-color:#FC3650">
+                <h4 class="modal-title" style="font-weight:bolder;font-size:30px;text-align:center;color:white;">COMENTARIO DEL DOCENTE </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">   
+                    @Html.AntiForgeryToken()
+                <div class="row justify-content-center">
+                    <br />
+                    <h6 style="text-align:center">Recuerde realar el comentario luego de las revisiones correspondientes</h6>                    
+                    <div>
+                        @Html.HiddenFor(x => x.userId)
+                        @Html.HiddenFor(model => model.actualVsdr.id)
+                        @Html.HiddenFor(model => model.actualVsdr.name)
+                        @Html.HiddenFor(model => model.userId)
+                        <br />
+                        <input type="text" id="contenido" style=" min-width: 400px; min-height: 250px" />
+                        <br />
+                    </div>
+                </div>
+                <br />
+                    <div class="modal-footer" style="justify-content: center">
+                        <div class="row justify-content-center">
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <input id="btn-crear" type="submit" class="btn-modal" Value="Crear comentario" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EvaluarSession" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top:50%">
+            <div class="modal-header" style="background-color:#FC3650">
+                <center><h2 class="modal-title" style="font-weight:bolder;font-size:30px;text-align:center;color:white;">ASIGNAR CALIFICACION</h2></center>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               
+                    @Html.AntiForgeryToken()
+                <div>
+                    <p class="danger"> @TempData["Warning"]</p>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.actualVsdr.id)
+                    @Html.HiddenFor(model => model.actualVsdr.name)
+                    @Html.HiddenFor(model => model.userId)
+                    @Html.HiddenFor(model => model.Id_VSDR)
+                    @Html.HiddenFor(model => model.VsdrEnrollment.vsdr_id)
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <br />
+                            <h6 style="text-align:center">Recuerde asignar la evaluacion despues de revisar la informacion respectiva</h6>                          
+                            <br />                            
+                            <input type="hidden" name="@Model.actualVsdr.id" id="idvsdrip" placeholder="@Model.actualVsdr.id" value="@Model.actualVsdr.id" />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <input type="number" id="puntaje" />
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                    <div class="modal-footer" style="justify-content: center">
+                        <div class="row">                            
+                                <div class="col-md-offset-4 col-md-8">
+                                    <input type="submit" class="btn-modal" id="btn-calificar" Value="Calificar" />
+                                    @*@Html.ActionLink("Calificar", "EvaluarTeacher", "VSDR", new { id = Model.userId, vsdr_id=Model.actualVsdr.id }, new { @class = "btn-modificar" })*@
+                                </div>                           
+                        </div>
+                    </div>
+                
+                </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="iduservaluea" />
+<input type="text" id="entrada" />
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $(document).ready(function () {
+        $("#btn-crear").click(function () {
+            var _id = $("#entrada").val();
+            var _idvsdrevalua = $("#idvsdrip").val();
+            var _contenido = $("#contenido").val();
+            $.ajax({
+                type: "POST",
+                url: "/VSDR/ComentTeacher",
+                data: { id: _id, id2: _idvsdrevalua, dato: _contenido},
+                success: function (result) {
+                    if (result) {
+                        alert("Comentario registrado con exito");
+                        $("#iduservaluea").val(null);
+                        $("#idvsdrip").val(null);
+                        $("#contenido").val(null);
+                        window.location.href = '@Url.Action("VsdrContentTeacher", "VSDR")'
+                    }
+                    else {
+                        alert("Error");
+                    }
+                }
+            });
+        });
+        $("#btn-calificar").click(function () {
+            var _id = $("#iduservaluea").val();
+            var _idvsdrevalua = $("#idvsdrip").val();
+            var _puntaje = $("#puntaje").val();
+
+            $.ajax({
+                url: "/VSDR/EvaluarTeacher",
+                data: { id: _id, id2: _idvsdrevalua, dato: _puntaje },
+                success: function (result) {
+                    if (result) {
+                        $("#iduservaluea").val(null);
+                        $("#idvsdrip").val(null);
+                        $("#puntaje").val(null);
+                        alert("Calificacion generada con exito");
+                        window.location.href = '@Url.Action("VsdrContentTeacher", "VSDR")'
+                    }
+                    else {
+                        alert("Error");
+                    }
+                }
+            });
+
+        });
+
+
+
+    })
+
+    var Evaluar = function (id,vsdr_id,puntaje) {
+        $("#iduservaluea").val(id);
+        var elem = document.getElementById("idvsdrip");
+        var uno = elem.getAttribute("name");
+        $("#uno").val(vsdr_id);
+        $("#puntaje").val(puntaje);
+        $("#EvaluarSession").modal('show');
+
+
+    };
+    var Comentar = function (id,vsdr_id,contenido) {
+        var elem = document.getElementById("idvsdrip");
+        var uno = elem.getAttribute("name");
+        $("#entrada").val(id);
+        $("#uno").val(vsdr_id);
+        $("#contenido").val(contenido);
+        $("#modalcoment").modal('show');
+
+    };
+
+</script>

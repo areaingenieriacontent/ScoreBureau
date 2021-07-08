@@ -30,14 +30,16 @@
     @Styles.Render("~/Content/StyleHome.css")
     @Styles.Render("~/Content/style1.css")
     @Html.Partial("_LoginPartial")
-    @*@if (Model.ActualRol ) { }*@
 
 </head>
 <body>
+  
     <div>
         @RenderBody()
-
     </div>
+      
+
+
 
     @*To-Do remove model null chek*@
     @if (Model != null && Model.Sesion == SESION.No)
@@ -47,7 +49,7 @@
         </script>
     }
 
-    @if (Request.IsAuthenticated )
+    @if (Request.IsAuthenticated)
     {
         <br />
         <br />

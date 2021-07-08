@@ -4,67 +4,66 @@
 
 
 
-<div id="encabezadocursos">
-<img src="~/Content/Images/debate/banner-salon-de-debate.jpg" style="height:200px;width:100%" />
+<div id="encabezadocursos"> 
+    <img src="~/Content/Images/debate/banner-salon-de-debate.jpg" style="height:200px;width:100%" />
 </div>
 <div id="hiperlink">
-<img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
-<a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
-<a href="#" style="font-weight: bolder; color:#FC3650"> VSDR </a>
+    <img src="~/Content/Images/icon-home.png" alt="" style="margin-left:5%;width:25px" />
+    <a href="@Url.Action("Index", "Home")" style="font-weight: bolder">INICIO/</a>
+    <a href="#" style="font-weight: bolder; color:#FC3650"> VSDR </a>
 </div>
 <br />
 <br />
 <div class="container">
-<br />
-<p style="text-align:center; font-size: 70px;"><b>VSDR</b> </p>
-<br />
+    <br />
+    <p style="text-align:center; font-size: 70px;"><b>GESTIÓN </b>DEBATE</p>
+    <br />
 </div>
-<div class="container">
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">     
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#CreateVDSL">Crear VDSR</button>
-        </div>
-    </div>
+<div class="container">           
+    <input type="text" placeholder="Nombre de debate" style="width:180px" class="text-box single-line" />
+    <a class="btn-buscar">Buscar</a>
+    <a class="btn-buscar" data-toggle="modal" data-target="#CreateVDSL">Crear VDSR</a> 
 </div>
             <br />
             <br />
             <div class="container">
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr class="success">
-                                <th><center>Nombre</center></th>
-                                <th><center>caso</center></th>
-                                <th><center>Fecha de inicio</center></th>
-                                <th><center>Fecha de fin </center></th>
-                                <th><center> Url </center></th>
-                                <th><center>Valido</center></th>
-                                <th><center>Abierto</center></th>
-                                <th><center>Matricular</center></th>
-                                <th><center>Modificar</center></th>
-                                <th><center>Eliminar</center></th>
+                <div >
+                    <table class="table">
+                        <thead class="tb-thead-vsdr">
+                            <tr>
+                                <th>Nombre Debate</th>                               
+                                <th>Fecha de inicio</th>
+                                <th>Fecha de fin </th>
+                                <th>Enlace Salón </th>
+                                <th>Estado</th>
+                                <th>Matricular</th>
+                                <th>Modificar</th>
+                                <th>Eliminar</th>
+                                @*<th><center>Matriculas Masivas</center></th>*@
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tb-tbody">
+
                             @for (int i = 0; Model.listOfVsdr.Count > i; i++)
                             {
                                 <tr>
                                     <td><center>@Model.listOfVsdr[i].name</center></td>
-                                    <td><center>@Model.listOfVsdr[i].case_content</center></td>
                                     <td><center>@Model.listOfVsdr[i].start_date</center></td>
                                     <td><center>@Model.listOfVsdr[i].end_date</center></td>
-                                    <td><center>@Model.listOfVsdr[i].resource_url</center></td>
-                                    <td><center>@Model.listOfVsdr[i].available</center></td>
+                                    <td><center><a href="@Model.listOfVsdr[i].resource_url" target="_blank" class="btn-enlace">ENLACE</a></center></td>
                                     <td><center>@Model.listOfVsdr[i].open</center></td>
-                                    <td>
-                                        @Html.ActionLink("Matricula", "MatriculaVSDR", "VSDR", new { id_vsdr = Model.listOfVsdr[i].id }, new { @class = "btn btn-secondary" })
+                                    <td>                                        
+                                       @Html.ActionLink(" ","MatriculaVSDR","VSDR", new { id_vsdr = Model.listOfVsdr[i].id }, new { @class = "btn-ok" })                                        
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Modificar", "UpdateSession","VSDR", new { id = Model.listOfVsdr[i].id }, new { @class = "btn btn-primary" })
+                                        @Html.ActionLink(" ","UpdateSession", "VSDR", new { id = Model.listOfVsdr[i].id }, new { @class = "btn-modificar" })                                 
                                     </td>
                                     <td>
-                                        <a href="#" id="showModal" class="btn btn-primary" onclick="Confirm(@Model.listOfVsdr[i].id)">Eliminar</a>                                   
+                                        <a href="#" id="showModal" class="" onclick="Confirm(@Model.listOfVsdr[i].id)"><img class="classdeletebtn" src="~/Content/Images/salon-de-debate/btn-eliminar.PNG"/></a>                                   
                                     </td>
+                                    @*<td>
+                                        @Html.ActionLink("Matricula Masiva", "EnrollmentMasiveVSDR", "VSDR",new { id_vsdr= Model.listOfVsdr[i].id }, new { @class = "btn btn-secondary" })
+                                    </td>*@
                                 </tr>
                             }
                         </tbody>
@@ -174,108 +173,11 @@
                 </div>
             </div>
 
-           @*<div id="FormUpdateSession" class="modal fade" role="dialog">
-                <div class="modal-dialog-xl">
-                    <div class="modal-content ">
-                        <div class="modal-header" , style="background-color:#FC3650">
-                            <center><h2 class="modal-title" style="font-weight:bolder;font-size:30px;text-align:center;color:white;">MODIFICAR VSDR</h2></center>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            @using (Html.BeginForm("UpdateSession", "VSDR", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <div>
-
-                                    <div class="form-horizontal">
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                                @Html.HiddenFor(model => model.actualVsdr1.id)
-                                                @Html.LabelFor(model => model.actualVsdr1.name, htmlAttributes: new { @class = "control-label", @style = "color:black " })
-                                                @Html.EditorFor(model => model.actualVsdr1.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre" } })
-                                                @Html.ValidationMessageFor(model => model.actualVsdr1.name, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                                @Html.LabelFor(model => model.actualVsdr1.case_content, htmlAttributes: new { @class = "control-label", @style = "color:black " })
-                                                @Html.EditorFor(model => model.actualVsdr1.case_content, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contenido" } })
-                                                @Html.ValidationMessageFor(model => model.actualVsdr1.case_content, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                @Html.LabelFor(model => model.actualVsdr1.start_date, htmlAttributes: new { @class = "control-label", @style = "color:black " })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.actualVsdr1.start_date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha de inicio" } })
-                                                    @Html.ValidationMessageFor(model => model.actualVsdr1.start_date, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                @Html.LabelFor(model => model.actualVsdr1.end_date, htmlAttributes: new { @class = "control-label", @style = "color:black" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.actualVsdr1.end_date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha de fin" } })
-                                                    @Html.ValidationMessageFor(model => model.actualVsdr1.end_date, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                @Html.LabelFor(model => model.actualVsdr1.resource_url, htmlAttributes: new { @class = "control-label", @style = "color:black " })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.actualVsdr1.resource_url, new { htmlAttributes = new { @class = "form-control", @placeholder = "URL" } })
-                                                    @Html.ValidationMessageFor(model => model.actualVsdr1.resource_url, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                @Html.CheckBoxFor(model => model.actualVsdr1.available, new { @class = "text-danger", @style = "color:black;opacity:1;pointer-events: all;margin: 6px;position:relative;margin-left: 15px " })
-                                                @Html.LabelFor(model => model.actualVsdr1.available, htmlAttributes: new { @class = "control-label col-md-6", @style = "color:black " })
-                                                <div class="col-md-10">
-                                                    <div class="checkbox">
-                                                        @Html.ValidationMessageFor(model => model.actualVsdr1.available, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                @Html.CheckBoxFor(model => model.actualVsdr1.open, htmlAttributes: new { @style = "color:black;opacity:1;pointer-events: all;margin: 6px;position:relative;margin-left: 15px " })
-                                                @Html.LabelFor(model => model.actualVsdr1.open, htmlAttributes: new { @class = "control-label col-md-6", @style = "color:black " })
-                                                <div class="col-md-10">
-                                                    <div class="checkbox">
-                                                        @Html.ValidationMessageFor(model => model.actualVsdr1.open, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="row justify-content-end">
-                                        <div class="form-group">
-                                            <div class="col-md-offset-4 col-md-8">
-                                                @Html.ActionLink("Inscribir", "UpdateSession", "VSDR", new { id = @Model.Id_VSDR }, new { @class = "btn btn-primary", style = "margin: 10px" })
-                                                <button type="submit" class="btn" id="btn-modal">Modificar VSDR</button>
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <button type="button" class="btn" data-dismiss="modal" id="btn-modal">Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>*@
-
-
+         
             <div id="DeleteSession" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content" style="margin-top:50%">
-                        <div class="modal-header" , style="background-color:#FC3650">
+                        <div class="modal-header" style="background-color:#FC3650">
                             <center><h2 class="modal-title" style="font-weight:bolder;font-size:30px;text-align:center;color:white;">ELIMINAR VSDR</h2></center>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
@@ -319,28 +221,11 @@
             </div>
 <input type="hidden" id="idhidder"/>
 
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
-            <script>
-                // Data Picker Initialization
-                $('.datepicker').datepicker({
-                    inline: true
-                });
-            </script>
 
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+}
 
-@*<script type="text/javascript" language="javascript">
-    function UpdateSession(id)
-    {
-        if (confirm("Modificar VSDR") == true)
-        {
-            var a = id
-            window.location.href = '@Url.Action("UpdateSession","VSDR", new {id = "ID" })'.replace("ID", a);
-        }
-    }
-
-</script>*@
 <script>
     $(document).ready(function () {
         $("#btn-Delete").click(function () {
@@ -366,7 +251,6 @@
         });
 
     })
-
 
     var Confirm = function (id) {
         $("#idhidder").val(id);
